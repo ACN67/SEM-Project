@@ -1,0 +1,10 @@
+{
+  "error": {
+    "code": "REPORT_VERSION_CONFLICT",
+    "message": "报告已有更新",
+    "retryable": false,
+    "details": {
+      "current_version_id": "v2"
+    }
+  }
+}

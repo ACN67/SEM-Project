@@ -1,0 +1,4940 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SEM Project",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "paths": {
+    "/admin/session": {
+      "post": {
+        "operationId": "POST_admin_session",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "成功",
+            "headers": {
+              "Set-Cookie": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "sem_admin 管理会话"
+              }
+            }
+          },
+          "401": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DELETE_admin_session",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "401": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "adminSession": []
+          }
+        ]
+      }
+    },
+    "/templates": {
+      "get": {
+        "operationId": "GET_templates",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 20,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_Template_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/templates/{template_id}/versions/{version}": {
+      "get": {
+        "operationId": "GET_templates_template_id_versions_version",
+        "parameters": [
+          {
+            "name": "template_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Template"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents": {
+      "post": {
+        "operationId": "POST_documents",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestAccepted"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "adminSession": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file",
+                  "metadata"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "metadata": {
+                    "$ref": "#/components/schemas/Metadata"
+                  }
+                }
+              },
+              "encoding": {
+                "metadata": {
+                  "contentType": "application/json"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "GET_documents",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 20,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_DocumentRecord_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{document_id}": {
+      "get": {
+        "operationId": "GET_documents_document_id",
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentRecord"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{document_id}/versions/{document_version_id}": {
+      "get": {
+        "operationId": "GET_documents_document_id_versions_document_version_id",
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "document_version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentRecord"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports": {
+      "get": {
+        "operationId": "GET_reports",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 20,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_ReportSummary_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "POST_reports",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobAccepted"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "discriminator": {
+                  "mapping": {
+                    "enterprise_comparison": "#/components/schemas/Comparison",
+                    "industry_analysis": "#/components/schemas/Industry",
+                    "industry_prosperity": "#/components/schemas/Prosperity",
+                    "investment_attraction": "#/components/schemas/Investment",
+                    "overseas_assessment": "#/components/schemas/Overseas"
+                  },
+                  "propertyName": "report_type"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Industry"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Comparison"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Prosperity"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Investment"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Overseas"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}": {
+      "get": {
+        "operationId": "GET_reports_report_id",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportSummary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}/versions": {
+      "get": {
+        "operationId": "GET_reports_report_id_versions",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 20,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_Version_"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}/versions/{version_id}": {
+      "get": {
+        "operationId": "GET_reports_report_id_versions_version_id",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportDocument"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{job_id}": {
+      "get": {
+        "operationId": "GET_jobs_job_id",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{job_id}/chapters/{chapter_id}": {
+      "get": {
+        "operationId": "GET_jobs_job_id_chapters_chapter_id",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "chapter_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preview"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{job_id}/cancel": {
+      "post": {
+        "operationId": "POST_jobs_job_id_cancel",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{job_id}/retry": {
+      "post": {
+        "operationId": "POST_jobs_job_id_retry",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobAccepted"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}/chapters/{chapter_id}": {
+      "patch": {
+        "operationId": "PATCH_reports_report_id_chapters_chapter_id",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "chapter_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Edited"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Edit"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}/chapters/{chapter_id}/regenerate": {
+      "post": {
+        "operationId": "POST_reports_report_id_chapters_chapter_id_regenerate",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "chapter_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobAccepted"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rewrite"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}/versions/{version_id}/exports": {
+      "post": {
+        "operationId": "POST_reports_report_id_versions_version_id_exports",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportAccepted"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/exports/{export_id}": {
+      "get": {
+        "operationId": "GET_exports_export_id",
+        "parameters": [
+          {
+            "name": "export_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportSummary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/exports/{export_id}/download": {
+      "get": {
+        "operationId": "GET_exports_export_id_download",
+        "parameters": [
+          {
+            "name": "export_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}/versions/{version_id}/assets/{asset_id}": {
+      "get": {
+        "operationId": "GET_reports_report_id_versions_version_id_assets_asset_id",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "见 error.code 和 details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "adminSession": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "sem_admin"
+      }
+    },
+    "schemas": {
+      "ErrorInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "minLength": 1,
+            "title": "Message",
+            "type": "string"
+          },
+          "retryable": {
+            "title": "Retryable",
+            "type": "boolean"
+          },
+          "details": {
+            "additionalProperties": true,
+            "title": "Details",
+            "type": "object"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "retryable",
+          "details"
+        ],
+        "title": "ErrorInfo",
+        "type": "object"
+      },
+      "Error": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "title": "Error",
+        "type": "object"
+      },
+      "Login": {
+        "additionalProperties": false,
+        "properties": {
+          "credential": {
+            "minLength": 1,
+            "title": "Credential",
+            "type": "string"
+          }
+        },
+        "required": [
+          "credential"
+        ],
+        "title": "Login",
+        "type": "object"
+      },
+      "Task": {
+        "additionalProperties": false,
+        "properties": {
+          "chapter_id": {
+            "minLength": 1,
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "section_key": {
+            "minLength": 1,
+            "title": "Section Key",
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "order": {
+            "minimum": 0,
+            "title": "Order",
+            "type": "integer"
+          },
+          "required": {
+            "title": "Required",
+            "type": "boolean"
+          },
+          "depends_on": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Depends On",
+            "type": "array"
+          },
+          "research_questions": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Research Questions",
+            "type": "array"
+          },
+          "evidence_requirements": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Evidence Requirements",
+            "type": "array"
+          },
+          "required_metrics": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Required Metrics",
+            "type": "array"
+          },
+          "desired_chart": {
+            "anyOf": [
+              {
+                "enum": [
+                  "line",
+                  "bar",
+                  "table"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Desired Chart"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "section_key",
+          "title",
+          "order",
+          "required",
+          "depends_on",
+          "research_questions",
+          "evidence_requirements",
+          "required_metrics",
+          "desired_chart"
+        ],
+        "title": "Task",
+        "type": "object"
+      },
+      "Template": {
+        "additionalProperties": false,
+        "properties": {
+          "template_id": {
+            "minLength": 1,
+            "title": "Template Id",
+            "type": "string"
+          },
+          "version": {
+            "minimum": 1,
+            "title": "Version",
+            "type": "integer"
+          },
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "report_type": {
+            "enum": [
+              "industry_analysis",
+              "enterprise_comparison",
+              "industry_prosperity",
+              "investment_attraction",
+              "overseas_assessment"
+            ],
+            "title": "Report Type",
+            "type": "string"
+          },
+          "sections": {
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
+          "layout_version": {
+            "minLength": 1,
+            "title": "Layout Version",
+            "type": "string"
+          },
+          "input_schema": {
+            "additionalProperties": true,
+            "title": "Input Schema",
+            "type": "object"
+          }
+        },
+        "required": [
+          "template_id",
+          "version",
+          "title",
+          "report_type",
+          "sections",
+          "layout_version",
+          "input_schema"
+        ],
+        "title": "Template",
+        "type": "object"
+      },
+      "Page_Template_": {
+        "additionalProperties": false,
+        "properties": {
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Template"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "page",
+          "limit",
+          "total",
+          "items"
+        ],
+        "title": "Page[Template]",
+        "type": "object"
+      },
+      "IngestAccepted": {
+        "additionalProperties": false,
+        "properties": {
+          "document_id": {
+            "minLength": 1,
+            "title": "Document Id",
+            "type": "string"
+          },
+          "document_version_id": {
+            "minLength": 1,
+            "title": "Document Version Id",
+            "type": "string"
+          },
+          "ingest_status": {
+            "enum": [
+              "QUEUED",
+              "PROCESSING",
+              "READY",
+              "FAILED"
+            ],
+            "title": "Ingest Status",
+            "type": "string"
+          },
+          "status_url": {
+            "minLength": 1,
+            "title": "Status Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "document_id",
+          "document_version_id",
+          "ingest_status",
+          "status_url"
+        ],
+        "title": "IngestAccepted",
+        "type": "object"
+      },
+      "Metadata": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "publisher": {
+            "minLength": 1,
+            "title": "Publisher",
+            "type": "string"
+          },
+          "published_at": {
+            "format": "date",
+            "title": "Published At",
+            "type": "string"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Url"
+          }
+        },
+        "required": [
+          "title",
+          "publisher",
+          "published_at"
+        ],
+        "title": "Metadata",
+        "type": "object"
+      },
+      "DocumentRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "publisher": {
+            "minLength": 1,
+            "title": "Publisher",
+            "type": "string"
+          },
+          "published_at": {
+            "format": "date",
+            "title": "Published At",
+            "type": "string"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Url"
+          },
+          "document_id": {
+            "minLength": 1,
+            "title": "Document Id",
+            "type": "string"
+          },
+          "document_version_id": {
+            "minLength": 1,
+            "title": "Document Version Id",
+            "type": "string"
+          },
+          "ingest_status": {
+            "enum": [
+              "QUEUED",
+              "PROCESSING",
+              "READY",
+              "FAILED"
+            ],
+            "title": "Ingest Status",
+            "type": "string"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ErrorInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "publisher",
+          "published_at",
+          "document_id",
+          "document_version_id",
+          "ingest_status",
+          "error"
+        ],
+        "title": "DocumentRecord",
+        "type": "object"
+      },
+      "Page_DocumentRecord_": {
+        "additionalProperties": false,
+        "properties": {
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "page",
+          "limit",
+          "total",
+          "items"
+        ],
+        "title": "Page[DocumentRecord]",
+        "type": "object"
+      },
+      "ReportSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "report_id": {
+            "minLength": 1,
+            "title": "Report Id",
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "report_type": {
+            "enum": [
+              "industry_analysis",
+              "enterprise_comparison",
+              "industry_prosperity",
+              "investment_attraction",
+              "overseas_assessment"
+            ],
+            "title": "Report Type",
+            "type": "string"
+          },
+          "current_version_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Version Id"
+          },
+          "latest_job_id": {
+            "minLength": 1,
+            "title": "Latest Job Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "QUEUED",
+              "RUNNING",
+              "COMPLETED",
+              "COMPLETED_WITH_WARNINGS",
+              "FAILED",
+              "CANCELLED"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "report_id",
+          "title",
+          "report_type",
+          "current_version_id",
+          "latest_job_id",
+          "status"
+        ],
+        "title": "ReportSummary",
+        "type": "object"
+      },
+      "Page_ReportSummary_": {
+        "additionalProperties": false,
+        "properties": {
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ReportSummary"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "page",
+          "limit",
+          "total",
+          "items"
+        ],
+        "title": "Page[ReportSummary]",
+        "type": "object"
+      },
+      "JobAccepted": {
+        "additionalProperties": false,
+        "properties": {
+          "job_id": {
+            "minLength": 1,
+            "title": "Job Id",
+            "type": "string"
+          },
+          "report_id": {
+            "minLength": 1,
+            "title": "Report Id",
+            "type": "string"
+          },
+          "previous_job_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Previous Job Id"
+          },
+          "status_url": {
+            "minLength": 1,
+            "title": "Status Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "job_id",
+          "report_id",
+          "status_url"
+        ],
+        "title": "JobAccepted",
+        "type": "object"
+      },
+      "Comparison": {
+        "additionalProperties": false,
+        "properties": {
+          "industry": {
+            "minLength": 1,
+            "title": "Industry",
+            "type": "string"
+          },
+          "region": {
+            "minLength": 1,
+            "title": "Region",
+            "type": "string"
+          },
+          "period": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "template_id": {
+            "minLength": 1,
+            "title": "Template Id",
+            "type": "string"
+          },
+          "knowledge_base_id": {
+            "default": "kb_demo",
+            "minLength": 1,
+            "title": "Knowledge Base Id",
+            "type": "string"
+          },
+          "focus": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Focus",
+            "type": "array"
+          },
+          "style": {
+            "const": "official",
+            "default": "official",
+            "title": "Style",
+            "type": "string"
+          },
+          "length": {
+            "default": "standard",
+            "enum": [
+              "standard",
+              "brief"
+            ],
+            "title": "Length",
+            "type": "string"
+          },
+          "as_of": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "As Of"
+          },
+          "report_type": {
+            "const": "enterprise_comparison",
+            "title": "Report Type",
+            "type": "string"
+          },
+          "companies": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 2,
+            "title": "Companies",
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "industry",
+          "region",
+          "period",
+          "template_id",
+          "report_type",
+          "companies"
+        ],
+        "title": "Comparison",
+        "type": "object"
+      },
+      "Industry": {
+        "additionalProperties": false,
+        "properties": {
+          "industry": {
+            "minLength": 1,
+            "title": "Industry",
+            "type": "string"
+          },
+          "region": {
+            "minLength": 1,
+            "title": "Region",
+            "type": "string"
+          },
+          "period": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "template_id": {
+            "minLength": 1,
+            "title": "Template Id",
+            "type": "string"
+          },
+          "knowledge_base_id": {
+            "default": "kb_demo",
+            "minLength": 1,
+            "title": "Knowledge Base Id",
+            "type": "string"
+          },
+          "focus": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Focus",
+            "type": "array"
+          },
+          "style": {
+            "const": "official",
+            "default": "official",
+            "title": "Style",
+            "type": "string"
+          },
+          "length": {
+            "default": "standard",
+            "enum": [
+              "standard",
+              "brief"
+            ],
+            "title": "Length",
+            "type": "string"
+          },
+          "as_of": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "As Of"
+          },
+          "report_type": {
+            "const": "industry_analysis",
+            "title": "Report Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "industry",
+          "region",
+          "period",
+          "template_id",
+          "report_type"
+        ],
+        "title": "Industry",
+        "type": "object"
+      },
+      "Investment": {
+        "additionalProperties": false,
+        "properties": {
+          "industry": {
+            "minLength": 1,
+            "title": "Industry",
+            "type": "string"
+          },
+          "region": {
+            "minLength": 1,
+            "title": "Region",
+            "type": "string"
+          },
+          "period": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "template_id": {
+            "minLength": 1,
+            "title": "Template Id",
+            "type": "string"
+          },
+          "knowledge_base_id": {
+            "default": "kb_demo",
+            "minLength": 1,
+            "title": "Knowledge Base Id",
+            "type": "string"
+          },
+          "focus": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Focus",
+            "type": "array"
+          },
+          "style": {
+            "const": "official",
+            "default": "official",
+            "title": "Style",
+            "type": "string"
+          },
+          "length": {
+            "default": "standard",
+            "enum": [
+              "standard",
+              "brief"
+            ],
+            "title": "Length",
+            "type": "string"
+          },
+          "as_of": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "As Of"
+          },
+          "report_type": {
+            "const": "investment_attraction",
+            "title": "Report Type",
+            "type": "string"
+          },
+          "target_segment": {
+            "minLength": 1,
+            "title": "Target Segment",
+            "type": "string"
+          }
+        },
+        "required": [
+          "industry",
+          "region",
+          "period",
+          "template_id",
+          "report_type",
+          "target_segment"
+        ],
+        "title": "Investment",
+        "type": "object"
+      },
+      "Overseas": {
+        "additionalProperties": false,
+        "properties": {
+          "industry": {
+            "minLength": 1,
+            "title": "Industry",
+            "type": "string"
+          },
+          "region": {
+            "minLength": 1,
+            "title": "Region",
+            "type": "string"
+          },
+          "period": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "template_id": {
+            "minLength": 1,
+            "title": "Template Id",
+            "type": "string"
+          },
+          "knowledge_base_id": {
+            "default": "kb_demo",
+            "minLength": 1,
+            "title": "Knowledge Base Id",
+            "type": "string"
+          },
+          "focus": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Focus",
+            "type": "array"
+          },
+          "style": {
+            "const": "official",
+            "default": "official",
+            "title": "Style",
+            "type": "string"
+          },
+          "length": {
+            "default": "standard",
+            "enum": [
+              "standard",
+              "brief"
+            ],
+            "title": "Length",
+            "type": "string"
+          },
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "report_type": {
+            "const": "overseas_assessment",
+            "title": "Report Type",
+            "type": "string"
+          },
+          "origin": {
+            "minLength": 1,
+            "title": "Origin",
+            "type": "string"
+          },
+          "target_market": {
+            "minLength": 1,
+            "title": "Target Market",
+            "type": "string"
+          },
+          "product": {
+            "minLength": 1,
+            "title": "Product",
+            "type": "string"
+          }
+        },
+        "required": [
+          "industry",
+          "region",
+          "period",
+          "template_id",
+          "as_of",
+          "report_type",
+          "origin",
+          "target_market",
+          "product"
+        ],
+        "title": "Overseas",
+        "type": "object"
+      },
+      "Period": {
+        "additionalProperties": false,
+        "properties": {
+          "from": {
+            "pattern": "^[0-9]{4}$",
+            "title": "From",
+            "type": "string"
+          },
+          "to": {
+            "pattern": "^[0-9]{4}$",
+            "title": "To",
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "title": "Period",
+        "type": "object"
+      },
+      "Prosperity": {
+        "additionalProperties": false,
+        "properties": {
+          "industry": {
+            "minLength": 1,
+            "title": "Industry",
+            "type": "string"
+          },
+          "region": {
+            "minLength": 1,
+            "title": "Region",
+            "type": "string"
+          },
+          "period": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "template_id": {
+            "minLength": 1,
+            "title": "Template Id",
+            "type": "string"
+          },
+          "knowledge_base_id": {
+            "default": "kb_demo",
+            "minLength": 1,
+            "title": "Knowledge Base Id",
+            "type": "string"
+          },
+          "focus": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Focus",
+            "type": "array"
+          },
+          "style": {
+            "const": "official",
+            "default": "official",
+            "title": "Style",
+            "type": "string"
+          },
+          "length": {
+            "default": "standard",
+            "enum": [
+              "standard",
+              "brief"
+            ],
+            "title": "Length",
+            "type": "string"
+          },
+          "as_of": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "As Of"
+          },
+          "report_type": {
+            "const": "industry_prosperity",
+            "title": "Report Type",
+            "type": "string"
+          },
+          "indicator": {
+            "minLength": 1,
+            "title": "Indicator",
+            "type": "string"
+          },
+          "granularity": {
+            "const": "quarter",
+            "title": "Granularity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "industry",
+          "region",
+          "period",
+          "template_id",
+          "report_type",
+          "indicator",
+          "granularity"
+        ],
+        "title": "Prosperity",
+        "type": "object"
+      },
+      "Version": {
+        "additionalProperties": false,
+        "properties": {
+          "version_id": {
+            "minLength": 1,
+            "title": "Version Id",
+            "type": "string"
+          },
+          "parent_version_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Version Id"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "stale_chapter_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Stale Chapter Ids",
+            "type": "array"
+          },
+          "exportable": {
+            "title": "Exportable",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "version_id",
+          "parent_version_id",
+          "created_at",
+          "stale_chapter_ids",
+          "exportable"
+        ],
+        "title": "Version",
+        "type": "object"
+      },
+      "Page_Version_": {
+        "additionalProperties": false,
+        "properties": {
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Version"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "page",
+          "limit",
+          "total",
+          "items"
+        ],
+        "title": "Page[Version]",
+        "type": "object"
+      },
+      "Cell": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "metric_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Metric Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "text",
+          "evidence_ids",
+          "metric_ids"
+        ],
+        "title": "Cell",
+        "type": "object"
+      },
+      "Chapter": {
+        "additionalProperties": false,
+        "properties": {
+          "chapter_id": {
+            "minLength": 1,
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "blocks": {
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "chart_ref": "#/components/schemas/ChartRef",
+                  "paragraph": "#/components/schemas/Paragraph",
+                  "table": "#/components/schemas/Table"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Paragraph"
+                },
+                {
+                  "$ref": "#/components/schemas/Table"
+                },
+                {
+                  "$ref": "#/components/schemas/ChartRef"
+                }
+              ]
+            },
+            "title": "Blocks",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "fact_candidates": {
+            "items": {
+              "$ref": "#/components/schemas/Fact"
+            },
+            "title": "Fact Candidates",
+            "type": "array"
+          },
+          "chart_requests": {
+            "items": {
+              "$ref": "#/components/schemas/ChartRequest"
+            },
+            "title": "Chart Requests",
+            "type": "array"
+          },
+          "missing_evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Gap"
+            },
+            "title": "Missing Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "title",
+          "blocks",
+          "summary",
+          "fact_candidates",
+          "chart_requests",
+          "missing_evidence"
+        ],
+        "title": "Chapter",
+        "type": "object"
+      },
+      "Chart": {
+        "additionalProperties": false,
+        "properties": {
+          "block_id": {
+            "minLength": 1,
+            "title": "Block Id",
+            "type": "string"
+          },
+          "chart_id": {
+            "minLength": 1,
+            "title": "Chart Id",
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "bar",
+              "line",
+              "table"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "source_metric_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Source Metric Ids",
+            "type": "array"
+          },
+          "chapter_id": {
+            "minLength": 1,
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Point"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "unit": {
+            "minLength": 1,
+            "title": "Unit",
+            "type": "string"
+          },
+          "asset_id": {
+            "minLength": 1,
+            "title": "Asset Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "block_id",
+          "chart_id",
+          "title",
+          "type",
+          "source_metric_ids",
+          "chapter_id",
+          "data",
+          "unit",
+          "asset_id"
+        ],
+        "title": "Chart",
+        "type": "object"
+      },
+      "ChartRef": {
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "const": "chart_ref",
+            "title": "Type",
+            "type": "string"
+          },
+          "block_id": {
+            "minLength": 1,
+            "title": "Block Id",
+            "type": "string"
+          },
+          "chart_id": {
+            "minLength": 1,
+            "title": "Chart Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "block_id",
+          "chart_id"
+        ],
+        "title": "ChartRef",
+        "type": "object"
+      },
+      "ChartRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "block_id": {
+            "minLength": 1,
+            "title": "Block Id",
+            "type": "string"
+          },
+          "chart_id": {
+            "minLength": 1,
+            "title": "Chart Id",
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "bar",
+              "line",
+              "table"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "source_metric_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Source Metric Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "block_id",
+          "chart_id",
+          "title",
+          "type",
+          "source_metric_ids"
+        ],
+        "title": "ChartRequest",
+        "type": "object"
+      },
+      "Csv": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "csv",
+            "title": "Kind",
+            "type": "string"
+          },
+          "row": {
+            "minimum": 1,
+            "title": "Row",
+            "type": "integer"
+          },
+          "column": {
+            "minLength": 1,
+            "title": "Column",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "row",
+          "column"
+        ],
+        "title": "Csv",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "publisher": {
+            "minLength": 1,
+            "title": "Publisher",
+            "type": "string"
+          },
+          "published_at": {
+            "format": "date",
+            "title": "Published At",
+            "type": "string"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Url"
+          },
+          "evidence_id": {
+            "minLength": 1,
+            "title": "Evidence Id",
+            "type": "string"
+          },
+          "document_id": {
+            "minLength": 1,
+            "title": "Document Id",
+            "type": "string"
+          },
+          "document_version_id": {
+            "minLength": 1,
+            "title": "Document Version Id",
+            "type": "string"
+          },
+          "chunk_id": {
+            "minLength": 1,
+            "title": "Chunk Id",
+            "type": "string"
+          },
+          "locator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Pdf"
+              },
+              {
+                "$ref": "#/components/schemas/Word"
+              },
+              {
+                "$ref": "#/components/schemas/Sheet"
+              },
+              {
+                "$ref": "#/components/schemas/Csv"
+              }
+            ],
+            "title": "Locator"
+          },
+          "excerpt": {
+            "minLength": 1,
+            "title": "Excerpt",
+            "type": "string"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Score"
+          }
+        },
+        "required": [
+          "title",
+          "publisher",
+          "published_at",
+          "evidence_id",
+          "document_id",
+          "document_version_id",
+          "chunk_id",
+          "locator",
+          "excerpt"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "Fact": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "metric_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Metric Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "text",
+          "evidence_ids",
+          "metric_ids"
+        ],
+        "title": "Fact",
+        "type": "object"
+      },
+      "Gap": {
+        "additionalProperties": false,
+        "properties": {
+          "question": {
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          },
+          "code": {
+            "minLength": 1,
+            "title": "Code",
+            "type": "string"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "question",
+          "code",
+          "reason",
+          "required"
+        ],
+        "title": "Gap",
+        "type": "object"
+      },
+      "Issue": {
+        "additionalProperties": false,
+        "properties": {
+          "issue_id": {
+            "minLength": 1,
+            "title": "Issue Id",
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "WARN",
+              "BLOCK"
+            ],
+            "title": "Severity",
+            "type": "string"
+          },
+          "code": {
+            "minLength": 1,
+            "title": "Code",
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "description": {
+            "minLength": 1,
+            "title": "Description",
+            "type": "string"
+          },
+          "related_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Related Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "issue_id",
+          "severity",
+          "code",
+          "location",
+          "description",
+          "related_ids"
+        ],
+        "title": "Issue",
+        "type": "object"
+      },
+      "Location": {
+        "additionalProperties": false,
+        "properties": {
+          "chapter_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chapter Id"
+          },
+          "block_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Block Id"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "block_id"
+        ],
+        "title": "Location",
+        "type": "object"
+      },
+      "Metric": {
+        "additionalProperties": false,
+        "properties": {
+          "metric_id": {
+            "minLength": 1,
+            "title": "Metric Id",
+            "type": "string"
+          },
+          "indicator": {
+            "minLength": 1,
+            "title": "Indicator",
+            "type": "string"
+          },
+          "name": {
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "entity_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entity Id"
+          },
+          "period": {
+            "minLength": 1,
+            "title": "Period",
+            "type": "string"
+          },
+          "granularity": {
+            "enum": [
+              "year",
+              "quarter",
+              "month"
+            ],
+            "title": "Granularity",
+            "type": "string"
+          },
+          "region": {
+            "minLength": 1,
+            "title": "Region",
+            "type": "string"
+          },
+          "scope": {
+            "minLength": 1,
+            "title": "Scope",
+            "type": "string"
+          },
+          "raw_value": {
+            "anyOf": [
+              {
+                "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Value"
+          },
+          "raw_unit": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Unit"
+          },
+          "multiplier": {
+            "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+            "title": "Multiplier",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "unit": {
+            "minLength": 1,
+            "title": "Unit",
+            "type": "string"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "source_evidence_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Source Evidence Ids",
+            "type": "array"
+          },
+          "formula_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Formula Id"
+          },
+          "input_metric_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Input Metric Ids",
+            "type": "array"
+          },
+          "missing_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          }
+        },
+        "required": [
+          "metric_id",
+          "indicator",
+          "name",
+          "entity_id",
+          "period",
+          "granularity",
+          "region",
+          "scope",
+          "raw_value",
+          "raw_unit",
+          "multiplier",
+          "value",
+          "unit",
+          "currency",
+          "source_evidence_ids",
+          "formula_id",
+          "input_metric_ids",
+          "missing_reason"
+        ],
+        "title": "Metric",
+        "type": "object"
+      },
+      "Outline": {
+        "additionalProperties": false,
+        "properties": {
+          "chapters": {
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            },
+            "minItems": 1,
+            "title": "Chapters",
+            "type": "array"
+          }
+        },
+        "required": [
+          "chapters"
+        ],
+        "title": "Outline",
+        "type": "object"
+      },
+      "Paragraph": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "metric_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Metric Ids",
+            "type": "array"
+          },
+          "type": {
+            "const": "paragraph",
+            "title": "Type",
+            "type": "string"
+          },
+          "block_id": {
+            "minLength": 1,
+            "title": "Block Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "evidence_ids",
+          "metric_ids",
+          "type",
+          "block_id"
+        ],
+        "title": "Paragraph",
+        "type": "object"
+      },
+      "Pdf": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "pdf",
+            "title": "Kind",
+            "type": "string"
+          },
+          "page": {
+            "minimum": 1,
+            "title": "Page",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "kind",
+          "page"
+        ],
+        "title": "Pdf",
+        "type": "object"
+      },
+      "Point": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "series": {
+            "minLength": 1,
+            "title": "Series",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "metric_id": {
+            "minLength": 1,
+            "title": "Metric Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "series",
+          "value",
+          "metric_id"
+        ],
+        "title": "Point",
+        "type": "object"
+      },
+      "QualitySummary": {
+        "additionalProperties": false,
+        "properties": {
+          "rules": {
+            "items": {
+              "$ref": "#/components/schemas/Rule"
+            },
+            "title": "Rules",
+            "type": "array"
+          },
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            },
+            "title": "Issues",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rules",
+          "issues"
+        ],
+        "title": "QualitySummary",
+        "type": "object"
+      },
+      "Rule": {
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "result": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "NOT_CHECKED"
+            ],
+            "title": "Result",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "rule_id",
+          "result",
+          "reason",
+          "required"
+        ],
+        "title": "Rule",
+        "type": "object"
+      },
+      "Sheet": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "xlsx",
+            "title": "Kind",
+            "type": "string"
+          },
+          "sheet": {
+            "minLength": 1,
+            "title": "Sheet",
+            "type": "string"
+          },
+          "cells": {
+            "minLength": 1,
+            "title": "Cells",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "sheet",
+          "cells"
+        ],
+        "title": "Sheet",
+        "type": "object"
+      },
+      "Table": {
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "const": "table",
+            "title": "Type",
+            "type": "string"
+          },
+          "block_id": {
+            "minLength": 1,
+            "title": "Block Id",
+            "type": "string"
+          },
+          "columns": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Columns",
+            "type": "array"
+          },
+          "rows": {
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/Cell"
+              },
+              "type": "array"
+            },
+            "title": "Rows",
+            "type": "array"
+          }
+        },
+        "required": [
+          "type",
+          "block_id",
+          "columns",
+          "rows"
+        ],
+        "title": "Table",
+        "type": "object"
+      },
+      "TemplateRef": {
+        "additionalProperties": false,
+        "properties": {
+          "template_id": {
+            "minLength": 1,
+            "title": "Template Id",
+            "type": "string"
+          },
+          "version": {
+            "minimum": 1,
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "template_id",
+          "version"
+        ],
+        "title": "TemplateRef",
+        "type": "object"
+      },
+      "Word": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "docx",
+            "title": "Kind",
+            "type": "string"
+          },
+          "section_path": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Section Path",
+            "type": "array"
+          },
+          "paragraph": {
+            "minimum": 1,
+            "title": "Paragraph",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "kind",
+          "section_path",
+          "paragraph"
+        ],
+        "title": "Word",
+        "type": "object"
+      },
+      "ReportDocument": {
+        "additionalProperties": false,
+        "properties": {
+          "run_id": {
+            "minLength": 1,
+            "title": "Run Id",
+            "type": "string"
+          },
+          "spec": {
+            "discriminator": {
+              "mapping": {
+                "enterprise_comparison": "#/components/schemas/Comparison",
+                "industry_analysis": "#/components/schemas/Industry",
+                "industry_prosperity": "#/components/schemas/Prosperity",
+                "investment_attraction": "#/components/schemas/Investment",
+                "overseas_assessment": "#/components/schemas/Overseas"
+              },
+              "propertyName": "report_type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Industry"
+              },
+              {
+                "$ref": "#/components/schemas/Comparison"
+              },
+              {
+                "$ref": "#/components/schemas/Prosperity"
+              },
+              {
+                "$ref": "#/components/schemas/Investment"
+              },
+              {
+                "$ref": "#/components/schemas/Overseas"
+              }
+            ],
+            "title": "Spec"
+          },
+          "template_ref": {
+            "$ref": "#/components/schemas/TemplateRef"
+          },
+          "source_version_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Source Version Ids",
+            "type": "array"
+          },
+          "facts_version": {
+            "minLength": 1,
+            "title": "Facts Version",
+            "type": "string"
+          },
+          "facts": {
+            "items": {
+              "$ref": "#/components/schemas/Fact"
+            },
+            "title": "Facts",
+            "type": "array"
+          },
+          "version_id": {
+            "minLength": 1,
+            "title": "Version Id",
+            "type": "string"
+          },
+          "parent_version_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Version Id"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "stale_chapter_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Stale Chapter Ids",
+            "type": "array"
+          },
+          "exportable": {
+            "title": "Exportable",
+            "type": "boolean"
+          },
+          "report_id": {
+            "minLength": 1,
+            "title": "Report Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "layout_version": {
+            "minLength": 1,
+            "title": "Layout Version",
+            "type": "string"
+          },
+          "model_id": {
+            "minLength": 1,
+            "title": "Model Id",
+            "type": "string"
+          },
+          "outline": {
+            "$ref": "#/components/schemas/Outline"
+          },
+          "chapters": {
+            "items": {
+              "$ref": "#/components/schemas/Chapter"
+            },
+            "title": "Chapters",
+            "type": "array"
+          },
+          "evidences": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "title": "Evidences",
+            "type": "array"
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/Metric"
+            },
+            "title": "Metrics",
+            "type": "array"
+          },
+          "charts": {
+            "items": {
+              "$ref": "#/components/schemas/Chart"
+            },
+            "title": "Charts",
+            "type": "array"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/QualitySummary"
+          }
+        },
+        "required": [
+          "run_id",
+          "spec",
+          "template_ref",
+          "source_version_ids",
+          "facts_version",
+          "facts",
+          "version_id",
+          "parent_version_id",
+          "created_at",
+          "stale_chapter_ids",
+          "exportable",
+          "report_id",
+          "schema_version",
+          "layout_version",
+          "model_id",
+          "outline",
+          "chapters",
+          "evidences",
+          "metrics",
+          "charts",
+          "quality"
+        ],
+        "title": "ReportDocument",
+        "type": "object"
+      },
+      "ChapterRun": {
+        "additionalProperties": false,
+        "properties": {
+          "chapter_id": {
+            "minLength": 1,
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "PENDING",
+              "WAITING_DEPENDENCY",
+              "RUNNING",
+              "SUCCEEDED",
+              "FAILED",
+              "SKIPPED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "attempt_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attempt Id"
+          },
+          "retries": {
+            "minimum": 0,
+            "title": "Retries",
+            "type": "integer"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ErrorInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "chapter_id",
+          "status",
+          "attempt_id",
+          "retries",
+          "error"
+        ],
+        "title": "ChapterRun",
+        "type": "object"
+      },
+      "JobDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "job_id": {
+            "minLength": 1,
+            "title": "Job Id",
+            "type": "string"
+          },
+          "report_id": {
+            "minLength": 1,
+            "title": "Report Id",
+            "type": "string"
+          },
+          "run_id": {
+            "minLength": 1,
+            "title": "Run Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "QUEUED",
+              "RUNNING",
+              "COMPLETED",
+              "COMPLETED_WITH_WARNINGS",
+              "FAILED",
+              "CANCELLED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "stage": {
+            "anyOf": [
+              {
+                "enum": [
+                  "PLANNING",
+                  "GENERATING",
+                  "VALIDATING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stage"
+          },
+          "chapters": {
+            "items": {
+              "$ref": "#/components/schemas/ChapterRun"
+            },
+            "title": "Chapters",
+            "type": "array"
+          },
+          "result_version_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Result Version Id"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          },
+          "estimated_cost_cny": {
+            "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+            "title": "Estimated Cost Cny",
+            "type": "string"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ErrorInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "job_id",
+          "report_id",
+          "run_id",
+          "status",
+          "stage",
+          "chapters",
+          "result_version_id",
+          "updated_at",
+          "estimated_cost_cny",
+          "error"
+        ],
+        "title": "JobDetail",
+        "type": "object"
+      },
+      "Preview": {
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "enum": [
+              "PENDING",
+              "WAITING_DEPENDENCY",
+              "RUNNING",
+              "SUCCEEDED",
+              "FAILED",
+              "SKIPPED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "content": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Chapter"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "content"
+        ],
+        "title": "Preview",
+        "type": "object"
+      },
+      "Edited": {
+        "additionalProperties": false,
+        "properties": {
+          "new_version_id": {
+            "minLength": 1,
+            "title": "New Version Id",
+            "type": "string"
+          },
+          "stale_chapter_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Stale Chapter Ids",
+            "type": "array"
+          },
+          "exportable": {
+            "title": "Exportable",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "new_version_id",
+          "stale_chapter_ids",
+          "exportable"
+        ],
+        "title": "Edited",
+        "type": "object"
+      },
+      "Edit": {
+        "additionalProperties": false,
+        "properties": {
+          "base_version_id": {
+            "minLength": 1,
+            "title": "Base Version Id",
+            "type": "string"
+          },
+          "blocks": {
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "chart_ref": "#/components/schemas/ChartRef",
+                  "paragraph": "#/components/schemas/Paragraph",
+                  "table": "#/components/schemas/Table"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Paragraph"
+                },
+                {
+                  "$ref": "#/components/schemas/Table"
+                },
+                {
+                  "$ref": "#/components/schemas/ChartRef"
+                }
+              ]
+            },
+            "title": "Blocks",
+            "type": "array"
+          }
+        },
+        "required": [
+          "base_version_id",
+          "blocks"
+        ],
+        "title": "Edit",
+        "type": "object"
+      },
+      "Rewrite": {
+        "additionalProperties": false,
+        "properties": {
+          "base_version_id": {
+            "minLength": 1,
+            "title": "Base Version Id",
+            "type": "string"
+          },
+          "scope": {
+            "enum": [
+              "chapter",
+              "dependents"
+            ],
+            "title": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "base_version_id",
+          "scope"
+        ],
+        "title": "Rewrite",
+        "type": "object"
+      },
+      "ExportAccepted": {
+        "additionalProperties": false,
+        "properties": {
+          "export_id": {
+            "minLength": 1,
+            "title": "Export Id",
+            "type": "string"
+          },
+          "status_url": {
+            "minLength": 1,
+            "title": "Status Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "export_id",
+          "status_url"
+        ],
+        "title": "ExportAccepted",
+        "type": "object"
+      },
+      "ExportRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "format": {
+            "enum": [
+              "docx",
+              "pdf"
+            ],
+            "title": "Format",
+            "type": "string"
+          }
+        },
+        "required": [
+          "format"
+        ],
+        "title": "ExportRequest",
+        "type": "object"
+      },
+      "ExportSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "export_id": {
+            "minLength": 1,
+            "title": "Export Id",
+            "type": "string"
+          },
+          "version_id": {
+            "minLength": 1,
+            "title": "Version Id",
+            "type": "string"
+          },
+          "format": {
+            "enum": [
+              "docx",
+              "pdf"
+            ],
+            "title": "Format",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "QUEUED",
+              "RUNNING",
+              "READY",
+              "FAILED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "checksum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checksum"
+          },
+          "download_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Download Url"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ErrorInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "export_id",
+          "version_id",
+          "format",
+          "status",
+          "checksum",
+          "download_url",
+          "error"
+        ],
+        "title": "ExportSummary",
+        "type": "object"
+      },
+      "Summary": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "metric_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Metric Ids",
+            "type": "array"
+          },
+          "chapter_id": {
+            "minLength": 1,
+            "title": "Chapter Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "evidence_ids",
+          "metric_ids",
+          "chapter_id"
+        ],
+        "title": "Summary",
+        "type": "object"
+      },
+      "ChapterInput": {
+        "additionalProperties": false,
+        "properties": {
+          "run_id": {
+            "minLength": 1,
+            "title": "Run Id",
+            "type": "string"
+          },
+          "spec": {
+            "discriminator": {
+              "mapping": {
+                "enterprise_comparison": "#/components/schemas/Comparison",
+                "industry_analysis": "#/components/schemas/Industry",
+                "industry_prosperity": "#/components/schemas/Prosperity",
+                "investment_attraction": "#/components/schemas/Investment",
+                "overseas_assessment": "#/components/schemas/Overseas"
+              },
+              "propertyName": "report_type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Industry"
+              },
+              {
+                "$ref": "#/components/schemas/Comparison"
+              },
+              {
+                "$ref": "#/components/schemas/Prosperity"
+              },
+              {
+                "$ref": "#/components/schemas/Investment"
+              },
+              {
+                "$ref": "#/components/schemas/Overseas"
+              }
+            ],
+            "title": "Spec"
+          },
+          "template_ref": {
+            "$ref": "#/components/schemas/TemplateRef"
+          },
+          "source_version_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Source Version Ids",
+            "type": "array"
+          },
+          "facts_version": {
+            "minLength": 1,
+            "title": "Facts Version",
+            "type": "string"
+          },
+          "facts": {
+            "items": {
+              "$ref": "#/components/schemas/Fact"
+            },
+            "title": "Facts",
+            "type": "array"
+          },
+          "task": {
+            "$ref": "#/components/schemas/Task"
+          },
+          "predecessors": {
+            "items": {
+              "$ref": "#/components/schemas/Summary"
+            },
+            "title": "Predecessors",
+            "type": "array"
+          },
+          "evidences": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "title": "Evidences",
+            "type": "array"
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/Metric"
+            },
+            "title": "Metrics",
+            "type": "array"
+          },
+          "gaps": {
+            "items": {
+              "$ref": "#/components/schemas/Gap"
+            },
+            "title": "Gaps",
+            "type": "array"
+          }
+        },
+        "required": [
+          "run_id",
+          "spec",
+          "template_ref",
+          "source_version_ids",
+          "facts_version",
+          "facts",
+          "task",
+          "predecessors",
+          "evidences",
+          "metrics",
+          "gaps"
+        ],
+        "title": "ChapterInput",
+        "type": "object"
+      },
+      "Filters": {
+        "additionalProperties": false,
+        "properties": {
+          "entity_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Entity Ids",
+            "type": "array"
+          },
+          "indicators": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Indicators",
+            "type": "array"
+          },
+          "periods": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Periods",
+            "type": "array"
+          },
+          "regions": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Regions",
+            "type": "array"
+          },
+          "industries": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Industries",
+            "type": "array"
+          },
+          "as_of": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "As Of"
+          }
+        },
+        "title": "Filters",
+        "type": "object"
+      },
+      "Coverage": {
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "enum": [
+              "SUFFICIENT",
+              "PARTIAL",
+              "INSUFFICIENT"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "gaps": {
+            "items": {
+              "$ref": "#/components/schemas/Gap"
+            },
+            "title": "Gaps",
+            "type": "array"
+          }
+        },
+        "required": [
+          "status",
+          "gaps"
+        ],
+        "title": "Coverage",
+        "type": "object"
+      },
+      "Artifact": {
+        "additionalProperties": false,
+        "properties": {
+          "storage_key": {
+            "minLength": 1,
+            "title": "Storage Key",
+            "type": "string"
+          },
+          "sha256": {
+            "title": "Sha256",
+            "type": "string"
+          },
+          "size_bytes": {
+            "title": "Size Bytes",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "storage_key",
+          "sha256",
+          "size_bytes"
+        ],
+        "title": "Artifact",
+        "type": "object"
+      },
+      "Calculation": {
+        "additionalProperties": false,
+        "properties": {
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/Metric"
+            },
+            "title": "Metrics",
+            "type": "array"
+          },
+          "gaps": {
+            "items": {
+              "$ref": "#/components/schemas/Gap"
+            },
+            "title": "Gaps",
+            "type": "array"
+          }
+        },
+        "required": [
+          "metrics",
+          "gaps"
+        ],
+        "title": "Calculation",
+        "type": "object"
+      },
+      "ChartResult": {
+        "additionalProperties": false,
+        "properties": {
+          "charts": {
+            "items": {
+              "$ref": "#/components/schemas/Chart"
+            },
+            "title": "Charts",
+            "type": "array"
+          },
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            },
+            "title": "Issues",
+            "type": "array"
+          }
+        },
+        "required": [
+          "charts",
+          "issues"
+        ],
+        "title": "ChartResult",
+        "type": "object"
+      }
+    }
+  }
+}

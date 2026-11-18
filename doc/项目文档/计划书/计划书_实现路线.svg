@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="510" viewBox="0 0 1280 510" role="img" aria-label="产业智能报告自动生成系统实现路线示意图">
+<defs>
+  <marker id="ar" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#858E98"/></marker>
+  <style>
+    text {font-family: "Microsoft YaHei","Noto Sans CJK SC","PingFang SC",sans-serif}
+    .title {fill:#282F38;font-size:21px;font-weight:700}
+    .body {fill:#58616B;font-size:15px}
+    .label {fill:#606B78;font-size:17px;font-weight:600}
+  </style>
+</defs>
+<rect width="1280" height="510" fill="#FFFFFF"/>
+<text x="29" y="35" font-size="20" font-weight="650" fill="#35404A">报告生成主流程</text>
+
+<path d="M215 139 H230 M418 139 H433 M621 139 H636 M824 139 H839 M1027 139 H1042" fill="none" stroke="#858E98" stroke-width="2" marker-end="url(#ar)"/>
+
+<g>
+  <rect x="25" y="73" width="190" height="136" rx="8" fill="#F6F7F8" stroke="#BBC2C8"/>
+  <text class="title" text-anchor="middle" x="120" y="111">① 报告需求</text>
+  <text class="body" text-anchor="middle" x="120" y="147">选择产业与报告类型</text>
+  <text class="body" text-anchor="middle" x="120" y="174">指定时间与地区</text>
+
+  <rect x="230" y="73" width="188" height="136" rx="8" fill="#F6F7F8" stroke="#BBC2C8"/>
+  <text class="title" text-anchor="middle" x="324" y="111">② 模板与大纲</text>
+  <text class="body" text-anchor="middle" x="324" y="147">确定章节结构</text>
+  <text class="body" text-anchor="middle" x="324" y="174">规划各章写作任务</text>
+
+  <rect x="433" y="73" width="188" height="136" rx="8" fill="#F5F8FB" stroke="#8DAAC1"/>
+  <rect x="433" y="73" width="188" height="5" rx="2" fill="#496D92"/>
+  <text class="title" text-anchor="middle" x="527" y="111">③ 知识库检索</text>
+  <text class="body" text-anchor="middle" x="527" y="147">RAG 匹配章节证据</text>
+  <text class="body" text-anchor="middle" x="527" y="174">保留来源与引用标识</text>
+
+  <rect x="636" y="73" width="188" height="136" rx="8" fill="#F5F8FB" stroke="#8DAAC1"/>
+  <rect x="636" y="73" width="188" height="5" rx="2" fill="#496D92"/>
+  <text class="title" text-anchor="middle" x="730" y="111">④ 章节生成</text>
+  <text class="body" text-anchor="middle" x="730" y="147">调用大模型撰写</text>
+  <text class="body" text-anchor="middle" x="730" y="174">生成结构化正文</text>
+
+  <rect x="839" y="73" width="188" height="136" rx="8" fill="#F9F8F8" stroke="#C8B7B7"/>
+  <rect x="839" y="73" width="5" height="136" rx="2" fill="#B65B5B"/>
+  <text class="title" text-anchor="middle" x="933" y="111">⑤ 数据与质检</text>
+  <text class="body" text-anchor="middle" x="933" y="147">指标计算、生成图表</text>
+  <text class="body" text-anchor="middle" x="933" y="174">核对引用、标记风险</text>
+
+  <rect x="1042" y="73" width="211" height="136" rx="8" fill="#F6F7F8" stroke="#BBC2C8"/>
+  <text class="title" text-anchor="middle" x="1147" y="111">⑥ 保存与导出</text>
+  <text class="body" text-anchor="middle" x="1147" y="147">保存版本、可选编辑</text>
+  <text class="body" text-anchor="middle" x="1147" y="174">输出 Word / PDF</text>
+</g>
+
+<text x="29" y="268" font-size="20" font-weight="650" fill="#35404A">支撑模块与数据来源</text>
+<rect x="188" y="290" width="420" height="108" rx="9" fill="#F6F8FA" stroke="#B9C8D5"/>
+<text class="label" x="398" y="325" text-anchor="middle">预建产业知识库（确定采用）</text>
+<text class="body" x="398" y="355" text-anchor="middle">公开统计 / 政策 / 企业年报 / 用户上传资料</text>
+<text class="body" x="398" y="382" text-anchor="middle">预处理、入库、建立索引、记录出处</text>
+<path d="M527 290 V212" stroke="#496D92" stroke-width="2.3" stroke-dasharray="6 5" fill="none" marker-end="url(#ar)"/>
+
+<rect x="669" y="290" width="418" height="108" rx="9" fill="#F7F7F7" stroke="#BFC3C7"/>
+<text class="label" x="878" y="325" text-anchor="middle">后端任务与版本管理</text>
+<text class="body" x="878" y="355" text-anchor="middle">协调检索、生成、检查与导出服务</text>
+<text class="body" x="878" y="382" text-anchor="middle">记录生成状态、失败原因及版本</text>
+
+<rect x="25" y="436" width="1228" height="49" rx="8" fill="#ECEEF0" stroke="#BFC4CA"/>
+<text text-anchor="middle" x="639" y="465" font-size="19" font-weight="620" fill="#3D4854">统一报告中间结构：报告信息 · 章节正文 · 证据引用 · 图表数据 · 质量提示 · 版本信息</text>
+</svg>

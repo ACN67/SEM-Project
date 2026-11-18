@@ -1,0 +1,36 @@
+{
+  "chapter_id": "ch_market",
+  "title": "市场规模",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "block_id": "b1",
+      "text": "模拟销量为 120 辆。",
+      "evidence_ids": [
+        "ev1"
+      ],
+      "metric_ids": [
+        "m1"
+      ]
+    },
+    {
+      "type": "chart_ref",
+      "block_id": "b2",
+      "chart_id": "chart1"
+    }
+  ],
+  "summary": "模拟销量为 120 辆。",
+  "fact_candidates": [],
+  "chart_requests": [
+    {
+      "chart_id": "chart1",
+      "block_id": "b2",
+      "title": "模拟销量",
+      "type": "bar",
+      "source_metric_ids": [
+        "m1"
+      ]
+    }
+  ],
+  "missing_evidence": []
+}

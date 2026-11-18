@@ -1,0 +1,14 @@
+{
+  "region": "德国",
+  "industry": "新能源汽车",
+  "period": {
+    "from": "2023",
+    "to": "2024"
+  },
+  "report_type": "overseas_assessment",
+  "template_id": "overseas_assessment_v1",
+  "target_market": "德国",
+  "product": "纯电动乘用车",
+  "origin": "中国",
+  "as_of": "2024-12-31"
+}

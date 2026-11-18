@@ -1,0 +1,20 @@
+{
+  "job_id": "j1",
+  "report_id": "report1",
+  "run_id": "run1",
+  "status": "COMPLETED",
+  "stage": null,
+  "chapters": [
+    {
+      "chapter_id": "ch_market",
+      "status": "SUCCEEDED",
+      "attempt_id": "a1",
+      "retries": 0,
+      "error": null
+    }
+  ],
+  "result_version_id": "v1",
+  "updated_at": "2026-11-18T09:00:00+08:00",
+  "estimated_cost_cny": "0.00",
+  "error": null
+}

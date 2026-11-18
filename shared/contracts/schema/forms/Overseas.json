@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "Period": {
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "pattern": "^[0-9]{4}$",
+          "title": "From",
+          "type": "string"
+        },
+        "to": {
+          "pattern": "^[0-9]{4}$",
+          "title": "To",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ],
+      "title": "Period",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "industry": {
+      "minLength": 1,
+      "title": "Industry",
+      "type": "string"
+    },
+    "region": {
+      "minLength": 1,
+      "title": "Region",
+      "type": "string"
+    },
+    "period": {
+      "$ref": "#/$defs/Period"
+    },
+    "template_id": {
+      "minLength": 1,
+      "title": "Template Id",
+      "type": "string"
+    },
+    "knowledge_base_id": {
+      "default": "kb_demo",
+      "minLength": 1,
+      "title": "Knowledge Base Id",
+      "type": "string"
+    },
+    "focus": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Focus",
+      "type": "array"
+    },
+    "style": {
+      "const": "official",
+      "default": "official",
+      "title": "Style",
+      "type": "string"
+    },
+    "length": {
+      "default": "standard",
+      "enum": [
+        "standard",
+        "brief"
+      ],
+      "title": "Length",
+      "type": "string"
+    },
+    "as_of": {
+      "format": "date",
+      "title": "As Of",
+      "type": "string"
+    },
+    "report_type": {
+      "const": "overseas_assessment",
+      "title": "Report Type",
+      "type": "string"
+    },
+    "origin": {
+      "minLength": 1,
+      "title": "Origin",
+      "type": "string"
+    },
+    "target_market": {
+      "minLength": 1,
+      "title": "Target Market",
+      "type": "string"
+    },
+    "product": {
+      "minLength": 1,
+      "title": "Product",
+      "type": "string"
+    }
+  },
+  "required": [
+    "industry",
+    "region",
+    "period",
+    "template_id",
+    "as_of",
+    "report_type",
+    "origin",
+    "target_market",
+    "product"
+  ],
+  "title": "Overseas",
+  "type": "object"
+}

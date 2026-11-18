@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "Period": {
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "pattern": "^[0-9]{4}$",
+          "title": "From",
+          "type": "string"
+        },
+        "to": {
+          "pattern": "^[0-9]{4}$",
+          "title": "To",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ],
+      "title": "Period",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "industry": {
+      "minLength": 1,
+      "title": "Industry",
+      "type": "string"
+    },
+    "region": {
+      "minLength": 1,
+      "title": "Region",
+      "type": "string"
+    },
+    "period": {
+      "$ref": "#/$defs/Period"
+    },
+    "template_id": {
+      "minLength": 1,
+      "title": "Template Id",
+      "type": "string"
+    },
+    "knowledge_base_id": {
+      "default": "kb_demo",
+      "minLength": 1,
+      "title": "Knowledge Base Id",
+      "type": "string"
+    },
+    "focus": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Focus",
+      "type": "array"
+    },
+    "style": {
+      "const": "official",
+      "default": "official",
+      "title": "Style",
+      "type": "string"
+    },
+    "length": {
+      "default": "standard",
+      "enum": [
+        "standard",
+        "brief"
+      ],
+      "title": "Length",
+      "type": "string"
+    },
+    "as_of": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "As Of"
+    },
+    "report_type": {
+      "const": "enterprise_comparison",
+      "title": "Report Type",
+      "type": "string"
+    },
+    "companies": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 2,
+      "title": "Companies",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "industry",
+    "region",
+    "period",
+    "template_id",
+    "report_type",
+    "companies"
+  ],
+  "title": "Comparison",
+  "type": "object"
+}

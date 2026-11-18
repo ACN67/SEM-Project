@@ -221,3 +221,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Frontend
+node_modules/
+dist/
+coverage/
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Runtime files
+/runtime/
+/data/runtime/

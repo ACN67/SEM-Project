@@ -1,0 +1,49 @@
+"""Synchronous service boundaries. Worker owns timeouts, retries and transactions."""
+from pathlib import Path
+from typing import Protocol
+from . import models as m
+
+class ServiceError(Exception):
+    def __init__(self, error: m.ErrorInfo):
+        self.error = error
+        super().__init__(error.message)
+
+class Calculation(m.Model):
+    metrics: list[m.Metric]
+    gaps: list[m.Gap]
+
+class ChartResult(m.Model):
+    charts: list[m.Chart]
+    issues: list[m.Issue]
+
+class Artifact(m.Model):
+    storage_key: m.ID
+    sha256: str
+    size_bytes: int
+
+class Knowledge(Protocol):
+    def ingest_document(self, file: Path, metadata: m.Metadata) -> m.IngestAccepted: ...
+    def retrieve(self, query: str, filters: m.Filters, top_k: int, source_version_ids: list[str]) -> list[m.Evidence]: ...
+    def get_metrics(self, filters: m.Filters, source_version_ids: list[str]) -> list[m.Metric]: ...
+
+class Templates(Protocol):
+    def get_template(self, id: str, version: int) -> m.Template: ...
+
+class Generation(Protocol):
+    def plan_outline(self, spec: m.Spec, template: m.Template) -> m.Outline: ...
+    def generate_chapter(self, input: m.ChapterInput) -> m.Chapter: ...
+    def generate_synthesis(self, input: m.ChapterInput) -> m.Chapter: ...
+
+class Quality(Protocol):
+    def calculate_metrics(self, raw_metrics: list[m.Metric], requirements: m.Task) -> Calculation: ...
+    def build_charts(self, chapter_id: str, metrics: list[m.Metric], requests: list[m.ChartRequest]) -> ChartResult: ...
+    def validate_chapter(self, chapter: m.Chapter, evidences: list[m.Evidence], metrics: list[m.Metric]) -> m.QualitySummary: ...
+    def validate_report(self, document: m.ReportDocument) -> m.QualitySummary: ...
+
+class Export(Protocol):
+    def render_report(self, snapshot: m.ReportDocument, format: m.Format) -> Artifact: ...
+
+class Orchestration(Protocol):
+    def schedule_report(self, spec: m.Spec, idempotency_key: str) -> m.JobAccepted: ...
+    def assess_coverage(self, task: m.Task, evidences: list[m.Evidence], metrics: list[m.Metric]) -> m.Coverage: ...
+    def prepare_chapter_context(self, task: m.Task, frozen_run: m.FrozenRun, predecessors: list[m.Chapter]) -> m.ChapterInput: ...

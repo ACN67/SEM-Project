@@ -1,0 +1,85 @@
+{
+  "run_id": "run1",
+  "spec": {
+    "region": "中国",
+    "industry": "新能源汽车",
+    "period": {
+      "from": "2023",
+      "to": "2024"
+    },
+    "report_type": "industry_analysis",
+    "template_id": "industry_analysis_v1"
+  },
+  "template_ref": {
+    "template_id": "industry_analysis_v1",
+    "version": 1
+  },
+  "source_version_ids": [
+    "dv1"
+  ],
+  "facts_version": "f0",
+  "facts": [],
+  "task": {
+    "chapter_id": "ch_market",
+    "section_key": "market",
+    "title": "市场规模",
+    "order": 0,
+    "required": true,
+    "depends_on": [],
+    "research_questions": [
+      "本年销量是多少？"
+    ],
+    "evidence_requirements": [
+      "销量原表"
+    ],
+    "required_metrics": [
+      "sales"
+    ],
+    "desired_chart": "bar"
+  },
+  "predecessors": [],
+  "evidences": [
+    {
+      "title": "模拟销量表（测试）",
+      "publisher": "测试发布方",
+      "published_at": "2024-12-31",
+      "source_url": null,
+      "evidence_id": "ev1",
+      "document_id": "doc1",
+      "document_version_id": "dv1",
+      "chunk_id": "ck1",
+      "locator": {
+        "kind": "xlsx",
+        "sheet": "销量",
+        "cells": "B2"
+      },
+      "excerpt": "模拟销量 120 辆",
+      "score": 0.9
+    }
+  ],
+  "metrics": [
+    {
+      "metric_id": "m1",
+      "indicator": "sales",
+      "name": "模拟销量",
+      "entity_id": null,
+      "period": "2024",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "模拟样本",
+      "raw_value": "120",
+      "raw_unit": "辆",
+      "multiplier": "1",
+      "value": "120",
+      "unit": "辆",
+      "currency": null,
+      "source_evidence_ids": [
+        "ev1"
+      ],
+      "formula_id": null,
+      "input_metric_ids": [],
+      "missing_reason": null
+    }
+  ],
+  "gaps": []
+}

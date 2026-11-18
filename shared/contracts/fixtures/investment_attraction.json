@@ -1,0 +1,11 @@
+{
+  "region": "合肥",
+  "industry": "新能源汽车",
+  "period": {
+    "from": "2023",
+    "to": "2024"
+  },
+  "report_type": "investment_attraction",
+  "template_id": "investment_attraction_v1",
+  "target_segment": "动力电池配套"
+}

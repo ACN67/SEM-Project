@@ -12,7 +12,8 @@ from backend.app.contracts import models as m
 from backend.app.contracts.services import Generation, ServiceError
 from backend.app.contracts.validation import check_generation
 from backend.app.generation import ChatCompletionsClient, GenerationService, summarize_chapter
-from backend.app.quality import QualityService
+from backend.app.generation.analysis_context import quarterly_analysis
+from backend.app.quality import QualityService, format_percent
 
 FIXTURES = Path(__file__).resolve().parents[3] / "shared/contracts/fixtures"
 
@@ -28,6 +29,24 @@ class GenerationTests(unittest.TestCase):
         self.writer = Mock()
         self.writer.complete.side_effect = lambda *_: json.dumps(self.output)
         self.service: Generation = GenerationService(self.writer)
+
+    def prosperity_context(self, observations, *, end_year="2024"):
+        spec = m.Prosperity.model_validate(fixture("industry_prosperity") | {
+            "indicator": "nev_sales",
+            "period": {"from": "2024", "to": end_year},
+        })
+        task = self.context.task.model_copy(update={"required_metrics": [spec.indicator]})
+        raw = [
+            self.context.metrics[0].model_copy(update={
+                "metric_id": period, "indicator": spec.indicator, "granularity": "quarter",
+                "period": period, "raw_value": value, "value": value, "unit": "万辆", "raw_unit": "万辆",
+            })
+            for period, value in observations
+        ]
+        return self.context.model_copy(update={
+            "spec": spec, "template_ref": m.TemplateRef(template_id=spec.template_id, version=1),
+            "task": task, "metrics": QualityService().calculate_metrics(raw, task).metrics,
+        })
 
     def template(self, spec):
         summary = self.context.task.model_copy(update={
@@ -98,6 +117,63 @@ class GenerationTests(unittest.TestCase):
                 instructions, request = self.writer.complete.call_args.args
                 self.assertIn(rule, instructions)
                 self.assertEqual(json.loads(request)["spec"][field], fixture(kind)[field])
+                self.assertIn("直接回答 task.research_questions", instructions)
+                self.assertIn("因果判断须有相应证据", instructions)
+
+    def test_prosperity_prompt_contains_linked_actual_quarter_pairs(self):
+        path = FIXTURES.parents[2] / "data/samples/acceptance_metrics.json"
+        records = json.loads(path.read_text(encoding="utf-8"))["metrics"]
+        context = self.prosperity_context([
+            (item["period"], item["value"])
+            for item in records if item.get("case_id") == "R03" and item["indicator"] == "nev_sales"
+        ])
+        rate_ids = [f"yoy:2024-Q{quarter}" for quarter in range(1, 5)]
+        text = "四季度销量同比增长 41.31%，高于三季度的 33.39%，增速加快。"
+        self.output["summary"] = text
+        self.output["blocks"] = [self.output["blocks"][0] | {"text": text, "metric_ids": rate_ids[-2:]}]
+        self.output["chart_requests"] = []
+
+        chapter = self.service.generate_chapter(context)
+        payload = json.loads(self.writer.complete.call_args.args[1])
+        self.writer.complete.assert_called_once()
+        analysis = payload["quarterly_analysis"]
+        self.assertEqual(analysis["year_over_year"][0], {
+            "period": "2024-Q1", "baseline_period": "2023-Q1",
+            "current_metric_id": "2024-Q1", "baseline_metric_id": "2023-Q1",
+            "yoy_metric_id": "yoy:2024-Q1",
+        })
+        self.assertEqual([item["yoy_metric_id"] for item in analysis["year_over_year"]], rate_ids)
+        self.assertEqual(
+            [item["direction"] for item in analysis["adjacent_yoy_changes"]], ["加快"] * 3,
+        )
+        self.assertEqual(chapter.blocks[0].metric_ids, rate_ids[-2:])
+        self.assertEqual(QualityService().validate_chapter(chapter, context.evidences, context.metrics).issues, [])
+
+    def test_prosperity_analysis_uses_unrounded_rates_without_bridging_missing_quarters(self):
+        context = self.prosperity_context([
+            ("2022-Q4", "90"), ("2023-Q4", "100"),
+            ("2023-Q1", "100"), ("2023-Q2", "100"), ("2023-Q3", "100"),
+            ("2024-Q1", "110.004"), ("2024-Q2", "110.003"), ("2024-Q3", "110.003"),
+            ("2025-Q1", "150"),
+        ], end_year="2025")
+        analysis = quarterly_analysis(context.spec, context.metrics)
+        by_id = {metric.metric_id: metric for metric in context.metrics}
+        self.assertEqual(format_percent(by_id["yoy:2024-Q1"]), "10.00%")
+        self.assertEqual(format_percent(by_id["yoy:2024-Q2"]), "10.00%")
+        self.assertEqual(
+            [item["period"] for item in analysis["year_over_year"]],
+            ["2024-Q1", "2024-Q2", "2024-Q3", "2025-Q1"],
+        )
+        self.assertEqual(
+            [(item["later_period"], item["direction"]) for item in analysis["adjacent_yoy_changes"]],
+            [("2024-Q2", "放缓"), ("2024-Q3", "持平")],
+        )
+
+        # Conflicting observations for the same period remove that comparison.
+        context.metrics.append(by_id["2024-Q2"].model_copy(update={"metric_id": "duplicate-q2"}))
+        analysis = quarterly_analysis(context.spec, context.metrics)
+        self.assertNotIn("2024-Q2", [item["period"] for item in analysis["year_over_year"]])
+        self.assertEqual(analysis["adjacent_yoy_changes"], [])
 
     def test_chapter_to_quality_and_synthesis(self):
         chapter = self.service.generate_chapter(self.context)

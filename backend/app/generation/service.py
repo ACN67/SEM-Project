@@ -1,6 +1,7 @@
 """Implement the Generation protocol without owning job or version state."""
 from __future__ import annotations
 
+import json
 import re
 from collections.abc import Iterator
 
@@ -8,6 +9,7 @@ from pydantic import ValidationError
 
 from ..contracts import models as m
 from ..contracts.validation import check_chapter, indexed, refs
+from .analysis_context import quarterly_analysis
 from .client import ChapterWriter, ChatCompletionsClient, generation_error
 from .outline import plan_outline
 from .prompts import chapter_instructions
@@ -186,11 +188,16 @@ class GenerationService:
                 fact_candidates=[], chart_requests=[], missing_evidence=gaps,
             )
 
-        payload = context.model_copy(update={"gaps": gaps}).model_dump_json(
-            by_alias=True,
+        payload = context.model_copy(update={"gaps": gaps}).model_dump(
+            mode="json", by_alias=True,
             exclude={"evidences": {"__all__": {"source_url", "score"}}},
         )
-        raw = self._writer.complete(chapter_instructions(context.spec, synthesis=synthesis), payload)
+        if isinstance(context.spec, m.Prosperity):
+            payload["quarterly_analysis"] = quarterly_analysis(context.spec, context.metrics)
+        raw = self._writer.complete(
+            chapter_instructions(context.spec, synthesis=synthesis),
+            json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
+        )
         chapter = _validate_output(raw, context)
         seen = {(gap.question, gap.code, gap.reason, gap.required) for gap in gaps}
         for gap in chapter.missing_evidence:

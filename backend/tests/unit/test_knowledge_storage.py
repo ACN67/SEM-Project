@@ -40,6 +40,7 @@ class OriginalStorageTests(unittest.TestCase):
             ("fake.pdf", b"not a pdf", "UNSUPPORTED_FILE_TYPE"),
             ("fake.xlsx", b"PKbroken", "UNSUPPORTED_FILE_TYPE"),
             ("fake.csv", b"%PDF-1.4\n%%EOF", "UNSUPPORTED_FILE_TYPE"),
+            ("unclosed.csv", b'id,description\n1,"unclosed', "UNSUPPORTED_FILE_TYPE"),
             ("binary.csv", b"a,\x00b", "UNSUPPORTED_FILE_TYPE"),
         ):
             with self.subTest(filename=filename):

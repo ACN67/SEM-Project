@@ -55,6 +55,16 @@ class KnowledgeMySQLTests(unittest.TestCase):
         target.write_text(content, encoding="utf-8")
         return target
 
+    def test_accepts_valid_csv_with_field_above_python_default_limit(self):
+        upload = self.upload("long", "资料.csv", 'id,description\n1,"' + "a" * 140_000 + '"\n')
+
+        accepted = self.ingest.ingest_document(upload, self.metadata)
+
+        self.assertTrue(accepted.document_version_id)
+        self.assertEqual(accepted.ingest_status, "QUEUED")
+        record = self.repo.get_version(accepted.document_id, accepted.document_version_id)
+        self.assertEqual(record.ingest_status, "QUEUED")
+
     def test_duplicate_alias_and_revision_remain_pollable(self):
         original = self.upload("a", "资料.csv", "销量\n100\n")
         alias = self.upload("b", "别名.csv", "销量\n100\n")

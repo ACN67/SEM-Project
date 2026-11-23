@@ -11,6 +11,9 @@ from ..contracts import models as m
 from ..contracts.services import ServiceError
 
 MAX_SIZE = 50 * 1024 * 1024
+# A UTF-8 field cannot have more characters than the upload has bytes.
+# Configure the process limit once so concurrent readers never race a restore.
+csv.field_size_limit(max(csv.field_size_limit(), MAX_SIZE))
 BLOCK_SIZE = 1024 * 1024
 OFFICE_PARTS = {".docx": "word/document.xml", ".xlsx": "xl/workbook.xml"}
 

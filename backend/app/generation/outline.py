@@ -12,13 +12,15 @@ def plan_outline(spec: m.Spec, template: m.Template) -> m.Outline:
     if "as_of" in template.input_schema.get("required", ()) and spec.as_of is None:
         raise generation_error("INVALID_OUTLINE", "该模板要求填写政策研判截止日。")
 
+    if len({section.order for section in template.sections}) != len(template.sections):
+        raise generation_error("INVALID_OUTLINE", "模板章节展示顺序重复。")
+
     try:
         sections = indexed(template.sections, "section_key")
         indexed(template.sections, "chapter_id")
         tasks = []
-        for order, section in enumerate(template.sections):
+        for section in sorted(template.sections, key=lambda section: section.order):
             task = section.model_copy(deep=True, update={
-                "order": order,
                 "depends_on": list(dict.fromkeys(
                     sections[key].chapter_id for key in section.depends_on
                 )),

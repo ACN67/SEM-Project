@@ -53,11 +53,13 @@ class GenerationTests(unittest.TestCase):
             "chapter_id": "ch_summary",
             "section_key": "summary",
             "title": "摘要",
+            "order": 0,
             "depends_on": ["market"],
         })
         return m.Template(
             template_id=spec.template_id, version=1, report_type=spec.report_type,
-            title="测试模板", sections=[summary, self.context.task], layout_version="1",
+            title="测试模板", layout_version="1",
+            sections=[summary, self.context.task.model_copy(update={"order": 1})],
             input_schema={},
         )
 
@@ -78,6 +80,34 @@ class GenerationTests(unittest.TestCase):
                 self.assertNotIn("另一问题", template.sections[0].research_questions)
                 self.assertEqual(template.sections[0].depends_on, ["market"])
         self.writer.complete.assert_not_called()
+
+    def test_outline_preserves_template_display_order(self):
+        spec = self.context.spec
+        template = self.template(spec)
+        summary, market = template.sections
+        template.sections = [
+            market.model_copy(update={"order": 20}),
+            summary.model_copy(update={"order": 10}),
+        ]
+
+        outline = self.service.plan_outline(spec, template)
+
+        self.assertEqual(
+            [(section.chapter_id, section.order) for section in outline.chapters],
+            [(summary.chapter_id, 10), (market.chapter_id, 20)],
+        )
+        self.assertEqual(outline.chapters[0].depends_on, [market.chapter_id])
+
+    def test_outline_rejects_duplicate_display_order(self):
+        spec = self.context.spec
+        template = self.template(spec)
+        template.sections[1].order = template.sections[0].order
+
+        with self.assertRaises(ServiceError) as error:
+            self.service.plan_outline(spec, template)
+
+        self.assertEqual(error.exception.error.code, "INVALID_OUTLINE")
+        self.assertEqual(error.exception.error.message, "模板章节展示顺序重复。")
 
     def test_invalid_template(self):
         spec = self.context.spec

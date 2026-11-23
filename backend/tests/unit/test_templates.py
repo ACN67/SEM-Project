@@ -3,8 +3,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from jsonschema import Draft202012Validator, ValidationError as SchemaError
-from pydantic import TypeAdapter, ValidationError
+from jsonschema import Draft202012Validator
 
 from backend.app.contracts import models as m
 from backend.app.contracts.services import ServiceError
@@ -16,7 +15,6 @@ from backend.app.templates.catalog import REPO_ROOT
 class TemplateTests(unittest.TestCase):
     def setUp(self):
         self.catalog = TemplateCatalog()
-        self.adapter = TypeAdapter(m.Spec)
 
     def request(self, kind):
         path = REPO_ROOT / "templates/examples" / f"{kind}.json"
@@ -34,8 +32,8 @@ class TemplateTests(unittest.TestCase):
                 Draft202012Validator(
                     template.input_schema, format_checker=Draft202012Validator.FORMAT_CHECKER,
                 ).validate(data)
-                spec = self.adapter.validate_python(data)
-                self.catalog.validate_request(spec, 1)
+                spec, resolved_template = self.catalog.validate_request(data)
+                self.assertEqual(resolved_template, template)
                 outline = plan_outline(spec, template)
                 self.assertEqual(outline.chapters[0].section_key, "summary")
                 self.assertEqual(
@@ -53,38 +51,67 @@ class TemplateTests(unittest.TestCase):
                 self.assertTrue(self.catalog.get_template(spec.template_id, 1).sections)
                 self.assertTrue(self.catalog.get_template(spec.template_id, 1).input_schema["required"])
 
-    def test_rejects_missing_policy_date_and_missing_form_fields(self):
-        data = self.request("industry_analysis")
-        template = self.catalog.get_template(data["template_id"], 1)
-        validator = Draft202012Validator(
-            template.input_schema, format_checker=Draft202012Validator.FORMAT_CHECKER,
-        )
-        for date in (None, "invalid", "2024-02-30"):
-            with self.subTest(date=date), self.assertRaises(SchemaError):
-                validator.validate({**data, "as_of": date})
-        del data["as_of"]
-        with self.assertRaises(SchemaError):
-            validator.validate(data)
+    def assert_invalid(self, payload, *paths):
         with self.assertRaises(ServiceError) as error:
-            self.catalog.validate_request(self.adapter.validate_python(data), 1)
-        self.assertEqual(error.exception.error.code, "INVALID_TEMPLATE_INPUT")
-        del data["industry"]
-        with self.assertRaises(ValidationError):
-            self.adapter.validate_python(data)
+            self.catalog.validate_request(payload)
+        self.assertEqual(error.exception.error.code, "VALIDATION_ERROR")
+        self.assertEqual({item["path"] for item in error.exception.error.details["errors"]}, set(paths))
 
-    def test_rejects_duplicate_companies_and_unknown_version(self):
+    def test_requires_raw_date_on_industry_request(self):
+        data = self.request("industry_analysis")
+        spec, _ = self.catalog.validate_request(data)
+        self.assertEqual(spec.as_of.isoformat(), data["as_of"])
+        for value in (None, "invalid", "2024-02-30", "2025-12-31T00:00:00"):
+            with self.subTest(value=value):
+                self.assert_invalid({**data, "as_of": value}, "/as_of")
+        del data["as_of"]
+        self.assert_invalid(data, "/as_of")
+        del data["industry"]
+        del data["period"]["from"]
+        self.assert_invalid(data, "/as_of", "/industry", "/period/from")
+
+    def test_comparison_supports_no_date_and_checks_business_rules(self):
         data = self.request("enterprise_comparison")
-        template = self.catalog.get_template(data["template_id"], 1)
+        spec, template = self.catalog.validate_request(data)
+        self.assertIsInstance(spec, m.Comparison)
+        self.assertIsNone(spec.as_of)
         self.assertNotIn("as_of", template.input_schema["required"])
-        data["companies"] = ["比亚迪", "比亚迪"]
-        with self.assertRaises(SchemaError):
-            Draft202012Validator(template.input_schema).validate(data)
-        with self.assertRaises(ValidationError):
-            self.adapter.validate_python(data)
+        for companies in (["比亚迪", "比亚迪"], ["比亚迪", " 比亚迪 "]):
+            with self.subTest(companies=companies):
+                self.assert_invalid({**data, "companies": companies}, "/companies")
+        self.assert_invalid({**data, "period": {"from": "2025", "to": "2024"}}, "/period")
+        self.assert_invalid({**data, "report_type": "industry_analysis"}, "/report_type")
+        self.assert_invalid({**data, "template_id": ""}, "/template_id")
         with self.assertRaises(ServiceError) as error:
-            self.catalog.get_template(template.template_id, 99)
+            self.catalog.validate_request(data, version=99)
         self.assertEqual(error.exception.error.code, "TEMPLATE_NOT_FOUND")
         self.assertFalse(error.exception.error.retryable)
+
+    def test_deployed_versions_are_ordered_and_highest_version_is_frozen(self):
+        kind = "industry_analysis"
+        data = self.request(kind)
+        source = REPO_ROOT / "templates/content" / data["template_id"] / "1.json"
+        config = json.loads(source.read_text(encoding="utf-8"))
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            folder = root / source.parent.name
+            folder.mkdir()
+            for version in (10, 2, 1):
+                (folder / f"{version}.json").write_text(
+                    json.dumps({**config, "version": version, "requires_as_of": version != 1}),
+                    encoding="utf-8",
+                )
+            catalog = TemplateCatalog(root)
+            self.assertEqual([item.version for item in catalog.list_templates()], [1, 2, 10])
+            _, current = catalog.validate_request(data)
+            self.assertEqual(current.version, 10)
+            del data["as_of"]
+            _, frozen = catalog.validate_request(data, version=1)
+            self.assertEqual(frozen.version, 1)
+            current.sections.clear()
+            catalog.list_templates()[0].sections.clear()
+            self.assertTrue(catalog.get_current_template(data["template_id"]).sections)
+            self.assertTrue(catalog.get_template(data["template_id"], 1).sections)
 
     def test_invalid_configuration_identifies_file_and_field(self):
         source = REPO_ROOT / "templates/content/industry_analysis_v1/1.json"

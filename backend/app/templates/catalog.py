@@ -4,6 +4,7 @@ from pathlib import Path
 from ..contracts import models as m
 from ..contracts.services import ServiceError
 from .loader import load_template
+from .request import parse_request, request_template_id
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 
@@ -27,6 +28,18 @@ class TemplateCatalog:
         if not self._templates:
             raise ValueError(f"{root}: no templates found")
 
+    def list_templates(self) -> list[m.Template]:
+        """Return all deployed versions in template ID and version order."""
+        return [self._templates[key].model_copy(deep=True) for key in sorted(self._templates)]
+
+    def get_current_template(self, template_id: str) -> m.Template:
+        """Select the highest numeric version included in this deployment."""
+        version = max(
+            (version for id, version in self._templates if id == template_id),
+            default=1,
+        )
+        return self.get_template(template_id, version)
+
     def get_template(self, id: str, version: int) -> m.Template:
         template = self._templates.get((id, version))
         if template is None:
@@ -36,13 +49,14 @@ class TemplateCatalog:
             ))
         return template.model_copy(deep=True)
 
-    def validate_request(self, spec: m.Spec, version: int) -> None:
-        """Validate template-specific constraints before scheduling a new run."""
-        template = self.get_template(spec.template_id, version)
-        if spec.report_type != template.report_type or (
-            "as_of" in template.input_schema["required"] and spec.as_of is None
-        ):
-            raise ServiceError(m.ErrorInfo(
-                code="INVALID_TEMPLATE_INPUT", message="报告类型或政策研判截止日不符合模板要求。",
-                retryable=False, details={"template_id": spec.template_id, "version": version},
-            ))
+    def validate_request(
+        self, payload: object, version: int | None = None,
+    ) -> tuple[m.Spec, m.Template]:
+        """Validate the raw request and return the spec with its exact deployed template."""
+        template_id = request_template_id(payload)
+        template = (
+            self.get_current_template(template_id)
+            if version is None
+            else self.get_template(template_id, version)
+        )
+        return parse_request(payload, template), template

@@ -29,7 +29,9 @@ document = Document()
 for name in ("Normal", "Title", "Heading 1"):
     style = document.styles[name]
     style.font.name = "Microsoft YaHei"
-    style._element.get_or_add_rPr().rFonts.set(qn("w:eastAsia"), "Microsoft YaHei")
+    fonts = style._element.get_or_add_rPr().rFonts
+    for attribute in ("ascii", "hAnsi", "eastAsia", "cs"):
+        fonts.set(qn(f"w:{attribute}"), "Microsoft YaHei")
 document.styles["Normal"].font.size = Pt(11)
 document.add_heading("新能源汽车销量｜中文导出试样", 0)
 document.add_heading("市场规模", 1)
@@ -41,8 +43,11 @@ for cell, value in zip(table.rows[0].cells, ("年度", "销量（万辆）")):
 for year, value in series:
     cells = table.add_row().cells
     cells[0].text, cells[1].text = year, str(value)
+document.add_paragraph().paragraph_format.space_after = Pt(4)
 document.add_picture(str(root / "sales.png"), width=Inches(5.3))
-document.add_paragraph("图 1　新能源汽车年度销量（来源 [1]）")
+document.add_paragraph("图 1　新能源汽车年度销量（来源 [1–3]）")
 document.add_heading("参考文献", 1)
-document.add_paragraph("[1] 生态环境部《中国移动源环境管理年报（2025年）》第 I 部分，原件第 8 页图 2。")
+document.add_paragraph("[1] 生态环境部《中国移动源环境管理年报（2025年）》第 I 部分，原件第 8 页。")
+document.add_paragraph("[2] 国家发展改革委，2022 年新能源汽车产销量，中汽协统计。")
+document.add_paragraph("[3] 中国政府网，2023 年我国汽车产销量，中汽协统计。")
 document.save(root / "k1-probe.docx")

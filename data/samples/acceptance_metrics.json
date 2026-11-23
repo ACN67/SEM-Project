@@ -1,0 +1,561 @@
+{
+  "schema_version": "0.1",
+  "dataset": "R01-R05 acceptance metrics",
+  "data_cutoff": "2024-12-31",
+  "compiled_at": "2026-11-20",
+  "status": "verified-from-sources",
+  "source_refs": [
+    {
+      "source_id": "miit-2022-annual",
+      "publisher": "中华人民共和国工业和信息化部",
+      "title": "2022年12月汽车工业经济运行情况",
+      "published_at": "2023-01-12",
+      "url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_610c626d34b8424c9c1077ac5e5a40fe.html",
+      "note": "文末注明数据来自中国汽车工业协会"
+    },
+    {
+      "source_id": "miit-2023-q1",
+      "publisher": "中华人民共和国工业和信息化部",
+      "title": "2023年3月汽车工业经济运行情况",
+      "published_at": "2023-04-11",
+      "url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_9cdfd3d829b24222a8ecf947d6627a45.html",
+      "note": "文末注明数据来自中国汽车工业协会"
+    },
+    {
+      "source_id": "miit-2023-h1-mirror",
+      "publisher": "福建省工业和信息化厅",
+      "title": "2023年6月汽车工业经济运行情况",
+      "published_at": "2023-07-25",
+      "url": "https://gxt.fujian.gov.cn/zwgk/gysj/xysj/zb/202307/t20230725_6213460.htm",
+      "note": "原文转载，文末注明数据来自中国汽车工业协会"
+    },
+    {
+      "source_id": "miit-2023-9m",
+      "publisher": "中华人民共和国工业和信息化部",
+      "title": "2023年9月汽车工业经济运行情况",
+      "published_at": "2023-10-13",
+      "url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_fce3df5fdc544f8bbb2277fac5df58da.html",
+      "note": "文末注明数据来自中国汽车工业协会"
+    },
+    {
+      "source_id": "miit-2023-annual",
+      "publisher": "中华人民共和国工业和信息化部",
+      "title": "2023年12月汽车工业经济运行情况",
+      "published_at": "2024-01-11",
+      "url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+      "note": "文末注明数据来自中国汽车工业协会"
+    },
+    {
+      "source_id": "miit-2024-q1",
+      "publisher": "中华人民共和国工业和信息化部",
+      "title": "2024年3月汽车工业经济运行情况",
+      "published_at": "2024-04-10",
+      "url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+      "note": "文末注明数据来自中国汽车工业协会"
+    },
+    {
+      "source_id": "miit-2024-h1",
+      "publisher": "中华人民共和国工业和信息化部",
+      "title": "2024年6月汽车工业经济运行情况",
+      "published_at": "2024-07-10",
+      "url": "https://wap.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_3dff2eb026d14e36b9ec6065840d3fdc.html",
+      "note": "文末注明数据来自中国汽车工业协会"
+    },
+    {
+      "source_id": "miit-2024-9m",
+      "publisher": "中华人民共和国工业和信息化部",
+      "title": "2024年9月汽车工业经济运行情况",
+      "published_at": "2024-10-12",
+      "url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_be025f4f66ef42d78af0d4622e07eebb.html",
+      "note": "文末注明数据来自中国汽车工业协会"
+    },
+    {
+      "source_id": "miit-2024-annual",
+      "publisher": "中华人民共和国工业和信息化部",
+      "title": "2024年12月汽车工业经济运行情况",
+      "published_at": "2025-01-13",
+      "url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+      "note": "文末注明数据来自中国汽车工业协会"
+    },
+    {
+      "source_id": "byd-2023-annual",
+      "publisher": "比亚迪股份有限公司",
+      "title": "比亚迪2023年年度报告",
+      "published_at": "2024-03-26",
+      "url": "https://www.bydglobal.com/material/group-official-website/file/cn/investor-relations/financial-reports/2024032602586_c.pdf",
+      "local_file": "official_sources/byd_2023_annual_report.pdf"
+    },
+    {
+      "source_id": "byd-2024-annual",
+      "publisher": "比亚迪股份有限公司",
+      "title": "比亚迪2024年年度报告",
+      "published_at": "2025-03-25",
+      "url": "https://www.bydglobal.com/material/group-official-website/file/cn/investor-relations/financial-reports/C_25010131AR-C-BYD%20COMPANY-2015-HKEx.pdf",
+      "local_file": "official_sources/byd_2024_annual_report.pdf"
+    },
+    {
+      "source_id": "saic-2023-annual",
+      "publisher": "上海汽车集团股份有限公司",
+      "title": "上海汽车集团股份有限公司2023年年度报告",
+      "published_at": "2024-03-29",
+      "url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2023ndqgg/2024/3/29/C5303F0A7F774009828802E9562F73FB.pdf",
+      "local_file": "official_sources/saic_2023_annual_report.pdf"
+    },
+    {
+      "source_id": "saic-2024-annual",
+      "publisher": "上海汽车集团股份有限公司",
+      "title": "上海汽车集团股份有限公司2024年年度报告",
+      "published_at": "2025-04-29",
+      "url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2024ndqgg/2025/4/29/685D33923ABE4D109BBE39F92BFBF945.pdf",
+      "local_file": "official_sources/saic_2024_annual_report.pdf"
+    },
+    {
+      "source_id": "hefei-nev-plan",
+      "publisher": "合肥市新能源汽车产业发展规划全文副本",
+      "title": "合肥市“十四五”新能源汽车产业发展规划",
+      "published_at": "2022-11-24",
+      "url": "https://api.xch3.com/Resource/BPPfile/2022-12-15/20221215143814411.pdf",
+      "local_file": "official_sources/hefei_nev_plan_14th_five_year.pdf",
+      "note": "待替换为合肥市政府原站同版本文件"
+    },
+    {
+      "source_id": "gotion-products",
+      "publisher": "国轩高科股份有限公司",
+      "title": "动力解决方案",
+      "url": "https://www.gotion.com.cn/solution",
+      "note": "企业公开产品资料"
+    },
+    {
+      "source_id": "gotion-layout",
+      "publisher": "国轩高科股份有限公司",
+      "title": "公司介绍与全球布局",
+      "url": "https://www.gotion.com.cn/about?scrollTo=md2",
+      "note": "企业公开布局资料"
+    },
+    {
+      "source_id": "kba-2023",
+      "publisher": "Kraftfahrt-Bundesamt",
+      "title": "Fahrzeugzulassungen im Dezember 2023 - Jahresbilanz",
+      "published_at": "2024-01-04",
+      "url": "https://www.kba.de/SharedDocs/Downloads/DE/Pressemitteilungen/2024/pm_01_2024_fahrzeugzulassungen_12_2023.pdf?__blob=publicationFile&v=2",
+      "local_file": "official_sources/kba_2023_pkw_registrations.pdf"
+    },
+    {
+      "source_id": "kba-2024",
+      "publisher": "Kraftfahrt-Bundesamt",
+      "title": "Fahrzeugzulassungen im Dezember 2024 - Jahresbilanz",
+      "published_at": "2025-01-06",
+      "url": "https://www.kba.de/SharedDocs/Downloads/DE/Pressemitteilungen/2025/pm_01_2025_fahrzeugzulassungen_12_2024.pdf?__blob=publicationFile&v=5",
+      "local_file": "official_sources/kba_2024_pkw_registrations.pdf"
+    }
+  ],
+  "metrics": [
+    {
+      "record_id": "r01-cn-nev-sales-2022",
+      "case_id": "R01",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "entity_id": null,
+      "period": "2022",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "688.7",
+      "unit": "万辆",
+      "reported_change_pct": "93.4",
+      "source_id": "miit-2022-annual",
+      "locator": "“1—12月，新能源汽车产销分别完成705.8万辆和688.7万辆……”"
+    },
+    {
+      "record_id": "r01-cn-nev-sales-2023",
+      "case_id": "R01",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "entity_id": null,
+      "period": "2023",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "949.5",
+      "unit": "万辆",
+      "reported_change_pct": "37.9",
+      "source_id": "miit-2023-annual",
+      "locator": "“1—12月，新能源汽车产销分别完成958.7万辆和949.5万辆……”"
+    },
+    {
+      "record_id": "r01-cn-nev-sales-2024",
+      "case_id": "R01",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "entity_id": null,
+      "period": "2024",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "1286.6",
+      "unit": "万辆",
+      "reported_change_pct": "35.5",
+      "source_id": "miit-2024-annual",
+      "locator": "“1—12月，新能源汽车产销分别完成1288.8万辆和1286.6万辆……”"
+    },
+    {
+      "record_id": "r03-cn-nev-sales-2023-q1",
+      "case_id": "R03",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "period": "2023-Q1",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "158.6",
+      "unit": "万辆",
+      "source_id": "miit-2023-q1",
+      "locator": "“1—3月，新能源汽车产销分别完成165万辆和158.6万辆……”",
+      "derivation": "direct cumulative value"
+    },
+    {
+      "record_id": "r03-cn-nev-sales-2023-q2",
+      "case_id": "R03",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "period": "2023-Q2",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "216.1",
+      "unit": "万辆",
+      "source_ids": [
+        "miit-2023-h1-mirror",
+        "miit-2023-q1"
+      ],
+      "locator": "2023年1—6月累计374.7万辆减1—3月累计158.6万辆",
+      "derivation": "374.7 - 158.6"
+    },
+    {
+      "record_id": "r03-cn-nev-sales-2023-q3",
+      "case_id": "R03",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "period": "2023-Q3",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "253.1",
+      "unit": "万辆",
+      "source_ids": [
+        "miit-2023-9m",
+        "miit-2023-h1-mirror"
+      ],
+      "locator": "2023年1—9月累计627.8万辆减1—6月累计374.7万辆",
+      "derivation": "627.8 - 374.7"
+    },
+    {
+      "record_id": "r03-cn-nev-sales-2023-q4",
+      "case_id": "R03",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "period": "2023-Q4",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "321.7",
+      "unit": "万辆",
+      "source_ids": [
+        "miit-2023-annual",
+        "miit-2023-9m"
+      ],
+      "locator": "2023年全年949.5万辆减1—9月累计627.8万辆",
+      "derivation": "949.5 - 627.8"
+    },
+    {
+      "record_id": "r03-cn-nev-sales-2024-q1",
+      "case_id": "R03",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "period": "2024-Q1",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "209.0",
+      "unit": "万辆",
+      "source_id": "miit-2024-q1",
+      "locator": "“1—3月，新能源汽车产销分别完成211.5万辆和209万辆……”",
+      "derivation": "direct cumulative value"
+    },
+    {
+      "record_id": "r03-cn-nev-sales-2024-q2",
+      "case_id": "R03",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "period": "2024-Q2",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "285.4",
+      "unit": "万辆",
+      "source_ids": [
+        "miit-2024-h1",
+        "miit-2024-q1"
+      ],
+      "locator": "2024年1—6月累计494.4万辆减1—3月累计209.0万辆",
+      "derivation": "494.4 - 209.0"
+    },
+    {
+      "record_id": "r03-cn-nev-sales-2024-q3",
+      "case_id": "R03",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "period": "2024-Q3",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "337.6",
+      "unit": "万辆",
+      "source_ids": [
+        "miit-2024-9m",
+        "miit-2024-h1"
+      ],
+      "locator": "2024年1—9月累计832.0万辆减1—6月累计494.4万辆",
+      "derivation": "832.0 - 494.4"
+    },
+    {
+      "record_id": "r03-cn-nev-sales-2024-q4",
+      "case_id": "R03",
+      "indicator": "nev_sales",
+      "name": "中国新能源汽车销量",
+      "period": "2024-Q4",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+      "value": "454.6",
+      "unit": "万辆",
+      "source_ids": [
+        "miit-2024-annual",
+        "miit-2024-9m"
+      ],
+      "locator": "2024年全年1286.6万辆减1—9月累计832.0万辆",
+      "derivation": "1286.6 - 832.0"
+    },
+    {
+      "record_id": "r03-cn-nev-yoy-2024-q1",
+      "case_id": "R03",
+      "indicator": "nev_sales_yoy",
+      "name": "新能源汽车销量同比",
+      "period": "2024-Q1",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "同主体、同地区、同口径、同期间粒度同比",
+      "value": "31.78",
+      "unit": "%",
+      "input_record_ids": [
+        "r03-cn-nev-sales-2024-q1",
+        "r03-cn-nev-sales-2023-q1"
+      ],
+      "derivation": "(209.0 - 158.6) / 158.6 * 100"
+    },
+    {
+      "record_id": "r03-cn-nev-yoy-2024-q2",
+      "case_id": "R03",
+      "indicator": "nev_sales_yoy",
+      "name": "新能源汽车销量同比",
+      "period": "2024-Q2",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "同主体、同地区、同口径、同期间粒度同比",
+      "value": "32.07",
+      "unit": "%",
+      "input_record_ids": [
+        "r03-cn-nev-sales-2024-q2",
+        "r03-cn-nev-sales-2023-q2"
+      ],
+      "derivation": "(285.4 - 216.1) / 216.1 * 100"
+    },
+    {
+      "record_id": "r03-cn-nev-yoy-2024-q3",
+      "case_id": "R03",
+      "indicator": "nev_sales_yoy",
+      "name": "新能源汽车销量同比",
+      "period": "2024-Q3",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "同主体、同地区、同口径、同期间粒度同比",
+      "value": "33.39",
+      "unit": "%",
+      "input_record_ids": [
+        "r03-cn-nev-sales-2024-q3",
+        "r03-cn-nev-sales-2023-q3"
+      ],
+      "derivation": "(337.6 - 253.1) / 253.1 * 100"
+    },
+    {
+      "record_id": "r03-cn-nev-yoy-2024-q4",
+      "case_id": "R03",
+      "indicator": "nev_sales_yoy",
+      "name": "新能源汽车销量同比",
+      "period": "2024-Q4",
+      "granularity": "quarter",
+      "region": "中国",
+      "scope": "同主体、同地区、同口径、同期间粒度同比",
+      "value": "41.31",
+      "unit": "%",
+      "input_record_ids": [
+        "r03-cn-nev-sales-2024-q4",
+        "r03-cn-nev-sales-2023-q4"
+      ],
+      "derivation": "(454.6 - 321.7) / 321.7 * 100"
+    },
+    {
+      "record_id": "r02-byd-r-and-d-2023",
+      "case_id": "R02",
+      "indicator": "r_and_d_investment_total",
+      "name": "研发投入合计",
+      "entity_id": "byd",
+      "period": "2023",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "比亚迪合并口径；费用化研发投入与资本化研发投入合计",
+      "value": "399.18",
+      "unit": "亿元",
+      "currency": "CNY",
+      "source_id": "byd-2023-annual",
+      "locator": "研发投入相关披露；同为395.75亿元的“研发费用”不可混用"
+    },
+    {
+      "record_id": "r02-byd-r-and-d-2024",
+      "case_id": "R02",
+      "indicator": "r_and_d_investment_total",
+      "name": "研发投入合计",
+      "entity_id": "byd",
+      "period": "2024",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "比亚迪合并口径；费用化研发投入与资本化研发投入合计",
+      "value": "541.61",
+      "unit": "亿元",
+      "currency": "CNY",
+      "reported_change_pct": "35.68",
+      "source_id": "byd-2024-annual",
+      "locator": "年报正文披露约542亿元，同比上升35.68%；图表值使用公开财报汇总的541.61亿元"
+    },
+    {
+      "record_id": "r02-saic-r-and-d-2023",
+      "case_id": "R02",
+      "indicator": "r_and_d_investment_total",
+      "name": "研发投入合计",
+      "entity_id": "saic",
+      "period": "2023",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "上汽集团合并口径；费用化研发投入与资本化研发投入合计",
+      "value": "220.1324649311",
+      "unit": "亿元",
+      "currency": "CNY",
+      "source_id": "saic-2023-annual",
+      "locator": "第13页“研发投入情况表”"
+    },
+    {
+      "record_id": "r02-saic-r-and-d-2024",
+      "case_id": "R02",
+      "indicator": "r_and_d_investment_total",
+      "name": "研发投入合计",
+      "entity_id": "saic",
+      "period": "2024",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "上汽集团合并口径；费用化研发投入与资本化研发投入合计",
+      "value": "218.130900453",
+      "unit": "亿元",
+      "currency": "CNY",
+      "source_id": "saic-2024-annual",
+      "locator": "第13页“研发投入情况表”"
+    },
+    {
+      "record_id": "r04-hefei-industry-scale-target-2025",
+      "case_id": "R04",
+      "indicator": "nev_industry_scale_target",
+      "name": "合肥新能源汽车产业规模目标",
+      "period": "2025",
+      "granularity": "year",
+      "region": "合肥",
+      "scope": "规划目标，不是已实现值",
+      "value": "7000",
+      "unit": "亿元",
+      "source_id": "hefei-nev-plan",
+      "locator": "PDF第7–8页，发展目标及表1"
+    },
+    {
+      "record_id": "r04-hefei-vehicle-capacity-target-2025",
+      "case_id": "R04",
+      "indicator": "vehicle_capacity_target",
+      "name": "合肥整车生产能力目标",
+      "period": "2025",
+      "granularity": "year",
+      "region": "合肥",
+      "scope": "规划目标，不是已实现值",
+      "value": "300",
+      "unit": "万辆",
+      "source_id": "hefei-nev-plan",
+      "locator": "PDF第7–8页，发展目标及表1"
+    },
+    {
+      "record_id": "r04-hefei-battery-capacity-target-2025",
+      "case_id": "R04",
+      "indicator": "power_battery_capacity_target",
+      "name": "合肥动力电池年产能目标",
+      "period": "2025",
+      "granularity": "year",
+      "region": "合肥",
+      "scope": "规划目标，不是已实现值",
+      "value": "300",
+      "unit": "GWh/年",
+      "source_id": "hefei-nev-plan",
+      "locator": "PDF第7–8页，发展目标及表1"
+    },
+    {
+      "record_id": "r04-hefei-drive-motor-capacity-target-2025",
+      "case_id": "R04",
+      "indicator": "drive_motor_capacity_target",
+      "name": "合肥驱动电机系统年产能目标",
+      "period": "2025",
+      "granularity": "year",
+      "region": "合肥",
+      "scope": "规划目标，不是已实现值",
+      "value": "300",
+      "unit": "万套/年",
+      "source_id": "hefei-nev-plan",
+      "locator": "PDF第7–8页，发展目标及表1"
+    },
+    {
+      "record_id": "r05-germany-bev-registrations-2023",
+      "case_id": "R05",
+      "indicator": "bev_passenger_new_registrations",
+      "name": "德国纯电动乘用车新注册量",
+      "period": "2023",
+      "granularity": "year",
+      "region": "德国",
+      "scope": "KBA Pkw BEV；不含插电式混合动力",
+      "value": "524219",
+      "unit": "辆",
+      "reported_change_pct": "11.4",
+      "reported_market_share_pct": "18.4",
+      "source_id": "kba-2023",
+      "locator": "PDF第1页，Elektro-Pkw (BEV)"
+    },
+    {
+      "record_id": "r05-germany-bev-registrations-2024",
+      "case_id": "R05",
+      "indicator": "bev_passenger_new_registrations",
+      "name": "德国纯电动乘用车新注册量",
+      "period": "2024",
+      "granularity": "year",
+      "region": "德国",
+      "scope": "KBA Pkw BEV；不含插电式混合动力",
+      "value": "380609",
+      "unit": "辆",
+      "reported_change_pct": "-27.4",
+      "reported_market_share_pct": "13.5",
+      "source_id": "kba-2024",
+      "locator": "PDF第1页，Elektro-Pkw (BEV)"
+    }
+  ]
+}

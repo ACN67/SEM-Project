@@ -1,0 +1,154 @@
+{
+  "template_id": "industry_analysis_v1",
+  "version": 1,
+  "title": "产业分析报告",
+  "report_type": "industry_analysis",
+  "layout_version": "1",
+  "requires_as_of": true,
+  "sections": [
+    {
+      "chapter_id": "summary",
+      "section_key": "summary",
+      "title": "摘要",
+      "order": 0,
+      "required": true,
+      "depends_on": [
+        "overview",
+        "market",
+        "chain",
+        "competition",
+        "policy",
+        "trend",
+        "conclusion"
+      ],
+      "research_questions": [
+        "哪些判断和资料缺口对决策最重要？"
+      ],
+      "evidence_requirements": [],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "overview",
+      "section_key": "overview",
+      "title": "概况",
+      "order": 1,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "本报告的研究对象和统计边界是什么？"
+      ],
+      "evidence_requirements": [
+        "产业定义及权威统计口径"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "market",
+      "section_key": "market",
+      "title": "市场规模",
+      "order": 2,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "研究期各年销量如何变化，哪些年份缺数？"
+      ],
+      "evidence_requirements": [
+        "同口径的年度销量原表及单元格定位"
+      ],
+      "required_metrics": [
+        "sales"
+      ],
+      "desired_chart": "line"
+    },
+    {
+      "chapter_id": "chain",
+      "section_key": "chain",
+      "title": "产业链",
+      "order": 3,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "产业链有哪些环节，关键约束分别是什么？"
+      ],
+      "evidence_requirements": [
+        "产业链环节及参与主体原文"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "competition",
+      "section_key": "competition",
+      "title": "竞争格局",
+      "order": 4,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "比较对象有哪些，竞争差异的依据是什么？"
+      ],
+      "evidence_requirements": [
+        "企业或协会披露及可比口径"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "policy",
+      "section_key": "policy",
+      "title": "政策环境",
+      "order": 5,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "截至研究截止日，哪些政策适用于研究对象？"
+      ],
+      "evidence_requirements": [
+        "政策原文、适用对象、生效日期和出处"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "trend",
+      "section_key": "trend",
+      "title": "趋势与挑战",
+      "order": 6,
+      "required": true,
+      "depends_on": [
+        "market",
+        "chain",
+        "competition",
+        "policy"
+      ],
+      "research_questions": [
+        "哪些趋势可由数据支持，哪些挑战尚待验证？"
+      ],
+      "evidence_requirements": [
+        "前章已核验数据与事实"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "conclusion",
+      "section_key": "conclusion",
+      "title": "结论",
+      "order": 7,
+      "required": true,
+      "depends_on": [
+        "overview",
+        "trend"
+      ],
+      "research_questions": [
+        "研究范围内有哪些可执行建议？"
+      ],
+      "evidence_requirements": [
+        "前章已核验事实和资料缺口"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    }
+  ]
+}

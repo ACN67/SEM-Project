@@ -1,0 +1,159 @@
+{
+  "template_id": "enterprise_comparison_v1",
+  "version": 1,
+  "title": "企业对标报告",
+  "report_type": "enterprise_comparison",
+  "layout_version": "1",
+  "requires_as_of": false,
+  "sections": [
+    {
+      "chapter_id": "summary",
+      "section_key": "summary",
+      "title": "摘要",
+      "order": 0,
+      "required": true,
+      "depends_on": [
+        "scope",
+        "profiles",
+        "operations",
+        "technology",
+        "differences",
+        "risks",
+        "conclusion"
+      ],
+      "research_questions": [
+        "哪些判断和资料缺口对决策最重要？"
+      ],
+      "evidence_requirements": [],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "scope",
+      "section_key": "scope",
+      "title": "对标范围",
+      "order": 1,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "企业、期间、合并范围和币种是否可比？"
+      ],
+      "evidence_requirements": [
+        "至少两家企业同期间的披露及统计口径"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "profiles",
+      "section_key": "profiles",
+      "title": "企业概况",
+      "order": 2,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "两家企业的业务规模和行业角色是什么？"
+      ],
+      "evidence_requirements": [
+        "各企业对应期间年报"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "operations",
+      "section_key": "operations",
+      "title": "经营指标",
+      "order": 3,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "各企业各期间的研发投入有何差异，采用何种定义与币种？"
+      ],
+      "evidence_requirements": [
+        "年报研发投入数据表及原文定位"
+      ],
+      "required_metrics": [
+        "rd_investment"
+      ],
+      "desired_chart": "table"
+    },
+    {
+      "chapter_id": "technology",
+      "section_key": "technology",
+      "title": "技术与业务",
+      "order": 4,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "关键技术和业务布局有哪些可以核验的差异？"
+      ],
+      "evidence_requirements": [
+        "年报或企业正式披露"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "differences",
+      "section_key": "differences",
+      "title": "竞争差异",
+      "order": 5,
+      "required": true,
+      "depends_on": [
+        "scope",
+        "profiles",
+        "operations",
+        "technology"
+      ],
+      "research_questions": [
+        "哪些差异能在可比口径下得到支持？"
+      ],
+      "evidence_requirements": [
+        "各企业及各期间已核验的事实"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "risks",
+      "section_key": "risks",
+      "title": "风险",
+      "order": 6,
+      "required": true,
+      "depends_on": [
+        "scope",
+        "profiles",
+        "operations",
+        "technology"
+      ],
+      "research_questions": [
+        "哪些数据不可比，哪些判断仍待核实？"
+      ],
+      "evidence_requirements": [
+        "披露口径和缺失说明"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "conclusion",
+      "section_key": "conclusion",
+      "title": "结论",
+      "order": 7,
+      "required": true,
+      "depends_on": [
+        "differences",
+        "risks"
+      ],
+      "research_questions": [
+        "有哪些结论可以用于对标决策？"
+      ],
+      "evidence_requirements": [
+        "竞争差异和风险章节的已核验事实"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    }
+  ]
+}

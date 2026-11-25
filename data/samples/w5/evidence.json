@@ -544,6 +544,37 @@
       "review_note": "只能形成能力匹配候选，不推断合作意愿。"
     },
     {
+      "evidence_key": "EV-R05-KBA-2023-XLSX-AL461",
+      "case_id": "R05",
+      "source_id": "kba-2023-xlsx",
+      "document_id": "doc_kba_fz10_2023_12",
+      "document_version_id": "dv_kba_fz10_2023_12_xlsx",
+      "title": "FZ 10 2023年12月乘用车新注册统计",
+      "publisher": "Kraftfahrt-Bundesamt",
+      "published_at": "2024-01-04",
+      "accessed_at": "2026-11-25",
+      "source_url": "https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ10/fz10_2023_12.xlsx?__blob=publicationFile&v=2",
+      "source_hash": "3fd1b4604bb957de8faa3b96be385254fe9c4b3d0a18c2083d98ff5cdffeec4c",
+      "file_version": "fz10_2023_12.xlsx",
+      "locator": {
+        "kind": "xlsx",
+        "sheet": "FZ 10.1",
+        "cell": "AL461",
+        "header_cells": [
+          "AK8",
+          "AL9",
+          "B461"
+        ]
+      },
+      "excerpt": "BEV列2023年1至12月汇总，AL461为524219辆。",
+      "role": "market_registration",
+      "applies_to": "德国纯电动乘用车新注册量",
+      "effective_from": null,
+      "effective_to": null,
+      "review_status": "PASS",
+      "review_note": "原始电子表格单元格已程序读取核对。"
+    },
+    {
       "evidence_key": "EV-R05-KBA-XLSX-AL488",
       "case_id": "R05",
       "source_id": "kba-2024-xlsx",

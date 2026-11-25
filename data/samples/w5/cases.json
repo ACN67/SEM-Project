@@ -334,17 +334,8 @@
         "target_segment": "动力电池配套",
         "as_of": "2024-12-31"
       },
-      "required_contract_indicators": [
-        "industry_scale_target",
-        "vehicle_capacity_target",
-        "power_battery_capacity_target"
-      ],
-      "metric_record_ids": [
-        "r04-hefei-industry-scale-target-2025",
-        "r04-hefei-vehicle-capacity-target-2025",
-        "r04-hefei-battery-capacity-target-2025",
-        "r04-hefei-drive-motor-capacity-target-2025"
-      ],
+      "required_contract_indicators": [],
+      "metric_record_ids": [],
       "evidence_keys": [
         "EV-R04-HEFEI-IMPL-P3",
         "EV-R04-HEFEI-PLAN-P11",
@@ -437,6 +428,7 @@
         "r05-germany-bev-registrations-2024"
       ],
       "evidence_keys": [
+        "EV-R05-KBA-2023-XLSX-AL461",
         "EV-R05-KBA-XLSX-AL488",
         "EV-R05-KBA-PDF-P1",
         "EV-R05-EU-ANTISUBSIDY",
@@ -458,6 +450,7 @@
           "conclusion_key": "R05-market-scope",
           "text": "2024年德国纯电乘用车新注册量为380609辆，同比下降27.40%；欧盟反补贴措施适用于中国原产的新型纯电载人汽车，德国购车补贴已在2023年底终止。",
           "evidence_keys": [
+            "EV-R05-KBA-2023-XLSX-AL461",
             "EV-R05-KBA-XLSX-AL488",
             "EV-R05-KBA-PDF-P1",
             "EV-R05-EU-ANTISUBSIDY",

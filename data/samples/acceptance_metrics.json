@@ -193,6 +193,20 @@
       "url": "https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ10/fz10_2024_12.xlsx?__blob=publicationFile&v=5",
       "sha256": "856b9afe515d51aa52bcb34d645dce2c5cdeaf47ef398b4e0a754c1bd5813dbf",
       "note": "工作表 FZ 10.1，数据格 AL488"
+    },
+    {
+      "source_id": "kba-2023-xlsx",
+      "publisher": "Kraftfahrt-Bundesamt",
+      "title": "FZ 10 2023年12月乘用车新注册统计",
+      "published_at": "2024-01-04",
+      "url": "https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ10/fz10_2023_12.xlsx?__blob=publicationFile&v=2"
+    },
+    {
+      "source_id": "mee-2025-mobile-source-report",
+      "publisher": "中华人民共和国生态环境部",
+      "title": "中国移动源环境管理年报（2025年）第 I 部分",
+      "published_at": "2025-12-03",
+      "url": "https://www.mee.gov.cn/hjzl/sthjzk/ydyhjgl/202512/W020251203577003736659.pdf"
     }
   ],
   "metrics": [
@@ -210,7 +224,10 @@
       "unit": "万辆",
       "reported_change_pct": "93.4",
       "source_id": "miit-2022-annual",
-      "locator": "“1—12月，新能源汽车产销分别完成705.8万辆和688.7万辆……”"
+      "locator": "“1—12月，新能源汽车产销分别完成705.8万辆和688.7万辆……”",
+      "evidence_keys": [
+        "EV-R01-MIIT-2022-ANNUAL"
+      ]
     },
     {
       "record_id": "r01-cn-nev-sales-2023",
@@ -226,7 +243,10 @@
       "unit": "万辆",
       "reported_change_pct": "37.9",
       "source_id": "miit-2023-annual",
-      "locator": "“1—12月，新能源汽车产销分别完成958.7万辆和949.5万辆……”"
+      "locator": "“1—12月，新能源汽车产销分别完成958.7万辆和949.5万辆……”",
+      "evidence_keys": [
+        "EV-R01-MIIT-2023-ANNUAL"
+      ]
     },
     {
       "record_id": "r01-cn-nev-sales-2024",
@@ -242,7 +262,10 @@
       "unit": "万辆",
       "reported_change_pct": "35.5",
       "source_id": "miit-2024-annual",
-      "locator": "“1—12月，新能源汽车产销分别完成1288.8万辆和1286.6万辆……”"
+      "locator": "“1—12月，新能源汽车产销分别完成1288.8万辆和1286.6万辆……”",
+      "evidence_keys": [
+        "EV-R01-MEE-2024-P8"
+      ]
     },
     {
       "record_id": "r03-cn-nev-sales-2023-q1",
@@ -257,7 +280,10 @@
       "unit": "万辆",
       "source_id": "miit-2023-q1",
       "locator": "“1—3月，新能源汽车产销分别完成165万辆和158.6万辆……”",
-      "derivation": "direct cumulative value"
+      "derivation": "direct cumulative value",
+      "evidence_keys": [
+        "EV-R03-MIIT-2023-Q1"
+      ]
     },
     {
       "record_id": "r03-cn-nev-sales-2023-q2",
@@ -275,7 +301,11 @@
         "miit-2023-q1"
       ],
       "locator": "2023年1—6月累计374.7万辆减1—3月累计158.6万辆",
-      "derivation": "374.7 - 158.6"
+      "derivation": "374.7 - 158.6",
+      "evidence_keys": [
+        "EV-R03-MIIT-2023-H1",
+        "EV-R03-MIIT-2023-Q1"
+      ]
     },
     {
       "record_id": "r03-cn-nev-sales-2023-q3",
@@ -293,7 +323,11 @@
         "miit-2023-h1-mirror"
       ],
       "locator": "2023年1—9月累计627.8万辆减1—6月累计374.7万辆",
-      "derivation": "627.8 - 374.7"
+      "derivation": "627.8 - 374.7",
+      "evidence_keys": [
+        "EV-R03-MIIT-2023-9M",
+        "EV-R03-MIIT-2023-H1"
+      ]
     },
     {
       "record_id": "r03-cn-nev-sales-2023-q4",
@@ -311,7 +345,11 @@
         "miit-2023-9m"
       ],
       "locator": "2023年全年949.5万辆减1—9月累计627.8万辆",
-      "derivation": "949.5 - 627.8"
+      "derivation": "949.5 - 627.8",
+      "evidence_keys": [
+        "EV-R03-MIIT-2023-ANNUAL",
+        "EV-R03-MIIT-2023-9M"
+      ]
     },
     {
       "record_id": "r03-cn-nev-sales-2024-q1",
@@ -326,7 +364,10 @@
       "unit": "万辆",
       "source_id": "miit-2024-q1",
       "locator": "“1—3月，新能源汽车产销分别完成211.5万辆和209万辆……”",
-      "derivation": "direct cumulative value"
+      "derivation": "direct cumulative value",
+      "evidence_keys": [
+        "EV-R03-MIIT-2024-Q1"
+      ]
     },
     {
       "record_id": "r03-cn-nev-sales-2024-q2",
@@ -344,7 +385,11 @@
         "miit-2024-q1"
       ],
       "locator": "2024年1—6月累计494.4万辆减1—3月累计209.0万辆",
-      "derivation": "494.4 - 209.0"
+      "derivation": "494.4 - 209.0",
+      "evidence_keys": [
+        "EV-R03-MIIT-2024-H1",
+        "EV-R03-MIIT-2024-Q1"
+      ]
     },
     {
       "record_id": "r03-cn-nev-sales-2024-q3",
@@ -362,7 +407,11 @@
         "miit-2024-h1"
       ],
       "locator": "2024年1—9月累计832.0万辆减1—6月累计494.4万辆",
-      "derivation": "832.0 - 494.4"
+      "derivation": "832.0 - 494.4",
+      "evidence_keys": [
+        "EV-R03-MIIT-2024-9M",
+        "EV-R03-MIIT-2024-H1"
+      ]
     },
     {
       "record_id": "r03-cn-nev-sales-2024-q4",
@@ -380,7 +429,11 @@
         "miit-2024-9m"
       ],
       "locator": "2024年全年1286.6万辆减1—9月累计832.0万辆",
-      "derivation": "1286.6 - 832.0"
+      "derivation": "1286.6 - 832.0",
+      "evidence_keys": [
+        "EV-R03-MIIT-2024-ANNUAL",
+        "EV-R03-MIIT-2024-9M"
+      ]
     },
     {
       "record_id": "r03-cn-nev-yoy-2024-q1",
@@ -467,7 +520,10 @@
         "byd-2023-annual",
         "byd-2024-cninfo-annual"
       ],
-      "locator": "2024年报PDF物理第34页的2023比较数；同为395.75亿元的“研发费用”不可混用"
+      "locator": "2024年报PDF物理第34页的2023比较数；同为395.75亿元的“研发费用”不可混用",
+      "evidence_keys": [
+        "EV-R02-BYD-CNINFO-P34"
+      ]
     },
     {
       "record_id": "r02-byd-r-and-d-2024",
@@ -487,7 +543,10 @@
         "byd-2024-annual",
         "byd-2024-cninfo-annual"
       ],
-      "locator": "CNINFO年报PDF物理第34页“研发投入情况表”：54,160,964,000元，同比35.68%"
+      "locator": "CNINFO年报PDF物理第34页“研发投入情况表”：54,160,964,000元，同比35.68%",
+      "evidence_keys": [
+        "EV-R02-BYD-CNINFO-P34"
+      ]
     },
     {
       "record_id": "r02-saic-r-and-d-2023",
@@ -503,7 +562,10 @@
       "unit": "亿元",
       "currency": "CNY",
       "source_id": "saic-2023-annual",
-      "locator": "第13页“研发投入情况表”"
+      "locator": "第13页“研发投入情况表”",
+      "evidence_keys": [
+        "EV-R02-SAIC-2023-P13"
+      ]
     },
     {
       "record_id": "r02-saic-r-and-d-2024",
@@ -519,7 +581,10 @@
       "unit": "亿元",
       "currency": "CNY",
       "source_id": "saic-2024-annual",
-      "locator": "第13页“研发投入情况表”"
+      "locator": "第13页“研发投入情况表”",
+      "evidence_keys": [
+        "EV-R02-SAIC-2024-P13"
+      ]
     },
     {
       "record_id": "r04-hefei-industry-scale-target-2025",
@@ -591,7 +656,10 @@
       "reported_change_pct": "11.4",
       "reported_market_share_pct": "18.4",
       "source_id": "kba-2023",
-      "locator": "PDF第1页，Elektro-Pkw (BEV)"
+      "locator": "PDF第1页，Elektro-Pkw (BEV)",
+      "evidence_keys": [
+        "EV-R05-KBA-2023-XLSX-AL461"
+      ]
     },
     {
       "record_id": "r05-germany-bev-registrations-2024",
@@ -610,7 +678,11 @@
         "kba-2024",
         "kba-2024-xlsx"
       ],
-      "locator": "原始XLSX工作表FZ 10.1，AL488；同版PDF物理第1页，Elektro-Pkw (BEV)"
+      "locator": "原始XLSX工作表FZ 10.1，AL488；同版PDF物理第1页，Elektro-Pkw (BEV)",
+      "evidence_keys": [
+        "EV-R05-KBA-PDF-P1",
+        "EV-R05-KBA-XLSX-AL488"
+      ]
     }
   ]
 }

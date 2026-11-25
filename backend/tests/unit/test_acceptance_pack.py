@@ -24,9 +24,6 @@ def read_json(path: Path) -> dict:
 
 
 def metric_from_record(record: dict, contract_indicators: dict[str, str]) -> m.Metric:
-    source_ids = record.get("source_ids")
-    if source_ids is None:
-        source_ids = [record["source_id"]]
     return m.Metric(
         metric_id=record["record_id"],
         indicator=contract_indicators[record["indicator"]],
@@ -42,7 +39,7 @@ def metric_from_record(record: dict, contract_indicators: dict[str, str]) -> m.M
         value=record.get("value"),
         unit=record["unit"],
         currency=record.get("currency"),
-        source_evidence_ids=source_ids,
+        source_evidence_ids=record["evidence_keys"],
         formula_id=None,
         input_metric_ids=[],
         missing_reason=None,
@@ -189,6 +186,19 @@ class AcceptancePackTests(unittest.TestCase):
             if record["locator"]["kind"] in {"pdf", "xlsx"}:
                 self.assertRegex(record["source_hash"], r"^[a-f0-9]{64}$")
 
+    def test_selected_metrics_resolve_to_reviewed_evidence_in_the_same_case(self):
+        for case in self.cases.values():
+            for metric in self.metrics_for(case["case_id"]):
+                with self.subTest(metric=metric.metric_id):
+                    self.assertTrue(metric.source_evidence_ids)
+                    for evidence_id in metric.source_evidence_ids:
+                        self.assertIn(evidence_id, case["evidence_keys"])
+                        evidence = self.evidence_records[evidence_id]
+                        self.assertEqual(evidence["case_id"], case["case_id"])
+                        self.assertEqual(evidence["review_status"], "PASS")
+                        if evidence["locator"]["kind"] in {"pdf", "xlsx"}:
+                            self.assertEqual(shared_evidence(evidence).evidence_id, evidence_id)
+
     def test_requests_are_shared_specs_and_contract_indicators_match_templates(self):
         adapter = TypeAdapter(m.Spec)
         parsed = {
@@ -226,11 +236,13 @@ class AcceptancePackTests(unittest.TestCase):
         )
         self.assertEqual(sales.indicator, "sales")
 
-        pdf = shared_evidence(self.evidence_records["EV-R02-BYD-CNINFO-P34"])
+        pdf = shared_evidence(self.evidence_records[byd.source_evidence_ids[0]])
         self.assertIsInstance(pdf.locator, m.Pdf)
         self.assertEqual(pdf.locator.page, 34)
 
-        sheet = shared_evidence(self.evidence_records["EV-R05-KBA-XLSX-AL488"])
+        bev = next(metric for metric in self.metrics_for("R05") if metric.period == "2024")
+        sheet = shared_evidence(self.evidence_records[bev.source_evidence_ids[-1]])
+        self.assertEqual(sheet.locator.sheet, "FZ 10.1")
         self.assertIsInstance(sheet.locator, m.Sheet)
         self.assertEqual(sheet.locator.cells, "AL488")
 

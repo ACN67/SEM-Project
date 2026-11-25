@@ -1,0 +1,518 @@
+{
+  "schema_version": "1.0",
+  "dataset": "SEM-Project R01-R05 W5 acceptance pack",
+  "data_cutoff": "2024-12-31",
+  "cases": [
+    {
+      "case_id": "R01",
+      "title": "中国新能源汽车产业分析",
+      "status": "READY",
+      "request": {
+        "report_type": "industry_analysis",
+        "industry": "新能源汽车",
+        "region": "中国",
+        "period": {
+          "from": "2022",
+          "to": "2024"
+        },
+        "template_id": "industry_analysis_v1",
+        "focus": [
+          "市场规模",
+          "政策环境",
+          "趋势与挑战"
+        ],
+        "as_of": "2024-12-31"
+      },
+      "required_contract_indicators": [
+        "sales"
+      ],
+      "metric_record_ids": [
+        "r01-cn-nev-sales-2022",
+        "r01-cn-nev-sales-2023",
+        "r01-cn-nev-sales-2024"
+      ],
+      "evidence_keys": [
+        "EV-R01-MIIT-2022-ANNUAL",
+        "EV-R01-MIIT-2023-ANNUAL",
+        "EV-R01-MEE-2024-P8",
+        "EV-R01-POLICY-2021-2035"
+      ],
+      "expected_metrics": [
+        {
+          "source_metric_id": "r01-cn-nev-sales-2024",
+          "period": "2024",
+          "contract_indicator": "sales",
+          "formula_id": "yoy_pct",
+          "display_value": "35.50%",
+          "unit": "%"
+        }
+      ],
+      "expected_conclusions": [
+        {
+          "conclusion_key": "R01-market-growth",
+          "text": "中国新能源汽车销量由2022年688.7万辆增至2024年1286.6万辆，2024年按原始值计算同比增长35.50%。",
+          "evidence_keys": [
+            "EV-R01-MIIT-2022-ANNUAL",
+            "EV-R01-MIIT-2023-ANNUAL",
+            "EV-R01-MEE-2024-P8"
+          ],
+          "allowed_wording": [
+            "销量增长",
+            "市场规模扩大",
+            "同比35.50%"
+          ],
+          "prohibited_wording": [
+            "对缺失年份插值",
+            "把销量增长率解释为单一政策造成的因果"
+          ]
+        }
+      ],
+      "gap_cases": [
+        {
+          "gap_case_id": "R01-missing-2023",
+          "kind": "metric_removal",
+          "details": {
+            "remove_metric_ids": [
+              "r01-cn-nev-sales-2023"
+            ]
+          },
+          "expected_codes": [
+            "MISSING_BASE_PERIOD"
+          ],
+          "expected_missing_periods": [
+            "2023"
+          ],
+          "expected_status": "GAP",
+          "note": "缺少2023基期时不得插值或生成2024同比。"
+        }
+      ]
+    },
+    {
+      "case_id": "R02",
+      "title": "比亚迪与上汽集团研发投入对标",
+      "status": "READY",
+      "request": {
+        "report_type": "enterprise_comparison",
+        "industry": "新能源汽车",
+        "region": "中国",
+        "period": {
+          "from": "2023",
+          "to": "2024"
+        },
+        "template_id": "enterprise_comparison_v1",
+        "companies": [
+          "byd",
+          "saic"
+        ],
+        "focus": [
+          "研发投入"
+        ]
+      },
+      "required_contract_indicators": [
+        "rd_investment"
+      ],
+      "metric_record_ids": [
+        "r02-byd-r-and-d-2023",
+        "r02-byd-r-and-d-2024",
+        "r02-saic-r-and-d-2023",
+        "r02-saic-r-and-d-2024"
+      ],
+      "evidence_keys": [
+        "EV-R02-BYD-2023-HK-P273",
+        "EV-R02-BYD-CNINFO-P34",
+        "EV-R02-SAIC-2023-P13",
+        "EV-R02-SAIC-2024-P13"
+      ],
+      "expected_metrics": [
+        {
+          "source_metric_id": "r02-byd-r-and-d-2024",
+          "period": "2024",
+          "contract_indicator": "rd_investment",
+          "formula_id": "yoy_pct",
+          "display_value": "35.68%",
+          "unit": "%"
+        },
+        {
+          "source_metric_id": "r02-saic-r-and-d-2024",
+          "period": "2024",
+          "contract_indicator": "rd_investment",
+          "formula_id": "yoy_pct",
+          "display_value": "-0.91%",
+          "unit": "%"
+        }
+      ],
+      "expected_conclusions": [
+        {
+          "conclusion_key": "R02-comparison",
+          "text": "比亚迪2024年研发投入同比增长35.68%，上汽集团按合并口径同比下降0.91%；两家公司业务结构和合并范围不同。",
+          "evidence_keys": [
+            "EV-R02-BYD-CNINFO-P34",
+            "EV-R02-SAIC-2023-P13",
+            "EV-R02-SAIC-2024-P13"
+          ],
+          "allowed_wording": [
+            "研发投入合计",
+            "各自年报合并口径",
+            "合并范围存在差异"
+          ],
+          "prohibited_wording": [
+            "研发费用与研发投入合计混排",
+            "把上汽含主要合资企业的351.61亿元混入本表",
+            "忽略合并范围和业务结构差异"
+          ]
+        }
+      ],
+      "gap_cases": [
+        {
+          "gap_case_id": "R02-unit-conflict",
+          "kind": "metric_patch",
+          "details": {
+            "metric_record_id": "r02-byd-r-and-d-2024",
+            "patch": {
+              "unit": "辆"
+            }
+          },
+          "expected_codes": [
+            "UNIT_MISMATCH"
+          ],
+          "expected_missing_periods": [],
+          "expected_status": "BLOCK",
+          "note": "研发投入金额与车辆数量不能直接比较或计算同比。"
+        }
+      ]
+    },
+    {
+      "case_id": "R03",
+      "title": "中国新能源汽车季度景气",
+      "status": "READY",
+      "request": {
+        "report_type": "industry_prosperity",
+        "industry": "新能源汽车",
+        "region": "中国",
+        "period": {
+          "from": "2023",
+          "to": "2024"
+        },
+        "template_id": "industry_prosperity_v1",
+        "indicator": "sales",
+        "granularity": "quarter",
+        "as_of": "2024-12-31"
+      },
+      "required_contract_indicators": [
+        "sales"
+      ],
+      "metric_record_ids": [
+        "r03-cn-nev-sales-2023-q1",
+        "r03-cn-nev-sales-2023-q2",
+        "r03-cn-nev-sales-2023-q3",
+        "r03-cn-nev-sales-2023-q4",
+        "r03-cn-nev-sales-2024-q1",
+        "r03-cn-nev-sales-2024-q2",
+        "r03-cn-nev-sales-2024-q3",
+        "r03-cn-nev-sales-2024-q4"
+      ],
+      "evidence_keys": [
+        "EV-R03-MIIT-2023-Q1",
+        "EV-R03-MIIT-2023-H1",
+        "EV-R03-MIIT-2023-9M",
+        "EV-R03-MIIT-2023-ANNUAL",
+        "EV-R03-MIIT-2024-Q1",
+        "EV-R03-MIIT-2024-H1",
+        "EV-R03-MIIT-2024-9M",
+        "EV-R03-MIIT-2024-ANNUAL"
+      ],
+      "expected_metrics": [
+        {
+          "source_metric_id": "r03-cn-nev-sales-2024-q1",
+          "period": "2024-Q1",
+          "contract_indicator": "sales",
+          "formula_id": "yoy_pct",
+          "display_value": "31.78%",
+          "unit": "%"
+        },
+        {
+          "source_metric_id": "r03-cn-nev-sales-2024-q2",
+          "period": "2024-Q2",
+          "contract_indicator": "sales",
+          "formula_id": "yoy_pct",
+          "display_value": "32.07%",
+          "unit": "%"
+        },
+        {
+          "source_metric_id": "r03-cn-nev-sales-2024-q3",
+          "period": "2024-Q3",
+          "contract_indicator": "sales",
+          "formula_id": "yoy_pct",
+          "display_value": "33.39%",
+          "unit": "%"
+        },
+        {
+          "source_metric_id": "r03-cn-nev-sales-2024-q4",
+          "period": "2024-Q4",
+          "contract_indicator": "sales",
+          "formula_id": "yoy_pct",
+          "display_value": "41.31%",
+          "unit": "%"
+        }
+      ],
+      "expected_conclusions": [
+        {
+          "conclusion_key": "R03-prosperity",
+          "text": "2024年四个季度销量同比均较上一季度提高，可写为增速加快；高增长与减速应分开判断。",
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-Q1",
+            "EV-R03-MIIT-2023-H1",
+            "EV-R03-MIIT-2023-9M",
+            "EV-R03-MIIT-2023-ANNUAL",
+            "EV-R03-MIIT-2024-Q1",
+            "EV-R03-MIIT-2024-H1",
+            "EV-R03-MIIT-2024-9M",
+            "EV-R03-MIIT-2024-ANNUAL"
+          ],
+          "allowed_wording": [
+            "增速加快",
+            "同比提高",
+            "累计值差分"
+          ],
+          "prohibited_wording": [
+            "用相邻季度销量环比代替同比",
+            "把销量增长直接归因于单一政策"
+          ]
+        }
+      ],
+      "gap_cases": [
+        {
+          "gap_case_id": "R03-zero-base",
+          "kind": "metric_patch",
+          "details": {
+            "metric_record_id": "r03-cn-nev-sales-2023-q1",
+            "patch": {
+              "value": "0"
+            }
+          },
+          "expected_codes": [
+            "ZERO_BASE"
+          ],
+          "expected_missing_periods": [],
+          "expected_status": "GAP",
+          "note": "基期为零时同比不可计算。"
+        },
+        {
+          "gap_case_id": "R03-missing-quarter",
+          "kind": "period_omission",
+          "details": {
+            "remove_metric_ids": [
+              "r03-cn-nev-sales-2024-q3"
+            ],
+            "missing_period": "2024-Q3"
+          },
+          "expected_codes": [],
+          "expected_missing_periods": [
+            "2024-Q3"
+          ],
+          "expected_status": "GAP",
+          "note": "缺季度不得补点、插值或跨季连接。"
+        }
+      ]
+    },
+    {
+      "case_id": "R04",
+      "title": "合肥动力电池配套招商研判",
+      "status": "READY_WITH_LIMITATION",
+      "request": {
+        "report_type": "investment_attraction",
+        "industry": "新能源汽车",
+        "region": "合肥",
+        "period": {
+          "from": "2021",
+          "to": "2025"
+        },
+        "template_id": "investment_attraction_v1",
+        "focus": [
+          "动力电池配套"
+        ],
+        "target_segment": "动力电池配套",
+        "as_of": "2024-12-31"
+      },
+      "required_contract_indicators": [
+        "industry_scale_target",
+        "vehicle_capacity_target",
+        "power_battery_capacity_target"
+      ],
+      "metric_record_ids": [
+        "r04-hefei-industry-scale-target-2025",
+        "r04-hefei-vehicle-capacity-target-2025",
+        "r04-hefei-battery-capacity-target-2025",
+        "r04-hefei-drive-motor-capacity-target-2025"
+      ],
+      "evidence_keys": [
+        "EV-R04-HEFEI-IMPL-P3",
+        "EV-R04-HEFEI-PLAN-P11",
+        "EV-R04-HEFEI-PLAN-P12",
+        "EV-R04-GOTION-PRODUCTS",
+        "EV-R04-GOTION-LAYOUT"
+      ],
+      "expected_metrics": [],
+      "expected_conclusions": [
+        {
+          "conclusion_key": "R04-capability-match",
+          "text": "合肥存在动力电池本地配套需求，国轩高科具备合肥布局和动力电池系统产品能力，可以列为能力匹配候选，建议进一步核实合作需求。",
+          "evidence_keys": [
+            "EV-R04-HEFEI-IMPL-P3",
+            "EV-R04-GOTION-PRODUCTS",
+            "EV-R04-GOTION-LAYOUT"
+          ],
+          "allowed_wording": [
+            "能力匹配候选",
+            "建议核实合作需求",
+            "需求侧与供给侧均有公开证据"
+          ],
+          "prohibited_wording": [
+            "已签约",
+            "拟投资",
+            "已有明确投资意向",
+            "已有采购订单"
+          ]
+        }
+      ],
+      "gap_cases": [
+        {
+          "gap_case_id": "R04-demand-only",
+          "kind": "evidence_removal",
+          "details": {
+            "remove_evidence_keys": [
+              "EV-R04-GOTION-PRODUCTS",
+              "EV-R04-GOTION-LAYOUT"
+            ]
+          },
+          "expected_codes": [
+            "PENDING_SUPPLY_EVIDENCE"
+          ],
+          "expected_missing_periods": [],
+          "expected_status": "PENDING_EVIDENCE",
+          "note": "只有需求侧证据时不能形成企业匹配结论。"
+        },
+        {
+          "gap_case_id": "R04-supply-only",
+          "kind": "evidence_removal",
+          "details": {
+            "remove_evidence_keys": [
+              "EV-R04-HEFEI-IMPL-P3",
+              "EV-R04-HEFEI-PLAN-P11",
+              "EV-R04-HEFEI-PLAN-P12"
+            ]
+          },
+          "expected_codes": [
+            "PENDING_DEMAND_EVIDENCE"
+          ],
+          "expected_missing_periods": [],
+          "expected_status": "PENDING_EVIDENCE",
+          "note": "只有企业能力证据时不能证明当地产业需求。"
+        }
+      ]
+    },
+    {
+      "case_id": "R05",
+      "title": "中国纯电动乘用车进入德国市场研判",
+      "status": "READY_WITH_LIMITATION",
+      "request": {
+        "report_type": "overseas_assessment",
+        "industry": "新能源汽车",
+        "region": "德国",
+        "period": {
+          "from": "2023",
+          "to": "2024"
+        },
+        "template_id": "overseas_assessment_v1",
+        "origin": "中国",
+        "target_market": "德国",
+        "product": "纯电动乘用车",
+        "as_of": "2024-12-31"
+      },
+      "required_contract_indicators": [
+        "bev_registrations"
+      ],
+      "metric_record_ids": [
+        "r05-germany-bev-registrations-2023",
+        "r05-germany-bev-registrations-2024"
+      ],
+      "evidence_keys": [
+        "EV-R05-KBA-XLSX-AL488",
+        "EV-R05-KBA-PDF-P1",
+        "EV-R05-EU-ANTISUBSIDY",
+        "EV-R05-EU-TYPE-APPROVAL",
+        "EV-R05-BAFA-BONUS-END"
+      ],
+      "expected_metrics": [
+        {
+          "source_metric_id": "r05-germany-bev-registrations-2024",
+          "period": "2024",
+          "contract_indicator": "bev_registrations",
+          "formula_id": "yoy_pct",
+          "display_value": "-27.40%",
+          "unit": "%"
+        }
+      ],
+      "expected_conclusions": [
+        {
+          "conclusion_key": "R05-market-scope",
+          "text": "2024年德国纯电乘用车新注册量为380609辆，同比下降27.40%；欧盟反补贴措施适用于中国原产的新型纯电载人汽车，德国购车补贴已在2023年底终止。",
+          "evidence_keys": [
+            "EV-R05-KBA-XLSX-AL488",
+            "EV-R05-KBA-PDF-P1",
+            "EV-R05-EU-ANTISUBSIDY",
+            "EV-R05-BAFA-BONUS-END"
+          ],
+          "allowed_wording": [
+            "纯电动乘用车",
+            "BEV",
+            "适用对象",
+            "生效日期",
+            "反补贴税"
+          ],
+          "prohibited_wording": [
+            "全部新能源汽车",
+            "中国品牌市场份额",
+            "仅凭BEV总注册量推算中国原产地占比",
+            "反补贴税等同于全部进口税负"
+          ]
+        }
+      ],
+      "gap_cases": [
+        {
+          "gap_case_id": "R05-policy-date-missing",
+          "kind": "evidence_patch",
+          "details": {
+            "evidence_key": "EV-R05-EU-ANTISUBSIDY",
+            "patch": {
+              "applies_to": null,
+              "effective_from": null
+            }
+          },
+          "expected_codes": [
+            "POLICY_METADATA_MISSING"
+          ],
+          "expected_missing_periods": [],
+          "expected_status": "PENDING_EVIDENCE",
+          "note": "政策缺适用对象或生效日期时不能直接判断适用于目标产品。"
+        },
+        {
+          "gap_case_id": "R05-scope-confusion",
+          "kind": "scope_confusion",
+          "details": {
+            "metric_record_id": "r05-germany-bev-registrations-2024",
+            "patch": {
+              "scope": "德国新能源乘用车注册量（含纯电和插电式混合动力）"
+            }
+          },
+          "expected_codes": [
+            "SCOPE_MISMATCH"
+          ],
+          "expected_missing_periods": [],
+          "expected_status": "BLOCK",
+          "note": "KBA Pkw BEV不得扩写成全部新能源汽车。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,28 @@
-{
-  "schema_version": "0.1",
+q{
+  "schema_version": "0.2",
   "dataset": "R01-R05 acceptance metrics",
   "data_cutoff": "2024-12-31",
   "compiled_at": "2026-11-20",
-  "status": "verified-from-sources",
+  "status": "reviewed-with-open-items",
+  "technical_review": {
+    "reviewer": "陈易",
+    "reviewed_at": "2026-11-25",
+    "contract_indicators": {
+      "nev_sales": "sales",
+      "nev_sales_yoy": "sales_yoy",
+      "r_and_d_investment_total": "rd_investment",
+      "nev_industry_scale_target": "industry_scale_target",
+      "vehicle_capacity_target": "vehicle_capacity_target",
+      "power_battery_capacity_target": "power_battery_capacity_target",
+      "drive_motor_capacity_target": "drive_motor_capacity_target",
+      "bev_passenger_new_registrations": "bev_registrations"
+    },
+    "open_items": [
+      "R04 接洽建议仍缺合作需求或接触渠道证据",
+      "R04 产业规划目标文件仍为第三方完整副本",
+      "R05 普通关税税目和税率未纳入本数据包"
+    ]
+  },
   "source_refs": [
     {
       "source_id": "miit-2022-annual",
@@ -94,6 +113,15 @@
       "local_file": "official_sources/byd_2024_annual_report.pdf"
     },
     {
+      "source_id": "byd-2024-cninfo-annual",
+      "publisher": "比亚迪股份有限公司",
+      "title": "比亚迪股份有限公司2024年年度报告全文",
+      "published_at": "2025-03-25",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881496.PDF",
+      "sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+      "note": "研发投入表位于 PDF 物理第34页，同时列示2024和2023比较数"
+    },
+    {
       "source_id": "saic-2023-annual",
       "publisher": "上海汽车集团股份有限公司",
       "title": "上海汽车集团股份有限公司2023年年度报告",
@@ -117,6 +145,15 @@
       "url": "https://api.xch3.com/Resource/BPPfile/2022-12-15/20221215143814411.pdf",
       "local_file": "official_sources/hefei_nev_plan_14th_five_year.pdf",
       "note": "待替换为合肥市政府原站同版本文件"
+    },
+    {
+      "source_id": "hefei-implementation-2022",
+      "publisher": "合肥市人民政府办公室",
+      "title": "合肥市人民政府关于加快新能源汽车产业发展的实施意见",
+      "published_at": "2022-05-07",
+      "url": "https://po-o-cn.oss-cn-shenzhen.aliyuncs.com/Upload/20220507/c8ec7210fb918158532662da47d39257.pdf",
+      "sha256": "ce0428d4fdc7e5e29b6b95a9b07c2ee6055dc2678579f86128b0ef7c70854d6a",
+      "note": "PDF物理第3页明确支持动力电池、驱动电机、BMS等零部件企业提升配套能力"
     },
     {
       "source_id": "gotion-products",
@@ -147,6 +184,15 @@
       "published_at": "2025-01-06",
       "url": "https://www.kba.de/SharedDocs/Downloads/DE/Pressemitteilungen/2025/pm_01_2025_fahrzeugzulassungen_12_2024.pdf?__blob=publicationFile&v=5",
       "local_file": "official_sources/kba_2024_pkw_registrations.pdf"
+    },
+    {
+      "source_id": "kba-2024-xlsx",
+      "publisher": "Kraftfahrt-Bundesamt",
+      "title": "FZ 10 2024年12月乘用车新注册统计",
+      "published_at": "2025-01-06",
+      "url": "https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ10/fz10_2024_12.xlsx?__blob=publicationFile&v=5",
+      "sha256": "856b9afe515d51aa52bcb34d645dce2c5cdeaf47ef398b4e0a754c1bd5813dbf",
+      "note": "工作表 FZ 10.1，数据格 AL488"
     }
   ],
   "metrics": [
@@ -417,8 +463,11 @@
       "value": "399.18",
       "unit": "亿元",
       "currency": "CNY",
-      "source_id": "byd-2023-annual",
-      "locator": "研发投入相关披露；同为395.75亿元的“研发费用”不可混用"
+      "source_ids": [
+        "byd-2023-annual",
+        "byd-2024-cninfo-annual"
+      ],
+      "locator": "2024年报PDF物理第34页的2023比较数；同为395.75亿元的“研发费用”不可混用"
     },
     {
       "record_id": "r02-byd-r-and-d-2024",
@@ -434,8 +483,11 @@
       "unit": "亿元",
       "currency": "CNY",
       "reported_change_pct": "35.68",
-      "source_id": "byd-2024-annual",
-      "locator": "年报正文披露约542亿元，同比上升35.68%；图表值使用公开财报汇总的541.61亿元"
+      "source_ids": [
+        "byd-2024-annual",
+        "byd-2024-cninfo-annual"
+      ],
+      "locator": "CNINFO年报PDF物理第34页“研发投入情况表”：54,160,964,000元，同比35.68%"
     },
     {
       "record_id": "r02-saic-r-and-d-2023",
@@ -481,7 +533,7 @@
       "value": "7000",
       "unit": "亿元",
       "source_id": "hefei-nev-plan",
-      "locator": "PDF第7–8页，发展目标及表1"
+      "locator": "PDF物理第11页（文内第7页），发展目标；PDF物理第12页（文内第8页），表1"
     },
     {
       "record_id": "r04-hefei-vehicle-capacity-target-2025",
@@ -495,7 +547,7 @@
       "value": "300",
       "unit": "万辆",
       "source_id": "hefei-nev-plan",
-      "locator": "PDF第7–8页，发展目标及表1"
+      "locator": "PDF物理第11页（文内第7页），发展目标；PDF物理第12页（文内第8页），表1"
     },
     {
       "record_id": "r04-hefei-battery-capacity-target-2025",
@@ -509,7 +561,7 @@
       "value": "300",
       "unit": "GWh/年",
       "source_id": "hefei-nev-plan",
-      "locator": "PDF第7–8页，发展目标及表1"
+      "locator": "PDF物理第11页（文内第7页），发展目标；PDF物理第12页（文内第8页），表1"
     },
     {
       "record_id": "r04-hefei-drive-motor-capacity-target-2025",
@@ -523,7 +575,7 @@
       "value": "300",
       "unit": "万套/年",
       "source_id": "hefei-nev-plan",
-      "locator": "PDF第7–8页，发展目标及表1"
+      "locator": "PDF物理第11页（文内第7页），发展目标；PDF物理第12页（文内第8页），表1"
     },
     {
       "record_id": "r05-germany-bev-registrations-2023",
@@ -554,8 +606,11 @@
       "unit": "辆",
       "reported_change_pct": "-27.4",
       "reported_market_share_pct": "13.5",
-      "source_id": "kba-2024",
-      "locator": "PDF第1页，Elektro-Pkw (BEV)"
+      "source_ids": [
+        "kba-2024",
+        "kba-2024-xlsx"
+      ],
+      "locator": "原始XLSX工作表FZ 10.1，AL488；同版PDF物理第1页，Elektro-Pkw (BEV)"
     }
   ]
 }

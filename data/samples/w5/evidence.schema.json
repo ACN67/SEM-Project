@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evidence.schema.json",
+  "title": "W5 evidence records",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_key",
+        "case_id",
+        "source_id",
+        "document_id",
+        "document_version_id",
+        "title",
+        "publisher",
+        "published_at",
+        "accessed_at",
+        "source_url",
+        "source_hash",
+        "file_version",
+        "locator",
+        "excerpt",
+        "role",
+        "applies_to",
+        "effective_from",
+        "effective_to",
+        "review_status",
+        "review_note"
+      ],
+      "properties": {
+        "evidence_key": {
+          "type": "string",
+          "pattern": "^EV-R0[1-5]-[A-Z0-9-]+$"
+        },
+        "case_id": {
+          "enum": [
+            "R01",
+            "R02",
+            "R03",
+            "R04",
+            "R05"
+          ]
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_version_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "accessed_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "source_hash": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locator": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/pdfLocator"
+            },
+            {
+              "$ref": "#/$defs/sheetLocator"
+            },
+            {
+              "$ref": "#/$defs/webLocator"
+            }
+          ]
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "market_observation",
+            "annual_report",
+            "industry_demand",
+            "enterprise_capability",
+            "market_registration",
+            "policy",
+            "trade_measure"
+          ]
+        },
+        "applies_to": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "effective_from": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "effective_to": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "review_status": {
+          "enum": [
+            "PASS",
+            "PENDING_EVIDENCE"
+          ]
+        },
+        "review_note": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "pdfLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "page",
+        "page_label"
+      ],
+      "properties": {
+        "kind": {
+          "const": "pdf"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "page_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "table": {
+          "type": "string"
+        },
+        "section": {
+          "type": "string"
+        }
+      }
+    },
+    "sheetLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "sheet",
+        "cell"
+      ],
+      "properties": {
+        "kind": {
+          "const": "xlsx"
+        },
+        "sheet": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cell": {
+          "type": "string",
+          "pattern": "^[A-Z]+[1-9][0-9]*$"
+        },
+        "header_cells": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "webLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "anchor"
+      ],
+      "properties": {
+        "kind": {
+          "const": "web"
+        },
+        "anchor": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

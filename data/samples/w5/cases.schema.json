@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cases.schema.json",
+  "title": "W5 acceptance cases",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset",
+    "data_cutoff",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "dataset": {
+      "const": "SEM-Project R01-R05 W5 acceptance pack"
+    },
+    "data_cutoff": {
+      "type": "string",
+      "format": "date"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    }
+  },
+  "$defs": {
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "title",
+        "status",
+        "request",
+        "required_contract_indicators",
+        "metric_record_ids",
+        "evidence_keys",
+        "expected_metrics",
+        "expected_conclusions",
+        "gap_cases"
+      ],
+      "properties": {
+        "case_id": {
+          "enum": [
+            "R01",
+            "R02",
+            "R03",
+            "R04",
+            "R05"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "READY",
+            "READY_WITH_LIMITATION",
+            "PENDING_EVIDENCE"
+          ]
+        },
+        "request": {
+          "type": "object"
+        },
+        "required_contract_indicators": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "metric_record_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "evidence_keys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "expected_metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/expectedMetric"
+          }
+        },
+        "expected_conclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/expectedConclusion"
+          }
+        },
+        "gap_cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gapCase"
+          }
+        }
+      }
+    },
+    "expectedMetric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_metric_id",
+        "period",
+        "contract_indicator",
+        "formula_id",
+        "display_value",
+        "unit"
+      ],
+      "properties": {
+        "source_metric_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "period": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contract_indicator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formula_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "display_value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "expectedConclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conclusion_key",
+        "text",
+        "evidence_keys",
+        "allowed_wording",
+        "prohibited_wording"
+      ],
+      "properties": {
+        "conclusion_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_keys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowed_wording": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prohibited_wording": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "gapCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gap_case_id",
+        "kind",
+        "details",
+        "expected_codes",
+        "expected_missing_periods",
+        "expected_status",
+        "note"
+      ],
+      "properties": {
+        "gap_case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "metric_removal",
+            "metric_patch",
+            "evidence_removal",
+            "evidence_patch",
+            "period_omission",
+            "scope_confusion",
+            "evidence_cutoff"
+          ]
+        },
+        "details": {
+          "type": "object"
+        },
+        "expected_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expected_missing_periods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expected_status": {
+          "enum": [
+            "GAP",
+            "BLOCK",
+            "PENDING_EVIDENCE",
+            "WARN"
+          ]
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

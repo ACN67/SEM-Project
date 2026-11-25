@@ -21,7 +21,7 @@
           "政策环境",
           "趋势与挑战"
         ],
-        "as_of": "2024-12-31"
+        "as_of": "2025-12-03"
       },
       "required_contract_indicators": [
         "sales"
@@ -84,6 +84,19 @@
           ],
           "expected_status": "GAP",
           "note": "缺少2023基期时不得插值或生成2024同比。"
+        },
+        {
+          "gap_case_id": "R01-before-2024-disclosure",
+          "kind": "evidence_cutoff",
+          "details": {
+            "as_of": "2024-12-31"
+          },
+          "expected_codes": [],
+          "expected_missing_periods": [
+            "2024"
+          ],
+          "expected_status": "GAP",
+          "note": "截止日当时缺少本案例采用的2024年资料，不能给出三年完整走势或2024年同比。"
         }
       ]
     },
@@ -196,7 +209,7 @@
         "template_id": "industry_prosperity_v1",
         "indicator": "sales",
         "granularity": "quarter",
-        "as_of": "2024-12-31"
+        "as_of": "2025-01-13"
       },
       "required_contract_indicators": [
         "sales"
@@ -258,7 +271,7 @@
       "expected_conclusions": [
         {
           "conclusion_key": "R03-prosperity",
-          "text": "2024年四个季度销量同比均较上一季度提高，可写为增速加快；高增长与减速应分开判断。",
+          "text": "2024年四个季度销量同比均为正，Q2至Q4的同比增速逐季提高。",
           "evidence_keys": [
             "EV-R03-MIIT-2023-Q1",
             "EV-R03-MIIT-2023-H1",
@@ -270,13 +283,14 @@
             "EV-R03-MIIT-2024-ANNUAL"
           ],
           "allowed_wording": [
-            "增速加快",
-            "同比提高",
+            "四个季度同比均为正",
+            "Q2至Q4增速逐季加快",
             "累计值差分"
           ],
           "prohibited_wording": [
             "用相邻季度销量环比代替同比",
-            "把销量增长直接归因于单一政策"
+            "把销量增长直接归因于单一政策",
+            "缺少2023年第四季度同比基准时判断2024年第一季度增速方向"
           ]
         }
       ],
@@ -338,20 +352,16 @@
       "metric_record_ids": [],
       "evidence_keys": [
         "EV-R04-HEFEI-IMPL-P3",
-        "EV-R04-HEFEI-PLAN-P11",
-        "EV-R04-HEFEI-PLAN-P12",
-        "EV-R04-GOTION-PRODUCTS",
-        "EV-R04-GOTION-LAYOUT"
+        "EV-R04-GOTION-LAB-2023"
       ],
       "expected_metrics": [],
       "expected_conclusions": [
         {
           "conclusion_key": "R04-capability-match",
-          "text": "合肥存在动力电池本地配套需求，国轩高科具备合肥布局和动力电池系统产品能力，可以列为能力匹配候选，建议进一步核实合作需求。",
+          "text": "合肥政策支持提升动力电池配套能力。国轩高科披露其在合肥的电芯与电池系统测试验证能力，可列为能力匹配候选，具体合作诉求及联系渠道待核实。",
           "evidence_keys": [
             "EV-R04-HEFEI-IMPL-P3",
-            "EV-R04-GOTION-PRODUCTS",
-            "EV-R04-GOTION-LAYOUT"
+            "EV-R04-GOTION-LAB-2023"
           ],
           "allowed_wording": [
             "能力匹配候选",
@@ -372,8 +382,7 @@
           "kind": "evidence_removal",
           "details": {
             "remove_evidence_keys": [
-              "EV-R04-GOTION-PRODUCTS",
-              "EV-R04-GOTION-LAYOUT"
+              "EV-R04-GOTION-LAB-2023"
             ]
           },
           "expected_codes": [
@@ -388,9 +397,7 @@
           "kind": "evidence_removal",
           "details": {
             "remove_evidence_keys": [
-              "EV-R04-HEFEI-IMPL-P3",
-              "EV-R04-HEFEI-PLAN-P11",
-              "EV-R04-HEFEI-PLAN-P12"
+              "EV-R04-HEFEI-IMPL-P3"
             ]
           },
           "expected_codes": [
@@ -418,7 +425,7 @@
         "origin": "中国",
         "target_market": "德国",
         "product": "纯电动乘用车",
-        "as_of": "2024-12-31"
+        "as_of": "2025-01-06"
       },
       "required_contract_indicators": [
         "bev_registrations"
@@ -448,7 +455,7 @@
       "expected_conclusions": [
         {
           "conclusion_key": "R05-market-scope",
-          "text": "2024年德国纯电乘用车新注册量为380609辆，同比下降27.40%；欧盟反补贴措施适用于中国原产的新型纯电载人汽车，德国购车补贴已在2023年底终止。",
+          "text": "2024年德国纯电乘用车新注册量为380609辆，同比下降27.40%。截至2025年1月6日，欧盟反补贴措施自2024年10月30日起适用于中国原产的新型纯电载人汽车。德国原有环境奖金自2023年12月18日起停止接受新申请。",
           "evidence_keys": [
             "EV-R05-KBA-2023-XLSX-AL461",
             "EV-R05-KBA-XLSX-AL488",

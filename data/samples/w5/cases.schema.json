@@ -215,7 +215,8 @@
             "evidence_removal",
             "evidence_patch",
             "period_omission",
-            "scope_confusion"
+            "scope_confusion",
+            "evidence_cutoff"
           ]
         },
         "details": {

@@ -2,7 +2,7 @@
 
 版本：1.0
 
-数据截止日：2024-12-31
+年度基线统计期末为 2024-12-31（JSON 的 `data_cutoff`）。各案例用 `request.as_of` 约束可用证据的发布日期。年度复盘可使用统计期后发布、在研究截止日前已公开的资料。
 
 指标复核：陈易
 
@@ -23,7 +23,8 @@
 2. R03 的同比由 `QualityService` 从原始季度值计算；已有 `nev_sales_yoy` 记录只作人工预期，不重复参与计算。
 3. 报告只能使用 `evidence.json` 中 `review_status=PASS` 的证据。`PENDING_EVIDENCE` 或缺口案例不得被改写成已核验事实。
 4. PDF 页码同时区分物理 PDF 页和文内页码；XLSX 使用工作表与单元格；网页使用页面锚点或章节名称。
-5. 来源文件的 SHA-256 用于校验文件版本。网页没有静态文件哈希时允许为 `null`，但必须保留发布日期和访问日期。
+5. 指标的 `evidence_keys` 对应具体定位，供装配 `Metric.source_evidence_ids`。原件标识仍保存在 `source_id` 或 `source_ids`。R04 规划目标和无发布日期的动态网页保留为待核实资料。
+6. 来源文件的 SHA-256 用于校验文件版本。网页没有静态文件哈希时允许为 `null`，但必须保留发布日期和访问日期。
 
 当前共享 `Evidence.locator` 只支持 PDF、DOCX、XLSX 和 CSV。PDF/XLSX 证据可测试转换为共享对象；纯网页记录先保留完整来源元数据，待知识库解析并保存网页快照后再转成共享 `Evidence`，测试会明确拒绝伪造网页 locator。
 

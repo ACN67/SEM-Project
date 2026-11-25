@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from datetime import date
 from decimal import Decimal
 import json
 from pathlib import Path
@@ -11,6 +12,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 from pydantic import TypeAdapter
 
 from backend.app.contracts import models as m
+from backend.app.generation.analysis_context import quarterly_analysis
 from backend.app.quality import QualityService, format_percent
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -266,6 +268,49 @@ class AcceptancePackTests(unittest.TestCase):
             with self.subTest(case_id=case_id):
                 result = self.assert_expected_metrics(case_id)
                 self.assertEqual(result.gaps, [])
+
+    def test_case_evidence_was_public_by_the_research_cutoff(self):
+        for case in self.cases.values():
+            if "as_of" not in case["request"]:
+                continue
+            cutoff = date.fromisoformat(case["request"]["as_of"])
+            for key in case["evidence_keys"]:
+                with self.subTest(case=case["case_id"], evidence=key):
+                    evidence = self.evidence_records[key]
+                    self.assertEqual(evidence["review_status"], "PASS")
+                    self.assertIsNotNone(evidence["published_at"])
+                    self.assertLessEqual(date.fromisoformat(evidence["published_at"]), cutoff)
+
+    def test_earlier_cutoff_excludes_unpublished_annual_result(self):
+        case = self.cases["R01"]
+        gap = next(item for item in case["gap_cases"] if item["kind"] == "evidence_cutoff")
+        cutoff = date.fromisoformat(gap["details"]["as_of"])
+        public_keys = {
+            key for key in case["evidence_keys"]
+            if date.fromisoformat(self.evidence_records[key]["published_at"]) <= cutoff
+        }
+        all_metrics = self.metrics_for("R01")
+        available_metrics = [
+            metric for metric in all_metrics if set(metric.source_evidence_ids) <= public_keys
+        ]
+        missing = {metric.period for metric in all_metrics} - {metric.period for metric in available_metrics}
+        self.assertEqual(missing, set(gap["expected_missing_periods"]))
+        result = self.calculate("R01", available_metrics)
+        self.assertNotIn("yoy:r01-cn-nev-sales-2024", {metric.metric_id for metric in result.metrics})
+        for conclusion in case["expected_conclusions"]:
+            self.assertFalse(set(conclusion["evidence_keys"]) <= public_keys)
+
+    def test_r03_growth_directions_require_a_previous_quarter(self):
+        spec = m.Prosperity.model_validate(self.cases["R03"]["request"])
+        result = self.calculate("R03")
+        rates = [Decimal(metric.value) for metric in result.metrics if metric.formula_id == "yoy_pct"]
+        self.assertEqual(len(rates), 4)
+        self.assertTrue(all(rate > 0 for rate in rates))
+        analysis = quarterly_analysis(spec, result.metrics)
+        self.assertEqual(
+            [(item["later_period"], item["direction"]) for item in analysis["adjacent_yoy_changes"]],
+            [(f"2024-Q{quarter}", "加快") for quarter in (2, 3, 4)],
+        )
 
     def test_r01_missing_year_is_not_interpolated(self):
         case = self.cases["R01"]

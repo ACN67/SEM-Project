@@ -515,8 +515,8 @@
       "applies_to": "国轩高科动力电池产品能力",
       "effective_from": null,
       "effective_to": null,
-      "review_status": "PASS",
-      "review_note": "只能支持产品能力，不证明与合肥具体项目签约。"
+      "review_status": "PENDING_EVIDENCE",
+      "review_note": "动态网页未标明发布日期，无法证明案例截止日当时的能力。"
     },
     {
       "evidence_key": "EV-R04-GOTION-LAYOUT",
@@ -540,8 +540,8 @@
       "applies_to": "国轩高科合肥布局与电池系统能力",
       "effective_from": null,
       "effective_to": null,
-      "review_status": "PASS",
-      "review_note": "只能形成能力匹配候选，不推断合作意愿。"
+      "review_status": "PENDING_EVIDENCE",
+      "review_note": "动态网页未标明发布日期，无法证明案例截止日当时的能力。"
     },
     {
       "evidence_key": "EV-R05-KBA-2023-XLSX-AL461",
@@ -642,17 +642,17 @@
       "publisher": "European Commission",
       "published_at": "2024-10-29",
       "accessed_at": "2026-11-25",
-      "source_url": "https://eur-lex.europa.eu/eli/reg_impl/2024/2754/oj/eng",
+      "source_url": "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=OJ%3AL_202402754",
       "source_hash": null,
       "file_version": "EUR-Lex OJ version 2024/2754",
       "locator": {
         "kind": "web",
-        "anchor": "Article 1 and Article 4"
+        "anchor": "Articles 1 and 3"
       },
-      "excerpt": "Article 1 imposes a definitive countervailing duty on imports of new battery electric vehicles designed for the transport of persons originating in China; Article 4 sets the entry into force.",
+      "excerpt": "Article 1 defines the scope of the duty. Under Article 3 the regulation entered into force on 30 October 2024.",
       "role": "trade_measure",
       "applies_to": "中国原产、用于载人的新型纯电动汽车",
-      "effective_from": "2024-10-31",
+      "effective_from": "2024-10-30",
       "effective_to": "2029-10-30",
       "review_status": "PASS",
       "review_note": "反补贴税不等同于全部进口税负；未纳入普通关税税率。"
@@ -706,6 +706,31 @@
       "effective_to": "2023-12-17",
       "review_status": "PASS",
       "review_note": "2024年市场判断不得沿用此前购车补贴条件。"
+    },
+    {
+      "evidence_key": "EV-R04-GOTION-LAB-2023",
+      "case_id": "R04",
+      "source_id": "gotion-lab-2023",
+      "document_id": "doc_gotion_lab_2023",
+      "document_version_id": "dv_gotion_lab_2023",
+      "title": "国轩高科获大众汽车集团电芯测试实验室资质认证",
+      "publisher": "国轩高科股份有限公司",
+      "published_at": "2023-02-21",
+      "accessed_at": "2026-11-25",
+      "source_url": "https://www.gotion.com.cn/newsInfo/317",
+      "source_hash": null,
+      "file_version": "2023-02-21 企业公告",
+      "locator": {
+        "kind": "web",
+        "anchor": "国轩高科验证工程院及测试平台"
+      },
+      "excerpt": "企业披露合肥新站、包河和庐江验证基地，以及覆盖电芯及电池系统的测试能力。",
+      "role": "enterprise_capability",
+      "applies_to": "国轩高科在合肥的动力电池测试与验证能力",
+      "effective_from": null,
+      "effective_to": null,
+      "review_status": "PASS",
+      "review_note": "发布日期早于案例截止日。公开认证及平台信息可支持能力匹配。"
     }
   ]
 }

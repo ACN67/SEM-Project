@@ -1,0 +1,1138 @@
+{
+  "run_id": "run1",
+  "spec": {
+    "region": "中国",
+    "industry": "新能源汽车",
+    "period": {
+      "from": "2023",
+      "to": "2024"
+    },
+    "report_type": "industry_analysis",
+    "template_id": "industry_analysis_v1"
+  },
+  "template_ref": {
+    "template_id": "industry_analysis_v1",
+    "version": 1
+  },
+  "source_version_ids": [
+    "dv1"
+  ],
+  "facts_version": "f0",
+  "facts": [],
+  "version_id": "v1",
+  "parent_version_id": null,
+  "created_at": "2026-11-18T09:00:00+08:00",
+  "stale_chapter_ids": [],
+  "exportable": true,
+  "report_id": "report1",
+  "schema_version": "1.0",
+  "layout_version": "1",
+  "model_id": "fixture",
+  "outline": {
+    "chapters": [
+      {
+        "chapter_id": "ch_market",
+        "section_key": "market",
+        "title": "市场规模",
+        "order": 0,
+        "required": true,
+        "depends_on": [],
+        "research_questions": [
+          "本年销量是多少？"
+        ],
+        "evidence_requirements": [
+          "销量原表"
+        ],
+        "required_metrics": [
+          "sales"
+        ],
+        "desired_chart": null
+      },
+      {
+        "chapter_id": "ch_second",
+        "section_key": "second",
+        "title": "结论",
+        "order": 1,
+        "required": true,
+        "depends_on": [
+          "ch_market"
+        ],
+        "research_questions": [
+          "本年销量是多少？"
+        ],
+        "evidence_requirements": [
+          "销量原表"
+        ],
+        "required_metrics": [
+          "sales"
+        ],
+        "desired_chart": null
+      }
+    ]
+  },
+  "chapters": [
+    {
+      "chapter_id": "ch_second",
+      "title": "结论",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "block_id": "b3",
+          "text": "报告结论",
+          "evidence_ids": [],
+          "metric_ids": []
+        }
+      ],
+      "summary": "模拟销量为 120 辆。",
+      "fact_candidates": [],
+      "chart_requests": [],
+      "missing_evidence": []
+    },
+    {
+      "chapter_id": "ch_market",
+      "title": "市场规模",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "block_id": "b1",
+          "text": "模拟销量为 120 辆。",
+          "evidence_ids": [
+            "ev1"
+          ],
+          "metric_ids": [
+            "m1"
+          ]
+        },
+        {
+          "type": "table",
+          "block_id": "b2",
+          "columns": [
+            "项目",
+            "数值"
+          ],
+          "rows": [
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ],
+            [
+              {
+                "text": "模拟观测",
+                "evidence_ids": [],
+                "metric_ids": []
+              },
+              {
+                "text": "0",
+                "evidence_ids": [],
+                "metric_ids": []
+              }
+            ]
+          ]
+        }
+      ],
+      "summary": "模拟销量为 120 辆。",
+      "fact_candidates": [],
+      "chart_requests": [],
+      "missing_evidence": []
+    }
+  ],
+  "evidences": [
+    {
+      "title": "模拟销量表（测试）",
+      "publisher": "测试发布方",
+      "published_at": "2024-12-31",
+      "source_url": null,
+      "evidence_id": "ev1",
+      "document_id": "doc1",
+      "document_version_id": "dv1",
+      "chunk_id": "ck1",
+      "locator": {
+        "kind": "xlsx",
+        "sheet": "销量",
+        "cells": "B2"
+      },
+      "excerpt": "模拟销量 120 辆",
+      "score": 0.9
+    }
+  ],
+  "metrics": [
+    {
+      "metric_id": "m1",
+      "indicator": "sales",
+      "name": "模拟销量",
+      "entity_id": null,
+      "period": "2024",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "模拟样本",
+      "raw_value": "120",
+      "raw_unit": "辆",
+      "multiplier": "1",
+      "value": "120",
+      "unit": "辆",
+      "currency": null,
+      "source_evidence_ids": [
+        "ev1"
+      ],
+      "formula_id": null,
+      "input_metric_ids": [],
+      "missing_reason": null
+    }
+  ],
+  "charts": [],
+  "quality": {
+    "rules": [
+      {
+        "rule_id": "source_refs",
+        "result": "PASS",
+        "reason": "来源可定位",
+        "required": true
+      }
+    ],
+    "issues": []
+  }
+}

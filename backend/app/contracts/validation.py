@@ -54,6 +54,9 @@ def check_snapshot(doc: ReportDocument):
         if not ready:
             raise ValueError("cyclic or missing dependency")
         done.update(ready)
+    for fact in doc.facts:
+        refs(fact.evidence_ids,evidence,"frozen fact evidence")
+        refs(fact.metric_ids,metrics,"frozen fact metric")
     for metric in metrics.values():
         refs(metric.source_evidence_ids,evidence,"metric evidence")
         refs(metric.input_metric_ids,metrics,"formula input")

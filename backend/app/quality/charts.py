@@ -42,7 +42,6 @@ def build_charts(
     block_id_counts = Counter(request.block_id for request in requests)
     charts: list[m.Chart] = []
 
-    name_counts = Counter(metric.name for metric in metric_map.values())
     for request in requests:
         if chart_id_counts[request.chart_id] > 1:
             issues.append(
@@ -119,11 +118,15 @@ def build_charts(
             )
             continue
 
+        series_keys = Counter(
+            (metric.name, metric.entity_id)
+            for metric in source_metrics
+        )
         points: list[m.Point] = []
         for source_index, metric in enumerate(source_metrics):
             series = metric.name
-            if name_counts[metric.name] > 1:
-                series = f"{metric.name} ({metric.entity_id or metric.metric_id})"
+            if len(series_keys) > 1 and metric.entity_id:
+                series = f"{metric.name} ({metric.entity_id})"
             number = metric_decimal(metric)
             points.append(
                 m.Point(

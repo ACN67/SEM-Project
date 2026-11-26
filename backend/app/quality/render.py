@@ -112,13 +112,21 @@ def _series_and_labels(data: list[m.Point]) -> tuple[list[str], list[str], dict[
     series: list[str] = []
     labels: list[str] = []
     values: dict[tuple[str, str], Decimal | None] = {}
+    metric_ids: dict[tuple[str, str], str] = {}
     for point in data:
         if point.series not in series:
             series.append(point.series)
         if point.label not in labels:
             labels.append(point.label)
-        values[(point.series, point.label)] = _point_decimal(point)
-    return series, labels, values
+        key = (point.series, point.label)
+        if key in values:
+            raise ChartRenderError(
+                "CHART_DATA_CONFLICT",
+                f"Duplicate chart coordinate {key}: {metric_ids[key]}, {point.metric_id}",
+            )
+        metric_ids[key] = point.metric_id
+        values[key] = _point_decimal(point)
+    return series, sorted(labels), values
 
 
 def _draw_line_or_bar(
@@ -182,6 +190,10 @@ def _draw_line_or_bar(
     def y_position(value: Decimal) -> float:
         ratio = float((value - minimum) / (maximum - minimum))
         return plot_bottom - ratio * (plot_bottom - plot_top)
+
+    zero_y = y_position(Decimal(0))
+    if chart.type == "bar":
+        draw.line([(plot_left, zero_y), (plot_right, zero_y)], fill="#4A5365", width=2 * scale)
 
     for tick in range(5):
         ratio = Decimal(tick) / Decimal(4)
@@ -271,13 +283,13 @@ def _draw_line_or_bar(
             start = cluster_center - bar_width * len(series) / 2
             for series_index, name in enumerate(series):
                 value = values.get((name, label))
-                if value is None:
+                if value is None or value == 0:
                     continue
                 y = y_position(value)
                 left = start + series_index * bar_width + 3 * scale
                 right = left + bar_width - 6 * scale
                 draw.rounded_rectangle(
-                    [left, y, right, plot_bottom],
+                    [left, min(y, zero_y), right, max(y, zero_y)],
                     radius=4 * scale,
                     fill=colors[name],
                 )

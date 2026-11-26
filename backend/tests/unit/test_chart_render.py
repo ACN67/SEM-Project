@@ -9,6 +9,7 @@ from PIL import Image
 
 from backend.app.contracts import models as m
 from backend.app.quality import ChartRenderError, render_chart_png
+from backend.app.quality.render import _series_and_labels
 
 
 def chart(chart_type: str, *, data: list[m.Point] | None = None) -> m.Chart:
@@ -63,6 +64,32 @@ class ChartRenderTests(unittest.TestCase):
             )
         )
         self.assertEqual(hashlib.sha256(first).digest(), hashlib.sha256(second).digest())
+
+    def test_global_period_order_and_duplicate_coordinates(self):
+        points = [
+            m.Point(label="2024", series="A", value="3", metric_id="a"),
+            m.Point(label="2022", series="B", value="2", metric_id="b"),
+            m.Point(label="2024", series="B", value="1", metric_id="c"),
+        ]
+        _, labels, values = _series_and_labels(points)
+        self.assertEqual(labels, ["2022", "2024"])
+        self.assertNotIn(("A", "2022"), values)
+        points.append(m.Point(label="2024", series="B", value="9", metric_id="d"))
+        with self.assertRaises(ChartRenderError) as error:
+            render_chart_png(chart("line", data=points))
+        self.assertEqual(error.exception.code, "CHART_DATA_CONFLICT")
+        self.assertIn("c, d", str(error.exception))
+
+    def test_signed_bars_share_zero_baseline(self):
+        points = [
+            m.Point(label=str(2022+i), series="A", value=str(value), metric_id=str(i))
+            for i, value in enumerate((-5, 0, 5))
+        ]
+        image = Image.open(BytesIO(render_chart_png(chart("bar", data=points))))
+        blue = (47, 107, 255)
+        self.assertEqual(image.getpixel((100, 500)), blue)
+        self.assertEqual(image.getpixel((1130, 250)), blue)
+        self.assertNotEqual(image.getpixel((615, 385)), blue)
 
     def test_invalid_size_and_missing_data_are_explicit_errors(self):
         with self.assertRaises(ChartRenderError) as error:

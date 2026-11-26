@@ -32,7 +32,7 @@ class WordTests(unittest.TestCase):
         chart = ReportDocument.model_validate_json(Path("shared/contracts/fixtures/report_document.json").read_text(encoding="utf8"))
         with self.assertRaises(ServiceError) as err:
             render_docx(chart)
-        self.assertEqual(err.exception.error.code,"UNSUPPORTED_BLOCK")
+        self.assertEqual(err.exception.error.code,"EXPORT_FAILED")
 
 
     def test_frozen_facts_require_existing_references(self):

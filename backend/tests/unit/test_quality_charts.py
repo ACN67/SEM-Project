@@ -46,6 +46,39 @@ class ChartTests(unittest.TestCase):
         self.assertEqual(first.charts[0].asset_id, second.charts[0].asset_id)
         self.assertTrue(first.charts[0].asset_id.startswith("chart_"))
 
+    def test_same_name_time_series_remain_one_series(self):
+        result = self.service.build_charts(
+            "ch1",
+            self.metrics,
+            [request()],
+        )
+        self.assertEqual(
+            {point.series for point in result.charts[0].data},
+            {"模拟销量"},
+        )
+
+    def test_entity_comparison_uses_entity_specific_series(self):
+        metrics = [
+            metric("byd-2023", name="研发投入", entity_id="byd", period="2023", value="100"),
+            metric("byd-2024", name="研发投入", entity_id="byd", period="2024", value="120"),
+            metric("saic-2023", name="研发投入", entity_id="saic", period="2023", value="90"),
+            metric("saic-2024", name="研发投入", entity_id="saic", period="2024", value="100"),
+        ]
+        result = self.service.build_charts(
+            "ch1",
+            metrics,
+            [
+                request(
+                    chart_type="bar",
+                    metric_ids=["byd-2023", "byd-2024", "saic-2023", "saic-2024"],
+                )
+            ],
+        )
+        self.assertEqual(
+            {point.series for point in result.charts[0].data},
+            {"研发投入 (byd)", "研发投入 (saic)"},
+        )
+
     def test_bar_table_and_zero_are_supported(self):
         metrics = [
             metric("m1", period="2023", value="0"),

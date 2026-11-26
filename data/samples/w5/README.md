@@ -26,7 +26,7 @@
 5. 指标的 `evidence_keys` 对应具体定位，供装配 `Metric.source_evidence_ids`。原件标识仍保存在 `source_id` 或 `source_ids`。R04 规划目标和无发布日期的动态网页保留为待核实资料。
 6. 来源文件的 SHA-256 用于校验文件版本。网页没有静态文件哈希时允许为 `null`，但必须保留发布日期和访问日期。
 
-当前共享 `Evidence.locator` 只支持 PDF、DOCX、XLSX 和 CSV。PDF/XLSX 证据可测试转换为共享对象；纯网页记录先保留完整来源元数据，待知识库解析并保存网页快照后再转成共享 `Evidence`，测试会明确拒绝伪造网页 locator。
+当前共享 `Evidence.locator` 只支持 PDF、DOCX、XLSX 和 CSV。PDF/XLSX 证据可测试转换为共享对象；纯网页记录先保留完整来源元数据，待知识库解析并保存网页快照后再转成共享 `Evidence`。测试适配器为了贯通生成与质量链路，会把网页锚点包装成带真实 `source_url` 的“网页快照”DOCX locator；该表示只存在于测试目录，不属于正式知识库。
 
 ## 状态
 

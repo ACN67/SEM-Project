@@ -1,2 +1,5 @@
 PyMySQL==1.2.4
 openpyxl==3.1.5
+docling-slim[format-pdf]==2.153.0
+python-docx==1.2.0
+pypdf==7.1.1

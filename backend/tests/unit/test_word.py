@@ -15,7 +15,7 @@ class WordTests(unittest.TestCase):
     def test_document_order_fields_and_table(self):
         doc = Document(BytesIO(render_docx(self.snapshot)))
         headings = [p.text for p in doc.paragraphs if p.style.name == "Heading 1"]
-        self.assertEqual(headings, ["市场规模","结论"])
+        self.assertEqual(headings, ["市场规模","结论","参考来源"])
         self.assertEqual(len(doc.tables[0].rows),81)
         self.assertEqual(doc.tables[0].cell(1,1).text,"0")
         self.assertIn("tblHeader",doc.tables[0]._tbl.xml)

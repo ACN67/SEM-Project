@@ -29,3 +29,14 @@ python scripts/export_contracts.py --check
 ```
 
 测试用并发连接复验全库哈希唯一及同名修订、检查新建仓储实例能否读取原版本，并通过 MySQL 触发器制造插入失败，验证文献、文件名和版本登记均回滚。控制台的 duplicate/revision 行依次显示文献 ID、初版 ID、异名重复 ID 和修订 ID。
+
+## W2 tabular metrics
+
+Apply 011_knowledge_metrics.sql after 010. Construct MetricRepository with the same
+connection factory and runtime root as W1. Call ingest_version(version_id,
+industry="新能源汽车") from the processing worker; it does not change ingest
+status. The worker owns the READY transition. get_metrics accepts the shared
+Filters model and a frozen list of version IDs. All observations are raw.
+CSV/XLSX normalized columns are defined in tabular.COLUMNS; header_mapping maps
+source headings to those names. Wide workbook mappings must be reviewed against
+original cells; tabular_mappings registers the 2024 KBA workbook by SHA-256.

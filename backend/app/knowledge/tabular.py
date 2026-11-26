@@ -10,6 +10,7 @@ from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
 from ..contracts import models as m
 from .storage import ingest_error
+from .tabular_mappings import registered_rows
 
 COLUMNS = ("indicator", "name", "entity_id", "period", "granularity", "region",
            "scope", "raw_value", "raw_unit", "multiplier", "unit", "currency")
@@ -88,6 +89,8 @@ def parse_tabular(path: Path, original_filename: str, record: m.DocumentRecord, 
                     if values:
                         consume(headers, values, lambda i: m.Csv(kind="csv", row=number, column=_text(headers[i])))
         elif suffix == ".xlsx":
+            if wide_rows is None:
+                wide_rows = registered_rows(path)
             with path.open("rb") as f:
                 book = load_workbook(f, read_only=True, data_only=True)
                 try:

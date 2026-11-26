@@ -58,3 +58,14 @@ class TextTests(unittest.TestCase):
         self.assertEqual([e.locator.page for e in result.evidences],[1,3])
         self.assertIn("third page",result.evidences[-1].excerpt)
         self.assertEqual(result.diagnostics,["Page 2: no readable text"])
+
+
+    def test_scanned_and_corrupt_pdf(self):
+        from PIL import Image
+        with self.path.open("wb") as stream:
+            Image.new("RGB",(200,200),"white").save(stream,format="PDF")
+        with self.assertRaises(ServiceError):
+            parse_text(self.path,"scan.pdf",self.record)
+        self.path.write_bytes(b"%PDF-invalid")
+        with self.assertRaises(ServiceError):
+            parse_text(self.path,"bad.pdf",self.record)

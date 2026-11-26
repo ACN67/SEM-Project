@@ -33,3 +33,23 @@ class WordTests(unittest.TestCase):
         with self.assertRaises(ServiceError) as err:
             render_docx(chart)
         self.assertEqual(err.exception.error.code,"UNSUPPORTED_BLOCK")
+
+
+    def test_frozen_facts_require_existing_references(self):
+        from backend.app.contracts.models import Fact
+        for field in ("evidence_ids", "metric_ids"):
+            fact = Fact(text="Evidence check", evidence_ids=[], metric_ids=[])
+            setattr(fact, field, ["unknown"])
+            with self.assertRaises(ServiceError) as err:
+                render_docx(self.snapshot.model_copy(update={"facts":[fact]}))
+            self.assertEqual(err.exception.error.code,"INVALID_SNAPSHOT")
+        valid = Fact(text="Valid", evidence_ids=["ev1"], metric_ids=["m1"])
+        self.assertTrue(render_docx(self.snapshot.model_copy(update={"facts":[valid]})))
+
+    def test_visual_layout_styles(self):
+        doc = Document(BytesIO(render_docx(self.snapshot)))
+        self.assertEqual(doc.paragraphs[0].style.name, "Report Cover Title")
+        self.assertIn("新能源汽车", doc.paragraphs[0].text)
+        self.assertEqual(doc.tables[0].rows[0].cells[0].paragraphs[0].style.name, "Report Table Header")
+        self.assertEqual(doc.tables[0].cell(1,1).paragraphs[0].alignment, 2)
+        self.assertIn("E4EDF3",doc.tables[0]._tbl.xml)

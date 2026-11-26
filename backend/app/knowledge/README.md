@@ -47,12 +47,12 @@ Install the pinned text dependencies in requirements.txt. TextRepository shares
 the W2 chunks and evidences tables. Its ingest_version returns ParsedText
 (evidences and page diagnostics); it leaves document status to the W4 worker.
 Docling uses the native text layer without OCR and maps physical page numbers
-even when extraction completes out of order. DOCX uses body paragraph indices.
+even when extraction completes out of order. Geometric line gaps separate PDF paragraphs; stable keys include page-local paragraph and chunk indices (w3-text-2). DOCX uses body paragraph indices and inherited outline levels.
 For stable IDs, reruns must use the same parser version and original metadata.
 
 Manual source check: EV-R02-SAIC-2024-P13 (SHA-256
 c980b2d827f372b5b90742e299d609345c83342584901c96ea95891c43f4ab3f),
 physical page 13, evidence ID
-241a8ecdedc038192d3d4874c00f5bd9dbaa9c95b49e967bea722992b9d56d89,
+54b81f82594425072dcd637a3d13f76228b9702dd6be14807d409de47f54ad4e,
 fixture version dv_saic_2024_annual, total R&D 21,813,090,045.30 yuan.
 Verified against the original annual report, not promoted automatically to a metric.

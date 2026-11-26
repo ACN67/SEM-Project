@@ -69,3 +69,39 @@ class TextTests(unittest.TestCase):
         self.path.write_bytes(b"%PDF-invalid")
         with self.assertRaises(ServiceError):
             parse_text(self.path,"bad.pdf",self.record)
+
+
+    def test_pdf_paragraphs_and_wrapped_lines(self):
+        from pypdf.generic import DictionaryObject, NameObject, DecodedStreamObject
+        writer=PdfWriter()
+        page=writer.add_blank_page(width=300,height=300)
+        font=DictionaryObject({NameObject("/Type"):NameObject("/Font"),NameObject("/Subtype"):NameObject("/Type1"),
+                               NameObject("/BaseFont"):NameObject("/Helvetica")})
+        page[NameObject("/Resources")]=DictionaryObject({NameObject("/Font"):DictionaryObject({NameObject("/F1"):writer._add_object(font)})})
+        stream=DecodedStreamObject()
+        stream.set_data(b"BT /F1 12 Tf 20 260 Td (first line) Tj 0 -14 Td (wrapped line) Tj 0 -100 Td (independent paragraph) Tj ET")
+        page[NameObject("/Contents")]=writer._add_object(stream)
+        writer.write(self.path)
+        result=parse_text(self.path,"source.pdf",self.record)
+        self.assertEqual([e.excerpt for e in result.evidences],["first line\nwrapped line","independent paragraph"])
+        self.assertEqual(len({e.evidence_id for e in result.evidences}),2)
+        self.assertEqual(result,parse_text(self.path,"source.pdf",self.record))
+
+    def test_inherited_and_direct_outline_levels(self):
+        from docx.enum.style import WD_STYLE_TYPE
+        from docx.oxml import OxmlElement
+        from docx.oxml.ns import qn
+        doc=Document()
+        style=doc.styles.add_style("Custom Heading",WD_STYLE_TYPE.PARAGRAPH)
+        style.base_style=doc.styles["Heading 1"]
+        doc.add_paragraph("First",style)
+        doc.add_paragraph("")
+        second=doc.add_paragraph("Second")
+        outline=OxmlElement("w:outlineLvl")
+        outline.set(qn("w:val"),"1")
+        second._p.get_or_add_pPr().append(outline)
+        doc.add_paragraph().add_run("Bold body").bold=True
+        doc.save(self.path)
+        result=parse_text(self.path,"source.docx",self.record)
+        self.assertEqual(result.evidences[-1].locator.section_path,["First","Second"])
+        self.assertEqual(result.evidences[-1].locator.paragraph,4)

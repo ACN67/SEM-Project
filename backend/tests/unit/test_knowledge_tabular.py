@@ -51,3 +51,18 @@ class TabularTests(unittest.TestCase):
             writer.writerows([self.row,self.row])
         with self.assertRaises(ServiceError):
             parse_tabular(self.path, "source.csv", self.record)
+
+
+    def test_currency_and_exact_decimal(self):
+        from backend.app.knowledge.tabular import _observation
+        from backend.app.contracts.models import Csv
+        row = dict(zip(COLUMNS, self.row))
+        locator = Csv(kind="csv", row=2, column="raw_value")
+        row.update(raw_unit="亿元", unit="亿元", multiplier="1", currency="")
+        with self.assertRaises(ValueError):
+            _observation(self.record,row,locator,"source",None)
+        row.update(currency="CNY",unit="元",multiplier="100000000",
+                   raw_value="12345678901234567890123456789.123456789")
+        metric = _observation(self.record,row,locator,"source",None).metric
+        self.assertEqual(metric.value,"1234567890123456789012345678912345678.9")
+        self.assertEqual(metric.currency,"CNY")

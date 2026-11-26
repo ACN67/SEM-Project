@@ -23,11 +23,16 @@ class MetricRepository:
                         raise ValueError("unknown document version")
                     record = _record(row[:5])
                     observations = parse_tabular(self._runtime_root / row[6], row[5], record, **mapping)
-                    cursor.execute("SELECT payload FROM metrics WHERE document_version_id=%s", (version_id,))
-                    existing = {metric.metric_id: metric for (payload,) in cursor.fetchall()
-                                if (metric := m.Metric.model_validate_json(payload))}
-                    if existing and existing != {o.metric.metric_id: o.metric for o in observations}:
-                        raise ValueError("immutable version has different parsed observations")
+                    cursor.execute("SELECT m.payload, e.payload, c.industry FROM metrics m "
+                                   "JOIN evidences e ON m.evidence_id=e.evidence_id "
+                                   "JOIN chunks c ON e.chunk_id=c.chunk_id WHERE m.document_version_id=%s", (version_id,))
+                    existing = {}
+                    for metric_json, evidence_json, industry in cursor.fetchall():
+                        metric = m.Metric.model_validate_json(metric_json)
+                        existing[metric.metric_id] = (metric, m.Evidence.model_validate_json(evidence_json), industry)
+                    incoming = {o.metric.metric_id: (o.metric, o.evidence, o.industry) for o in observations}
+                    if existing and existing != incoming:
+                        raise ValueError("immutable version has different parsed observations or metadata")
                     for observation in observations:
                         evidence, metric = observation.evidence, observation.metric
                         cursor.execute("INSERT INTO chunks VALUES (%s,%s,%s,%s) ON DUPLICATE KEY UPDATE chunk_id=chunk_id",

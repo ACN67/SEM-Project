@@ -1,7 +1,7 @@
 """Parse immutable CSV/XLSX originals into source-linked raw observations."""
 import csv
 from dataclasses import dataclass
-from decimal import Decimal
+from decimal import Decimal, localcontext
 from hashlib import sha256
 from pathlib import Path
 import re
@@ -49,10 +49,15 @@ def _observation(record, row, locator, header, industry):
     if not re.fullmatch(patterns.get(granularity, "(?!)"), period):
         raise ValueError("invalid period")
     currency = _text(row["currency"]) or None
-    if unit in {"元", "美元", "欧元"} and not currency:
+    if any(re.fullmatch(r"(?:万|亿|千|百万|十亿)?(?:元|人民币|美元|欧元|英镑|日元|港元|USD|EUR|CNY|GBP|JPY|HKD)", item, re.I) for item in (raw_unit, unit)) and not currency:
         raise ValueError("currency required")
     missing = raw in {"", "-", "—", "–"}
-    value = None if missing else _number((Decimal(raw) * multiplier).normalize())
+    value = None
+    if not missing:
+        number = Decimal(raw)
+        with localcontext() as context:
+            context.prec = max(28, len(number.as_tuple().digits) + len(multiplier.as_tuple().digits))
+            value = _number((number * multiplier).normalize())
     key = _id(record.document_version_id, locator.model_dump_json(), _text(row["indicator"]), RULE_VERSION)
     evidence = m.Evidence(**record.model_dump(include=set(m.Metadata.model_fields)),
         evidence_id=key, chunk_id=key, document_id=record.document_id,

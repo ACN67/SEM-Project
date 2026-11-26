@@ -39,6 +39,8 @@ class MetricMySQLTests(Base):
             cursor.execute("DROP TRIGGER reject_metric")
         first = self.metrics.ingest_version(version, industry="auto")
         self.assertEqual(first,self.metrics.ingest_version(version,industry="auto"))
+        with self.assertRaises(ValueError):
+            self.metrics.ingest_version(version,industry="other")
         self.assertEqual(len(first),8)
         self.assertEqual(self.metrics.get_metrics(Filters(),[version]),[])
         with closing(self.connect(self.database)) as connection, connection.cursor() as cursor:

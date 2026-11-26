@@ -33,11 +33,12 @@ def _append_citation(paragraph, markers):
 def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | None = None) -> bytes:
     try:
         snapshot = m.ReportDocument.model_validate(snapshot.model_dump(by_alias=True))
-        referenced = {block.chart_id for chapter in snapshot.chapters for block in chapter.blocks
-                      if isinstance(block, m.ChartRef)}
-        for chart in snapshot.charts:
-            if chart.chart_id in referenced:
-                require_chart_sources(snapshot, chart)
+        if snapshot.exportable:
+            referenced = {block.chart_id for chapter in snapshot.chapters for block in chapter.blocks
+                          if isinstance(block, m.ChartRef)}
+            for chart in snapshot.charts:
+                if chart.chart_id in referenced:
+                    require_chart_sources(snapshot, chart)
         check_snapshot(snapshot)
     except (ValueError, AttributeError) as exc:
         raise _error("INVALID_SNAPSHOT", str(exc)) from exc

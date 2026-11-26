@@ -103,6 +103,20 @@ class EvidenceExportTests(unittest.TestCase):
         self.assertEqual(sum(t.startswith("[1] ") for t in texts), 1)
         self.assertFalse(any(t.startswith("[2] ") for t in texts))
 
+    def test_non_exportable_takes_priority_over_missing_chart_evidence(self):
+        snap = snapshot()
+        snap.metrics[1].source_evidence_ids = []
+        for exportable, code in ((False, "REPORT_NOT_EXPORTABLE"), (True, "EXPORT_FAILED")):
+            with self.subTest(exportable=exportable):
+                snap.exportable = exportable
+                with self.assertRaises(ServiceError) as err:
+                    render_docx(snap, asset_resolver=lambda v,a: self.fail("read asset before rejection"))
+                self.assertEqual(err.exception.error.code, code)
+                if exportable:
+                    self.assertEqual(err.exception.error.details, {
+                        "chart_id": "chart1", "asset_id": "a1", "metric_id": "m2",
+                    })
+
     def test_block_rejected(self):
         snap=snapshot()
         snap.quality.issues[0].severity="BLOCK"

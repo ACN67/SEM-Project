@@ -58,7 +58,7 @@ class EvidenceExportTests(unittest.TestCase):
         self.assertIn("同一出处用于结论。[1]",texts)
         self.assertEqual(sum(t.startswith("[1] ") for t in texts),1)
         self.assertEqual(sum(t.startswith("[2] ") for t in texts),1)
-        self.assertTrue(any("SAMPLE_GAP" in t for t in texts))
+        self.assertTrue(any("表格（第 3 个内容块）" in t and "模拟数据尚需人工核对" in t for t in texts))
         self.assertIn("参考来源",texts)
         self.assertTrue(any("PDF 第 13 页" in t for t in texts))
         body=doc.element.body.xml
@@ -75,6 +75,33 @@ class EvidenceExportTests(unittest.TestCase):
         with self.assertRaises(ServiceError) as err:
             render_docx(snap,asset_resolver=lambda v,a:b"bad")
         self.assertIn("cyclic",str(err.exception))
+
+    def test_chart_requires_every_original_evidence(self):
+        for missing in (["m1", "m2", "m2022", "m2023"], ["m2"]):
+            snap = snapshot()
+            for metric in snap.metrics:
+                if metric.metric_id in missing:
+                    metric.source_evidence_ids = []
+            with self.assertRaises(ServiceError) as err:
+                render_docx(snap, asset_resolver=lambda v,a: self.fail("read asset before provenance check"))
+            self.assertEqual(err.exception.error.code, "EXPORT_FAILED")
+            self.assertEqual(err.exception.error.details["chart_id"], "chart1")
+            self.assertIn(err.exception.error.details["metric_id"], missing)
+        snap = snapshot()
+        snap.metrics[1].source_evidence_ids = ["unknown"]
+        with self.assertRaises(ServiceError) as err:
+            render_docx(snap)
+        self.assertEqual(err.exception.error.code, "EXPORT_FAILED")
+        self.assertEqual(err.exception.error.details["metric_id"], "m2")
+        snap = snapshot()
+        for metric in snap.metrics:
+            if not metric.input_metric_ids:
+                metric.source_evidence_ids = ["ev1"]
+        doc = Document(BytesIO(render_docx(snap, asset_resolver=lambda v,a:render_chart_png(snap.charts[0]))))
+        texts = [p.text for p in doc.paragraphs]
+        self.assertIn("来源：[1]", texts)
+        self.assertEqual(sum(t.startswith("[1] ") for t in texts), 1)
+        self.assertFalse(any(t.startswith("[2] ") for t in texts))
 
     def test_block_rejected(self):
         snap=snapshot()

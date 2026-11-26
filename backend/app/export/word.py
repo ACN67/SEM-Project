@@ -11,7 +11,7 @@ from ..contracts.validation import check_snapshot
 from ..contracts.services import ServiceError
 from .layout import field, load_layout
 from .assets import AssetResolver, resolve_chart
-from .citations import Citations
+from .citations import Citations, require_chart_sources
 
 REPORT_NAMES = {
     "industry_analysis": "产业分析报告",
@@ -33,6 +33,11 @@ def _append_citation(paragraph, markers):
 def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | None = None) -> bytes:
     try:
         snapshot = m.ReportDocument.model_validate(snapshot.model_dump(by_alias=True))
+        referenced = {block.chart_id for chapter in snapshot.chapters for block in chapter.blocks
+                      if isinstance(block, m.ChartRef)}
+        for chart in snapshot.charts:
+            if chart.chart_id in referenced:
+                require_chart_sources(snapshot, chart)
         check_snapshot(snapshot)
     except (ValueError, AttributeError) as exc:
         raise _error("INVALID_SNAPSHOT", str(exc)) from exc
@@ -95,7 +100,7 @@ def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | N
                 caption = document.add_paragraph(f"{chart.title}（单位：{chart.unit}）", "Report Table Header")
                 caption.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 caption.paragraph_format.keep_with_next = True
-                source = document.add_paragraph("来源：" + (citations.markers(metric_ids=chart.source_metric_ids) or "快照未提供证据"), "Report Table Text")
+                source = document.add_paragraph("来源：" + citations.markers(metric_ids=chart.source_metric_ids), "Report Table Text")
                 source.alignment = WD_ALIGN_PARAGRAPH.CENTER
             elif isinstance(block, m.Table):
                 table = document.add_table(rows=1, cols=len(block.columns))
@@ -149,8 +154,19 @@ def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | N
         for issue in warnings:
             location = issue.location
             chapter_title = chapters[location.chapter_id].title if location.chapter_id in chapters else location.chapter_id
-            place = " / ".join(part for part in (chapter_title,location.block_id) if part) or "全文"
-            document.add_paragraph(f"{place} | {issue.code}：{issue.description}")
+            block_label = None
+            if location.chapter_id in chapters and location.block_id:
+                for index, block in enumerate(chapters[location.chapter_id].blocks, 1):
+                    if block.block_id == location.block_id:
+                        if isinstance(block, m.ChartRef):
+                            block_label = f"图表（{charts[block.chart_id].title}）"
+                        elif isinstance(block, m.Table):
+                            block_label = f"表格（第 {index} 个内容块）"
+                        else:
+                            block_label = f"正文（第 {index} 个内容块）"
+                        break
+            place = " · ".join(part for part in (chapter_title,block_label) if part) or "全文"
+            document.add_paragraph(f"{place}：{issue.description}")
     if citations.numbers:
         document.add_heading("参考来源", level=1)
         for entry in citations.entries():

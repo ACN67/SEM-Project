@@ -82,12 +82,13 @@ def _point_decimal(point: m.Point) -> Decimal | None:
 def _number_label(value: Decimal) -> str:
     if value == 0:
         return "0"
-    text = format(value, "f")
-    if "." in text:
-        text = text.rstrip("0").rstrip(".")
-    if len(text) > 14:
-        text = format(value.quantize(Decimal("0.01")), "f")
-    return text
+    # Axis labels are presentation values; the chart points retain full precision.
+    text = format(value, ".5g")
+    mantissa, separator, exponent = text.partition("e")
+    if "." in mantissa:
+        mantissa = mantissa.rstrip("0").rstrip(".")
+    return mantissa + separator + exponent
+
 
 
 def _fit_text(
@@ -185,7 +186,20 @@ def _draw_line_or_bar(
         draw.text((legend_x + 26 * scale, legend_y), name, font=small, fill="#374151")
         legend_x += item_width
 
-    plot_left = 100 * scale
+    minimum = min(Decimal(0), min(numeric))
+    maximum = max(Decimal(0), max(numeric))
+    if maximum == minimum:
+        maximum = minimum + Decimal("1")
+    padding = (maximum - minimum) * Decimal("0.08")
+    if padding == 0:
+        padding = Decimal("0.1")
+    if minimum < 0:
+        minimum -= padding
+    maximum += padding
+
+    ticks = [minimum + (maximum - minimum) * Decimal(index) / Decimal(4) for index in range(5)]
+    widest_tick = max(draw.textlength(_number_label(value), font=small) for value in ticks)
+    plot_left = max(100 * scale, ceil(widest_tick + 24 * scale))
     plot_top = max(155 * scale, legend_y + 43 * scale)
     plot_right = (width - 70) * scale
     plot_bottom = (height - 105) * scale
@@ -202,17 +216,6 @@ def _draw_line_or_bar(
         width=2 * scale,
     )
 
-    minimum = min(Decimal(0), min(numeric))
-    maximum = max(Decimal(0), max(numeric))
-    if maximum == minimum:
-        maximum = minimum + Decimal("1")
-    padding = (maximum - minimum) * Decimal("0.08")
-    if padding == 0:
-        padding = Decimal("0.1")
-    if minimum < 0:
-        minimum -= padding
-    maximum += padding
-
     def y_position(value: Decimal) -> float:
         ratio = float((value - minimum) / (maximum - minimum))
         return plot_bottom - ratio * (plot_bottom - plot_top)
@@ -221,9 +224,7 @@ def _draw_line_or_bar(
     if chart.type == "bar":
         draw.line([(plot_left, zero_y), (plot_right, zero_y)], fill="#4A5365", width=2 * scale)
 
-    for tick in range(5):
-        ratio = Decimal(tick) / Decimal(4)
-        tick_value = minimum + (maximum - minimum) * ratio
+    for tick_value in ticks:
         y = y_position(tick_value)
         draw.line(
             [(plot_left, y), (plot_right, y)],

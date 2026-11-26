@@ -1,0 +1,100 @@
+{
+  "source_hash": "c980b2d827f372b5b90742e299d609345c83342584901c96ea95891c43f4ab3f",
+  "evidence": {
+    "title": "上海汽车集团股份有限公司2024年年度报告",
+    "publisher": "上海汽车集团股份有限公司",
+    "published_at": "2025-04-29",
+    "source_url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2024ndqgg/2025/4/29/685D33923ABE4D109BBE39F92BFBF945.pdf",
+    "evidence_id": "54b81f82594425072dcd637a3d13f76228b9702dd6be14807d409de47f54ad4e",
+    "document_id": "doc_saic_2024_annual",
+    "document_version_id": "dv_saic_2024_annual",
+    "chunk_id": "54b81f82594425072dcd637a3d13f76228b9702dd6be14807d409de47f54ad4e",
+    "locator": {
+      "kind": "pdf",
+      "page": 13
+    },
+    "excerpt": "4、 研发投入\n(1).研发投入情况表\n√适用 □不适用\n单位：元\n本期费用化研发投入\n17,649,893,105.21\n本期资本化研发投入\n4,163,196,940.09\n研发投入合计\n21,813,090,045.30\n研发投入总额占营业收入比例（%）\n3.55\n研发投入资本化的比重（%）\n19.09\n注：2024 年度本集团含所属主要合资整车企业的汇总研发投入为 3,516,108.19 万元，同比 2023\n年度 3,276,417.68 万元（同口径）增加 7.32%。",
+    "score": null
+  },
+  "manual_metric_inputs": [
+    {
+      "metric_id": "rd-1",
+      "indicator": "rd_investment",
+      "name": "费用化研发投入",
+      "entity_id": "SAIC",
+      "period": "2024",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "上汽集团合并口径",
+      "raw_value": "17649893105.21",
+      "raw_unit": "元",
+      "multiplier": "0.00000001",
+      "value": "176.4989310521",
+      "unit": "亿元",
+      "currency": "CNY",
+      "source_evidence_ids": [
+        "54b81f82594425072dcd637a3d13f76228b9702dd6be14807d409de47f54ad4e"
+      ],
+      "formula_id": null,
+      "input_metric_ids": [],
+      "missing_reason": null
+    },
+    {
+      "metric_id": "rd-2",
+      "indicator": "rd_investment",
+      "name": "资本化研发投入",
+      "entity_id": "SAIC",
+      "period": "2024",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "上汽集团合并口径",
+      "raw_value": "4163196940.09",
+      "raw_unit": "元",
+      "multiplier": "0.00000001",
+      "value": "41.6319694009",
+      "unit": "亿元",
+      "currency": "CNY",
+      "source_evidence_ids": [
+        "54b81f82594425072dcd637a3d13f76228b9702dd6be14807d409de47f54ad4e"
+      ],
+      "formula_id": null,
+      "input_metric_ids": [],
+      "missing_reason": null
+    },
+    {
+      "metric_id": "rd-3",
+      "indicator": "rd_investment",
+      "name": "研发投入合计",
+      "entity_id": "SAIC",
+      "period": "2024",
+      "granularity": "year",
+      "region": "中国",
+      "scope": "上汽集团合并口径",
+      "raw_value": null,
+      "raw_unit": null,
+      "multiplier": "1",
+      "value": "218.130900453",
+      "unit": "亿元",
+      "currency": "CNY",
+      "source_evidence_ids": [],
+      "formula_id": "sum",
+      "input_metric_ids": [
+        "rd-1",
+        "rd-2"
+      ],
+      "missing_reason": null
+    }
+  ],
+  "reference": "[1] 上海汽车集团股份有限公司．上海汽车集团股份有限公司2024年年度报告．2025-04-29．PDF 第 13 页\nhttps://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2024ndqgg/2025/4/29/685D33923ABE4D109BBE39F92BFBF945.pdf",
+  "positive": "PASS",
+  "negative": {
+    "code": "EXPORT_FAILED",
+    "message": "Chart metric rd-2 has no traceable original evidence",
+    "retryable": false,
+    "details": {
+      "chart_id": "chart1",
+      "asset_id": "a1",
+      "metric_id": "rd-2"
+    }
+  }
+}

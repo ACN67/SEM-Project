@@ -1,5 +1,32 @@
 """Resolve citations from frozen direct evidence and recursive metric inputs."""
 from ..contracts import models as m
+from ..contracts.services import ServiceError
+
+def require_chart_sources(snapshot: m.ReportDocument, chart: m.Chart) -> None:
+    metrics = {metric.metric_id: metric for metric in snapshot.metrics}
+    evidence_ids = {e.evidence_id for e in snapshot.evidences}
+    pending = list(chart.source_metric_ids)
+    visited = set()
+    if not pending:
+        raise ServiceError(m.ErrorInfo(code="EXPORT_FAILED", message="Chart has no source metrics",
+            retryable=False, details={"chart_id":chart.chart_id,"asset_id":chart.asset_id}))
+    while pending:
+        metric_id = pending.pop()
+        if metric_id in visited:
+            continue
+        visited.add(metric_id)
+        metric = metrics.get(metric_id)
+        if metric is None:
+            raise ServiceError(m.ErrorInfo(code="EXPORT_FAILED", message=f"Missing chart metric {metric_id}",
+                retryable=False, details={"chart_id":chart.chart_id,"asset_id":chart.asset_id,"metric_id":metric_id}))
+        if metric.input_metric_ids:
+            pending.extend(metric.input_metric_ids)
+        elif (not metric.source_evidence_ids or metric.formula_id is not None
+              or not set(metric.source_evidence_ids) <= evidence_ids):
+            raise ServiceError(m.ErrorInfo(code="EXPORT_FAILED",
+                message=f"Chart metric {metric_id} has no traceable original evidence",
+                retryable=False, details={"chart_id":chart.chart_id,"asset_id":chart.asset_id,"metric_id":metric_id}))
+
 
 class Citations:
     def __init__(self, snapshot: m.ReportDocument):

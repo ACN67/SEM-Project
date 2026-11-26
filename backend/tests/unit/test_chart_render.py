@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+from decimal import Decimal
 from io import BytesIO
 import unittest
 
@@ -9,7 +10,7 @@ from PIL import Image
 
 from backend.app.contracts import models as m
 from backend.app.quality import ChartRenderError, render_chart_png
-from backend.app.quality.render import _series_and_labels
+from backend.app.quality.render import _series_and_labels, _number_label
 
 
 def chart(chart_type: str, *, data: list[m.Point] | None = None) -> m.Chart:
@@ -99,6 +100,11 @@ class ChartRenderTests(unittest.TestCase):
                          ["2023-Q4", "2024-01", "2024-Q1", "2024-05", "2024-Q2", "2024-12"])
         for kind in ("line", "bar"):
             self.assertTrue(render_chart_png(chart(kind, data=points)).startswith(b"\x89PNG"))
+
+    def test_axis_ticks_preserve_readable_precision(self):
+        self.assertEqual(_number_label(Decimal("58.89534312231")), "58.895")
+        self.assertNotEqual(_number_label(Decimal("0.00000000123")), "0")
+        self.assertIn("e", _number_label(Decimal("12345678901234567890")))
 
     def test_dense_monthly_bars(self):
         points = [m.Point(label=f"{2000+i//12}-{i%12+1:02}", series="S", value="1", metric_id=str(i))

@@ -10,6 +10,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 from ..contracts import models as m
+from .common import period_sort_key
 
 _PALETTE = (
     "#2F6BFF",
@@ -127,7 +128,13 @@ def _series_and_labels(data: list[m.Point]) -> tuple[list[str], list[str], dict[
             )
         metric_ids[key] = point.metric_id
         values[key] = _point_decimal(point)
-    return series, sorted(labels), values
+    def label_sort_key(label: str):
+        # Chart points carry the period label but not the metric granularity.
+        # Reuse the common calendar ordering and use the label as a stable tie-breaker.
+        granularity = "quarter" if "-Q" in label else "month" if "-" in label else "year"
+        return period_sort_key(label, granularity), label
+
+    return series, sorted(labels, key=label_sort_key), values
 
 
 def _draw_line_or_bar(

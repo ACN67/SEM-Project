@@ -91,6 +91,15 @@ class ChartRenderTests(unittest.TestCase):
         self.assertEqual(image.getpixel((958, 250)), blue)
         self.assertNotEqual(image.getpixel((615, 385)), blue)
 
+    def test_mixed_calendar_periods_sort_chronologically(self):
+        periods = ["2024-12", "2024-Q1", "2023-Q4", "2024-01", "2024-Q2", "2024-05"]
+        points = [m.Point(label=label, series="A", value="1", metric_id=str(index))
+                  for index, label in enumerate(periods)]
+        self.assertEqual(_series_and_labels(points)[1],
+                         ["2023-Q4", "2024-01", "2024-Q1", "2024-05", "2024-Q2", "2024-12"])
+        for kind in ("line", "bar"):
+            self.assertTrue(render_chart_png(chart(kind, data=points)).startswith(b"\x89PNG"))
+
     def test_dense_monthly_bars(self):
         points = [m.Point(label=f"{2000+i//12}-{i%12+1:02}", series="S", value="1", metric_id=str(i))
                   for i in range(120)]

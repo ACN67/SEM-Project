@@ -230,12 +230,12 @@ class W5FixtureKnowledge:
                 continue
             if record.get("input_record_ids"):
                 continue
-            if any(
-                self.evidence_records[key]["document_version_id"]
-                not in allowed_versions
-                for key in evidence_keys
-                if key in self.evidence_records
-            ):
+            if any(key not in self.evidence_records
+                   or self.evidence_records[key]["document_version_id"] not in allowed_versions
+                   or self.evidence_records[key]["review_status"] != "PASS"
+                   or not self._evidence_in_filters(self.evidence_records[key],
+                                                   m.Filters(as_of=filters.as_of, industries=filters.industries))
+                   for key in evidence_keys):
                 continue
             indicator = self.contract_indicators[record["indicator"]]
             if filters.indicators and indicator not in filters.indicators:

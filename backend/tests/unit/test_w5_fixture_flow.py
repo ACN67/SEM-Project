@@ -46,6 +46,12 @@ class W5FixtureKnowledgeTests(unittest.TestCase):
         self.assertIsNotNone(web.source_url)
         self.assertEqual(web.locator.section_path[0], "网页快照")
 
+    def test_metrics_respect_evidence_date_and_industry(self):
+        versions = self.knowledge.source_version_ids("R01")
+        self.assertEqual(self.knowledge.get_metrics(m.Filters(as_of="2023-01-11"), versions), [])
+        self.assertEqual(len(self.knowledge.get_metrics(m.Filters(as_of="2023-01-12"), versions)), 1)
+        self.assertEqual(self.knowledge.get_metrics(m.Filters(industries=["unrelated"]), versions), [])
+
     def test_filters_unknown_versions_and_ingest_are_explicit(self):
         filters = m.Filters(indicators=["rd_investment"])
         versions = self.knowledge.source_version_ids("R02")

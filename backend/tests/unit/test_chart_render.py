@@ -87,9 +87,14 @@ class ChartRenderTests(unittest.TestCase):
         ]
         image = Image.open(BytesIO(render_chart_png(chart("bar", data=points))))
         blue = (47, 107, 255)
-        self.assertEqual(image.getpixel((100, 500)), blue)
-        self.assertEqual(image.getpixel((1130, 250)), blue)
+        self.assertEqual(image.getpixel((272, 500)), blue)
+        self.assertEqual(image.getpixel((958, 250)), blue)
         self.assertNotEqual(image.getpixel((615, 385)), blue)
+
+    def test_dense_monthly_bars(self):
+        points = [m.Point(label=f"{2000+i//12}-{i%12+1:02}", series="S", value="1", metric_id=str(i))
+                  for i in range(120)]
+        self.assertTrue(render_chart_png(chart("bar", data=points)).startswith(b"\x89PNG"))
 
     def test_invalid_size_and_missing_data_are_explicit_errors(self):
         with self.assertRaises(ChartRenderError) as error:

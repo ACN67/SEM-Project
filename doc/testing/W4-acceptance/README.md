@@ -23,3 +23,5 @@ Unit tests cover missing entries, changed fingerprints, stable ranking and datab
 
 
 The final rebuild regression covers both a tagged DOCX and a CSV with a custom header mapping. Calling process(version, rebuild=True) without labels or mapping preserves the evidence, metric payloads, business labels and filtered retrieval result. Both parser entry points are guarded against accidental calls during this regression. The real BGE test also rebuilds without labels and checks the SAIC-filtered result. Nine MySQL integration tests passed with W4_REAL_MODEL=1.
+
+Rebuild requires a previously published knowledge_labels manifest. An initial indexing failure without that manifest returns DOCUMENT_PROCESSING_FAILED, reason=rebuild_requires_published_manifest, retryable=false, before any state change. Worker must use normal ingestion retry with original labels and mapping. A failed rebuild of a previously published version retains its manifest and can be rebuilt again. The new MySQL regression verifies both recovery paths and SAIC-filtered retrieval. 110 unit, 6 contract and 10 real-model-enabled MySQL integration tests passed.

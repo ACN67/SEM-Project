@@ -37,7 +37,12 @@ class IngestPipeline:
                 if rebuild:
                     cursor.execute("SELECT payload FROM knowledge_labels WHERE document_version_id=%s", (version,))
                     stored = cursor.fetchone()
-                    labels = json.loads(stored[0]) if stored else {}
+                    if stored is None:
+                        connection.rollback()
+                        raise ServiceError(m.ErrorInfo(code="DOCUMENT_PROCESSING_FAILED",
+                            message="No published index manifest; retry ingestion with original labels and mapping",
+                            retryable=False, details={"reason": "rebuild_requires_published_manifest"}))
+                    labels = json.loads(stored[0])
                 cursor.execute("UPDATE document_versions SET ingest_status='PROCESSING',error_json=NULL WHERE document_version_id=%s",(version,))
             connection.commit()
         try:

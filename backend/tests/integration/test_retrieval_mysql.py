@@ -142,3 +142,46 @@ class PipelineTests(test_knowledge_mysql.KnowledgeMySQLTests):
                 import json
                 stored=json.loads(cursor.fetchone()[0])
                 self.assertEqual(stored,{**labels,"_index_fingerprint":"replacement-index"})
+
+    def test_initial_index_failure_rejects_rebuild_and_allows_normal_retry(self):
+        import json
+        connect = lambda: self.connect(self.database)
+        with connect() as db, db.cursor() as cursor:
+            for name in ("011_knowledge_metrics.sql", "012_knowledge_index.sql"):
+                for sql in Path("backend/migrations", name).read_text(encoding="utf-8-sig").split(";"):
+                    if sql.strip():
+                        cursor.execute(sql)
+        path = self.root/"initial.docx"
+        document = Document()
+        document.add_paragraph("研发投入 100 亿元")
+        document.save(path)
+        version = self.ingest.ingest_document(path, self.metadata).document_version_id
+        index = Mock()
+        index.fingerprint = "test-index"
+        index.replace.side_effect = RuntimeError("index unavailable")
+        pipeline = IngestPipeline(connect, self.root/"runtime", index)
+        labels = {"entity_ids": ["SAIC"]}
+        with self.assertRaises(ServiceError):
+            pipeline.process(version, labels=labels)
+        index.replace.side_effect = None
+        with self.assertRaises(ServiceError) as err:
+            pipeline.process(version, rebuild=True, labels=labels)
+        self.assertEqual(err.exception.error.details["reason"], "rebuild_requires_published_manifest")
+        self.assertFalse(err.exception.error.retryable)
+        with connect() as db, db.cursor() as cursor:
+            cursor.execute("SELECT ingest_status FROM document_versions WHERE document_version_id=%s", (version,))
+            self.assertEqual(cursor.fetchone()[0], "FAILED")
+            cursor.execute("SELECT payload FROM knowledge_labels WHERE document_version_id=%s", (version,))
+            self.assertIsNone(cursor.fetchone())
+        self.assertTrue(pipeline.process(version, labels=labels))
+        evidence = index.replace.call_args.args[1][0]
+        index.rank.return_value = [(evidence.evidence_id, 0.9)]
+        result = Retrieval(connect, index).retrieve("研发投入", m.Filters(entity_ids=["SAIC"]), 5, [version])
+        self.assertEqual(result[0].evidence_id, evidence.evidence_id)
+        # A previously published manifest also survives a failed rebuild.
+        index.replace.side_effect = RuntimeError("rebuild unavailable")
+        with self.assertRaises(ServiceError):
+            pipeline.process(version, rebuild=True)
+        index.replace.side_effect = None
+        self.assertTrue(pipeline.process(version, rebuild=True))
+        self.assertTrue(Retrieval(connect, index).retrieve("研发投入", m.Filters(entity_ids=["SAIC"]), 5, [version]))

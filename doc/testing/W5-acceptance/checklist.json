@@ -1,0 +1,71 @@
+[
+  {
+    "case_id": "R01",
+    "title": "中国新能源汽车产业分析",
+    "evidence_keys": [
+      "EV-R01-MIIT-2022-ANNUAL",
+      "EV-R01-MIIT-2023-ANNUAL",
+      "EV-R01-MEE-2024-P8",
+      "EV-R01-POLICY-2021-2035"
+    ],
+    "independent_review": "PENDING",
+    "machine_acceptance": "INCOMPLETE",
+    "negative_case_reference": "data/samples/w5/cases.json"
+  },
+  {
+    "case_id": "R02",
+    "title": "比亚迪与上汽集团研发投入对标",
+    "evidence_keys": [
+      "EV-R02-BYD-2023-HK-P273",
+      "EV-R02-BYD-CNINFO-P34",
+      "EV-R02-SAIC-2023-P13",
+      "EV-R02-SAIC-2024-P13"
+    ],
+    "independent_review": "PENDING",
+    "machine_acceptance": "INCOMPLETE",
+    "negative_case_reference": "data/samples/w5/cases.json"
+  },
+  {
+    "case_id": "R03",
+    "title": "中国新能源汽车季度景气",
+    "evidence_keys": [
+      "EV-R03-MIIT-2023-Q1",
+      "EV-R03-MIIT-2023-H1",
+      "EV-R03-MIIT-2023-9M",
+      "EV-R03-MIIT-2023-ANNUAL",
+      "EV-R03-MIIT-2024-Q1",
+      "EV-R03-MIIT-2024-H1",
+      "EV-R03-MIIT-2024-9M",
+      "EV-R03-MIIT-2024-ANNUAL"
+    ],
+    "independent_review": "PENDING",
+    "machine_acceptance": "INCOMPLETE",
+    "negative_case_reference": "data/samples/w5/cases.json"
+  },
+  {
+    "case_id": "R04",
+    "title": "合肥动力电池配套招商研判",
+    "evidence_keys": [
+      "EV-R04-HEFEI-IMPL-P3",
+      "EV-R04-GOTION-LAB-2023"
+    ],
+    "independent_review": "PENDING",
+    "machine_acceptance": "INCOMPLETE",
+    "negative_case_reference": "data/samples/w5/cases.json"
+  },
+  {
+    "case_id": "R05",
+    "title": "中国纯电动乘用车进入德国市场研判",
+    "evidence_keys": [
+      "EV-R05-KBA-2023-XLSX-AL461",
+      "EV-R05-KBA-XLSX-AL488",
+      "EV-R05-KBA-PDF-P1",
+      "EV-R05-EU-ANTISUBSIDY",
+      "EV-R05-EU-TYPE-APPROVAL",
+      "EV-R05-BAFA-BONUS-END"
+    ],
+    "independent_review": "PENDING",
+    "machine_acceptance": "INCOMPLETE",
+    "negative_case_reference": "data/samples/w5/cases.json"
+  }
+]

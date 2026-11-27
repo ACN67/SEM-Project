@@ -64,8 +64,8 @@ def verify(executable, root):
             table_rows=[["来源定位","缺少一侧证据时标记待核实"]]
             if template.report_type=="investment_attraction":
                 table_columns=["区域需求及来源","企业能力及来源","判断"]
-                table_rows=[["动力电池配套需求 [1]","电芯测试能力 [2]","候选匹配，需人工复核"],
-                    ["缺少需求侧证据","保留能力侧证据 [2]","待核实，不推断签约"]]
+                table_rows=[["动力电池配套需求","电芯测试能力","候选匹配，需人工复核"],
+                    ["缺少需求侧证据","保留能力侧证据","待核实，不推断签约"]]
             elif template.report_type=="overseas_assessment":
                 table_columns=["事项","对象和日期","证据范围"]
                 table_rows=[["市场统计","德国 BEV 全年新注册","与进口量区分"],
@@ -75,8 +75,10 @@ def verify(executable, root):
                 table_columns=["季度","2023 同期","2024 本期","同比"]
                 table_rows=[["Q1","100","130","30%"],["Q2","100","120","20%"],
                     ["缺基期","缺失","120","不计算"],["零基期","0","120","无定义"]]
-            blocks.append(m.Table(type="table", block_id=task.chapter_id+"-table",
-                columns=table_columns, rows=[[m.Cell(text=value,evidence_ids=["ev1","ev2"],metric_ids=[]) for value in row] for row in table_rows]))
+            table_sections={"industry_prosperity":"quarterly","investment_attraction":"matching","overseas_assessment":"policy"}
+            if task.section_key==table_sections.get(template.report_type,"market"):
+                blocks.append(m.Table(type="table", block_id=task.chapter_id+"-table",
+                    columns=table_columns, rows=[[m.Cell(text=value,evidence_ids=["ev1","ev2"],metric_ids=[]) for value in row] for row in table_rows]))
             doc.chapters.append(prototype.model_copy(update=dict(chapter_id=task.chapter_id,title=task.title,
                 blocks=blocks,chart_requests=[],missing_evidence=[]),deep=True))
         doc.quality.issues[0].location = m.Location(chapter_id=template.sections[0].chapter_id,

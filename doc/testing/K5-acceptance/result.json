@@ -2,71 +2,71 @@
   {
     "type": "enterprise_comparison",
     "format": "docx",
-    "storage_key": "exports/enterprise_comparison-controlled-v1/d9c9b906ff784f32a6e52b68946342b4/report-enterprise_comparison-controlled-v1.docx",
-    "sha256": "02ca25be87539b1d1526f68e59e2348f3c2bd61b8611fc05ab9a4788ac464a3c",
-    "size_bytes": 104378
+    "storage_key": "exports/enterprise_comparison-controlled-v1/a85f00875ecb46349c0ce15672343f75/report-enterprise_comparison-controlled-v1.docx",
+    "sha256": "6a34bb64700cce0d9874ad99ac3e6b13fb221b0b05ac2ce11e8525bda85a2c07",
+    "size_bytes": 103852
   },
   {
     "type": "enterprise_comparison",
     "format": "pdf",
-    "storage_key": "exports/enterprise_comparison-controlled-v1/6319a6bc3ea14dcfb9094a4e3af5eae8/report-enterprise_comparison-controlled-v1.pdf",
-    "sha256": "9b5b3beb6e0530f240f0f7c90261ec7dafe99f1163aa0e2dc43aa3c3d7ee4bea",
-    "size_bytes": 182045
+    "storage_key": "exports/enterprise_comparison-controlled-v1/169bab21275c45c4a64a2e7b83cfe06d/report-enterprise_comparison-controlled-v1.pdf",
+    "sha256": "f266204129f6a8d5666f8a113b353a3c8566c8d7038200da233d733a01d75469",
+    "size_bytes": 147887
   },
   {
     "type": "industry_analysis",
     "format": "docx",
-    "storage_key": "exports/industry_analysis-controlled-v1/7a8415f751d0410f855adf07be1b6072/report-industry_analysis-controlled-v1.docx",
-    "sha256": "cb89d2ee293b3e7da1176211823071ba20e903c3423dd4743589c632c89bd06f",
-    "size_bytes": 80501
+    "storage_key": "exports/industry_analysis-controlled-v1/b85d0a884e134f788c26fdcb203518af/report-industry_analysis-controlled-v1.docx",
+    "sha256": "9a501409d161b53848ccd0c0050187b8f83ed28ad0c8885beb82dec28eec046e",
+    "size_bytes": 80343
   },
   {
     "type": "industry_analysis",
     "format": "pdf",
-    "storage_key": "exports/industry_analysis-controlled-v1/36307d2f453b40e68fb22441f69a0bba/report-industry_analysis-controlled-v1.pdf",
-    "sha256": "f0055b772ff1e01ae5120430abc45971e2b52c0a2bacda8996568bfce7805783",
-    "size_bytes": 182760
+    "storage_key": "exports/industry_analysis-controlled-v1/a713bd30a0fc4264b95b76fe3076a94d/report-industry_analysis-controlled-v1.pdf",
+    "sha256": "b6d6ff88a34eb2951dd124fe7fe04cc8b8d1a106a0b9a6c656f659d55626e087",
+    "size_bytes": 160859
   },
   {
     "type": "industry_prosperity",
     "format": "docx",
-    "storage_key": "exports/industry_prosperity-controlled-v1/421e02fcf5754af5914c26059ae87b5b/report-industry_prosperity-controlled-v1.docx",
-    "sha256": "ddbb13bf834c39bb46c57c1274b33a25e0ce8c59bbb3bb1827b177b8e715231c",
-    "size_bytes": 92330
+    "storage_key": "exports/industry_prosperity-controlled-v1/855c4fdb6773458fa05fb660cd97ed49/report-industry_prosperity-controlled-v1.docx",
+    "sha256": "b459dc50887000833642be7732b7bd08cacdb1a31eeec7e0db76295a06502891",
+    "size_bytes": 91889
   },
   {
     "type": "industry_prosperity",
     "format": "pdf",
-    "storage_key": "exports/industry_prosperity-controlled-v1/0d522bde72254f5baf8c2d284ec6b5b6/report-industry_prosperity-controlled-v1.pdf",
-    "sha256": "ba736ed0319fb35b2a20e7ca0be7643603c6caab0703bb8bfd27da6d7d8d39a7",
-    "size_bytes": 231614
+    "storage_key": "exports/industry_prosperity-controlled-v1/5a6bfa1d721e4f288f244aac4f63dc3d/report-industry_prosperity-controlled-v1.pdf",
+    "sha256": "d2b07b8f14ddea8e3544dd5561215882d64ac6f93fa4b3f32a4e651865142cc5",
+    "size_bytes": 167765
   },
   {
     "type": "investment_attraction",
     "format": "docx",
-    "storage_key": "exports/investment_attraction-controlled-v1/e289927a54fb4002b03fb336091a184a/report-investment_attraction-controlled-v1.docx",
-    "sha256": "03345e93b8c18db688dd368c80c451fd446ffe95235025752d9ece08948f5a03",
-    "size_bytes": 39112
+    "storage_key": "exports/investment_attraction-controlled-v1/4c597e15521340918b137b4f8c42b8e0/report-investment_attraction-controlled-v1.docx",
+    "sha256": "cb3df0d87626270d4143b7795dadd539d55164dc019b61d1b88770792070ce3f",
+    "size_bytes": 38936
   },
   {
     "type": "investment_attraction",
     "format": "pdf",
-    "storage_key": "exports/investment_attraction-controlled-v1/1f690dd1398b46c284fa4093336ef029/report-investment_attraction-controlled-v1.pdf",
-    "sha256": "064f73e45c04107d850651645c8279a7b743ef95c0bbfebccd26152b65d87e30",
-    "size_bytes": 148433
+    "storage_key": "exports/investment_attraction-controlled-v1/7bd9f8044ddd40f29980bf78e6487508/report-investment_attraction-controlled-v1.pdf",
+    "sha256": "78685a330407be8a57dcf4f9064adb070caa1a9e8a4991eb9f55040a1e381c76",
+    "size_bytes": 115575
   },
   {
     "type": "overseas_assessment",
     "format": "docx",
-    "storage_key": "exports/overseas_assessment-controlled-v1/dffedac05e554073807f67358466cfad/report-overseas_assessment-controlled-v1.docx",
-    "sha256": "cc80530fb83fc12a76b0002925068fc2ae908ae5b0cb7f102bc046d93b28bdc8",
-    "size_bytes": 39334
+    "storage_key": "exports/overseas_assessment-controlled-v1/4ca10081c87b4aeca513f53bb9252260/report-overseas_assessment-controlled-v1.docx",
+    "sha256": "092e3708129f4dbfb86068a50485338543f56adf4b96e221513ef34033486ea8",
+    "size_bytes": 39100
   },
   {
     "type": "overseas_assessment",
     "format": "pdf",
-    "storage_key": "exports/overseas_assessment-controlled-v1/346351b33b4c4dc19023f7e62ee559ce/report-overseas_assessment-controlled-v1.pdf",
-    "sha256": "3311f219859f4672ce4408d5ddbfb9ec11bd44cc7003eb485787befe53bbb716",
-    "size_bytes": 169290
+    "storage_key": "exports/overseas_assessment-controlled-v1/efdb73f21d1249bb9ce3548822fb4ce1/report-overseas_assessment-controlled-v1.pdf",
+    "sha256": "b29527937f75ebb4e4b6a886e9d2cea4b591bf37daa0ac1faf238ba091f6fb19",
+    "size_bytes": 124529
   }
 ]

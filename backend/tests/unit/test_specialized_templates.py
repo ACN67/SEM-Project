@@ -19,3 +19,13 @@ class SpecializedTemplatesTests(unittest.TestCase):
         payload=json.loads(Path("templates/examples/overseas_assessment.json").read_text(encoding="utf8"))
         payload["region"]="OTHER"
         with self.assertRaises(ServiceError):catalog.validate_request(payload)
+
+    def test_selected_indicator_reaches_outline_without_mutating_catalog(self):
+        from backend.app.generation.outline import plan_outline
+        catalog=TemplateCatalog()
+        payload=json.loads(Path("templates/examples/industry_prosperity.json").read_text(encoding="utf8"))
+        payload["indicator"]="rd_investment"
+        spec,template=catalog.validate_request(payload)
+        outline=plan_outline(spec,template)
+        self.assertEqual(next(t.required_metrics for t in outline.chapters if t.chapter_id=="quarterly"),["rd_investment"])
+        self.assertEqual(next(t.required_metrics for t in template.sections if t.chapter_id=="quarterly"),["sales"])

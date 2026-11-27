@@ -1,3 +1,3 @@
-# K5 controlled template regression
+# K5 controlled regression
 
-All five catalogs validate their typed requests. Three new configurations require dated policy evidence, specialized scope and dependency ordering. Run python -m backend.tests.integration.verify_templates <soffice.com> <output-root>. Ten DOCX/PDF artifacts passed chapter title, version, source and warning checks. These are controlled snapshots with synthetic chart values. Model semantic acceptance and independent source signoff require full workflow verification.
+119 unit and 6 contract tests pass. The outline binds requested prosperity indicators without changing cached templates. Five controlled snapshots export to ten Word/PDF artifacts. Prosperity uses quarterly values 100/100 and 130/120, illustrating 30% to 20% growth and missing/zero baselines. Investment and overseas snapshots display evidence boundaries in specialized tables. All PDF pages are rendered in all-pages.png. Values and conclusions are controlled fixtures and require separate real-data/model acceptance. Reproduce using python -m backend.tests.integration.verify_templates <soffice.com> <output-root>.

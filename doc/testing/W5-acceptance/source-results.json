@@ -22,9 +22,8 @@
   {
     "evidence_key": "EV-R02-BYD-2023-HK-P273",
     "case_id": "R02",
-    "status": "FACT_NOT_VERIFIED",
+    "status": "CANDIDATE_NOT_FOUND",
     "page_located": true,
-    "fact_verified": false,
     "document_version_id": "cae950708fd44eb09ba0e1ebbf403766",
     "retrieved": [
       {
@@ -91,14 +90,15 @@
         "excerpt": "六、 研發支出\n按性質分類如下：",
         "score": 0.576271653175354
       }
-    ]
+    ],
+    "candidate_match": false,
+    "fact_review": "PENDING"
   },
   {
     "evidence_key": "EV-R02-BYD-CNINFO-P34",
     "case_id": "R02",
-    "status": "FACT_PASS",
+    "status": "CANDIDATE_MATCH",
     "page_located": true,
-    "fact_verified": true,
     "document_version_id": "3a4e75399cc2413c9f6b831223dfaebe",
     "retrieved": [
       {
@@ -165,14 +165,15 @@
         "excerpt": "单位：元\n项目\n2024年\n2023年\n同比增减\n经营活动现金流入小计\n814,817,630,000.00\n611,818,103,000.00\n33.18%\n经营活动现金流出小计\n681,363,757,000.00\n442,093,078,000.00\n54.12%\n经营活动产生的现金流量净\n额\n133,453,873,000.00\n169,725,025,000.00\n-21.37%",
         "score": 0.6235846877098083
       }
-    ]
+    ],
+    "candidate_match": true,
+    "fact_review": "PENDING"
   },
   {
     "evidence_key": "EV-R02-SAIC-2023-P13",
     "case_id": "R02",
-    "status": "FACT_PASS",
+    "status": "CANDIDATE_MATCH",
     "page_located": true,
-    "fact_verified": true,
     "document_version_id": "0cbf33c0375d4596b88bc24ed783b5cf",
     "retrieved": [
       {
@@ -207,14 +208,15 @@
         "excerpt": "3. 费用\n√适用 □不适用\n单位：元\n项目\n2023年\n2022年\n变动比例（%）\n销售费用\n29,878,918,085.65\n30,175,402,864.14\n-0.98\n管理费用\n24,240,271,451.56\n25,641,378,773.93\n-5.46\n研发费用\n18,365,413,289.29\n18,030,919,437.98\n1.86\n财务费用\n-156,683,993.96\n-764,406,025.70\n不适用\n所得税费用\n5,912,843,489.27\n5,228,427,640.03\n13.09\n注：财务费用较上年同期变动主要系公司之子公司借款利息支出同比增加。",
         "score": 0.663704514503479
       }
-    ]
+    ],
+    "candidate_match": true,
+    "fact_review": "PENDING"
   },
   {
     "evidence_key": "EV-R02-SAIC-2024-P13",
     "case_id": "R02",
-    "status": "FACT_PASS",
+    "status": "CANDIDATE_MATCH",
     "page_located": true,
-    "fact_verified": true,
     "document_version_id": "0bd1ffc8ff9a44cd9f76c3f566b6dd12",
     "retrieved": [
       {
@@ -265,7 +267,9 @@
         "excerpt": "公司研发人员的数量\n30,600\n研发人员数量占公司总人数的比例（%）\n17.5",
         "score": 0.5531723499298096
       }
-    ]
+    ],
+    "candidate_match": true,
+    "fact_review": "PENDING"
   },
   {
     "evidence_key": "EV-R03-MIIT-2023-Q1",
@@ -310,9 +314,8 @@
   {
     "evidence_key": "EV-R04-HEFEI-IMPL-P3",
     "case_id": "R04",
-    "status": "FACT_PASS",
+    "status": "CANDIDATE_MATCH",
     "page_located": true,
-    "fact_verified": true,
     "document_version_id": "5b9ee769483343a095c6155c7c384daa",
     "retrieved": [
       {
@@ -331,14 +334,15 @@
         "excerpt": "平台，促进各类数据共建共享与互联互通。（责任单位：市科技局、\n市发改委、市市场监管局、市经信局、市数据资源局，各县市区人民\n政府、开发区管委会）\n（三）攻关核心技术。依据国家新能源汽车\"三纵三横\"研发布\n局，每年组织实施一批关键技术研发项目，重点突破整车集成、动力\n电池、电驱动、智能网联、轻量化以及前瞻性技术。开发具有先进底\n层操作系统、全新电子电气系统架构和智能化网联化特征的新能源汽\n车整车或平台；开发低成本、高比能、长寿命锂电池系统以及其他性\n能优化的动力电池产品，建立健全动力电池模块化标准体系；探索新\n一代车用电机驱动系统解决方案，支持电驱动总成的集成应用；加强\n智能网联汽车关键零部件及系统开发，突破计算和控制基础平台等技\n术瓶颈；支持燃料电池系统、氢能储运、车载储氢等燃料电池汽车相\n关技术研发。不断提升基础关键技术、先进基础工艺、基础核心零部\n件、关键基础材料等研发能力，在新能源汽车整车、动力电池、驱动\n电机、智能网联等方面形成技术领先优势。（责任单位：市科技局，\n各县市区人民政府、开发区管委会）\n（四）培育产业生态。加快推进新能源汽车产业强链、补链、延\n链。支持江淮汽车、蔚来汽车、江淮大众、安凯客车、合肥长安、奇\n瑞（巢湖）等整车企业加强新能源汽车供应链建设，创新\"车电分离\"\n等商业模式，提升品牌国际竞争力，培育行业领军企业。支持动力电\n池、驱动电机、BMS、激光雷达、高精地图、自动驾驶等新能源汽车\n零部件企业提升配套能力，培育10-20家细分领域隐形冠军企业，整体\n提升产业链供应链稳定性和竞争力。完善动力电池回收、梯次利用和\n再资源化的循环利用体系，建立健全动力电池运输仓储、维修保养、\n安全检验、退役退出、回收利用等环节管理制度，加强全生命周期监\n管。支持江淮汽车、安凯客车等整车企业与合肥综合性国家科学中心",
         "score": 0.663666307926178
       }
-    ]
+    ],
+    "candidate_match": true,
+    "fact_review": "PENDING"
   },
   {
     "evidence_key": "EV-R04-HEFEI-PLAN-P11",
     "case_id": "R04",
-    "status": "FACT_PASS",
+    "status": "CANDIDATE_MATCH",
     "page_located": true,
-    "fact_verified": true,
     "document_version_id": "56f566ac365443f388d1076c40a933fa",
     "retrieved": [
       {
@@ -357,14 +361,15 @@
         "excerpt": "引优培强，开放合作。坚持引培结合，做大做强一批本地龙\n头企业，加大招商引资力度，推进一批具有带动作用的优质项目\n落地，促进产业集聚发展。提升开放合作水平，积极利用全球资\n源和市场，加强产业链全球布局和国际交流合作，扩大市场占有\n率，形成产业发展新优势。\n（三）发展目标\n到 2025 年，全市新能源汽车产业规模迈上新台阶，重点领\n域取得新突破，优势特色领域不断拓宽，创新创业主体更加活跃，\n服务体系日趋完善，集聚发展格局基本形成，产业综合竞争力显\n著提升，努力争创国家级战略性新兴产业集群。\n产业规模迈上新台阶。力争 2025 年，全市新能源汽车产业\n规模突破 7000 亿元，整车产能突破 300 万辆，培育百亿级企业\n10 家，实现产值和产量跃居全国第一方阵。布局完整、结构合\n理的新能源汽车及零部件产业体系基本形成，动力电池年产能超\n过300GWh，驱动电机系统年产能超过300万套。\n创新能级实现新突破。力争 2025 年，建成国家级新能源汽\n车产业创新中心 1 个，公共创新中心 5 个，培育商业模式创新工\n程 1 个，新增省级以上创新平台 10 个。规模以上新能源汽车企\n业研发投入占销售收入比重超过长三角平均水平。\n产业生态呈现新面貌。力争 2025 年，\"人-车-路-云\"高度协\n同的智能基础设施体系初步建成，高度自动驾驶智能网联汽车实",
         "score": 0.7778204679489136
       }
-    ]
+    ],
+    "candidate_match": true,
+    "fact_review": "PENDING"
   },
   {
     "evidence_key": "EV-R04-HEFEI-PLAN-P12",
     "case_id": "R04",
-    "status": "FACT_PASS",
+    "status": "CANDIDATE_MATCH",
     "page_located": true,
-    "fact_verified": true,
     "document_version_id": "56f566ac365443f388d1076c40a933fa",
     "retrieved": [
       {
@@ -431,7 +436,9 @@
         "excerpt": "智能网联汽车封闭测试场所/个\n2\n新增公用和共用充电桩/个\n20000\n新建换电站/个\n100\n推广应用燃料电池汽车/辆\n500",
         "score": 0.5536255240440369
       }
-    ]
+    ],
+    "candidate_match": true,
+    "fact_review": "PENDING"
   },
   {
     "evidence_key": "EV-R04-GOTION-PRODUCTS",
@@ -506,9 +513,8 @@
   {
     "evidence_key": "EV-R05-KBA-PDF-P1",
     "case_id": "R05",
-    "status": "FACT_PASS",
+    "status": "CANDIDATE_MATCH",
     "page_located": true,
-    "fact_verified": true,
     "document_version_id": "027f19ee2f344b0d86792218d841d877",
     "retrieved": [
       {
@@ -751,7 +757,9 @@
         "excerpt": "© Kraftfahrt-Bundesamt • Pressestelle • Telefon: +49 461 316-1293 • Telefax: +49 461 316-272907\nE-Mail: pressestelle@kba.de • Internet: www.kba.de",
         "score": 0.5148636698722839
       }
-    ]
+    ],
+    "candidate_match": true,
+    "fact_review": "PENDING"
   },
   {
     "evidence_key": "EV-R05-EU-ANTISUBSIDY",
@@ -771,9 +779,8 @@
   {
     "evidence_key": "EV-R04-GOTION-LAB-2023",
     "case_id": "R04",
-    "status": "FACT_PASS",
+    "status": "CANDIDATE_MATCH",
     "page_located": true,
-    "fact_verified": true,
     "document_version_id": "69008832f3d74fe4837f8594a1f7e132",
     "retrieved": [
       {
@@ -888,6 +895,8 @@
         "excerpt": "2月21日，国轩高科正式获得大众汽车集团电芯测试实验室资质认证。此次认证标志着国轩高科测试验证能力获得大众汽车集团认可，并正式\n进入全球领先技术管理体系。",
         "score": 0.5240980982780457
       }
-    ]
+    ],
+    "candidate_match": true,
+    "fact_review": "PENDING"
   }
 ]

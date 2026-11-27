@@ -1,4 +1,4 @@
-"""Explicit source facts, independently checkable against original pages."""
+"""Find candidate fragments. This does not verify meaning or sign off source facts."""
 import unicodedata
 
 EXPECTED = {
@@ -13,7 +13,7 @@ EXPECTED = {
     "EV-R04-GOTION-LAB-2023": ["大众", "认证", "2023-02-21"],
 }
 
-def check_fact(key, evidences):
+def matches_candidate(key, evidences):
     def normalize(text):
         return "".join(unicodedata.normalize("NFKC",text).split())
     text=normalize(" ".join(e.excerpt for e in evidences))

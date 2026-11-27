@@ -2,26 +2,41 @@
   "cases": [
     {
       "case_id": "R01",
-      "status": "INCOMPLETE",
+      "source_coverage": "INCOMPLETE",
+      "fact_review": "PENDING",
+      "independent_signoff": "PENDING",
+      "acceptance": "INCOMPLETE",
       "missing_evidence_keys": [
         "EV-R01-MEE-2024-P8",
         "EV-R01-MIIT-2022-ANNUAL",
         "EV-R01-MIIT-2023-ANNUAL",
         "EV-R01-POLICY-2021-2035"
       ],
-      "removed_evidence_negative": true
+      "business_negative": {
+        "status": "NOT_RUN",
+        "reason": "Case business prerequisites and fact signoff incomplete"
+      }
     },
     {
       "case_id": "R02",
-      "status": "INCOMPLETE",
+      "source_coverage": "INCOMPLETE",
+      "fact_review": "PENDING",
+      "independent_signoff": "PENDING",
+      "acceptance": "INCOMPLETE",
       "missing_evidence_keys": [
         "EV-R02-BYD-2023-HK-P273"
       ],
-      "removed_evidence_negative": true
+      "business_negative": {
+        "status": "NOT_RUN",
+        "reason": "Case business prerequisites and fact signoff incomplete"
+      }
     },
     {
       "case_id": "R03",
-      "status": "INCOMPLETE",
+      "source_coverage": "INCOMPLETE",
+      "fact_review": "PENDING",
+      "independent_signoff": "PENDING",
+      "acceptance": "INCOMPLETE",
       "missing_evidence_keys": [
         "EV-R03-MIIT-2023-9M",
         "EV-R03-MIIT-2023-ANNUAL",
@@ -32,23 +47,38 @@
         "EV-R03-MIIT-2024-H1",
         "EV-R03-MIIT-2024-Q1"
       ],
-      "removed_evidence_negative": true
+      "business_negative": {
+        "status": "NOT_RUN",
+        "reason": "Case business prerequisites and fact signoff incomplete"
+      }
     },
     {
       "case_id": "R04",
-      "status": "PASS",
+      "source_coverage": "COVERED",
+      "fact_review": "PENDING",
+      "independent_signoff": "PENDING",
+      "acceptance": "INCOMPLETE",
       "missing_evidence_keys": [],
-      "removed_evidence_negative": true
+      "business_negative": {
+        "status": "NOT_RUN",
+        "reason": "Case business prerequisites and fact signoff incomplete"
+      }
     },
     {
       "case_id": "R05",
-      "status": "INCOMPLETE",
+      "source_coverage": "INCOMPLETE",
+      "fact_review": "PENDING",
+      "independent_signoff": "PENDING",
+      "acceptance": "INCOMPLETE",
       "missing_evidence_keys": [
         "EV-R05-BAFA-BONUS-END",
         "EV-R05-EU-ANTISUBSIDY",
         "EV-R05-EU-TYPE-APPROVAL"
       ],
-      "removed_evidence_negative": true
+      "business_negative": {
+        "status": "NOT_RUN",
+        "reason": "Case business prerequisites and fact signoff incomplete"
+      }
     }
   ],
   "calculation": {

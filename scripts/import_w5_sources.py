@@ -49,10 +49,10 @@ def main():
                     continue
                 hits=service.retrieve(record["excerpt"],m.Filters(),50,[version])
                 located=[e for e in hits if e.locator.kind=="pdf" and e.locator.page==item["locator"]["page"]]
-                from scripts.w5_facts import check_fact
-                fact=check_fact(record["evidence_key"],located)
-                results.append({**result,"status":"FACT_PASS" if fact else "FACT_NOT_VERIFIED",
-                    "page_located":bool(located),"fact_verified":fact,
+                from scripts.w5_facts import matches_candidate
+                candidate=matches_candidate(record["evidence_key"],located)
+                results.append({**result,"status":"CANDIDATE_MATCH" if candidate else "CANDIDATE_NOT_FOUND",
+                    "page_located":bool(located),"candidate_match":candidate,"fact_review":"PENDING",
                     "document_version_id":version,"retrieved":[e.model_dump(mode="json") for e in located]})
             except Exception as exc:
                 results.append({"evidence_key":record["evidence_key"],"case_id":record["case_id"],

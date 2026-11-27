@@ -9,14 +9,16 @@ from backend.app.quality.service import QualityService
 
 def summarize(rows):
     cases=json.loads(Path("data/samples/w5/cases.json").read_text(encoding="utf8"))["cases"]
-    passed={r["evidence_key"] for r in rows if r["status"] in ("FACT_PASS","METRIC_PASS")}
+    available={r["evidence_key"] for r in rows if r["status"] in ("CANDIDATE_MATCH","METRIC_PASS")}
     coverage=[]
     for case in cases:
         required=set(case["evidence_keys"])
-        missing=sorted(required-passed)
-        coverage.append(dict(case_id=case["case_id"],status="PASS" if not missing else "INCOMPLETE",
+        missing=sorted(required-available)
+        coverage.append(dict(case_id=case["case_id"],
+            source_coverage="COVERED" if not missing else "INCOMPLETE",
+            fact_review="PENDING", independent_signoff="PENDING", acceptance="INCOMPLETE",
             missing_evidence_keys=missing,
-            removed_evidence_negative=bool(required-(passed-{next(iter(required))}))))
+            business_negative={"status":"NOT_RUN","reason":"Case business prerequisites and fact signoff incomplete"}))
     return coverage
 
 def main():

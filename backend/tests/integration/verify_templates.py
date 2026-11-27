@@ -10,6 +10,7 @@ from backend.app.export.service import ExportService
 from backend.app.export.pdf import PdfConverter
 from backend.app.quality.render import render_chart_png
 from backend.tests.unit.test_export_evidence import snapshot
+from .specialized_content import TEXT, prepare_sources
 
 def verify(executable, root):
     root.mkdir(parents=True, exist_ok=True)
@@ -21,6 +22,7 @@ def verify(executable, root):
         spec, _ = catalog.validate_request(payload)
         doc = snapshot()
         doc.spec = spec
+        prepare_sources(doc, template.report_type)
         doc.version_id = template.report_type+"-controlled-v1"
         from backend.app.generation.outline import plan_outline
         doc.outline = plan_outline(spec, template)
@@ -45,15 +47,10 @@ def verify(executable, root):
 
         for task in template.sections:
             text = "受控渲染样例。"+task.research_questions[0]
-            if template.report_type=="industry_prosperity":
-                text="2024-Q1 同比 30%，2024-Q2 同比 20%，仍为正增长，增速放缓 10 个百分点。缺基期时不计算同比，零基期同比无定义。"
-            elif template.report_type=="investment_attraction":
-                text="合肥动力电池配套需求与候选企业电芯测试能力构成待复核匹配。需求与能力分别列示来源。公开接洽渠道待核实，未形成投资承诺。"
-            elif template.report_type=="overseas_assessment":
-                text="研究对象为中国原产纯电乘用车进入德国。注册量不代表进口量。政策适用对象、生效日期与发布日期分别核验，普通关税缺证时不计算完整税负。"
+            text=TEXT.get(template.report_type,{}).get(task.section_key,text)
 
             blocks = [m.Paragraph(type="paragraph", block_id=task.chapter_id+"-text",
-                text=text, evidence_ids=["ev1"], metric_ids=[])]
+                text=text, evidence_ids=(["ev2"] if template.report_type=="investment_attraction" and task.section_key=="capability" else ["ev1","ev2"] if template.report_type=="investment_attraction" and task.section_key in ("summary","matching") else ["ev2"] if template.report_type=="overseas_assessment" and task.section_key=="policy" else ["ev1"]), metric_ids=[])]
             if chart_task and task.chapter_id == chart_task.chapter_id:
                 chart.chapter_id = task.chapter_id
                 chart.block_id = task.chapter_id+"-chart"
@@ -78,7 +75,7 @@ def verify(executable, root):
             table_sections={"industry_prosperity":"quarterly","investment_attraction":"matching","overseas_assessment":"policy"}
             if task.section_key==table_sections.get(template.report_type,"market"):
                 blocks.append(m.Table(type="table", block_id=task.chapter_id+"-table",
-                    columns=table_columns, rows=[[m.Cell(text=value,evidence_ids=["ev1","ev2"],metric_ids=[]) for value in row] for row in table_rows]))
+                    columns=table_columns, rows=[[m.Cell(text=value,evidence_ids=(["ev1"] if col==0 and ri==0 else ["ev2"] if col==1 else []) if template.report_type=="investment_attraction" else ["ev2"] if template.report_type=="overseas_assessment" and ri==1 else [] if template.report_type=="overseas_assessment" and ri==2 else ["ev1"],metric_ids=[]) for col,value in enumerate(row)] for ri,row in enumerate(table_rows)]))
             doc.chapters.append(prototype.model_copy(update=dict(chapter_id=task.chapter_id,title=task.title,
                 blocks=blocks,chart_requests=[],missing_evidence=[]),deep=True))
         doc.quality.issues[0].location = m.Location(chapter_id=template.sections[0].chapter_id,
@@ -91,6 +88,13 @@ def verify(executable, root):
             if format=="docx":
                 rendered=Document(path)
                 text=" ".join(p.text for p in rendered.paragraphs)
+                text+=" ".join(cell.text for table in rendered.tables for row in table.rows for cell in row.cells)
+                if template.report_type=="investment_attraction":
+                    cells=rendered.tables[0].rows[1].cells
+                    assert "[1]" in cells[0].text and "[2]" not in cells[0].text
+                    assert "[2]" in cells[1].text and "[1]" not in cells[1].text
+                if template.report_type in TEXT:
+                    assert all(TEXT[template.report_type][task.section_key] in text for task in template.sections)
                 assert len(rendered.inline_shapes)==len(doc.charts)
             else:
                 reader=PdfReader(path)
@@ -99,6 +103,18 @@ def verify(executable, root):
                 assert title in text, (template.report_type,title)
             assert doc.version_id in text and "参考来源" in text and "模拟数据尚需人工核对" in text
             results.append(dict(type=template.report_type,format=format,**artifact.model_dump()))
+        if template.report_type=="investment_attraction":
+            negative=doc.model_copy(deep=True)
+            negative.version_id="investment-missing-demand"
+            negative.evidences=[e for e in negative.evidences if e.evidence_id=="ev2"]
+            for chapter in negative.chapters:
+                chapter.blocks=[m.Paragraph(type="paragraph",block_id=chapter.chapter_id+"-gap",
+                    text="需求侧证据缺失，候选匹配待核实，不推断签约。",evidence_ids=["ev2"],metric_ids=[])]
+            artifact=service.render_report(negative,"docx")
+            rendered=Document(root/artifact.storage_key)
+            text=" ".join(p.text for p in rendered.paragraphs)
+            assert "待核实" in text and "受控企业电芯测试能力说明" in text
+            assert "受控区域需求说明" not in text
     assert len(results)==10
     (root/"result.json").write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding="utf8")
 

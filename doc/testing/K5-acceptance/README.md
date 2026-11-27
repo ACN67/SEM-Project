@@ -1,3 +1,5 @@
 # K5 controlled regression
 
 119 unit and 6 contract tests pass. The outline binds requested prosperity indicators without changing cached templates. Five controlled snapshots export to ten Word/PDF artifacts. Prosperity uses quarterly values 100/100 and 130/120, illustrating 30% to 20% growth and missing/zero baselines. Investment and overseas snapshots display evidence boundaries in specialized tables. All PDF pages are rendered in all-pages.png. Values and conclusions are controlled fixtures and require separate real-data/model acceptance. Reproduce using python -m backend.tests.integration.verify_templates <soffice.com> <output-root>.
+
+Source-role rework uses controlled regional demand, enterprise capability, German BEV statistics and dated policy descriptions. DOCX assertions inspect table cells and require separate demand/capability citations. A separate export removes demand evidence entirely and checks that its source disappears while the uncertainty remains. Section paragraphs are distinct. 119 unit and 6 contract tests pass; all ten normal exports and the missing-demand DOCX passed.

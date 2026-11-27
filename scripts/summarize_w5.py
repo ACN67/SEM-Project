@@ -29,7 +29,13 @@ def main():
             depends_on=[],research_questions=[],evidence_requirements=[],required_metrics=["bev_registrations"],desired_chart=None)
         calculation=QualityService().calculate_metrics(metrics,task)
         output["calculation"]=calculation.model_dump(mode="json")
-        output["manual_yoy_pct"]=str((Decimal("380609")/Decimal("524219")-1)*100)
+        expected=(Decimal("380609")/Decimal("524219")-1)*100
+        output["manual_yoy_pct"]=str(expected)
+        derived=[metric for metric in calculation.metrics if metric.formula_id=="yoy_pct"]
+        assert len(derived)==1 and abs(Decimal(derived[0].value)-expected)<Decimal("0.00000001")
+        missing_baseline=QualityService().calculate_metrics([metric for metric in metrics if metric.period=="2024"],task)
+        assert not any(metric.formula_id=="yoy_pct" and metric.value is not None for metric in missing_baseline.metrics)
+        output["missing_baseline_negative"]="PASS"
     (root/"case-results.json").write_text(json.dumps(output,ensure_ascii=False,indent=2),encoding="utf8")
 
 if __name__=="__main__":

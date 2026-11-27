@@ -126,5 +126,6 @@
     ],
     "gaps": []
   },
-  "manual_yoy_pct": "-27.39503909625557257558386857"
+  "manual_yoy_pct": "-27.39503909625557257558386857",
+  "missing_baseline_negative": "PASS"
 }

@@ -74,10 +74,23 @@ def make_base(path):
     settings.append(update)
     document.save(path)
 
-def load_layout(version):
+def load_layout(version, *, root=None):
     if version != "1":
         raise ValueError(f"Unknown Word layout: {version}")
-    return Document(ROOT / version / "base.docx")
+    from .pdf import export_error
+    try:
+        document = Document((Path(root) if root is not None else ROOT) / version / "base.docx")
+        required = {"Normal", "Heading 1", "Heading 2", "Report Contents",
+            "Report Cover Title", "Report Cover Period", "Report Cover Details",
+            "Report Table Header", "Report Table Text"}
+        for name in required:
+            if name not in document.styles or document.styles[name].type != WD_STYLE_TYPE.PARAGRAPH:
+                raise ValueError("Missing paragraph style: " + name)
+        if "Table Grid" not in document.styles or document.styles["Table Grid"].type != WD_STYLE_TYPE.TABLE:
+            raise ValueError("Missing table style: Table Grid")
+        return document
+    except Exception as exc:
+        raise export_error("layout_invalid") from exc
 
 if __name__ == "__main__":
     make_base(ROOT / "1" / "base.docx")

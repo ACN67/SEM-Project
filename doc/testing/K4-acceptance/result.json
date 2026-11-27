@@ -1,0 +1,20 @@
+{
+  "converter": "LibreOffice 26.8.3.1 861effc5289d539f15c4c18d1ba8579ffd78728b",
+  "seconds": 31.92199999996228,
+  "pdf_artifacts": [
+    {
+      "version": "acceptance-v1",
+      "pages": 4,
+      "storage_key": "exports/acceptance-v1/191643f793124355bbd6193bd7185702/report-acceptance-v1.pdf",
+      "sha256": "9395237fe3124b90913fce3d0370e364fa49cbd637692625c932ab0b7f32f47c",
+      "size_bytes": 129148
+    },
+    {
+      "version": "acceptance-v2",
+      "pages": 4,
+      "storage_key": "exports/acceptance-v2/4b168f4658f348b49353de10c9ec430c/report-acceptance-v2.pdf",
+      "sha256": "779150608e1e3797598a05f8ca8b94a56ec034eeb4056b522f24896f7bc1a16b",
+      "size_bytes": 129150
+    }
+  ]
+}

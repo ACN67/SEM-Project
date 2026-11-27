@@ -15,8 +15,11 @@ Run database checks with W1_MYSQL_PORT and W4_REAL_MODEL=1 set and python -m uni
 
 ## Review rework
 
-The internal version manifest now stores the index fingerprint. An eligible candidate with a mismatched fingerprint or missing vector entry returns INDEX_NOT_READY. Worker may call pipeline.process(version, labels=..., mapping=..., rebuild=True) to rebuild a READY version; it becomes PROCESSING during replacement and only returns READY after validation. Supply the same original parse metadata for a rebuild.
+The internal version manifest now stores the index fingerprint. An eligible candidate with a mismatched fingerprint or missing vector entry returns INDEX_NOT_READY. Worker may call pipeline.process(version, labels=..., mapping=..., rebuild=True) to rebuild a READY version; it becomes PROCESSING during replacement and only returns READY after validation. Rebuild reads persisted evidence and preserves the stored business labels. It updates only the active index fingerprint and processing state; original parser mappings are not required.
 
-Eight isolated MySQL tests passed with the real model enabled. The real-model test removes indexed entries, checks the explicit error, rebuilds and checks the hit. A second collection fingerprint is simulated with the same injected model to test configuration switching without downloading another model revision. The parser error test verifies that the persisted failure exactly matches the ServiceError returned to the Worker, including retryable=false.
+Nine isolated MySQL tests passed with the real model enabled. The real-model test removes indexed entries, checks the explicit error, rebuilds and checks the hit. A second collection fingerprint is simulated with the same injected model to test configuration switching without downloading another model revision. The parser error test verifies that the persisted failure exactly matches the ServiceError returned to the Worker, including retryable=false.
 
 Unit tests cover missing entries, changed fingerprints, stable ranking and database failure conversion. 110 unit tests and 6 contract tests passed.
+
+
+The final rebuild regression covers both a tagged DOCX and a CSV with a custom header mapping. Calling process(version, rebuild=True) without labels or mapping preserves the evidence, metric payloads, business labels and filtered retrieval result. Both parser entry points are guarded against accidental calls during this regression. The real BGE test also rebuilds without labels and checks the SAIC-filtered result. Nine MySQL integration tests passed with W4_REAL_MODEL=1.

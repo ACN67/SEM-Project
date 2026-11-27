@@ -34,14 +34,19 @@ class IngestPipeline:
                 if row[0] == "PROCESSING" or (row[0] == "READY" and not rebuild):
                     connection.rollback()
                     return False
+                if rebuild:
+                    cursor.execute("SELECT payload FROM knowledge_labels WHERE document_version_id=%s", (version,))
+                    stored = cursor.fetchone()
+                    labels = json.loads(stored[0]) if stored else {}
                 cursor.execute("UPDATE document_versions SET ingest_status='PROCESSING',error_json=NULL WHERE document_version_id=%s",(version,))
             connection.commit()
         try:
-            if row[1].lower().endswith((".xlsx",".csv")):
-                self.metrics.ingest_version(version,**(mapping or {}))
-            else:
-                industries=(labels or {}).get("industries",[])
-                self.text.ingest_version(version,industry=industries[0] if len(industries)==1 else None)
+            if not rebuild:
+                if row[1].lower().endswith((".xlsx",".csv")):
+                    self.metrics.ingest_version(version,**(mapping or {}))
+                else:
+                    industries=(labels or {}).get("industries",[])
+                    self.text.ingest_version(version,industry=industries[0] if len(industries)==1 else None)
             with closing(self.connect()) as connection, connection.cursor() as cursor:
                 cursor.execute("SELECT payload FROM evidences WHERE document_version_id=%s ORDER BY evidence_id",(version,))
                 evidences=[m.Evidence.model_validate_json(row[0]) for row in cursor.fetchall()]

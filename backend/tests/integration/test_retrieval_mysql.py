@@ -63,8 +63,8 @@ class PipelineTests(test_knowledge_mysql.KnowledgeMySQLTests):
         with self.assertRaises(ServiceError) as err:
             service.retrieve("研发投入",m.Filters(),5,[versions[0]])
         self.assertEqual(err.exception.error.code,"INDEX_NOT_READY")
-        self.assertTrue(pipeline.process(versions[0],labels={"entity_ids":["SAIC"]},rebuild=True))
-        self.assertTrue(service.retrieve("本期费用化研发投入",m.Filters(),5,[versions[0]]))
+        self.assertTrue(pipeline.process(versions[0],rebuild=True))
+        self.assertTrue(service.retrieve("本期费用化研发投入",m.Filters(entity_ids=["SAIC"]),5,[versions[0]]))
 
 
         changed=EvidenceIndex(self.root/"index", revision="0"*40,model=index.model)
@@ -73,8 +73,8 @@ class PipelineTests(test_knowledge_mysql.KnowledgeMySQLTests):
             changed_service.retrieve("研发投入",m.Filters(),5,[versions[0]])
         self.assertEqual(err.exception.error.code,"INDEX_NOT_READY")
         changed_pipeline=IngestPipeline(connect,self.root/"runtime",changed)
-        self.assertTrue(changed_pipeline.process(versions[0],labels={"entity_ids":["SAIC"]},rebuild=True))
-        self.assertTrue(changed_service.retrieve("本期费用化研发投入",m.Filters(),5,[versions[0]]))
+        self.assertTrue(changed_pipeline.process(versions[0],rebuild=True))
+        self.assertTrue(changed_service.retrieve("本期费用化研发投入",m.Filters(entity_ids=["SAIC"]),5,[versions[0]]))
 
     def test_parser_error_matches_persisted_status(self):
         from unittest.mock import patch
@@ -94,3 +94,51 @@ class PipelineTests(test_knowledge_mysql.KnowledgeMySQLTests):
         self.assertEqual(status,"FAILED")
         self.assertEqual(json.loads(payload),err.exception.error.model_dump())
 
+
+    def test_rebuild_preserves_labels_and_parsed_rows_without_original_mapping(self):
+        import csv
+        from unittest.mock import patch
+        from backend.app.knowledge.tabular import COLUMNS
+        connect=lambda:self.connect(self.database)
+        with connect() as db, db.cursor() as cursor:
+            for name in ("011_knowledge_metrics.sql","012_knowledge_index.sql"):
+                for sql in Path("backend/migrations",name).read_text(encoding="utf-8-sig").split(";"):
+                    if sql.strip():cursor.execute(sql)
+        index=Mock()
+        index.fingerprint="initial-index"
+        pipeline=IngestPipeline(connect,self.root/"runtime",index)
+        for extension in ("csv","docx"):
+            path=self.root/("source."+extension)
+            if extension=="csv":
+                headers=["mapped-indicator",*COLUMNS[1:]]
+                with path.open("w",encoding="utf8",newline="") as file:
+                    writer=csv.writer(file);writer.writerow(headers)
+                    writer.writerow(["sales","Sales","A","2024","year","CN","retail","100","cars","1","cars",""])
+                mapping={"header_mapping":{"mapped-indicator":"indicator"},"industry":"auto"}
+            else:
+                doc=Document();doc.add_paragraph("研发投入 100 亿元");doc.save(path)
+                mapping=None
+            version=self.ingest.ingest_document(path,self.metadata).document_version_id
+            labels={"entity_ids":["A"],"industries":["auto"],"regions":["CN"]}
+            pipeline.process(version,labels=labels,mapping=mapping)
+            before=index.replace.call_args.args[1]
+            index.rank.return_value=[(before[0].evidence_id,0.9)]
+            filters=m.Filters(entity_ids=["A"],industries=["auto"],regions=["CN"])
+            service=Retrieval(connect,index)
+            self.assertTrue(service.retrieve("投入",filters,5,[version]))
+            with connect() as db, db.cursor() as cursor:
+                cursor.execute("SELECT payload FROM metrics WHERE document_version_id=%s",(version,))
+                metrics_before=cursor.fetchall()
+            index.fingerprint="replacement-index"
+            with patch.object(pipeline.text,"ingest_version",side_effect=AssertionError("reparsed original")), patch.object(
+                pipeline.metrics,"ingest_version",side_effect=AssertionError("reparsed rows")):
+                self.assertTrue(pipeline.process(version,rebuild=True))
+            self.assertEqual(before,index.replace.call_args.args[1])
+            self.assertTrue(service.retrieve("投入",filters,5,[version]))
+            with connect() as db, db.cursor() as cursor:
+                cursor.execute("SELECT payload FROM metrics WHERE document_version_id=%s",(version,))
+                self.assertEqual(metrics_before,cursor.fetchall())
+                cursor.execute("SELECT payload FROM knowledge_labels WHERE document_version_id=%s",(version,))
+                import json
+                stored=json.loads(cursor.fetchone()[0])
+                self.assertEqual(stored,{**labels,"_index_fingerprint":"replacement-index"})

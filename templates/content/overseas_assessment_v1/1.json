@@ -34,7 +34,7 @@
       "required": true,
       "depends_on": [],
       "research_questions": [
-        "确认中国原产纯电乘用车进入德国的产品和统计边界。"
+        "依据本次报告的 origin、target_market、product 和 as_of，确认产品、原产地、目标市场及统计边界。"
       ],
       "evidence_requirements": [
         "可定位的原始来源与适用日期"
@@ -52,7 +52,7 @@
         "scope"
       ],
       "research_questions": [
-        "区分纯电乘用车注册量与进口量，记录统计期和发布日。"
+        "依据本次指定产品与目标市场，区分注册量、销量与进口量，记录统计期和发布日。"
       ],
       "evidence_requirements": [
         "可定位的原始来源与适用日期"

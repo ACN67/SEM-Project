@@ -34,7 +34,7 @@
       "required": true,
       "depends_on": [],
       "research_questions": [
-        "截至截止日，合肥动力电池配套有哪些政策需求？"
+        "依据本次报告的 region、target_segment 和 as_of，目标地区在指定产业链环节有哪些有来源的需求？"
       ],
       "evidence_requirements": [
         "可定位的原始来源与适用日期"

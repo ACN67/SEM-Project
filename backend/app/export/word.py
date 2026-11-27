@@ -80,6 +80,7 @@ def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | N
     ordered = [chapters[task.chapter_id] for task in sorted(snapshot.outline.chapters, key=lambda task: task.order)
                if task.chapter_id in chapters]
     contents = document.add_paragraph()
+    contents.paragraph_format.first_line_indent = Pt(0)
     # A simple field contains its cached result and can be replaced by Word on update.
     from docx.oxml import OxmlElement
     from docx.oxml.ns import qn

@@ -106,3 +106,26 @@ class ExportServiceTests(unittest.TestCase):
                         service.render_report(snap,"docx")
                     self.assertEqual(err.exception.error.details["reason"],"layout_invalid")
                     self.assertFalse(err.exception.error.retryable)
+
+    def test_table_style_configuration_is_not_retryable(self):
+        from docx import Document
+        from docx.enum.style import WD_STYLE_TYPE
+        from backend.app.export.layout import ROOT
+        snap = snapshot()
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root/"1").mkdir()
+            for wrong_type in (False, True):
+                with self.subTest(wrong_type=wrong_type):
+                    document = Document(ROOT/"1/base.docx")
+                    document.styles["Table Grid"].delete()
+                    if wrong_type:
+                        document.styles.add_style("Table Grid", WD_STYLE_TYPE.PARAGRAPH)
+                    document.save(root/"1/base.docx")
+                    service = ExportService(root/"output", template_root=root,
+                        asset_resolver=lambda v,a:render_chart_png(snap.charts[0]))
+                    with self.assertRaises(ServiceError) as err:
+                        service.render_report(snap, "docx")
+                    self.assertEqual(err.exception.error.code, "EXPORT_FAILED")
+                    self.assertEqual(err.exception.error.details["reason"], "layout_invalid")
+                    self.assertFalse(err.exception.error.retryable)

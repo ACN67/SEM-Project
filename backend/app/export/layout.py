@@ -86,6 +86,8 @@ def load_layout(version, *, root=None):
         for name in required:
             if name not in document.styles or document.styles[name].type != WD_STYLE_TYPE.PARAGRAPH:
                 raise ValueError("Missing paragraph style: " + name)
+        if "Table Grid" not in document.styles or document.styles["Table Grid"].type != WD_STYLE_TYPE.TABLE:
+            raise ValueError("Missing table style: Table Grid")
         return document
     except Exception as exc:
         raise export_error("layout_invalid") from exc

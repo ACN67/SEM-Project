@@ -19,3 +19,5 @@ The current V1/V2 PDFs were regenerated with LibreOffice and the directory page 
 Regression coverage includes missing/corrupt templates, reversed chapter storage order, field nesting and existing conversion timeouts.
 
 The final layout regression saves readable DOCX templates with individual required styles removed (cover title, table text and heading). Each returns layout_invalid with retryable=false before rendering. 109 unit tests and 6 contract tests passed. Normal rendering and timeout coverage remain passing.
+
+Table Grid is now required with table style type. Missing or wrong-type definitions return layout_invalid with retryable=false through report export. The cached contents paragraph has zero first-line indentation so all chapter entries align. 110 unit and 6 contract tests passed.

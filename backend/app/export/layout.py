@@ -77,7 +77,11 @@ def make_base(path):
 def load_layout(version, *, root=None):
     if version != "1":
         raise ValueError(f"Unknown Word layout: {version}")
-    return Document((Path(root) if root is not None else ROOT) / version / "base.docx")
+    from .pdf import export_error
+    try:
+        return Document((Path(root) if root is not None else ROOT) / version / "base.docx")
+    except Exception as exc:
+        raise export_error("layout_invalid") from exc
 
 if __name__ == "__main__":
     make_base(ROOT / "1" / "base.docx")

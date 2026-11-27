@@ -60,3 +60,30 @@ class ExportServiceTests(unittest.TestCase):
             self.assertNotEqual(first.sha256,second.sha256)
             snap.version_id="../outside"
             with self.assertRaises(ServiceError):service.render_report(snap,"docx")
+
+    def test_bad_layout_is_not_retryable(self):
+        snap = snapshot()
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            service = ExportService(root/"output", template_root=root,
+                asset_resolver=lambda v,a:render_chart_png(snap.charts[0]))
+            for broken in (False, True):
+                if broken:
+                    (root/"1").mkdir()
+                    (root/"1/base.docx").write_bytes(b"broken")
+                with self.assertRaises(ServiceError) as err:
+                    service.render_report(snap,"docx")
+                self.assertFalse(err.exception.error.retryable)
+                self.assertEqual(err.exception.error.details["reason"],"layout_invalid")
+
+    def test_toc_cache_is_inside_field_and_ordered(self):
+        from docx import Document
+        from io import BytesIO
+        from backend.app.export.word import render_docx
+        snap=snapshot()
+        snap.chapters.reverse()
+        doc=Document(BytesIO(render_docx(snap,asset_resolver=lambda v,a:render_chart_png(snap.charts[0]))))
+        fields=doc.element.xpath(".//w:fldSimple")
+        self.assertEqual(len(fields),1)
+        self.assertEqual(fields[0].xpath(".//*[local-name()='t']/text()"),["市场规模","结论"])
+        self.assertEqual(len(fields[0].xpath(".//*[local-name()='br']")),1)

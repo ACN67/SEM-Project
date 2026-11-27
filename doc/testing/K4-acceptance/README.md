@@ -17,3 +17,5 @@ Missing or corrupt fixed layouts now return EXPORT_FAILED with reason=layout_inv
 The current V1/V2 PDFs were regenerated with LibreOffice and the directory page was inspected (contents.png). Microsoft Word updated the TOC in a real exported DOCX, producing chapter page numbers and replacing the cache without duplicate static titles. The PDF cache displays chapter names; interactive Word update produces the expanded directory and page numbers.
 
 Regression coverage includes missing/corrupt templates, reversed chapter storage order, field nesting and existing conversion timeouts.
+
+The final layout regression saves readable DOCX templates with individual required styles removed (cover title, table text and heading). Each returns layout_invalid with retryable=false before rendering. 109 unit tests and 6 contract tests passed. Normal rendering and timeout coverage remain passing.

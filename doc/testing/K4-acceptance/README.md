@@ -9,3 +9,11 @@ Reproduce from the repository root using python -m backend.tests.integration.ver
 Unit tests cover same-version concurrent Word requests, missing converter, timeout, successful exit without PDF, nonzero exit, version isolation and staging cleanup. Converter timeouts kill only the conversion process tree on Windows.
 
 HTTP download and backend artifact registration require orchestration integration. This module returns storage_key, sha256 and size_bytes through the existing contract.
+
+## Review rework
+
+Missing or corrupt fixed layouts now return EXPORT_FAILED with reason=layout_invalid and retryable=false. The TOC cache is inside its Word field and follows the same outline ordering as the report body. Each chapter is cached on a separate line.
+
+The current V1/V2 PDFs were regenerated with LibreOffice and the directory page was inspected (contents.png). Microsoft Word updated the TOC in a real exported DOCX, producing chapter page numbers and replacing the cache without duplicate static titles. The PDF cache displays chapter names; interactive Word update produces the expanded directory and page numbers.
+
+Regression coverage includes missing/corrupt templates, reversed chapter storage order, field nesting and existing conversion timeouts.

@@ -22,7 +22,9 @@
   {
     "evidence_key": "EV-R02-BYD-2023-HK-P273",
     "case_id": "R02",
-    "status": "LOCATED",
+    "status": "FACT_NOT_VERIFIED",
+    "page_located": true,
+    "fact_verified": false,
     "document_version_id": "cae950708fd44eb09ba0e1ebbf403766",
     "retrieved": [
       {
@@ -94,7 +96,9 @@
   {
     "evidence_key": "EV-R02-BYD-CNINFO-P34",
     "case_id": "R02",
-    "status": "LOCATED",
+    "status": "FACT_PASS",
+    "page_located": true,
+    "fact_verified": true,
     "document_version_id": "3a4e75399cc2413c9f6b831223dfaebe",
     "retrieved": [
       {
@@ -166,7 +170,9 @@
   {
     "evidence_key": "EV-R02-SAIC-2023-P13",
     "case_id": "R02",
-    "status": "LOCATED",
+    "status": "FACT_PASS",
+    "page_located": true,
+    "fact_verified": true,
     "document_version_id": "0cbf33c0375d4596b88bc24ed783b5cf",
     "retrieved": [
       {
@@ -206,7 +212,9 @@
   {
     "evidence_key": "EV-R02-SAIC-2024-P13",
     "case_id": "R02",
-    "status": "LOCATED",
+    "status": "FACT_PASS",
+    "page_located": true,
+    "fact_verified": true,
     "document_version_id": "0bd1ffc8ff9a44cd9f76c3f566b6dd12",
     "retrieved": [
       {
@@ -302,7 +310,9 @@
   {
     "evidence_key": "EV-R04-HEFEI-IMPL-P3",
     "case_id": "R04",
-    "status": "LOCATED",
+    "status": "FACT_PASS",
+    "page_located": true,
+    "fact_verified": true,
     "document_version_id": "5b9ee769483343a095c6155c7c384daa",
     "retrieved": [
       {
@@ -326,7 +336,9 @@
   {
     "evidence_key": "EV-R04-HEFEI-PLAN-P11",
     "case_id": "R04",
-    "status": "LOCATED",
+    "status": "FACT_PASS",
+    "page_located": true,
+    "fact_verified": true,
     "document_version_id": "56f566ac365443f388d1076c40a933fa",
     "retrieved": [
       {
@@ -350,7 +362,9 @@
   {
     "evidence_key": "EV-R04-HEFEI-PLAN-P12",
     "case_id": "R04",
-    "status": "LOCATED",
+    "status": "FACT_PASS",
+    "page_located": true,
+    "fact_verified": true,
     "document_version_id": "56f566ac365443f388d1076c40a933fa",
     "retrieved": [
       {
@@ -432,17 +446,69 @@
   {
     "evidence_key": "EV-R05-KBA-2023-XLSX-AL461",
     "case_id": "R05",
-    "status": "SOURCE_NOT_READY"
+    "status": "METRIC_PASS",
+    "document_version_id": "8a3d476e43de4bfc94d52c5bd8c55d51",
+    "metrics": [
+      {
+        "metric_id": "80cc19f6dcb4534ab7a15ec00d5b59d7064b09dd3ee1797e1c9e7c81ab1bfde9",
+        "indicator": "bev_registrations",
+        "name": "BEV new passenger car registrations",
+        "entity_id": null,
+        "period": "2023",
+        "granularity": "year",
+        "region": "Germany",
+        "scope": "new passenger car registrations, BEV, Jan-Dec",
+        "raw_value": "524219",
+        "raw_unit": "辆",
+        "multiplier": "1",
+        "value": "524219",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "80cc19f6dcb4534ab7a15ec00d5b59d7064b09dd3ee1797e1c9e7c81ab1bfde9"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      }
+    ]
   },
   {
     "evidence_key": "EV-R05-KBA-XLSX-AL488",
     "case_id": "R05",
-    "status": "SOURCE_NOT_READY"
+    "status": "METRIC_PASS",
+    "document_version_id": "da90207a6f1f42499705b2007a992e9a",
+    "metrics": [
+      {
+        "metric_id": "696833a04cc0dad2b32edf9ea9e5c7a647a0c266c30b4e93161dcb12d4527723",
+        "indicator": "bev_registrations",
+        "name": "BEV new passenger car registrations",
+        "entity_id": null,
+        "period": "2024",
+        "granularity": "year",
+        "region": "Germany",
+        "scope": "new passenger car registrations, BEV, Jan-Dec",
+        "raw_value": "380609",
+        "raw_unit": "辆",
+        "multiplier": "1",
+        "value": "380609",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "696833a04cc0dad2b32edf9ea9e5c7a647a0c266c30b4e93161dcb12d4527723"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      }
+    ]
   },
   {
     "evidence_key": "EV-R05-KBA-PDF-P1",
     "case_id": "R05",
-    "status": "LOCATED",
+    "status": "FACT_PASS",
+    "page_located": true,
+    "fact_verified": true,
     "document_version_id": "027f19ee2f344b0d86792218d841d877",
     "retrieved": [
       {
@@ -705,7 +771,9 @@
   {
     "evidence_key": "EV-R04-GOTION-LAB-2023",
     "case_id": "R04",
-    "status": "LOCATED",
+    "status": "FACT_PASS",
+    "page_located": true,
+    "fact_verified": true,
     "document_version_id": "69008832f3d74fe4837f8594a1f7e132",
     "retrieved": [
       {

@@ -15,11 +15,20 @@ def acquire(record, root):
     suffix=".pdf" if ".pdf" in url.lower() else ".xlsx" if ".xlsx" in url.lower() else ".html"
     target=root/(record["evidence_key"]+suffix)
     try:
+        expected=record.get("source_hash")
+        if target.exists() and expected and sha256(target.read_bytes()).hexdigest()!=expected:
+            target.unlink()
+        if target.exists() and suffix==".html" and record["title"] not in target.read_text(encoding="utf8",errors="replace"):
+            target.unlink()
         if not target.exists():
             request=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
             with urllib.request.urlopen(request,timeout=30) as response:
                 content=response.read()
             temporary=target.with_suffix(suffix+".part")
+            if not content or (expected and sha256(content).hexdigest()!=expected):
+                raise ValueError("download hash mismatch or empty response")
+            if suffix==".html" and record["title"] not in content.decode("utf8",errors="replace"):
+                raise ValueError("download does not contain expected page title")
             temporary.write_bytes(content)
             temporary.replace(target)
         content=target.read_bytes()

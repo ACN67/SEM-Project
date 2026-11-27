@@ -17,3 +17,7 @@ Validation on this W5 branch passed 117 unit tests, 6 contract tests and schema 
 KBA original spreadsheet cells were independently read by openpyxl in this run: FZ 10.1 AL461=524219 for Jan.-Dezember 2023 and AL488=380609 for Jan.-Dezember 2024, both under the BEV column heading. spreadsheet-locators.json preserves the cell/header values. These cell checks do not claim W2 metric import.
 
 The real KnowledgeService run returned expected-page evidence for 9 records. Full originals were indexed and filtered by their actual frozen version IDs. Runtime IDs and located excerpts are preserved in source-results.json. Local runtime and originals remain outside Git.
+
+## Review rework
+
+Bad cached HTML and hash-mismatched originals are reacquired. Empty, hash-mismatched or title-missing responses are rejected before publishing new cache files. Every import outcome is atomically checkpointed, including failures; independent sources continue after an exception. Expected page detection and explicit fact verification are separate fields. One BYD source currently misses the expected total in retrieved fragments and remains FACT_NOT_VERIFIED. Two KBA workbooks now pass real W2 import with year-specific, hash-locked cell mappings. Run python scripts/summarize_w5.py <runtime> for QualityService calculation and five-case coverage. Missing sources and unverified facts keep cases INCOMPLETE. Removing a required evidence item preserves an incomplete result. These checks do not replace independent member signoff or prove all five cases complete.

@@ -1,15 +1,22 @@
 """A revision-specific normalized embedding collection."""
 from hashlib import sha256
 import json
+import re
+
+MODEL_REVISION = "7999e1d3359715c523056ef9478215996d62a620"
+SCORE_THRESHOLD = 0.5142417848110199
 
 class EvidenceIndex:
-    def __init__(self, root, *, revision, threshold, model=None):
+    def __init__(self, root, *, revision=MODEL_REVISION, threshold=SCORE_THRESHOLD, model=None):
+        if not re.fullmatch(r"[a-f0-9]{40}", revision):
+            raise ValueError("model revision must be an immutable commit")
         import chromadb
         from sentence_transformers import SentenceTransformer
         config = {"model":"BAAI/bge-small-zh-v1.5", "revision":revision, "normalize":True, "dimension":512}
         self.fingerprint = sha256(json.dumps(config,sort_keys=True).encode()).hexdigest()
         self.model = model or SentenceTransformer(config["model"], revision=revision)
-        self.collection = chromadb.PersistentClient(path=str(root)).get_or_create_collection(
+        self.client = chromadb.PersistentClient(path=str(root))
+        self.collection = self.client.get_or_create_collection(
             name="evidence-"+self.fingerprint[:24],metadata={"hnsw:space":"cosine"})
         self.threshold = threshold
 

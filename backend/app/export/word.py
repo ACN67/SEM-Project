@@ -78,8 +78,13 @@ def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | N
     document.add_paragraph("目录", "Report Contents")
     contents = document.add_paragraph()
     field(contents, ' TOC \\o "1-2" \\h \\z \\u ')
-    for chapter in snapshot.chapters:
-        document.add_paragraph(chapter.title, "Report Table Text")
+    # Cache chapter names inside the TOC field for converters that do not update it.
+    from docx.oxml import OxmlElement
+    run = OxmlElement("w:r")
+    text = OxmlElement("w:t")
+    text.text = "  /  ".join(chapter.title for chapter in snapshot.chapters)
+    run.append(text)
+    contents._p.insert(len(contents._p) - 1, run)
     document.add_page_break()
     chapters = {chapter.chapter_id: chapter for chapter in snapshot.chapters}
     for task in sorted(snapshot.outline.chapters, key=lambda item: item.order):

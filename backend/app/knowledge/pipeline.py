@@ -2,6 +2,8 @@
 from contextlib import closing
 import json
 from ..contracts import models as m
+from ..contracts.services import ServiceError
+from .errors import infrastructure_error
 from .metrics import MetricRepository
 from .text_repository import TextRepository
 
@@ -12,7 +14,15 @@ class IngestPipeline:
         self.text=TextRepository(connect,runtime_root)
         self.index=index
 
-    def process(self, version, *, labels=None, mapping=None):
+    def process(self, version, *, labels=None, mapping=None, rebuild=False):
+        try:
+            return self._process(version, labels=labels, mapping=mapping, rebuild=rebuild)
+        except Exception as exc:
+            if isinstance(exc, ServiceError):
+                raise
+            raise infrastructure_error(exc) from exc
+
+    def _process(self, version, *, labels=None, mapping=None, rebuild=False):
         with closing(self.connect()) as connection:
             connection.begin()
             with connection.cursor() as cursor:
@@ -21,7 +31,7 @@ class IngestPipeline:
                 if row is None:
                     connection.rollback()
                     raise ValueError("unknown version")
-                if row[0] in ("READY","PROCESSING"):
+                if row[0] == "PROCESSING" or (row[0] == "READY" and not rebuild):
                     connection.rollback()
                     return False
                 cursor.execute("UPDATE document_versions SET ingest_status='PROCESSING',error_json=NULL WHERE document_version_id=%s",(version,))
@@ -42,17 +52,18 @@ class IngestPipeline:
                 connection.begin()
                 with connection.cursor() as cursor:
                     cursor.execute("INSERT INTO knowledge_labels VALUES (%s,%s) ON DUPLICATE KEY UPDATE payload=VALUES(payload)",
-                        (version,json.dumps(labels or {},ensure_ascii=False)))
+                        (version,json.dumps({**(labels or {}), "_index_fingerprint":self.index.fingerprint},ensure_ascii=False)))
                     cursor.execute("UPDATE document_versions SET ingest_status='READY',error_json=NULL WHERE document_version_id=%s AND ingest_status='PROCESSING'",(version,))
                 connection.commit()
             return True
-        except Exception:
+        except Exception as exc:
+            failure = infrastructure_error(exc, "DOCUMENT_PROCESSING_FAILED")
             with closing(self.connect()) as connection, connection.cursor() as cursor:
-                error=m.ErrorInfo(code="DOCUMENT_PROCESSING_FAILED",message="Document processing failed",retryable=True,details={})
+                error=failure.error
                 cursor.execute("UPDATE document_versions SET ingest_status='FAILED',error_json=%s WHERE document_version_id=%s",
                     (error.model_dump_json(),version))
                 connection.commit()
-            raise
+            raise failure from exc
 
     def recover_abandoned(self, version):
         """Call only after the worker confirms that the previous owner has stopped."""

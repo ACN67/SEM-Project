@@ -13,11 +13,12 @@ class RetrievalTests(unittest.TestCase):
         self.connection=MagicMock()
         self.connection.cursor.return_value=nullcontext(self.cursor)
         self.index=MagicMock()
+        self.index.fingerprint="test-index"
         self.service=Retrieval(lambda:self.connection,self.index)
         e=self.snap.evidences[0]
         meta=m.Metadata(title=e.title,publisher=e.publisher,published_at=e.published_at,source_url=e.source_url)
         self.cursor.fetchall.return_value=[(e.model_dump_json(),"auto",meta.model_dump_json(),
-            json.dumps({"entity_ids":["A"],"periods":["2024"]}),None)]
+            json.dumps({"entity_ids":["A"],"periods":["2024"],"_index_fingerprint":"test-index"}),None)]
         self.index.rank.return_value=[(e.evidence_id,0.8)]
 
     def test_frozen_candidates(self):
@@ -38,3 +39,16 @@ class RetrievalTests(unittest.TestCase):
     def test_invalid_limit(self):
         for n in (0,51,True,1.5):
             with self.assertRaises(ServiceError):self.service.retrieve("test",m.Filters(),n,["v"])
+
+    def test_storage_failure_is_service_error(self):
+        self.cursor.execute.side_effect=OSError("database unavailable")
+        with self.assertRaises(ServiceError) as err:
+            self.service.retrieve("test",m.Filters(),5,["v"])
+        self.assertEqual(err.exception.error.code,"RETRIEVAL_FAILED")
+        self.assertTrue(err.exception.error.retryable)
+
+    def test_changed_fingerprint_requires_rebuild(self):
+        self.index.fingerprint="new-index"
+        with self.assertRaises(ServiceError) as err:
+            self.service.retrieve("test",m.Filters(),5,["v"])
+        self.assertEqual(err.exception.error.code,"INDEX_NOT_READY")

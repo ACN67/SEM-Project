@@ -11,3 +11,12 @@ Use KnowledgeService(connect, runtime_root, EvidenceIndex(index_root)) for the e
 MySQL acceptance on isolated port 33307 passed 7 tests through test_retrieval_mysql.py, including inherited original/version checks. Index failure kept the version invisible; retry published READY and returned located evidence within the allowed version and entity. Fake index tests and actual model tests are separate. An additional real-model/MySQL case parsed two versions of the same DOCX and verified that each frozen version returned its own 100/200 amount. HTTP integration requires the backend.
 
 Run database checks with W1_MYSQL_PORT and W4_REAL_MODEL=1 set and python -m unittest discover -s backend/tests/integration -p test_retrieval_mysql.py -q.
+
+
+## Review rework
+
+The internal version manifest now stores the index fingerprint. An eligible candidate with a mismatched fingerprint or missing vector entry returns INDEX_NOT_READY. Worker may call pipeline.process(version, labels=..., mapping=..., rebuild=True) to rebuild a READY version; it becomes PROCESSING during replacement and only returns READY after validation. Supply the same original parse metadata for a rebuild.
+
+Eight isolated MySQL tests passed with the real model enabled. The real-model test removes indexed entries, checks the explicit error, rebuilds and checks the hit. A second collection fingerprint is simulated with the same injected model to test configuration switching without downloading another model revision. The parser error test verifies that the persisted failure exactly matches the ServiceError returned to the Worker, including retryable=false.
+
+Unit tests cover missing entries, changed fingerprints, stable ranking and database failure conversion. 110 unit tests and 6 contract tests passed.

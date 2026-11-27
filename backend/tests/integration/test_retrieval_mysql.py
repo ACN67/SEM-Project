@@ -6,6 +6,7 @@ import test_knowledge_mysql
 from backend.app.knowledge.pipeline import IngestPipeline
 from backend.app.knowledge.retrieval import Retrieval
 from backend.app.contracts import models as m
+from backend.app.contracts.services import ServiceError
 
 class PipelineTests(test_knowledge_mysql.KnowledgeMySQLTests):
     def test_failure_retry_ready_and_retrieval(self):
@@ -18,9 +19,9 @@ class PipelineTests(test_knowledge_mysql.KnowledgeMySQLTests):
         document=Document();document.add_paragraph("新能源汽车研发投入");document.save(path)
         accepted=self.ingest.ingest_document(path,self.metadata)
         version=accepted.document_version_id
-        index=Mock();index.replace.side_effect=RuntimeError("partial index")
+        index=Mock();index.fingerprint="test-index";index.replace.side_effect=RuntimeError("partial index")
         pipeline=IngestPipeline(connect,self.root/"runtime",index)
-        with self.assertRaises(RuntimeError):pipeline.process(version,labels={"entity_ids":["SAIC"]})
+        with self.assertRaises(ServiceError):pipeline.process(version,labels={"entity_ids":["SAIC"]})
         service=Retrieval(connect,index)
         self.assertEqual(service.retrieve("研发投入",m.Filters(),5,[version]),[])
         index.replace.side_effect=None
@@ -58,3 +59,38 @@ class PipelineTests(test_knowledge_mysql.KnowledgeMySQLTests):
             self.assertTrue(result)
             self.assertTrue(all(e.document_version_id==version and amount in e.excerpt for e in result))
         self.assertEqual(service.retrieve("如何制作红烧肉？",m.Filters(),5,versions),[])
+        index.collection.delete(where={"version":versions[0]})
+        with self.assertRaises(ServiceError) as err:
+            service.retrieve("研发投入",m.Filters(),5,[versions[0]])
+        self.assertEqual(err.exception.error.code,"INDEX_NOT_READY")
+        self.assertTrue(pipeline.process(versions[0],labels={"entity_ids":["SAIC"]},rebuild=True))
+        self.assertTrue(service.retrieve("本期费用化研发投入",m.Filters(),5,[versions[0]]))
+
+
+        changed=EvidenceIndex(self.root/"index", revision="0"*40,model=index.model)
+        changed_service=Retrieval(connect,changed)
+        with self.assertRaises(ServiceError) as err:
+            changed_service.retrieve("研发投入",m.Filters(),5,[versions[0]])
+        self.assertEqual(err.exception.error.code,"INDEX_NOT_READY")
+        changed_pipeline=IngestPipeline(connect,self.root/"runtime",changed)
+        self.assertTrue(changed_pipeline.process(versions[0],labels={"entity_ids":["SAIC"]},rebuild=True))
+        self.assertTrue(changed_service.retrieve("本期费用化研发投入",m.Filters(),5,[versions[0]]))
+
+    def test_parser_error_matches_persisted_status(self):
+        from unittest.mock import patch
+        import json
+        connect=lambda:self.connect(self.database)
+        path=self.root/"source.docx"
+        document=Document();document.add_paragraph("valid original");document.save(path)
+        version=self.ingest.ingest_document(path,self.metadata).document_version_id
+        failure=ServiceError(m.ErrorInfo(code="DOCUMENT_PARSE_FAILED",message="Cannot parse",
+            retryable=False,details={}))
+        pipeline=IngestPipeline(connect,self.root/"runtime",Mock())
+        with patch.object(pipeline.text,"ingest_version",side_effect=failure):
+            with self.assertRaises(ServiceError) as err:pipeline.process(version)
+        with connect() as db, db.cursor() as cursor:
+            cursor.execute("SELECT error_json,ingest_status FROM document_versions WHERE document_version_id=%s",(version,))
+            payload,status=cursor.fetchone()
+        self.assertEqual(status,"FAILED")
+        self.assertEqual(json.loads(payload),err.exception.error.model_dump())
+

@@ -3,6 +3,7 @@ from contextlib import closing
 import json
 from ..contracts import models as m
 from ..contracts.services import ServiceError
+from .errors import infrastructure_error
 
 class Retrieval:
     def __init__(self, connect, index):
@@ -10,6 +11,14 @@ class Retrieval:
         self.index = index
 
     def retrieve(self, query, filters, top_k, source_version_ids):
+        try:
+            return self._retrieve(query, filters, top_k, source_version_ids)
+        except ServiceError:
+            raise
+        except Exception as exc:
+            raise infrastructure_error(exc, "RETRIEVAL_FAILED") from exc
+
+    def _retrieve(self, query, filters, top_k, source_version_ids):
         if isinstance(top_k,bool) or not isinstance(top_k,int) or not 1<=top_k<=50 or not query.strip():
             raise ServiceError(m.ErrorInfo(code="INVALID_REQUEST",message="Invalid retrieval query or top_k",retryable=False,details={}))
         if not source_version_ids:
@@ -39,11 +48,16 @@ class Retrieval:
                 ("entity_ids",filters.entity_ids),("indicators",filters.indicators),("periods",filters.periods),
                 ("regions",filters.regions),("industries",filters.industries))):
                 continue
+            if tags.get("_index_fingerprint") != self.index.fingerprint:
+                raise ServiceError(m.ErrorInfo(code="INDEX_NOT_READY",message="Rebuild source version for current index",
+                    retryable=True,details={}))
             candidates[evidence.evidence_id]=evidence
         if not candidates:
             return []
         try:
             ranked=self.index.rank(query,sorted(candidates))
+        except ServiceError:
+            raise
         except Exception as exc:
             raise ServiceError(m.ErrorInfo(code="RETRIEVAL_FAILED",message="Evidence index unavailable",
                 retryable=True,details={})) from exc

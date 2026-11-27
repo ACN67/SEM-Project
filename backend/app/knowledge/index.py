@@ -34,6 +34,12 @@ class EvidenceIndex:
             raise ValueError("incomplete version index")
 
     def rank(self, query, ids):
+        present = self.collection.get(ids=ids, include=[])
+        if set(present["ids"]) != set(ids):
+            from ..contracts import models as m
+            from ..contracts.services import ServiceError
+            raise ServiceError(m.ErrorInfo(code="INDEX_NOT_READY",message="Index entries missing; rebuild source version",
+                retryable=True,details={}))
         vector = self.model.encode(["为这个句子生成表示以用于检索相关文章："+query],normalize_embeddings=True).tolist()
         scores = []
         for offset in range(0,len(ids),128):

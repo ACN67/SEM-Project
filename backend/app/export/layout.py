@@ -74,10 +74,10 @@ def make_base(path):
     settings.append(update)
     document.save(path)
 
-def load_layout(version):
+def load_layout(version, *, root=None):
     if version != "1":
         raise ValueError(f"Unknown Word layout: {version}")
-    return Document(ROOT / version / "base.docx")
+    return Document((Path(root) if root is not None else ROOT) / version / "base.docx")
 
 if __name__ == "__main__":
     make_base(ROOT / "1" / "base.docx")

@@ -1,5 +1,6 @@
 """Render an immutable report snapshot to a basic DOCX document."""
 from io import BytesIO
+from pathlib import Path
 import re
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Cm, Pt, RGBColor
@@ -30,7 +31,7 @@ def _append_citation(paragraph, markers):
         run.font.superscript = True
         run.font.color.rgb = RGBColor.from_string("42657F")
 
-def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | None = None) -> bytes:
+def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | None = None, layout_root: Path | None = None) -> bytes:
     try:
         snapshot = m.ReportDocument.model_validate(snapshot.model_dump(by_alias=True))
         if snapshot.exportable:
@@ -59,7 +60,7 @@ def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | N
                         retryable=False, details={"chart_id":chart.chart_id,"asset_id":chart.asset_id}))
                 assets[chart.chart_id] = resolve_chart(snapshot, chart, asset_resolver)
     try:
-        document = load_layout(snapshot.layout_version)
+        document = load_layout(snapshot.layout_version, root=layout_root)
     except ValueError as exc:
         raise _error("UNKNOWN_LAYOUT", str(exc)) from exc
     spec = snapshot.spec
@@ -75,7 +76,10 @@ def render_docx(snapshot: m.ReportDocument, *, asset_resolver: AssetResolver | N
     document.add_paragraph(f"编制日期  {snapshot.created_at.date().isoformat()}", "Report Cover Details")
     document.add_page_break()
     document.add_paragraph("目录", "Report Contents")
-    field(document.add_paragraph(), ' TOC \\o "1-2" \\h \\z \\u ')
+    contents = document.add_paragraph()
+    field(contents, ' TOC \\o "1-2" \\h \\z \\u ')
+    for chapter in snapshot.chapters:
+        document.add_paragraph(chapter.title, "Report Table Text")
     document.add_page_break()
     chapters = {chapter.chapter_id: chapter for chapter in snapshot.chapters}
     for task in sorted(snapshot.outline.chapters, key=lambda item: item.order):

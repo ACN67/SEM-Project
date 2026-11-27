@@ -13,3 +13,7 @@ The existing five-case expected values and negative cases remain in data/samples
 One Gotion news snapshot was validated by title and publication date. Empty EUR-Lex printouts were excluded. To recreate a candidate snapshot, print the original URL using Edge to <evidence_key>-snapshot.pdf in the source directory and rerun the acquisition verifier. This gate checks title/date presence and leaves human review pending.
 
 Validation on this W5 branch passed 117 unit tests, 6 contract tests and schema regeneration checks. The original source list and per-case negative scenarios remain intact. This PR is draft while formal five-case knowledge acceptance and independent signoff are incomplete.
+
+KBA original spreadsheet cells were independently read by openpyxl in this run: FZ 10.1 AL461=524219 for Jan.-Dezember 2023 and AL488=380609 for Jan.-Dezember 2024, both under the BEV column heading. spreadsheet-locators.json preserves the cell/header values. These cell checks do not claim W2 metric import.
+
+The real KnowledgeService run returned expected-page evidence for 9 records. Full originals were indexed and filtered by their actual frozen version IDs. Runtime IDs and located excerpts are preserved in source-results.json. Local runtime and originals remain outside Git.

@@ -1,0 +1,40 @@
+[
+  {
+    "evidence_key": "EV-R05-KBA-2023-XLSX-AL461",
+    "locator": {
+      "kind": "xlsx",
+      "sheet": "FZ 10.1",
+      "cell": "AL461",
+      "header_cells": [
+        "AK8",
+        "AL9",
+        "B461"
+      ]
+    },
+    "values": {
+      "AL461": 524219,
+      "AK8": "mit Elektroantrieb (BEV)",
+      "AL9": "Jan.-Dezember 2023",
+      "B461": "NEUZULASSUNGEN INSGESAMT"
+    }
+  },
+  {
+    "evidence_key": "EV-R05-KBA-XLSX-AL488",
+    "locator": {
+      "kind": "xlsx",
+      "sheet": "FZ 10.1",
+      "cell": "AL488",
+      "header_cells": [
+        "AK8",
+        "AL9",
+        "B488"
+      ]
+    },
+    "values": {
+      "AL488": 380609,
+      "AK8": "mit Elektroantrieb (BEV)",
+      "AL9": "Jan.-Dezember 2024",
+      "B488": "NEUZULASSUNGEN INSGESAMT"
+    }
+  }
+]

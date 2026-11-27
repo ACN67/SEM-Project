@@ -87,3 +87,22 @@ class ExportServiceTests(unittest.TestCase):
         self.assertEqual(len(fields),1)
         self.assertEqual(fields[0].xpath(".//*[local-name()='t']/text()"),["市场规模","结论"])
         self.assertEqual(len(fields[0].xpath(".//*[local-name()='br']")),1)
+
+    def test_readable_docx_missing_required_style_is_configuration_error(self):
+        from docx import Document
+        from backend.app.export.layout import ROOT
+        snap = snapshot()
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root/"1").mkdir()
+            for name in ("Report Cover Title", "Report Table Text", "Heading 1"):
+                with self.subTest(style=name):
+                    document = Document(ROOT/"1/base.docx")
+                    document.styles[name].delete()
+                    document.save(root/"1/base.docx")
+                    service = ExportService(root/"output", template_root=root,
+                        asset_resolver=lambda v,a:render_chart_png(snap.charts[0]))
+                    with self.assertRaises(ServiceError) as err:
+                        service.render_report(snap,"docx")
+                    self.assertEqual(err.exception.error.details["reason"],"layout_invalid")
+                    self.assertFalse(err.exception.error.retryable)

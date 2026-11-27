@@ -79,7 +79,14 @@ def load_layout(version, *, root=None):
         raise ValueError(f"Unknown Word layout: {version}")
     from .pdf import export_error
     try:
-        return Document((Path(root) if root is not None else ROOT) / version / "base.docx")
+        document = Document((Path(root) if root is not None else ROOT) / version / "base.docx")
+        required = {"Normal", "Heading 1", "Heading 2", "Report Contents",
+            "Report Cover Title", "Report Cover Period", "Report Cover Details",
+            "Report Table Header", "Report Table Text"}
+        for name in required:
+            if name not in document.styles or document.styles[name].type != WD_STYLE_TYPE.PARAGRAPH:
+                raise ValueError("Missing paragraph style: " + name)
+        return document
     except Exception as exc:
         raise export_error("layout_invalid") from exc
 

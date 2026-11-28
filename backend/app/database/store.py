@@ -19,6 +19,8 @@ from uuid import uuid4
 from ..contracts import models as m
 from ..contracts.services import ServiceError
 
+UNSET = object()
+
 _UTC = timezone.utc
 
 
@@ -257,6 +259,7 @@ class MemoryStore:
         self._documents: dict[str, m.DocumentRecord] = {}
         self._sessions: dict[str, datetime] = {}
         self._sequence = 0
+        self._budget_reserved=Decimal(0)
 
     def _order(self, created_at: datetime | None, key: str) -> tuple:
         """Ascending ordering key: oldest first, ties broken by ID then insertion.
@@ -332,14 +335,14 @@ class MemoryStore:
             job.updated_at = now
             return replace(job)
 
-    def update_job(self, job_id: str, *, status=None, stage=None, frozen=None,
+    def update_job(self, job_id: str, *, status=None, stage=UNSET, frozen=None,
                    context=None, result_version_id=None, estimated_cost_cny=None,
-                   error=None, now=None) -> None:
+                   error=UNSET, now=None) -> None:
         with self._lock:
             job = self._jobs[job_id]
             if status is not None:
                 job.status = status
-            if stage is not None:
+            if stage is not UNSET:
                 job.stage = stage
             if frozen is not None:
                 job.frozen = frozen
@@ -349,7 +352,7 @@ class MemoryStore:
                 job.result_version_id = result_version_id
             if estimated_cost_cny is not None:
                 job.estimated_cost_cny = estimated_cost_cny
-            if error is not None:
+            if error is not UNSET:
                 job.error = error
             if now is not None:
                 job.updated_at = now
@@ -402,7 +405,7 @@ class MemoryStore:
             )
 
     def update_chapter(self, job_id: str, chapter_id: str, *, status=None,
-                       attempt_id=None, retries=None, content=None, error=None) -> None:
+                       attempt_id=None, retries=None, content=None, error=UNSET) -> None:
         with self._lock:
             job = self._jobs[job_id]
             for chapter in job.chapters:
@@ -415,7 +418,7 @@ class MemoryStore:
                         chapter.retries = retries
                     if content is not None:
                         chapter.content = content
-                    if error is not None:
+                    if error is not UNSET:
                         chapter.error = error
                     return
             raise KeyError(chapter_id)
@@ -423,6 +426,9 @@ class MemoryStore:
     # -- versions ---------------------------------------------------------
     def save_version(self, document: m.ReportDocument, *, make_current: bool, now: datetime) -> None:
         with self._lock:
+            existing = self._versions.get(document.version_id)
+            if existing is not None and existing != document:
+                raise ValueError("immutable report version conflict")
             self._versions[document.version_id] = document.model_copy(deep=True)
             if make_current:
                 report = self._reports[document.report_id]
@@ -500,7 +506,7 @@ class MemoryStore:
             return replace(export)
 
     def update_export(self, export_id: str, *, status=None, storage_key=None,
-                      checksum=None, size_bytes=None, error=None, now=None) -> None:
+                      checksum=None, size_bytes=None, error=UNSET, now=None) -> None:
         with self._lock:
             export = self._exports[export_id]
             if status is not None:
@@ -511,7 +517,7 @@ class MemoryStore:
                 export.checksum = checksum
             if size_bytes is not None:
                 export.size_bytes = size_bytes
-            if error is not None:
+            if error is not UNSET:
                 export.error = error
             if now is not None:
                 export.updated_at = now
@@ -596,3 +602,10 @@ class MemoryStore:
     def delete_admin_session(self, session_id: str) -> None:
         with self._lock:
             self._sessions.pop(session_id, None)
+
+    def reserve_budget(self, amount, limit):
+        with self._lock:
+            if self._budget_reserved+amount>limit:
+                return False
+            self._budget_reserved+=amount
+            return True

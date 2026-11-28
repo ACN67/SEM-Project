@@ -11,7 +11,7 @@ class MetricRepository:
         self._connect = connect
         self._runtime_root = runtime_root
 
-    def ingest_version(self, version_id: str, **mapping) -> list[m.Metric]:
+    def ingest_version(self, version_id: str, *, source_evidence_ids=None, **mapping) -> list[m.Metric]:
         with closing(self._connect()) as connection:
             connection.begin()
             try:
@@ -23,6 +23,17 @@ class MetricRepository:
                         raise ValueError("unknown document version")
                     record = _record(row[:5])
                     observations = parse_tabular(self._runtime_root / row[6], row[5], record, **mapping)
+                    if source_evidence_ids is not None:
+                        if len(observations)!=1 or not source_evidence_ids:
+                            raise ValueError('source-linked transcription requires one observation')
+                        ids=list(dict.fromkeys(source_evidence_ids))
+                        cursor.execute('SELECT e.payload,v.ingest_status FROM evidences e JOIN document_versions v ON v.document_version_id=e.document_version_id WHERE e.evidence_id IN ('+','.join(['%s']*len(ids))+')',tuple(ids))
+                        sources=cursor.fetchall()
+                        if len(sources)!=len(ids) or any(status!='READY' for _,status in sources):
+                            raise ValueError('original evidence unavailable')
+                        if record.published_at!=max(m.Evidence.model_validate_json(p).published_at for p,_ in sources):
+                            raise ValueError('transcription date must match latest input evidence')
+                        observations[0].metric.source_evidence_ids=ids
                     cursor.execute("SELECT m.payload, e.payload, c.industry FROM metrics m "
                                    "JOIN evidences e ON m.evidence_id=e.evidence_id "
                                    "JOIN chunks c ON e.chunk_id=c.chunk_id WHERE m.document_version_id=%s", (version_id,))
@@ -62,6 +73,14 @@ class MetricRepository:
         result = []
         for payload, industry, metadata in rows:
             metric = m.Metric.model_validate_json(payload)
+            with closing(self._connect()) as connection, connection.cursor() as cursor:
+                ids=metric.source_evidence_ids
+                if not ids:
+                    continue
+                cursor.execute('SELECT e.payload,v.ingest_status FROM evidences e JOIN document_versions v ON v.document_version_id=e.document_version_id WHERE e.evidence_id IN ('+','.join(['%s']*len(ids))+')',tuple(ids))
+                sources=cursor.fetchall()
+            if len(sources)!=len(set(ids)) or any(status!='READY' or m.Evidence.model_validate_json(p).document_version_id not in source_version_ids for p,status in sources):
+                continue
             if filters.as_of and m.Metadata.model_validate_json(metadata).published_at > filters.as_of:
                 continue
             if any(values and actual not in values for values, actual in (

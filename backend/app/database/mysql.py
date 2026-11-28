@@ -9,6 +9,7 @@ accepted response in one transaction, matching 接口规范 v1.0.
 from __future__ import annotations
 
 import json
+from hashlib import sha256
 from datetime import datetime, timezone
 from decimal import Decimal
 from urllib.parse import urlsplit
@@ -20,6 +21,7 @@ from pydantic import TypeAdapter
 from ..contracts import models as m
 from ..contracts.services import ServiceError
 from .store import (
+    UNSET,
     ChapterRecord,
     ExportRecord,
     IdempotencyRequest,
@@ -255,9 +257,9 @@ class MySqlStore:
                 raise
             return self.get_job(job_id)
 
-    def update_job(self, job_id: str, *, status=None, stage=None, frozen=None,
+    def update_job(self, job_id: str, *, status=None, stage=UNSET, frozen=None,
                    context=None, result_version_id=None, estimated_cost_cny=None,
-                   error=None, now=None) -> None:
+                   error=UNSET, now=None) -> None:
         assignments = []
         params: list[object] = []
         if status is not None:
@@ -265,7 +267,7 @@ class MySqlStore:
                 raise ValueError(f"unknown job status {status}")
             assignments.append("status=%s")
             params.append(status)
-        if stage is not None:
+        if stage is not UNSET:
             assignments.append("stage=%s")
             params.append(stage)
         if frozen is not None:
@@ -280,7 +282,7 @@ class MySqlStore:
         if estimated_cost_cny is not None:
             assignments.append("estimated_cost_cny=%s")
             params.append(str(estimated_cost_cny))
-        if error is not None:
+        if error is not UNSET:
             assignments.append("error_json=%s")
             params.append(_dump(error))
         if now is not None:
@@ -332,7 +334,7 @@ class MySqlStore:
         return self.get_job(job_id)
 
     def update_chapter(self, job_id: str, chapter_id: str, *, status=None,
-                       attempt_id=None, retries=None, content=None, error=None) -> None:
+                       attempt_id=None, retries=None, content=None, error=UNSET) -> None:
         assignments = []
         params: list[object] = []
         if status is not None:
@@ -347,7 +349,7 @@ class MySqlStore:
         if content is not None:
             assignments.append("content_json=%s")
             params.append(_dump(content))
-        if error is not None:
+        if error is not UNSET:
             assignments.append("error_json=%s")
             params.append(_dump(error))
         if not assignments:
@@ -387,6 +389,15 @@ class MySqlStore:
             connection.begin()
             try:
                 with connection.cursor() as cursor:
+                    cursor.execute("SELECT document_json FROM report_versions WHERE version_id=%s FOR UPDATE", (document.version_id,))
+                    existing=cursor.fetchone()
+                    if existing:
+                        if m.ReportDocument.model_validate_json(existing['document_json']) != document:
+                            raise ValueError("immutable report version conflict")
+                        if make_current:
+                            cursor.execute("UPDATE reports SET current_version_id=%s,updated_at=%s WHERE report_id=%s", (document.version_id,_naive(now),document.report_id))
+                        connection.commit()
+                        return
                     cursor.execute(
                         "INSERT INTO report_versions (report_id, version_id, parent_version_id,"
                         " document_json, exportable, stale_chapter_ids, created_at)"
@@ -442,6 +453,10 @@ class MySqlStore:
 
     # -- exports ----------------------------------------------------------
     def _guarded(self, cursor, guard: IdempotencyRequest) -> dict | None:
+        lock_name=sha256((guard.operation+'|'+guard.target_id+'|'+guard.key).encode()).hexdigest()
+        cursor.execute("SELECT GET_LOCK(%s,10) AS acquired", (lock_name,))
+        if cursor.fetchone()['acquired'] != 1:
+            raise RuntimeError("idempotency lock timeout")
         cursor.execute(
             "SELECT request_hash, response_json FROM idempotency_keys"
             " WHERE operation=%s AND target_id=%s AND idempotency_key=%s FOR UPDATE",
@@ -528,7 +543,7 @@ class MySqlStore:
             return self.get_export(export_id)
 
     def update_export(self, export_id: str, *, status=None, storage_key=None,
-                      checksum=None, size_bytes=None, error=None, now=None) -> None:
+                      checksum=None, size_bytes=None, error=UNSET, now=None) -> None:
         assignments = []
         params: list[object] = []
         if status is not None:
@@ -543,7 +558,7 @@ class MySqlStore:
         if size_bytes is not None:
             assignments.append("size_bytes=%s")
             params.append(size_bytes)
-        if error is not None:
+        if error is not UNSET:
             assignments.append("error_json=%s")
             params.append(_dump(error))
         if now is not None:
@@ -605,8 +620,8 @@ class MySqlStore:
     def ready_version_ids(self) -> list[str]:
         with self._document_connect() as connection, connection.cursor() as cursor:
             cursor.execute(
-                "SELECT document_version_id FROM document_versions"
-                " WHERE ingest_status='READY' ORDER BY document_version_id",
+                "SELECT v.document_version_id FROM document_versions v"
+                " WHERE v.ingest_status='READY' AND NOT EXISTS (SELECT 1 FROM document_versions newer WHERE newer.document_id=v.document_id AND newer.ingest_status='READY' AND newer.registration_order>v.registration_order) ORDER BY v.document_version_id",
             )
             return [row["document_version_id"] for row in cursor.fetchall()]
 
@@ -678,3 +693,21 @@ class MySqlStore:
     def delete_admin_session(self, session_id: str) -> None:
         with self._connect() as connection, connection.cursor() as cursor:
             cursor.execute("DELETE FROM admin_sessions WHERE session_id=%s", (session_id,))
+
+    def reserve_budget(self, amount, limit):
+        with self._connect() as c:
+            c.begin()
+            try:
+                with c.cursor() as q:
+                    q.execute("INSERT IGNORE INTO project_budget VALUES (1,0)")
+                    q.execute("SELECT reserved FROM project_budget WHERE id=1 FOR UPDATE")
+                    value=Decimal(q.fetchone()['reserved'])+amount
+                    if value>limit:
+                        c.rollback()
+                        return False
+                    q.execute("UPDATE project_budget SET reserved=%s WHERE id=1", (str(value),))
+                c.commit()
+                return True
+            except Exception:
+                c.rollback()
+                raise

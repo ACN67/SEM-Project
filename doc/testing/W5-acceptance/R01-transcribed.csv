@@ -1,0 +1,4 @@
+indicator,name,entity_id,period,granularity,region,scope,raw_value,raw_unit,multiplier,unit,currency
+sales,sales,,2022,year,中国,中国汽车工业协会统计口径；全国新能源汽车销量,688.7,万辆,10000,辆,
+sales,sales,,2023,year,中国,中国汽车工业协会统计口径；全国新能源汽车销量,949.5,万辆,10000,辆,
+sales,sales,,2024,year,中国,中国汽车工业协会统计口径；全国新能源汽车销量,1286.6,万辆,10000,辆,

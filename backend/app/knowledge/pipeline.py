@@ -48,7 +48,13 @@ class IngestPipeline:
         try:
             if not rebuild:
                 if row[1].lower().endswith((".xlsx",".csv")):
-                    self.metrics.ingest_version(version,**(mapping or {}))
+                    industry_values=(labels or {}).get("industries",[])
+                    tabular_mapping=dict(mapping or {})
+                    if len(industry_values)==1:
+                        if "industry" in tabular_mapping and tabular_mapping["industry"]!=industry_values[0]:
+                            raise ValueError("conflicting tabular industry labels")
+                        tabular_mapping["industry"]=industry_values[0]
+                    self.metrics.ingest_version(version,**tabular_mapping)
                 else:
                     industries=(labels or {}).get("industries",[])
                     self.text.ingest_version(version,industry=industries[0] if len(industries)==1 else None)

@@ -1,0 +1,278 @@
+{
+  "sources": {
+    "EV-R01-MIIT-2022-ANNUAL": {
+      "file": "EV-R01-MIIT-2022-ANNUAL-rendition.txt",
+      "sha256": "665065eff54352cea364541a7e44325359d5618d7b041123d4937e0229e8a94c",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_610c626d34b8424c9c1077ac5e5a40fe.html",
+      "original_page": null
+    },
+    "EV-R01-MIIT-2023-ANNUAL": {
+      "file": "EV-R01-MIIT-2023-ANNUAL-rendition.txt",
+      "sha256": "a9b04f56d85491b43bff488ce225c70c062f983a77269212b79dfc9625b08904",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+      "original_page": null
+    },
+    "EV-R01-MIIT-2024-ANNUAL": {
+      "file": "EV-R01-MIIT-2024-ANNUAL-rendition.txt",
+      "sha256": "33563d695d9c7474155477830fc64aee9169f23daa9f18367b051dd0f8ad1572",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+      "original_page": null
+    },
+    "EV-R03-MIIT-2023-Q1": {
+      "file": "EV-R03-MIIT-2023-Q1-rendition.txt",
+      "sha256": "39f8ddf173a1061f1e85ff8edccd3f4c2f4dbc89bbc8721f15fb737817675c42",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_9cdfd3d829b24222a8ecf947d6627a45.html",
+      "original_page": null
+    },
+    "EV-R03-MIIT-2023-H1": {
+      "file": "EV-R03-MIIT-2023-H1-rendition.txt",
+      "sha256": "81e68ff43fc581e5c85c45d33fef8c08a1d0984e32c7e5d19ca18ba2e3b42f6c",
+      "source_url": "https://gxt.fujian.gov.cn/zwgk/gysj/xysj/zb/202307/t20230725_6213460.htm",
+      "original_page": null
+    },
+    "EV-R03-MIIT-2023-9M": {
+      "file": "EV-R03-MIIT-2023-9M-rendition.txt",
+      "sha256": "5521c1534ced4fcffcde94675510816a83e6dce82c281b4c6b47ae2742a8fae9",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_fce3df5fdc544f8bbb2277fac5df58da.html",
+      "original_page": null
+    },
+    "EV-R03-MIIT-2023-ANNUAL": {
+      "file": "EV-R03-MIIT-2023-ANNUAL-rendition.txt",
+      "sha256": "a9b04f56d85491b43bff488ce225c70c062f983a77269212b79dfc9625b08904",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+      "original_page": null
+    },
+    "EV-R03-MIIT-2024-Q1": {
+      "file": "EV-R03-MIIT-2024-Q1-rendition.txt",
+      "sha256": "deab9733e67e976bfa4aace85e5dcffc7249274c00a2cf289b810e0b5cae64b9",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+      "original_page": null
+    },
+    "EV-R03-MIIT-2024-H1": {
+      "file": "EV-R03-MIIT-2024-H1-rendition.txt",
+      "sha256": "372e273690739e11eb904938a78ecb82c369097a6b60c08777cf2ec956d72a8d",
+      "source_url": "https://wap.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_3dff2eb026d14e36b9ec6065840d3fdc.html",
+      "original_page": null
+    },
+    "EV-R03-MIIT-2024-9M": {
+      "file": "EV-R03-MIIT-2024-9M-rendition.txt",
+      "sha256": "64178514e1633b509d5b9789ad28815df4aea54054bb35ca306a980c0b3d56df",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_be025f4f66ef42d78af0d4622e07eebb.html",
+      "original_page": null
+    },
+    "EV-R03-MIIT-2024-ANNUAL": {
+      "file": "EV-R03-MIIT-2024-ANNUAL-rendition.txt",
+      "sha256": "d932b0c3c14cc9c2d545432b41254ef3e935f4d6fb7ec185c1619b94ab7f7ffb",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+      "original_page": null
+    },
+    "EV-R02-BYD-CNINFO-P34": {
+      "file": "EV-R02-BYD-CNINFO-P34.pdf",
+      "sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+      "source_url": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881496.PDF",
+      "original_page": 34
+    },
+    "EV-R02-SAIC-2023-P13": {
+      "file": "EV-R02-SAIC-2023-P13.pdf",
+      "sha256": "4a2339816a97dc00b9196ed9d82b91373f1c3fc1f200313996b0605d74219e45",
+      "source_url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2023ndqgg/2024/3/29/C5303F0A7F774009828802E9562F73FB.pdf",
+      "original_page": 13
+    },
+    "EV-R02-SAIC-2024-P13": {
+      "file": "EV-R02-SAIC-2024-P13.pdf",
+      "sha256": "c980b2d827f372b5b90742e299d609345c83342584901c96ea95891c43f4ab3f",
+      "source_url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2024ndqgg/2025/4/29/685D33923ABE4D109BBE39F92BFBF945.pdf",
+      "original_page": 13
+    }
+  },
+  "tables": [
+    {
+      "case_id": "R01",
+      "file": "R01-transcribed.csv",
+      "sha256": "706d38f614f8b2c91b49617ac471db05f13d60d7842502dc2f95ae165f5a8777",
+      "representation": "manual-transcription",
+      "rows": [
+        {
+          "csv_row": 2,
+          "evidence_keys": [
+            "EV-R01-MIIT-2022-ANNUAL"
+          ],
+          "source_values": [
+            "688.7"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 3,
+          "evidence_keys": [
+            "EV-R01-MIIT-2023-ANNUAL"
+          ],
+          "source_values": [
+            "949.5"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 4,
+          "evidence_keys": [
+            "EV-R01-MIIT-2024-ANNUAL"
+          ],
+          "source_values": [
+            "1286.6"
+          ],
+          "operation": "direct"
+        }
+      ]
+    },
+    {
+      "case_id": "R03",
+      "file": "R03-transcribed.csv",
+      "sha256": "f65ef19b68b6cc97348cd468d60d010461e3e96f35cc4f3a63250c91bde611ee",
+      "representation": "manual-transcription",
+      "rows": [
+        {
+          "csv_row": 2,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-Q1"
+          ],
+          "source_values": [
+            "158.6",
+            "0"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 3,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-H1",
+            "EV-R03-MIIT-2023-Q1"
+          ],
+          "source_values": [
+            "374.7",
+            "158.6"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 4,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-9M",
+            "EV-R03-MIIT-2023-H1"
+          ],
+          "source_values": [
+            "627.8",
+            "374.7"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 5,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-ANNUAL",
+            "EV-R03-MIIT-2023-9M"
+          ],
+          "source_values": [
+            "949.5",
+            "627.8"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 6,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-Q1"
+          ],
+          "source_values": [
+            "209",
+            "0"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 7,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-H1",
+            "EV-R03-MIIT-2024-Q1"
+          ],
+          "source_values": [
+            "494.4",
+            "209"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 8,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-9M",
+            "EV-R03-MIIT-2024-H1"
+          ],
+          "source_values": [
+            "832",
+            "494.4"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 9,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-ANNUAL",
+            "EV-R03-MIIT-2024-9M"
+          ],
+          "source_values": [
+            "1286.6",
+            "832"
+          ],
+          "operation": "cumulative_difference"
+        }
+      ]
+    },
+    {
+      "case_id": "R02",
+      "file": "R02-transcribed.csv",
+      "sha256": "d3bfd7e09035d891490fa21e8bfc42c0a6fe862f15000933605cc01409270d3f",
+      "representation": "manual-transcription",
+      "rows": [
+        {
+          "csv_row": 2,
+          "evidence_keys": [
+            "EV-R02-BYD-CNINFO-P34"
+          ],
+          "source_values": [
+            "54,160,964,000.00"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 3,
+          "evidence_keys": [
+            "EV-R02-BYD-CNINFO-P34"
+          ],
+          "source_values": [
+            "39,917,743,000.00"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 4,
+          "evidence_keys": [
+            "EV-R02-SAIC-2023-P13"
+          ],
+          "source_values": [
+            "22,013,246,493.11"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 5,
+          "evidence_keys": [
+            "EV-R02-SAIC-2024-P13"
+          ],
+          "source_values": [
+            "21,813,090,045.30"
+          ],
+          "operation": "direct"
+        }
+      ]
+    }
+  ]
+}

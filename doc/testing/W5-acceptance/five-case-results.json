@@ -63,7 +63,7 @@
         "status": "PASS",
         "gaps": [
           {
-            "question": "rd_investment:saic:2024:yoy",
+            "question": "rd_investment:byd:2024:yoy",
             "code": "MISSING_BASE_PERIOD",
             "reason": "缺少 2023 同期指标",
             "required": true
@@ -128,52 +128,52 @@
             {
               "period": "2024-Q1",
               "baseline_period": "2023-Q1",
-              "current_metric_id": "5c7978bee3c72d1a310ffa3670176166f9672989c852001c7ccbe8fe81362583",
-              "baseline_metric_id": "485b69878e67e35b5814fe3a985d9582e58890e9e9880d2a3995c935ea651cd5",
-              "yoy_metric_id": "yoy:5c7978bee3c72d1a310ffa3670176166f9672989c852001c7ccbe8fe81362583"
+              "current_metric_id": "86addd70c851520e65c2ff5094650e2159eb2335abfc063857c92075fedae09c",
+              "baseline_metric_id": "b845a055e7a354f1f6f6dffda6f357b252a0eb50957caa1ab1c57fe6ef7a9077",
+              "yoy_metric_id": "yoy:86addd70c851520e65c2ff5094650e2159eb2335abfc063857c92075fedae09c"
             },
             {
               "period": "2024-Q2",
               "baseline_period": "2023-Q2",
-              "current_metric_id": "79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793",
-              "baseline_metric_id": "808141c186558dc8cc51b873883b0b3e7e10faf300f92e6054f5f50fb99a8ecf",
-              "yoy_metric_id": "yoy:79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793"
+              "current_metric_id": "fb5922e685cccbd97f4a3296cc10ba899c98a15caa97852822c00305fdcd73b6",
+              "baseline_metric_id": "db25ba803e7d83b9bb223fe964a899391a5499cfef0d13316ca2fba79e3d3af1",
+              "yoy_metric_id": "yoy:fb5922e685cccbd97f4a3296cc10ba899c98a15caa97852822c00305fdcd73b6"
             },
             {
               "period": "2024-Q3",
               "baseline_period": "2023-Q3",
-              "current_metric_id": "a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5",
-              "baseline_metric_id": "0ab345d83b5247c4988475de5b336668392339901fe64ba052a7162aa0fc932e",
-              "yoy_metric_id": "yoy:a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5"
+              "current_metric_id": "d6cd82ff533665b131f2b5d73305f226af2c3814e544918bb5d37a99d7a97ff1",
+              "baseline_metric_id": "b100e3fb15f828fe075c1de6753d9640cf8a04ebcbb5e64e2d5c6b55141bbd2a",
+              "yoy_metric_id": "yoy:d6cd82ff533665b131f2b5d73305f226af2c3814e544918bb5d37a99d7a97ff1"
             },
             {
               "period": "2024-Q4",
               "baseline_period": "2023-Q4",
-              "current_metric_id": "7eaa813fc2fa96ea4e16379996f2734fc42186d13f3853ccf115c397889e40d3",
-              "baseline_metric_id": "619a20cb450c63b7edad881ae1f6aeb6208ecd6f4084528dd25c4ec2b9ffeb66",
-              "yoy_metric_id": "yoy:7eaa813fc2fa96ea4e16379996f2734fc42186d13f3853ccf115c397889e40d3"
+              "current_metric_id": "338f562e2922e72de2d29c49360ceae8967baf222619010efb2cab025c7bb4c7",
+              "baseline_metric_id": "7f2cff5551f966c4fce8ccdcd24d48dff0f7822cfc955960e09ea77aadc198d5",
+              "yoy_metric_id": "yoy:338f562e2922e72de2d29c49360ceae8967baf222619010efb2cab025c7bb4c7"
             }
           ],
           "adjacent_yoy_changes": [
             {
               "earlier_period": "2024-Q1",
               "later_period": "2024-Q2",
-              "earlier_yoy_metric_id": "yoy:5c7978bee3c72d1a310ffa3670176166f9672989c852001c7ccbe8fe81362583",
-              "later_yoy_metric_id": "yoy:79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793",
+              "earlier_yoy_metric_id": "yoy:86addd70c851520e65c2ff5094650e2159eb2335abfc063857c92075fedae09c",
+              "later_yoy_metric_id": "yoy:fb5922e685cccbd97f4a3296cc10ba899c98a15caa97852822c00305fdcd73b6",
               "direction": "加快"
             },
             {
               "earlier_period": "2024-Q2",
               "later_period": "2024-Q3",
-              "earlier_yoy_metric_id": "yoy:79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793",
-              "later_yoy_metric_id": "yoy:a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5",
+              "earlier_yoy_metric_id": "yoy:fb5922e685cccbd97f4a3296cc10ba899c98a15caa97852822c00305fdcd73b6",
+              "later_yoy_metric_id": "yoy:d6cd82ff533665b131f2b5d73305f226af2c3814e544918bb5d37a99d7a97ff1",
               "direction": "加快"
             },
             {
               "earlier_period": "2024-Q3",
               "later_period": "2024-Q4",
-              "earlier_yoy_metric_id": "yoy:a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5",
-              "later_yoy_metric_id": "yoy:7eaa813fc2fa96ea4e16379996f2734fc42186d13f3853ccf115c397889e40d3",
+              "earlier_yoy_metric_id": "yoy:d6cd82ff533665b131f2b5d73305f226af2c3814e544918bb5d37a99d7a97ff1",
+              "later_yoy_metric_id": "yoy:338f562e2922e72de2d29c49360ceae8967baf222619010efb2cab025c7bb4c7",
               "direction": "加快"
             }
           ]

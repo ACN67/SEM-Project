@@ -83,20 +83,48 @@ def main():
             if sha256(path.read_bytes()).hexdigest()!=table['sha256']:raise ValueError('transcription changed')
             keys={key for row in table['rows'] for key in row['evidence_keys']}
             if not keys<=versions.keys():raise ValueError('transcription original unavailable')
-            version=service.ingest_document(path,m.Metadata(title=table['case_id']+' 原件数值整理表（非原始发布表）',publisher='SEM 项目资料整理',
-                published_at=max(date.fromisoformat(records[k]['published_at']) for k in keys),source_url=None)).document_version_id
-            service.pipeline.process(version,labels={'industries':['新能源汽车']})
-            metrics=service.get_metrics(m.Filters(),[version])
-            if len(metrics)!=len(table['rows']):raise ValueError('transcription row count mismatch')
-            table_versions[table['case_id']]=version
-            table_results.append(dict(case_id=table['case_id'],document_version_id=version,metrics=[x.model_dump(mode='json') for x in metrics],provenance=table))
+            import csv
+            with path.open(encoding='utf8',newline='') as stream:
+                reader=csv.DictReader(stream); fields=reader.fieldnames; cells=list(reader)
+            row_versions=[]; trace_checks=[]
+            for row,provenance in zip(cells,table['rows'],strict=True):
+                source_ids=[]; input_evidences=[]
+                for key in provenance['evidence_keys']:
+                    # Reuse actual retrieved source fragments, preserving original locators.
+                    hits=evidence_hits[key]
+                    value=provenance['source_values'][provenance['evidence_keys'].index(key)]
+                    relevant=[e for e in hits if value.replace(',','') in ''.join(e.excerpt.split()).replace(',','')]
+                    if not relevant: raise ValueError('source value not located: '+key+' '+value)
+                    input_evidences.extend(relevant)
+                    source_ids.extend(e.evidence_id for e in relevant)
+                single=args.sources/(table['case_id']+'-'+row['entity_id']+'-'+row['period']+'-linked.csv')
+                with single.open('w',encoding='utf8',newline='') as stream:
+                    writer=csv.DictWriter(stream,fieldnames=fields+['original_evidence_ids']);writer.writeheader();writer.writerow({**row,'original_evidence_ids':','.join(sorted(set(source_ids)))})
+                version=service.ingest_document(single,m.Metadata(title=table['case_id']+' '+row['period']+' 原件数值整理',publisher='SEM 项目资料整理',
+                    published_at=max(e.published_at for e in input_evidences),source_url=None)).document_version_id
+                service.pipeline.process(version,labels={'industries':['新能源汽车']},mapping={'source_evidence_ids':source_ids})
+                row_versions.append(version)
+                allowed=[version]+[versions[k] for k in provenance['evidence_keys']]
+                linked=service.get_metrics(m.Filters(),allowed)
+                assert len(linked)==1 and set(linked[0].source_evidence_ids)==set(source_ids)
+                assert not service.get_metrics(m.Filters(),[version]), 'original source boundary bypassed'
+                cutoff=date(2024,12,31)
+                visible=service.get_metrics(m.Filters(as_of=cutoff),allowed)
+                assert bool(visible)==(max(e.published_at for e in input_evidences)<=cutoff)
+                trace_checks.append(dict(period=row['period'],entity_id=row['entity_id'],source_evidence_ids=linked[0].source_evidence_ids,
+                    original_locations=[e.model_dump(mode='json') for e in input_evidences],as_of='2024-12-31',visible=bool(visible)))
+            allowed=row_versions+[versions[k] for k in keys]
+            metrics=service.get_metrics(m.Filters(),allowed)
+            if len(metrics)!=len(table['rows']):raise ValueError('linked transcription row count mismatch')
+            table_versions[table['case_id']]=allowed
+            table_results.append(dict(case_id=table['case_id'],source_version_ids=allowed,metrics=[x.model_dump(mode='json') for x in metrics],provenance=table,trace_checks=trace_checks))
         save(args.runtime/'five-case-tables.json',table_results)
         outcomes=[]
         for case in cases:
             cid=case['case_id'];missing=[k for k in case['evidence_keys'] if k not in versions]
             checks=[];negatives=[]
             indicator=case['required_contract_indicators']
-            selected=[table_versions[cid]] if cid in table_versions else [versions[k] for k in case['evidence_keys'] if k in versions and k.endswith(('AL461','AL488'))]
+            selected=table_versions[cid] if cid in table_versions else [versions[k] for k in case['evidence_keys'] if k in versions and k.endswith(('AL461','AL488'))]
             raw=service.get_metrics(m.Filters(),selected) if selected else []
             if indicator:
                 task=m.Task(chapter_id='acceptance',section_key='acceptance',title=cid,order=0,required=True,depends_on=[],

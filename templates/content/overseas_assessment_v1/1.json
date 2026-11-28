@@ -1,0 +1,119 @@
+{
+  "template_id": "overseas_assessment_v1",
+  "version": 1,
+  "title": "出海研判报告",
+  "report_type": "overseas_assessment",
+  "layout_version": "1",
+  "requires_as_of": true,
+  "sections": [
+    {
+      "chapter_id": "summary",
+      "section_key": "summary",
+      "title": "摘要",
+      "order": 0,
+      "required": true,
+      "depends_on": [
+        "scope",
+        "market",
+        "policy",
+        "risk",
+        "entry"
+      ],
+      "research_questions": [
+        "主要判断、适用范围和证据缺口是什么？"
+      ],
+      "evidence_requirements": [],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "scope",
+      "section_key": "scope",
+      "title": "产品与目标市场",
+      "order": 1,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "依据本次报告的 origin、target_market、product 和 as_of，确认产品、原产地、目标市场及统计边界。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "market",
+      "section_key": "market",
+      "title": "市场统计",
+      "order": 2,
+      "required": true,
+      "depends_on": [
+        "scope"
+      ],
+      "research_questions": [
+        "依据本次指定产品与目标市场，区分注册量、销量与进口量，记录统计期和发布日。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "policy",
+      "section_key": "policy",
+      "title": "贸易与准入",
+      "order": 3,
+      "required": true,
+      "depends_on": [
+        "scope"
+      ],
+      "research_questions": [
+        "定位普通关税、反补贴税及准入原文，列出对象、原产地条件、生效日，排除截止日后发布资料。缺税项明确税负范围。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "risk",
+      "section_key": "risk",
+      "title": "风险评估",
+      "order": 4,
+      "required": true,
+      "depends_on": [
+        "market",
+        "policy"
+      ],
+      "research_questions": [
+        "证据缺口如何影响成本和准入判断？"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "entry",
+      "section_key": "entry",
+      "title": "进入建议",
+      "order": 5,
+      "required": true,
+      "depends_on": [
+        "risk"
+      ],
+      "research_questions": [
+        "结合适用政策和证据边界给出进入建议。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    }
+  ]
+}

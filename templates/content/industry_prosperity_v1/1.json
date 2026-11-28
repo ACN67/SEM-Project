@@ -1,0 +1,120 @@
+{
+  "template_id": "industry_prosperity_v1",
+  "version": 1,
+  "title": "产业景气报告",
+  "report_type": "industry_prosperity",
+  "layout_version": "1",
+  "requires_as_of": true,
+  "sections": [
+    {
+      "chapter_id": "summary",
+      "section_key": "summary",
+      "title": "摘要",
+      "order": 0,
+      "required": true,
+      "depends_on": [
+        "scope",
+        "quarterly",
+        "change",
+        "drivers",
+        "conclusion"
+      ],
+      "research_questions": [
+        "主要判断、适用范围和证据缺口是什么？"
+      ],
+      "evidence_requirements": [],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "scope",
+      "section_key": "scope",
+      "title": "指标口径",
+      "order": 1,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "明确指标、完整季度与同比基期，累计值不得重复求和。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "quarterly",
+      "section_key": "quarterly",
+      "title": "季度走势",
+      "order": 2,
+      "required": true,
+      "depends_on": [
+        "scope"
+      ],
+      "research_questions": [
+        "列出完整季度及同期数值，缺月标记缺口。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [
+        "sales"
+      ],
+      "desired_chart": "line"
+    },
+    {
+      "chapter_id": "change",
+      "section_key": "change",
+      "title": "同比变化",
+      "order": 3,
+      "required": true,
+      "depends_on": [
+        "quarterly"
+      ],
+      "research_questions": [
+        "比较同比及相邻同比之差，区分正增长和增速放缓，缺基期或零基期不得计算。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "drivers",
+      "section_key": "drivers",
+      "title": "驱动因素",
+      "order": 4,
+      "required": true,
+      "depends_on": [
+        "change"
+      ],
+      "research_questions": [
+        "哪些来源支持驱动解释？证据不足时列为待验证。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "conclusion",
+      "section_key": "conclusion",
+      "title": "综合判断",
+      "order": 5,
+      "required": true,
+      "depends_on": [
+        "drivers"
+      ],
+      "research_questions": [
+        "结合数据与缺口给出景气判断。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    }
+  ]
+}

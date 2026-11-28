@@ -63,7 +63,7 @@
         "status": "PASS",
         "gaps": [
           {
-            "question": "rd_investment:byd:2024:yoy",
+            "question": "rd_investment:saic:2024:yoy",
             "code": "MISSING_BASE_PERIOD",
             "reason": "缺少 2023 同期指标",
             "required": true
@@ -128,52 +128,52 @@
             {
               "period": "2024-Q1",
               "baseline_period": "2023-Q1",
-              "current_metric_id": "86addd70c851520e65c2ff5094650e2159eb2335abfc063857c92075fedae09c",
-              "baseline_metric_id": "b845a055e7a354f1f6f6dffda6f357b252a0eb50957caa1ab1c57fe6ef7a9077",
-              "yoy_metric_id": "yoy:86addd70c851520e65c2ff5094650e2159eb2335abfc063857c92075fedae09c"
+              "current_metric_id": "ae6590a73cb1437573aeb5425e9514e694345b4cf823962ced22a0d0d431bb21",
+              "baseline_metric_id": "aff83bedc08623e6984b85366563ef0083671bac9a819cbf50a8e2fa48b55597",
+              "yoy_metric_id": "yoy:ae6590a73cb1437573aeb5425e9514e694345b4cf823962ced22a0d0d431bb21"
             },
             {
               "period": "2024-Q2",
               "baseline_period": "2023-Q2",
-              "current_metric_id": "fb5922e685cccbd97f4a3296cc10ba899c98a15caa97852822c00305fdcd73b6",
-              "baseline_metric_id": "db25ba803e7d83b9bb223fe964a899391a5499cfef0d13316ca2fba79e3d3af1",
-              "yoy_metric_id": "yoy:fb5922e685cccbd97f4a3296cc10ba899c98a15caa97852822c00305fdcd73b6"
+              "current_metric_id": "4a57d43e076c27881162139f488034492e1561ae7799b08bdfbe7d4cc4132fac",
+              "baseline_metric_id": "ade832e4263c7e95df515675df95770801f36e31f05b0db671a35f4c1f5f116c",
+              "yoy_metric_id": "yoy:4a57d43e076c27881162139f488034492e1561ae7799b08bdfbe7d4cc4132fac"
             },
             {
               "period": "2024-Q3",
               "baseline_period": "2023-Q3",
-              "current_metric_id": "d6cd82ff533665b131f2b5d73305f226af2c3814e544918bb5d37a99d7a97ff1",
-              "baseline_metric_id": "b100e3fb15f828fe075c1de6753d9640cf8a04ebcbb5e64e2d5c6b55141bbd2a",
-              "yoy_metric_id": "yoy:d6cd82ff533665b131f2b5d73305f226af2c3814e544918bb5d37a99d7a97ff1"
+              "current_metric_id": "5bab78732256ebf5071a5165d9e034be8961a6936071a7241b52cf1db3a55645",
+              "baseline_metric_id": "dbbc03af03f1506b804812572456ae8e6121f0d6cee9fabce15172ef16d3bc3c",
+              "yoy_metric_id": "yoy:5bab78732256ebf5071a5165d9e034be8961a6936071a7241b52cf1db3a55645"
             },
             {
               "period": "2024-Q4",
               "baseline_period": "2023-Q4",
-              "current_metric_id": "338f562e2922e72de2d29c49360ceae8967baf222619010efb2cab025c7bb4c7",
-              "baseline_metric_id": "7f2cff5551f966c4fce8ccdcd24d48dff0f7822cfc955960e09ea77aadc198d5",
-              "yoy_metric_id": "yoy:338f562e2922e72de2d29c49360ceae8967baf222619010efb2cab025c7bb4c7"
+              "current_metric_id": "2ad310739bd59dddf1a13c470e9c3c9dc40fa4d03464eafcf2dd12da79bdc0c1",
+              "baseline_metric_id": "c998bad6978e1f26fec712dcbaecf3b36120c1bcbfea798a989ef2fac2699837",
+              "yoy_metric_id": "yoy:2ad310739bd59dddf1a13c470e9c3c9dc40fa4d03464eafcf2dd12da79bdc0c1"
             }
           ],
           "adjacent_yoy_changes": [
             {
               "earlier_period": "2024-Q1",
               "later_period": "2024-Q2",
-              "earlier_yoy_metric_id": "yoy:86addd70c851520e65c2ff5094650e2159eb2335abfc063857c92075fedae09c",
-              "later_yoy_metric_id": "yoy:fb5922e685cccbd97f4a3296cc10ba899c98a15caa97852822c00305fdcd73b6",
+              "earlier_yoy_metric_id": "yoy:ae6590a73cb1437573aeb5425e9514e694345b4cf823962ced22a0d0d431bb21",
+              "later_yoy_metric_id": "yoy:4a57d43e076c27881162139f488034492e1561ae7799b08bdfbe7d4cc4132fac",
               "direction": "加快"
             },
             {
               "earlier_period": "2024-Q2",
               "later_period": "2024-Q3",
-              "earlier_yoy_metric_id": "yoy:fb5922e685cccbd97f4a3296cc10ba899c98a15caa97852822c00305fdcd73b6",
-              "later_yoy_metric_id": "yoy:d6cd82ff533665b131f2b5d73305f226af2c3814e544918bb5d37a99d7a97ff1",
+              "earlier_yoy_metric_id": "yoy:4a57d43e076c27881162139f488034492e1561ae7799b08bdfbe7d4cc4132fac",
+              "later_yoy_metric_id": "yoy:5bab78732256ebf5071a5165d9e034be8961a6936071a7241b52cf1db3a55645",
               "direction": "加快"
             },
             {
               "earlier_period": "2024-Q3",
               "later_period": "2024-Q4",
-              "earlier_yoy_metric_id": "yoy:d6cd82ff533665b131f2b5d73305f226af2c3814e544918bb5d37a99d7a97ff1",
-              "later_yoy_metric_id": "yoy:338f562e2922e72de2d29c49360ceae8967baf222619010efb2cab025c7bb4c7",
+              "earlier_yoy_metric_id": "yoy:5bab78732256ebf5071a5165d9e034be8961a6936071a7241b52cf1db3a55645",
+              "later_yoy_metric_id": "yoy:2ad310739bd59dddf1a13c470e9c3c9dc40fa4d03464eafcf2dd12da79bdc0c1",
               "direction": "加快"
             }
           ]
@@ -219,7 +219,7 @@
         "name": "remove_EV-R04-HEFEI-IMPL-P3",
         "status": "PASS",
         "remaining_versions": [
-          "69008832f3d74fe4837f8594a1f7e132"
+          "9d18b3de22764287a99533ca12312e71"
         ],
         "consequence": "仅剩单侧资料，匹配判断须待核实；此项验证知识库边界，不验证模型语义。"
       },
@@ -227,7 +227,7 @@
         "name": "remove_EV-R04-GOTION-LAB-2023",
         "status": "PASS",
         "remaining_versions": [
-          "5b9ee769483343a095c6155c7c384daa"
+          "cafdb336f68448888ee2845e56c76880"
         ],
         "consequence": "仅剩单侧资料，匹配判断须待核实；此项验证知识库边界，不验证模型语义。"
       }

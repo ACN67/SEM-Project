@@ -33,7 +33,7 @@ def main():
     args=parser.parse_args()
     args.runtime.mkdir(parents=True,exist_ok=True)
     # Invalidate previous results before any acquisition or dependency can fail.
-    for name in ('five-case-sources.json','five-case-tables.json','five-case-results.json'):
+    for name in ('five-case-sources.json','five-case-tables.json','five-case-results.json','five-case-filters.json'):
         save(args.runtime/name,[])
     connect=lambda:pymysql.connect(host=os.getenv('MYSQL_HOST','127.0.0.1'),port=int(os.getenv('W1_MYSQL_PORT','3306')),
         user=os.getenv('MYSQL_USER','root'),password=os.getenv('MYSQL_PASSWORD',''),database=args.database,charset='utf8mb4')
@@ -77,7 +77,7 @@ def main():
                     metrics=[x.model_dump(mode='json') for x in metrics])
             except Exception as exc:result.update(status='FAILED',error=str(exc))
             results.append(result);save(args.runtime/'five-case-sources.json',results)
-        table_results=[]
+        table_results=[]; filter_checks=[]
         for table in transcriptions['tables']:
             path=args.sources/table['file']
             if sha256(path.read_bytes()).hexdigest()!=table['sha256']:raise ValueError('transcription changed')
@@ -127,6 +127,12 @@ def main():
             selected=table_versions[cid] if cid in table_versions else [versions[k] for k in case['evidence_keys'] if k in versions and k.endswith(('AL461','AL488'))]
             raw=service.get_metrics(m.Filters(),selected) if selected else []
             if indicator:
+                filters=m.Filters(industries=[case['request']['industry']],regions=[case['request']['region']],
+                    indicators=indicator,periods=sorted({x.period for x in raw}),as_of=case['request'].get('as_of'))
+                filtered=service.get_metrics(filters,selected)
+                if {x.metric_id for x in filtered}!={x.metric_id for x in raw}:
+                    raise ValueError(cid+' combined case filters lost observations')
+                filter_checks.append(dict(case_id=cid,filters=filters.model_dump(mode='json'),count=len(filtered),status='PASS'))
                 task=m.Task(chapter_id='acceptance',section_key='acceptance',title=cid,order=0,required=True,depends_on=[],
                     research_questions=[],evidence_requirements=[],required_metrics=indicator,desired_chart=None)
                 calc=QualityService().calculate_metrics(raw,task)
@@ -193,6 +199,7 @@ def main():
                 machine_verification='PASS' if passed else 'INCOMPLETE',independent_review='PENDING_ASTRA_REVIEW',
                 semantic_conclusions='REQUIRES_REVIEW',acceptance='READY_FOR_REVIEW' if passed else 'INCOMPLETE'))
             save(args.runtime/'five-case-results.json',outcomes)
+        save(args.runtime/'five-case-filters.json',filter_checks)
     finally:
         index.client._system.stop()
     if any(c['machine_verification']!='PASS' for c in outcomes):

@@ -1,0 +1,97 @@
+[
+  {
+    "case_id": "R01",
+    "filters": {
+      "entity_ids": [],
+      "indicators": [
+        "sales"
+      ],
+      "periods": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "regions": [
+        "中国"
+      ],
+      "industries": [
+        "新能源汽车"
+      ],
+      "as_of": "2025-12-03"
+    },
+    "count": 3,
+    "status": "PASS"
+  },
+  {
+    "case_id": "R02",
+    "filters": {
+      "entity_ids": [],
+      "indicators": [
+        "rd_investment"
+      ],
+      "periods": [
+        "2023",
+        "2024"
+      ],
+      "regions": [
+        "中国"
+      ],
+      "industries": [
+        "新能源汽车"
+      ],
+      "as_of": null
+    },
+    "count": 4,
+    "status": "PASS"
+  },
+  {
+    "case_id": "R03",
+    "filters": {
+      "entity_ids": [],
+      "indicators": [
+        "sales"
+      ],
+      "periods": [
+        "2023-Q1",
+        "2023-Q2",
+        "2023-Q3",
+        "2023-Q4",
+        "2024-Q1",
+        "2024-Q2",
+        "2024-Q3",
+        "2024-Q4"
+      ],
+      "regions": [
+        "中国"
+      ],
+      "industries": [
+        "新能源汽车"
+      ],
+      "as_of": "2025-01-13"
+    },
+    "count": 8,
+    "status": "PASS"
+  },
+  {
+    "case_id": "R05",
+    "filters": {
+      "entity_ids": [],
+      "indicators": [
+        "bev_registrations"
+      ],
+      "periods": [
+        "2023",
+        "2024"
+      ],
+      "regions": [
+        "德国"
+      ],
+      "industries": [
+        "新能源汽车"
+      ],
+      "as_of": "2025-01-06"
+    },
+    "count": 2,
+    "status": "PASS"
+  }
+]

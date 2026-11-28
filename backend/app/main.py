@@ -37,6 +37,7 @@ ROUTER_PREFIX = "/api/v1"
 def _build_services(settings: Settings) -> AppServices:
     from .orchestration import (
         FIXED_WRITER_MODEL_ID,
+        FixedWriter,
         DemoKnowledge,
         OrchestrationService,
         seed_demo_documents,
@@ -53,14 +54,22 @@ def _build_services(settings: Settings) -> AppServices:
 
         connect = connect_from_url(settings.database_url)
         store = MySqlStore(connect)
+        def knowledge_connect():
+            import pymysql
+            connection=connect()
+            connection.cursorclass=pymysql.cursors.Cursor
+            return connection
         knowledge = KnowledgeService(
-            connect, runtime_root, EvidenceIndex(runtime_root / "index"),
+            knowledge_connect, runtime_root, EvidenceIndex(runtime_root / "index"),
         )
 
         def ingest_runner(version: str):
             # Empty labels mean no metadata filters; documents are still
             # indexed and retrievable within their frozen version.
-            return knowledge.pipeline.process(version, labels={})
+            import json
+            import os
+            labels=json.loads(os.getenv('INGEST_LABELS_JSON','{}'))
+            return knowledge.pipeline.process(version, labels=labels)
 
     else:
         store = MemoryStore()
@@ -131,7 +140,7 @@ def create_app(
 def main() -> None:
     import uvicorn
 
-    uvicorn.run("backend.app.main:app", port=8000, reload=False)
+    uvicorn.run("backend.app.main:create_app", factory=True, port=8000, reload=False)
 
 
 if __name__ == "__main__":

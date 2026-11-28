@@ -354,11 +354,11 @@ class MySqlStore:
             params.append(_dump(error))
         if not assignments:
             return
-        params.extend([job_id, chapter_id])
+        params.extend([job_id, chapter_id,job_id])
         with self._connect() as connection, connection.cursor() as cursor:
             cursor.execute(
                 f"UPDATE chapter_runs SET {', '.join(assignments)}"
-                " WHERE job_id=%s AND chapter_id=%s",
+                " WHERE job_id=%s AND chapter_id=%s AND job_id IN (SELECT job_id FROM jobs WHERE job_id=%s AND status IN ('QUEUED','RUNNING'))",
                 params,
             )
 
@@ -609,6 +609,7 @@ class MySqlStore:
                         connection.commit()
                         return replay
                     self._insert_job(cursor, job, now)
+                    cursor.execute("UPDATE reports SET latest_job_id=%s,job_status='QUEUED',updated_at=%s WHERE report_id=%s",(job.job_id,_naive(now),job.report_id))
                     self._store_guard(cursor, guard, accepted)
                 connection.commit()
             except Exception:
@@ -695,6 +696,8 @@ class MySqlStore:
             cursor.execute("DELETE FROM admin_sessions WHERE session_id=%s", (session_id,))
 
     def reserve_budget(self, amount, limit):
+        if not amount.is_finite() or not limit.is_finite() or amount<=0 or limit<0:
+            raise ValueError("invalid budget reservation")
         with self._connect() as c:
             c.begin()
             try:
@@ -706,6 +709,63 @@ class MySqlStore:
                         c.rollback()
                         return False
                     q.execute("UPDATE project_budget SET reserved=%s WHERE id=1", (str(value),))
+                c.commit()
+                return True
+            except Exception:
+                c.rollback()
+                raise
+
+    def finish_attempt(self, job_id, chapter_id, attempt_id, *, content=None, error=None, frozen=None, context=None):
+        with self._connect() as c:
+            c.begin()
+            try:
+                with c.cursor() as q:
+                    q.execute("SELECT status FROM jobs WHERE job_id=%s FOR UPDATE",(job_id,))
+                    if q.fetchone()['status']!='RUNNING':
+                        c.rollback();return False
+                    q.execute("UPDATE chapter_runs SET status=%s,content_json=%s,error_json=%s WHERE job_id=%s AND chapter_id=%s AND status='RUNNING' AND attempt_id=%s",('SUCCEEDED' if error is None else 'FAILED',_dump(content),_dump(error),job_id,chapter_id,attempt_id))
+                    if q.rowcount!=1:
+                        c.rollback();return False
+                    if frozen is not None:q.execute("UPDATE jobs SET frozen_json=%s,context_json=%s WHERE job_id=%s",(_dump(frozen),_dump(context),job_id))
+                c.commit();return True
+            except Exception:
+                c.rollback();raise
+
+    def finalize_job(self, job_id, run_id, *, status, now, document=None, error=None):
+        """Serialize final publication with cancellation on the job row."""
+        if status not in ("FAILED", "COMPLETED", "COMPLETED_WITH_WARNINGS"):
+            raise ValueError("invalid final status")
+        with self._connect() as c:
+            c.begin()
+            try:
+                with c.cursor() as q:
+                    q.execute("SELECT status,run_id,report_id FROM jobs WHERE job_id=%s FOR UPDATE", (job_id,))
+                    job = q.fetchone()
+                    if not job or job['status'] != 'RUNNING' or job['run_id'] != run_id:
+                        c.rollback()
+                        return False
+                    q.execute("SELECT latest_job_id FROM reports WHERE report_id=%s FOR UPDATE", (job['report_id'],))
+                    if q.fetchone()['latest_job_id'] != job_id:
+                        c.rollback()
+                        return False
+                    publish = document is not None and status != 'FAILED'
+                    if document is not None:
+                        if document.report_id != job['report_id'] or document.run_id != run_id:
+                            raise ValueError("snapshot owner mismatch")
+                        q.execute("SELECT document_json FROM report_versions WHERE version_id=%s FOR UPDATE", (document.version_id,))
+                        existing = q.fetchone()
+                        if existing:
+                            if m.ReportDocument.model_validate_json(existing['document_json']) != document:
+                                raise ValueError("immutable report version conflict")
+                        else:
+                            q.execute("INSERT INTO report_versions (report_id,version_id,parent_version_id,document_json,exportable,stale_chapter_ids,created_at) VALUES (%s,%s,%s,%s,%s,%s,%s)",
+                                      (document.report_id,document.version_id,document.parent_version_id,_dump(document),document.exportable,_dump(document.stale_chapter_ids),_naive(now)))
+                    q.execute("UPDATE jobs SET status=%s,stage=NULL,error_json=%s,result_version_id=%s,updated_at=%s WHERE job_id=%s",
+                              (status,_dump(error),document.version_id if publish else None,_naive(now),job_id))
+                    if publish:
+                        q.execute("UPDATE reports SET job_status=%s,current_version_id=%s,updated_at=%s WHERE report_id=%s", (status,document.version_id,_naive(now),job['report_id']))
+                    else:
+                        q.execute("UPDATE reports SET job_status=%s,updated_at=%s WHERE report_id=%s", (status,_naive(now),job['report_id']))
                 c.commit()
                 return True
             except Exception:

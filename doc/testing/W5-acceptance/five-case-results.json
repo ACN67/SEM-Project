@@ -1,0 +1,281 @@
+[
+  {
+    "case_id": "R01",
+    "missing_sources": [],
+    "checks": [
+      {
+        "name": "yoy",
+        "entity_id": null,
+        "period": "2024",
+        "expected": "35.50",
+        "actual": "35.5028962611901000526592943654555",
+        "status": "PASS"
+      }
+    ],
+    "negatives": [
+      {
+        "name": "remove_baseline",
+        "status": "PASS",
+        "gaps": [
+          {
+            "question": "sales:*:2024:yoy",
+            "code": "MISSING_BASE_PERIOD",
+            "reason": "缺少 2023 同期指标",
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "before_publication",
+        "status": "PASS",
+        "as_of": "2024-12-31"
+      }
+    ],
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "semantic_conclusions": "REQUIRES_REVIEW",
+    "acceptance": "READY_FOR_REVIEW"
+  },
+  {
+    "case_id": "R02",
+    "missing_sources": [],
+    "checks": [
+      {
+        "name": "yoy",
+        "entity_id": "byd",
+        "period": "2024",
+        "expected": "35.68",
+        "actual": "35.6814286819773352416242571630365",
+        "status": "PASS"
+      },
+      {
+        "name": "yoy",
+        "entity_id": "saic",
+        "period": "2024",
+        "expected": "-0.91",
+        "actual": "-0.9092545612145288940805757151820004",
+        "status": "PASS"
+      }
+    ],
+    "negatives": [
+      {
+        "name": "remove_baseline",
+        "status": "PASS",
+        "gaps": [
+          {
+            "question": "rd_investment:saic:2024:yoy",
+            "code": "MISSING_BASE_PERIOD",
+            "reason": "缺少 2023 同期指标",
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "rd_unit_conflict",
+        "status": "PASS"
+      },
+      {
+        "name": "rd_expense_vs_total",
+        "status": "PASS"
+      }
+    ],
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "semantic_conclusions": "REQUIRES_REVIEW",
+    "acceptance": "READY_FOR_REVIEW"
+  },
+  {
+    "case_id": "R03",
+    "missing_sources": [],
+    "checks": [
+      {
+        "name": "yoy",
+        "entity_id": null,
+        "period": "2024-Q1",
+        "expected": "31.78",
+        "actual": "31.77805800756620428751576292559899",
+        "status": "PASS"
+      },
+      {
+        "name": "yoy",
+        "entity_id": null,
+        "period": "2024-Q2",
+        "expected": "32.07",
+        "actual": "32.06848681166126793151318833873207",
+        "status": "PASS"
+      },
+      {
+        "name": "yoy",
+        "entity_id": null,
+        "period": "2024-Q3",
+        "expected": "33.39",
+        "actual": "33.38601343342552350849466613986567",
+        "status": "PASS"
+      },
+      {
+        "name": "yoy",
+        "entity_id": null,
+        "period": "2024-Q4",
+        "expected": "41.31",
+        "actual": "41.31178116257382654647186820018651",
+        "status": "PASS"
+      },
+      {
+        "name": "adjacent_yoy_direction",
+        "status": "PASS",
+        "analysis": {
+          "year_over_year": [
+            {
+              "period": "2024-Q1",
+              "baseline_period": "2023-Q1",
+              "current_metric_id": "5c7978bee3c72d1a310ffa3670176166f9672989c852001c7ccbe8fe81362583",
+              "baseline_metric_id": "485b69878e67e35b5814fe3a985d9582e58890e9e9880d2a3995c935ea651cd5",
+              "yoy_metric_id": "yoy:5c7978bee3c72d1a310ffa3670176166f9672989c852001c7ccbe8fe81362583"
+            },
+            {
+              "period": "2024-Q2",
+              "baseline_period": "2023-Q2",
+              "current_metric_id": "79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793",
+              "baseline_metric_id": "808141c186558dc8cc51b873883b0b3e7e10faf300f92e6054f5f50fb99a8ecf",
+              "yoy_metric_id": "yoy:79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793"
+            },
+            {
+              "period": "2024-Q3",
+              "baseline_period": "2023-Q3",
+              "current_metric_id": "a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5",
+              "baseline_metric_id": "0ab345d83b5247c4988475de5b336668392339901fe64ba052a7162aa0fc932e",
+              "yoy_metric_id": "yoy:a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5"
+            },
+            {
+              "period": "2024-Q4",
+              "baseline_period": "2023-Q4",
+              "current_metric_id": "7eaa813fc2fa96ea4e16379996f2734fc42186d13f3853ccf115c397889e40d3",
+              "baseline_metric_id": "619a20cb450c63b7edad881ae1f6aeb6208ecd6f4084528dd25c4ec2b9ffeb66",
+              "yoy_metric_id": "yoy:7eaa813fc2fa96ea4e16379996f2734fc42186d13f3853ccf115c397889e40d3"
+            }
+          ],
+          "adjacent_yoy_changes": [
+            {
+              "earlier_period": "2024-Q1",
+              "later_period": "2024-Q2",
+              "earlier_yoy_metric_id": "yoy:5c7978bee3c72d1a310ffa3670176166f9672989c852001c7ccbe8fe81362583",
+              "later_yoy_metric_id": "yoy:79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793",
+              "direction": "加快"
+            },
+            {
+              "earlier_period": "2024-Q2",
+              "later_period": "2024-Q3",
+              "earlier_yoy_metric_id": "yoy:79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793",
+              "later_yoy_metric_id": "yoy:a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5",
+              "direction": "加快"
+            },
+            {
+              "earlier_period": "2024-Q3",
+              "later_period": "2024-Q4",
+              "earlier_yoy_metric_id": "yoy:a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5",
+              "later_yoy_metric_id": "yoy:7eaa813fc2fa96ea4e16379996f2734fc42186d13f3853ccf115c397889e40d3",
+              "direction": "加快"
+            }
+          ]
+        }
+      }
+    ],
+    "negatives": [
+      {
+        "name": "remove_baseline",
+        "status": "PASS",
+        "gaps": []
+      },
+      {
+        "name": "zero_base",
+        "status": "PASS"
+      },
+      {
+        "name": "missing_quarter",
+        "status": "PASS"
+      }
+    ],
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "semantic_conclusions": "REQUIRES_REVIEW",
+    "acceptance": "READY_FOR_REVIEW"
+  },
+  {
+    "case_id": "R04",
+    "missing_sources": [],
+    "checks": [
+      {
+        "name": "demand_and_capability_fragments",
+        "status": "PASS",
+        "source_role_matches": {
+          "EV-R04-HEFEI-IMPL-P3": true,
+          "EV-R04-GOTION-LAB-2023": true
+        },
+        "meaning": "分别定位政策配套方向与企业测试能力，匹配适用性仍交独立复核。"
+      }
+    ],
+    "negatives": [
+      {
+        "name": "remove_EV-R04-HEFEI-IMPL-P3",
+        "status": "PASS",
+        "remaining_versions": [
+          "69008832f3d74fe4837f8594a1f7e132"
+        ],
+        "consequence": "仅剩单侧资料，匹配判断须待核实；此项验证知识库边界，不验证模型语义。"
+      },
+      {
+        "name": "remove_EV-R04-GOTION-LAB-2023",
+        "status": "PASS",
+        "remaining_versions": [
+          "5b9ee769483343a095c6155c7c384daa"
+        ],
+        "consequence": "仅剩单侧资料，匹配判断须待核实；此项验证知识库边界，不验证模型语义。"
+      }
+    ],
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "semantic_conclusions": "REQUIRES_REVIEW",
+    "acceptance": "READY_FOR_REVIEW"
+  },
+  {
+    "case_id": "R05",
+    "missing_sources": [],
+    "checks": [
+      {
+        "name": "yoy",
+        "entity_id": null,
+        "period": "2024",
+        "expected": "-27.40",
+        "actual": "-27.39503909625557257558386857401201",
+        "status": "PASS"
+      }
+    ],
+    "negatives": [
+      {
+        "name": "remove_baseline",
+        "status": "PASS",
+        "gaps": [
+          {
+            "question": "bev_registrations:*:2024:yoy",
+            "code": "MISSING_BASE_PERIOD",
+            "reason": "缺少 2023 同期指标",
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "bev_scope_conflict",
+        "status": "PASS"
+      },
+      {
+        "name": "before_publication",
+        "status": "PASS",
+        "as_of": "2024-10-28"
+      }
+    ],
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "semantic_conclusions": "REQUIRES_REVIEW",
+    "acceptance": "READY_FOR_REVIEW"
+  }
+]

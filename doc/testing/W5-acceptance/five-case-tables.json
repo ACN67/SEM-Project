@@ -1,0 +1,538 @@
+[
+  {
+    "case_id": "R01",
+    "document_version_id": "32e8e02002754faf9dd4ade262dbe769",
+    "metrics": [
+      {
+        "metric_id": "5d065d9326b4644a07377d06357571385aed799406266a4d9d15753f9c6598fc",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2022",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "688.7",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "6887000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "5d065d9326b4644a07377d06357571385aed799406266a4d9d15753f9c6598fc"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "6a45e3e5b36aa7ca26df3064ca903e3d4446654c2aba6891718ed6b6668c907c",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "949.5",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "9495000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "6a45e3e5b36aa7ca26df3064ca903e3d4446654c2aba6891718ed6b6668c907c"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "a13373ce85f87244c1b65ac9ce50bcd4da4f54c231b46d014552fbb72b2ea027",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "1286.6",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "12866000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "a13373ce85f87244c1b65ac9ce50bcd4da4f54c231b46d014552fbb72b2ea027"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      }
+    ],
+    "provenance": {
+      "case_id": "R01",
+      "file": "R01-transcribed.csv",
+      "sha256": "706d38f614f8b2c91b49617ac471db05f13d60d7842502dc2f95ae165f5a8777",
+      "representation": "manual-transcription",
+      "rows": [
+        {
+          "csv_row": 2,
+          "evidence_keys": [
+            "EV-R01-MIIT-2022-ANNUAL"
+          ],
+          "source_values": [
+            "688.7"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 3,
+          "evidence_keys": [
+            "EV-R01-MIIT-2023-ANNUAL"
+          ],
+          "source_values": [
+            "949.5"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 4,
+          "evidence_keys": [
+            "EV-R01-MIIT-2024-ANNUAL"
+          ],
+          "source_values": [
+            "1286.6"
+          ],
+          "operation": "direct"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "R03",
+    "document_version_id": "5507eced70e84dff8f0cbb1bc9ee6f78",
+    "metrics": [
+      {
+        "metric_id": "0ab345d83b5247c4988475de5b336668392339901fe64ba052a7162aa0fc932e",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023-Q3",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "253.1",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "2531000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "0ab345d83b5247c4988475de5b336668392339901fe64ba052a7162aa0fc932e"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "485b69878e67e35b5814fe3a985d9582e58890e9e9880d2a3995c935ea651cd5",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023-Q1",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "158.6",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "1586000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "485b69878e67e35b5814fe3a985d9582e58890e9e9880d2a3995c935ea651cd5"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "5c7978bee3c72d1a310ffa3670176166f9672989c852001c7ccbe8fe81362583",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024-Q1",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "209",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "2090000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "5c7978bee3c72d1a310ffa3670176166f9672989c852001c7ccbe8fe81362583"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "619a20cb450c63b7edad881ae1f6aeb6208ecd6f4084528dd25c4ec2b9ffeb66",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023-Q4",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "321.7",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "3217000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "619a20cb450c63b7edad881ae1f6aeb6208ecd6f4084528dd25c4ec2b9ffeb66"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024-Q2",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "285.4",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "2854000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "79f6731f6277337b48539e5e436cd5dd520932401f4039596fd6be6c21bfa793"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "7eaa813fc2fa96ea4e16379996f2734fc42186d13f3853ccf115c397889e40d3",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024-Q4",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "454.6",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "4546000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "7eaa813fc2fa96ea4e16379996f2734fc42186d13f3853ccf115c397889e40d3"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "808141c186558dc8cc51b873883b0b3e7e10faf300f92e6054f5f50fb99a8ecf",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023-Q2",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "216.1",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "2161000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "808141c186558dc8cc51b873883b0b3e7e10faf300f92e6054f5f50fb99a8ecf"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024-Q3",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "337.6",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "3376000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "a50e925ec956ba2b196c8e4a957954bae35ef76725edf0b9572ed4e26ab831b5"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      }
+    ],
+    "provenance": {
+      "case_id": "R03",
+      "file": "R03-transcribed.csv",
+      "sha256": "f65ef19b68b6cc97348cd468d60d010461e3e96f35cc4f3a63250c91bde611ee",
+      "representation": "manual-transcription",
+      "rows": [
+        {
+          "csv_row": 2,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-Q1"
+          ],
+          "source_values": [
+            "158.6",
+            "0"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 3,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-H1",
+            "EV-R03-MIIT-2023-Q1"
+          ],
+          "source_values": [
+            "374.7",
+            "158.6"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 4,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-9M",
+            "EV-R03-MIIT-2023-H1"
+          ],
+          "source_values": [
+            "627.8",
+            "374.7"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 5,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-ANNUAL",
+            "EV-R03-MIIT-2023-9M"
+          ],
+          "source_values": [
+            "949.5",
+            "627.8"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 6,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-Q1"
+          ],
+          "source_values": [
+            "209",
+            "0"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 7,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-H1",
+            "EV-R03-MIIT-2024-Q1"
+          ],
+          "source_values": [
+            "494.4",
+            "209"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 8,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-9M",
+            "EV-R03-MIIT-2024-H1"
+          ],
+          "source_values": [
+            "832",
+            "494.4"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 9,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-ANNUAL",
+            "EV-R03-MIIT-2024-9M"
+          ],
+          "source_values": [
+            "1286.6",
+            "832"
+          ],
+          "operation": "cumulative_difference"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "R02",
+    "document_version_id": "5f6364f554e740569574d170a061c939",
+    "metrics": [
+      {
+        "metric_id": "0cf171c9ea56a85c7a2173ed4bc62efadd813baeff43d13c9a8f8fc2d89c0b7d",
+        "indicator": "rd_investment",
+        "name": "rd_investment",
+        "entity_id": "saic",
+        "period": "2023",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "上汽集团合并口径；费用化与资本化研发投入合计",
+        "raw_value": "22013246493.11",
+        "raw_unit": "元",
+        "multiplier": "1",
+        "value": "22013246493.11",
+        "unit": "元",
+        "currency": "CNY",
+        "source_evidence_ids": [
+          "0cf171c9ea56a85c7a2173ed4bc62efadd813baeff43d13c9a8f8fc2d89c0b7d"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "0da4b1dc2fdc9d471bdcaafbc8b2ec651d63a0c2ebc2ecc921cdfb8c75170153",
+        "indicator": "rd_investment",
+        "name": "rd_investment",
+        "entity_id": "byd",
+        "period": "2023",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "比亚迪合并口径；费用化与资本化研发投入合计",
+        "raw_value": "39917743000.00",
+        "raw_unit": "元",
+        "multiplier": "1",
+        "value": "39917743000",
+        "unit": "元",
+        "currency": "CNY",
+        "source_evidence_ids": [
+          "0da4b1dc2fdc9d471bdcaafbc8b2ec651d63a0c2ebc2ecc921cdfb8c75170153"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "3ee392467c5fa3245c223e04c9dfb0f313643497a94262e887d5bf46fe36b9aa",
+        "indicator": "rd_investment",
+        "name": "rd_investment",
+        "entity_id": "byd",
+        "period": "2024",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "比亚迪合并口径；费用化与资本化研发投入合计",
+        "raw_value": "54160964000.00",
+        "raw_unit": "元",
+        "multiplier": "1",
+        "value": "54160964000",
+        "unit": "元",
+        "currency": "CNY",
+        "source_evidence_ids": [
+          "3ee392467c5fa3245c223e04c9dfb0f313643497a94262e887d5bf46fe36b9aa"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "b34285756a04d9ea9691a36b689a9182d062d1c53e951b731fb89368b3bfece7",
+        "indicator": "rd_investment",
+        "name": "rd_investment",
+        "entity_id": "saic",
+        "period": "2024",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "上汽集团合并口径；费用化与资本化研发投入合计",
+        "raw_value": "21813090045.30",
+        "raw_unit": "元",
+        "multiplier": "1",
+        "value": "21813090045.3",
+        "unit": "元",
+        "currency": "CNY",
+        "source_evidence_ids": [
+          "b34285756a04d9ea9691a36b689a9182d062d1c53e951b731fb89368b3bfece7"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      }
+    ],
+    "provenance": {
+      "case_id": "R02",
+      "file": "R02-transcribed.csv",
+      "sha256": "d3bfd7e09035d891490fa21e8bfc42c0a6fe862f15000933605cc01409270d3f",
+      "representation": "manual-transcription",
+      "rows": [
+        {
+          "csv_row": 2,
+          "evidence_keys": [
+            "EV-R02-BYD-CNINFO-P34"
+          ],
+          "source_values": [
+            "54,160,964,000.00"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 3,
+          "evidence_keys": [
+            "EV-R02-BYD-CNINFO-P34"
+          ],
+          "source_values": [
+            "39,917,743,000.00"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 4,
+          "evidence_keys": [
+            "EV-R02-SAIC-2023-P13"
+          ],
+          "source_values": [
+            "22,013,246,493.11"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 5,
+          "evidence_keys": [
+            "EV-R02-SAIC-2024-P13"
+          ],
+          "source_values": [
+            "21,813,090,045.30"
+          ],
+          "operation": "direct"
+        }
+      ]
+    }
+  }
+]

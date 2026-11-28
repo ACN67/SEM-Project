@@ -8,6 +8,17 @@ from scripts.w5_facts import matches_candidate
 
 
 class SourceToolTests(unittest.TestCase):
+    def test_gateway_errors_and_canonical_source_mismatch_are_rejected(self):
+        from scripts.capture_w5_web import validate_rendition
+        url='https://example.org/?uri=celex%3A32018R0858'
+        prefix='URL Source: https://example.org/?uri=celex:32018R0858\n'
+        validate_rendition(prefix+'valid public text '*40,url)
+        for body in ('403 ERROR', 'JavaScript is disabled', 'Target URL returned error 403'):
+            with self.assertRaises(ValueError):
+                validate_rendition(prefix+body+' filler '*80,url)
+        with self.assertRaises(ValueError):
+            validate_rendition(prefix+'valid public text '*40,'https://other.org')
+
     def test_failed_download_can_recover_from_bad_cache(self):
         record = dict(evidence_key="ev", case_id="R01", source_id="s", title="Expected title",
             publisher="P", published_at="2024-01-01", source_url="https://example.org/page",

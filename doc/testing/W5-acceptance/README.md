@@ -1,15 +1,56 @@
-# W5 acquisition, candidates and incomplete acceptance
+# W5 真实资料复验记录（数据包 1.1）
 
-Run python scripts/verify_w5_sources.py <external-source-directory> to fetch originals, check registered hashes and read expected pages. Raw files remain outside Git. Failed cache files are reacquired. Download, hash and page checks do not sign off source facts.
+本次复验使用 MySQL、固定修订的 BGE 中文向量模型、Chroma、KnowledgeService 与 QualityService。R01—R05 的机器检查均通过，10 项正向检查、13 项负例检查已实际执行。当前状态为 READY_FOR_REVIEW，独立事实复核交下一轮 Astra 审查完成。机器通过不代表模型语义或整份报告已验收。
 
-Run python scripts/import_w5_sources.py <external-source-directory> <runtime-directory> --database <isolated-database> after applying migrations 010, 011 and 012. Set W1_MYSQL_PORT, MYSQL_USER and MYSQL_PASSWORD. This uses KnowledgeService, real BGE and Chroma. Each outcome is atomically saved and independent sources continue after failures.
+## 当前结果和边界
 
-PDF evidence is classified as CANDIDATE_MATCH or CANDIDATE_NOT_FOUND using explicit search tokens on the expected page. The matcher may match a sentence that negates a claim. Its output is only a retrieval aid. fact_review remains PENDING for every such record. No automatic fact PASS is emitted.
+|案例|真实资料与结果|已执行的负例|独立复核重点|
+|---|---|---|---|
+|R01 产业分析|工信部 2022、2023、2024 年销量，2024 同比 35.50%；产业规划文字转存可检索|移除 2023 基期；将截止日提前到 2024-12-31，2024 年发布材料不可检索|原始销量、统计范围、发布日与截止日|
+|R02 企业对标|比亚迪 2024 年报第 34 页含两年原值；上汽两份年报第 13 页；同比 35.68%、-0.91%|移除基期；金额单位变为辆；研发费用口径替换研发投入合计|研发投入定义、币种、合并范围及精度|
+|R03 景气|从 2023/2024 累计端点差分四季销量；同比 31.78%、32.07%、33.39%、41.31%；相邻同比方向均为加快|移除基期；零基期；移除第三季度，不补点|累计差分没有重复相加；四季来源和相邻同比方向|
+|R04 招商|合肥政策完整打印副本物理第 3 页与国轩 2023 年实验室认证公开材料均可检索|分别移除需求、能力侧资料，限定剩余版本后检索不泄漏已移除来源|政策支持方向与能力匹配候选；不推断具体合作需求、签约或投资意向|
+|R05 出海|KBA 两个原始工作簿导入 524219、380609 辆；同比 -27.40%；反补贴、型式认证、补贴停止及普通关税原文转存可检索|移除基期；BEV 改为含插混口径；政策发布前不可检索|注册量不是进口量；原产地、产品、日期；普通关税与反补贴分开|
 
-Two KBA spreadsheets are imported through hash-locked mappings. Their reviewed cells contain 524219 and 380609 BEV registrations in 2023 and 2024. Run python scripts/summarize_w5.py <runtime-directory> to execute QualityService growth calculation, compare independent arithmetic and remove the 2023 baseline before recalculation. The missing-baseline check executes the real quality entry point and verifies no defined同比 result is produced.
+R04 负例验收的是知识库允许版本边界和单侧证据缺口。R05 日期负例验收的是 KnowledgeService 的 as_of 筛选。它们不证明生成模型已正确措辞；事实与适用性由独立复核签收。
 
-Five-case summaries report source_coverage, fact_review, independent_signoff and acceptance separately. All case acceptance results remain INCOMPLETE. Business negative scenarios without completed prerequisites are NOT_RUN. The KBA missing-baseline result is a metric-level check and does not establish R05 policy acceptance.
+## 获取与来源表示
 
-The source-results.json runtime evidence was obtained from complete originals. In this rework the saved fragments were re-evaluated under candidate-only classification and the KBA quality calculation/negative were rerun. Unchanged embeddings were reused. Acquisition includes failed government downloads and incomplete web snapshots. Empty EUR-Lex printouts were excluded. One Gotion snapshot contains its title and publication date but still requires fact review. R04 sources and contact evidence, R05 ordinary tariff evidence, other structured indicator mappings and independent signoff remain incomplete. Issues #11, #12 and #13 remain open.
+原始 PDF/XLSX 保存在外部资料目录。直接下载失败的公开网页，通过可选公共文字网关获取同一官方页面的文字转存，保存原始网关响应和可检索 PDF。所有转存 PDF 显式标明“非原始 PDF”。不得将文字转存的哈希填成原始发布 PDF 的哈希。
 
-121 unit tests and 6 contract tests passed. Regressions explicitly cover invalid cache recovery, empty results and negated candidate text. None of these gives a five-case acceptance PASS.
+renditions.json 分别登记原网页、实际获取入口、原始文字响应 SHA-256、转存 PDF SHA-256、原定位和节选字符范围。欧盟法律使用原始颁布版本入口，未使用 2026 年修订合并文本。PDF 版面的页码是转存页码；原法条/原文锚点另在清单保存。acquisition.json 是早期直接获取记录，含失败项目；当前所用来源以 five-case-sources.json 和 renditions.json 为准。
+
+合肥实施意见仍使用保存了原政府网址、标题及日期的完整打印副本。十四五规划的正式来源替换、具体合作诉求或可用于指定历史截止日的接洽依据仍受 issue #12 跟踪；本次核心匹配不使用无日期动态页面，也不把规划目标当实际产能。普通关税已取得 2024/2522 原文文字转存，CN 8703 80 10 常规税率为 10%，自 2025-01-01 适用。该税项不等于全部进口税负，issue #13 待独立核对后决定是否关闭。issue #11 的网页入库路径已有实测，仍待审核签收。
+
+## 指标整理及追溯
+
+prepare_w5_tables.py 从已取得的原文文本/原始 PDF 抽取数值，保留原精度。R03 季度值是累计端点差分，操作数和两侧来源在 transcriptions.json 中逐行记录；该整理表作为派生整理材料上传，不声称是原始发布表。CSV 单元格由知识库生成真实证据和指标，原文定位通过侧表回溯。KBA 直接使用原工作簿哈希锁定的单元格映射。
+
+五类请求与人工预期在 data/samples/w5/cases.json；原件登记在 evidence.json。本次修订改用工信部 2024 年度原文、采用比亚迪同表比较数、保留比亚迪原始精度，并新增普通关税记录，修订记录见数据包 README。
+
+## 复现
+
+使用隔离数据库，先应用知识库迁移 010、011、012。安装 backend/app/knowledge/requirements.txt、质量模块依赖及 scripts/requirements-w5.txt，准备固定 BGE 缓存、中文 TrueType 字体。设置 W1_MYSQL_PORT、MYSQL_USER、MYSQL_PASSWORD；模型缓存可用时设置 HF_HUB_OFFLINE=1。
+
+```text
+python scripts/verify_w5_sources.py <外部资料目录>
+python scripts/capture_w5_web.py <外部资料目录> --font <中文字体文件>
+python scripts/prepare_w5_tables.py <外部资料目录>
+python scripts/verify_w5_cases.py <外部资料目录> <运行目录> --database <隔离数据库>
+```
+
+verify_w5_cases.py 在开始时作废旧结果、逐来源保存检查点，来源失败不写成功；任何案例未通过时返回失败状态。重复转存的 PDF 哈希稳定，重复导入复用已有文档版本。不可使用仅有标题、空响应、403 或验证码页充当资料。
+
+## 文件与签收
+
+- five-case-results.json：当前五例正向、负例及待复核状态。
+- five-case-sources.json：真实导入版本、哈希、来源、实际检索片段和 KBA 指标；命中片段供审查，不自动视为事实通过。
+- five-case-tables.json：真实知识库整理表指标及逐行原件关系。
+- transcriptions.json、R01/R02/R03-transcribed.csv：整理表、原值与累计差分操作数、原件哈希。
+- renditions.json、capture-preview.png：文字转存来源链、哈希、节选范围和版面抽查。
+- spreadsheet-locators.json：KBA 工作表及格号定位。
+- checklist.json：五例机器检查与独立签收状态。
+
+已移除先前不完整的 source-results.json、case-results.json，历史结果可从 Git 历史读取。旧 import_w5_sources.py、summarize_w5.py 只保留早期获取和候选检查入口，不作为本次五例验收入口。
+
+本轮 122 项单元测试、6 项契约测试通过，契约生成一致。自查补正了工作簿可用性判断、失败来源提前进入可用集合、过宽的负例查询、失败时残留旧结果和转存时间戳导致哈希漂移的问题。

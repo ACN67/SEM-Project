@@ -730,3 +730,44 @@ class MySqlStore:
                 c.commit();return True
             except Exception:
                 c.rollback();raise
+
+    def finalize_job(self, job_id, run_id, *, status, now, document=None, error=None):
+        """Serialize final publication with cancellation on the job row."""
+        if status not in ("FAILED", "COMPLETED", "COMPLETED_WITH_WARNINGS"):
+            raise ValueError("invalid final status")
+        with self._connect() as c:
+            c.begin()
+            try:
+                with c.cursor() as q:
+                    q.execute("SELECT status,run_id,report_id FROM jobs WHERE job_id=%s FOR UPDATE", (job_id,))
+                    job = q.fetchone()
+                    if not job or job['status'] != 'RUNNING' or job['run_id'] != run_id:
+                        c.rollback()
+                        return False
+                    q.execute("SELECT latest_job_id FROM reports WHERE report_id=%s FOR UPDATE", (job['report_id'],))
+                    if q.fetchone()['latest_job_id'] != job_id:
+                        c.rollback()
+                        return False
+                    publish = document is not None and status != 'FAILED'
+                    if document is not None:
+                        if document.report_id != job['report_id'] or document.run_id != run_id:
+                            raise ValueError("snapshot owner mismatch")
+                        q.execute("SELECT document_json FROM report_versions WHERE version_id=%s FOR UPDATE", (document.version_id,))
+                        existing = q.fetchone()
+                        if existing:
+                            if m.ReportDocument.model_validate_json(existing['document_json']) != document:
+                                raise ValueError("immutable report version conflict")
+                        else:
+                            q.execute("INSERT INTO report_versions (report_id,version_id,parent_version_id,document_json,exportable,stale_chapter_ids,created_at) VALUES (%s,%s,%s,%s,%s,%s,%s)",
+                                      (document.report_id,document.version_id,document.parent_version_id,_dump(document),document.exportable,_dump(document.stale_chapter_ids),_naive(now)))
+                    q.execute("UPDATE jobs SET status=%s,stage=NULL,error_json=%s,result_version_id=%s,updated_at=%s WHERE job_id=%s",
+                              (status,_dump(error),document.version_id if publish else None,_naive(now),job_id))
+                    if publish:
+                        q.execute("UPDATE reports SET job_status=%s,current_version_id=%s,updated_at=%s WHERE report_id=%s", (status,document.version_id,_naive(now),job['report_id']))
+                    else:
+                        q.execute("UPDATE reports SET job_status=%s,updated_at=%s WHERE report_id=%s", (status,_naive(now),job['report_id']))
+                c.commit()
+                return True
+            except Exception:
+                c.rollback()
+                raise

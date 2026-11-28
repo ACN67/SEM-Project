@@ -54,3 +54,6 @@ Invoke-RestMethod http://127.0.0.1:8000/api/v1/jobs/$created.job_id
 ```
 
 正式模式：复制 `.env.example` 为 `.env`，配置 `DATABASE_URL`（先按 010→011→012→020 顺序应用迁移）与 `MODEL_*` 后重启。
+
+## Review fixes (2026-11-28)
+Runs freeze READY source IDs when accepted, including retries of the same run. Internal KnowledgeService.get_evidences resolves exact metric provenance within READY frozen versions. The project_budget row persists shared conservative reservations across jobs and restarts. Reservations are never refunded automatically; real provider usage settlement remains a separate integration step. PER_CALL_RESERVE_CNY must be configured conservatively for the provider's maximum call cost; no real provider charge was tested in this rework.

@@ -445,7 +445,9 @@ class OrchestrationService:
         format_retries = 0
         attempt = 0
         while True:
-            if self.store.get_job(job_id).status != 'RUNNING':
+            current = self.store.get_job(job_id)
+            chapter = next(c for c in current.chapters if c.chapter_id == chapter_id)
+            if current.status != 'RUNNING' or chapter.status != 'RUNNING' or chapter.attempt_id != attempt_id:
                 return frozen
             attempt += 1
             try:
@@ -453,16 +455,16 @@ class OrchestrationService:
             except ServiceError as exc:
                 error = exc.error
                 if not error.retryable or attempt >= MAX_ATTEMPTS:
-                    self._chapter_failed(job_id, tasks, chapter_id, failed, error)
+                    self._chapter_failed(job_id, tasks, chapter_id, failed, error, attempt_id)
                     return frozen
                 if error.code in FORMAT_CODES:
                     if format_retries >= FORMAT_EXTRA:
-                        self._chapter_failed(job_id, tasks, chapter_id, failed, error)
+                        self._chapter_failed(job_id, tasks, chapter_id, failed, error, attempt_id)
                         return frozen
                     format_retries += 1
                 else:
                     if transient >= TRANSIENT_EXTRA:
-                        self._chapter_failed(job_id, tasks, chapter_id, failed, error)
+                        self._chapter_failed(job_id, tasks, chapter_id, failed, error, attempt_id)
                         return frozen
                     transient += 1
                 self.store.update_chapter(job_id, chapter_id, retries=attempt)
@@ -473,7 +475,7 @@ class OrchestrationService:
                 self._chapter_failed(
                     job_id, tasks, chapter_id, failed,
                     m.ErrorInfo(code="ORCHESTRATION_ERROR", message=str(exc),
-                                retryable=False, details={}),
+                                retryable=False, details={}), attempt_id,
                 )
                 return frozen
             facts=[f for f in content.fact_candidates if f.evidence_ids or f.metric_ids]
@@ -491,9 +493,9 @@ class OrchestrationService:
         chapter_id: str,
         failed: dict[str, m.ErrorInfo],
         error: m.ErrorInfo,
+        attempt_id: str,
     ) -> None:
-        record=next(c for c in self.store.get_job(job_id).chapters if c.chapter_id==chapter_id)
-        if not self.store.finish_attempt(job_id,chapter_id,record.attempt_id,error=error):
+        if not self.store.finish_attempt(job_id,chapter_id,attempt_id,error=error):
             return
         failed[chapter_id] = error
         self._skip_dependents(job_id, tasks, chapter_id, error)
@@ -610,11 +612,8 @@ class OrchestrationService:
             if tasks[chapter_id].required
         ]
         if required_failed:
-            self.store.update_job(
-                job_id, status="FAILED", stage=None,
-                error=failed[required_failed[0]], now=now,
-            )
-            self.store.set_report_job(job.report_id, job_id, "FAILED", now)
+            self.store.finalize_job(job_id, job.run_id, status="FAILED",
+                                    error=failed[required_failed[0]], now=now)
             return
         # Chapters that never became ready (e.g. their dependencies failed).
         for record in job.chapters:
@@ -686,41 +685,26 @@ class OrchestrationService:
             check_snapshot(document)
         except (ValueError, OSError) as exc:
             logger.exception("snapshot for job %s failed validation", job.job_id)
-            self.store.save_version(document, make_current=False, now=now)
-            self.store.update_job(
-                job.job_id, status="FAILED", stage=None,
-                error=m.ErrorInfo(
-                    code="INVALID_SNAPSHOT", message="报告快照未通过一致性检查。",
-                    retryable=False, details={"reason": str(exc)},
-                ),
-                now=now,
+            self.store.finalize_job(
+                job.job_id, job.run_id, status="FAILED", document=document,
+                error=m.ErrorInfo(code="INVALID_SNAPSHOT", message="报告快照未通过一致性检查。",
+                                  retryable=False, details={"reason": str(exc)}), now=now,
             )
-            self.store.set_report_job(job.report_id, job.job_id, "FAILED", now)
             return
-        self.store.save_version(document, make_current=True, now=now)
         status = "COMPLETED"
         if quality.issues or failed or any(
             record.status == "SKIPPED" for record in job.chapters
         ):
             status = "COMPLETED_WITH_WARNINGS"
-        self.store.set_report_version(job.report_id, document.version_id, now)
-        self.store.update_job(
-            job.job_id, status=status, stage=None,
-            result_version_id=document.version_id, now=self.clock(),
-        )
-        self.store.set_report_job(job.report_id, job.job_id, status, self.clock())
+        self.store.finalize_job(job.job_id, job.run_id, status=status,
+                                document=document, now=self.clock())
 
     def _fail_with_draft(self, job: JobRecord, document: m.ReportDocument, now: datetime) -> None:
-        self.store.save_version(document, make_current=False, now=now)
-        self.store.update_job(
-            job.job_id, status="FAILED", stage=None,
-            error=m.ErrorInfo(
-                code="QUALITY_BLOCK", message="全文质量检查存在 BLOCK 问题，已保留草稿。",
-                retryable=False, details={},
-            ),
-            now=now,
+        self.store.finalize_job(
+            job.job_id, job.run_id, status="FAILED", document=document,
+            error=m.ErrorInfo(code="QUALITY_BLOCK", message="全文质量检查存在 BLOCK 问题，已保留草稿。",
+                              retryable=False, details={}), now=now,
         )
-        self.store.set_report_job(job.report_id, job.job_id, "FAILED", now)
 
     def _write_assets(self, document: m.ReportDocument) -> None:
         """Persist chart PNGs under the frozen version so exports can resolve them."""

@@ -104,3 +104,61 @@ class StoreMySQLTests(unittest.TestCase):
         retry(3)
         self.assertEqual(self.store.get_report(report.report_id).latest_job_id,actual)
         self.assertEqual(self.store.get_report(report.report_id).job_status,'COMPLETED')
+
+    def test_finalization_is_guarded_atomic_and_immutable(self):
+        for store in [self.store, MemoryStore()]:
+            report = ReportRecord(report_id='final-r', title='test', report_type='industry_analysis', template_id='industry_analysis_v1', template_version=1)
+            store.create_report(report, self.now)
+            doc = ReportDocument.model_validate_json(Path('shared/contracts/fixtures/report_document.json').read_text(encoding='utf8')).model_copy(update={'report_id':'final-r', 'version_id':'final-v', 'run_id':'run'})
+            store.create_job(JobRecord(job_id='final-j', report_id='final-r', run_id='run', status='RUNNING'), self.now)
+            store.set_report_job('final-r', 'final-j', 'RUNNING', self.now)
+            self.assertFalse(store.finalize_job('final-j', 'old-run', status='COMPLETED', document=doc, now=self.now))
+            store.cancel_job('final-j', self.now)
+            for status in ['FAILED', 'COMPLETED', 'COMPLETED_WITH_WARNINGS']:
+                self.assertFalse(store.finalize_job('final-j', 'run', status=status, document=doc, now=self.now))
+            self.assertIsNone(store.get_version('final-r', 'final-v'))
+            self.assertIsNone(store.get_report('final-r').current_version_id)
+            self.assertEqual(store.get_job('final-j').status, 'CANCELLED')
+            store.create_job(JobRecord(job_id='new-j', report_id='final-r', run_id='run', status='RUNNING'), self.now)
+            self.assertFalse(store.finalize_job('new-j', 'run', status='COMPLETED', document=doc, now=self.now))
+            store.set_report_job('final-r', 'new-j', 'RUNNING', self.now)
+            store.save_version(doc, make_current=False, now=self.now)
+            with self.assertRaises(ValueError):
+                store.finalize_job('new-j', 'run', status='COMPLETED', document=doc.model_copy(update={'exportable':not doc.exportable}), now=self.now)
+            self.assertEqual(store.get_job('new-j').status, 'RUNNING')
+            self.assertIsNone(store.get_report('final-r').current_version_id)
+            self.assertTrue(store.finalize_job('new-j', 'run', status='COMPLETED', document=doc, now=self.now))
+            self.assertEqual(store.get_job('new-j').result_version_id, 'final-v')
+            self.assertEqual(store.get_report('final-r').current_version_id, 'final-v')
+            self.assertEqual(store.get_report('final-r').job_status, 'COMPLETED')
+            self.assertIsNone(store.cancel_job('new-j', self.now))
+
+    def test_cancel_races_finalization_without_partial_publication(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Barrier
+        for store in [self.store, MemoryStore()]:
+            for i in range(4):
+                rid, jid = 'race-r'+str(i), 'race-j'+str(i)
+                store.create_report(ReportRecord(report_id=rid, title='test', report_type='industry_analysis', template_id='industry_analysis_v1', template_version=1), self.now)
+                store.create_job(JobRecord(job_id=jid, report_id=rid, run_id='run', status='RUNNING'), self.now)
+                store.set_report_job(rid, jid, 'RUNNING', self.now)
+                doc = ReportDocument.model_validate_json(Path('shared/contracts/fixtures/report_document.json').read_text(encoding='utf8')).model_copy(update={'report_id':rid, 'version_id':'race-v'+str(i), 'run_id':'run'})
+                barrier = Barrier(2)
+                def finish():
+                    barrier.wait()
+                    return store.finalize_job(jid, 'run', status='COMPLETED', document=doc, now=self.now)
+                def cancel():
+                    barrier.wait()
+                    return store.cancel_job(jid, self.now)
+                with ThreadPoolExecutor(max_workers=2) as pool:
+                    a, b = pool.submit(finish), pool.submit(cancel)
+                    published, cancelled = a.result(), b.result()
+                self.assertNotEqual(published, cancelled is not None)
+                job, report = store.get_job(jid), store.get_report(rid)
+                if published:
+                    self.assertEqual(job.status, 'COMPLETED')
+                    self.assertEqual(report.current_version_id, doc.version_id)
+                else:
+                    self.assertEqual(job.status, 'CANCELLED')
+                    self.assertIsNone(report.current_version_id)
+                    self.assertIsNone(store.get_version(rid, doc.version_id))

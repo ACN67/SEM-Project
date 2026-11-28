@@ -114,6 +114,10 @@ class IdempotencyRequest:
 class Store(Protocol):
     """Synchronous storage used by orchestration and the HTTP layer."""
 
+    def finalize_job(self, job_id: str, run_id: str, *, status: str,
+                     now: datetime, document: m.ReportDocument | None = None,
+                     error: m.ErrorInfo | None = None) -> bool: ...
+
     # -- reports ----------------------------------------------------------
     def create_report(self, report: ReportRecord, now: datetime) -> None: ...
     def get_report(self, report_id: str) -> ReportRecord | None: ...
@@ -629,4 +633,28 @@ class MemoryStore:
             chapter.error=error
             if frozen is not None:job.frozen=frozen
             if context is not None:job.context=context
+            return True
+
+    def finalize_job(self, job_id, run_id, *, status, now, document=None, error=None):
+        """Commit a terminal result only while this run still owns the report."""
+        if status not in ("FAILED", "COMPLETED", "COMPLETED_WITH_WARNINGS"):
+            raise ValueError("invalid final status")
+        with self._lock:
+            job = self._jobs[job_id]
+            report = self._reports[job.report_id]
+            if job.status != "RUNNING" or job.run_id != run_id or report.latest_job_id != job_id:
+                return False
+            if document is not None:
+                if document.report_id != job.report_id or document.run_id != run_id:
+                    raise ValueError("snapshot owner mismatch")
+                existing = self._versions.get(document.version_id)
+                if existing is not None and existing != document:
+                    raise ValueError("immutable report version conflict")
+                self._versions[document.version_id] = document.model_copy(deep=True)
+                if status != "FAILED":
+                    report.current_version_id = document.version_id
+            job.status, job.stage, job.error, job.updated_at = status, None, error, now
+            if document is not None and status != "FAILED":
+                job.result_version_id = document.version_id
+            report.job_status, report.updated_at = status, now
             return True

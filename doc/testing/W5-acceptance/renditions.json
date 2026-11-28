@@ -1,0 +1,371 @@
+[
+  {
+    "evidence_key": "EV-R01-MIIT-2022-ANNUAL",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_610c626d34b8424c9c1077ac5e5a40fe.html",
+    "capture_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_610c626d34b8424c9c1077ac5e5a40fe.html",
+    "retrieval_url": "https://r.jina.ai/https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_610c626d34b8424c9c1077ac5e5a40fe.html",
+    "acquired_at": "2026-11-27T17:39:34.275566+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-12月新能源汽车产销数据"
+    },
+    "text_file": "EV-R01-MIIT-2022-ANNUAL-rendition.txt",
+    "text_sha256": "665065eff54352cea364541a7e44325359d5618d7b041123d4937e0229e8a94c",
+    "selected_character_ranges": [],
+    "file": "EV-R01-MIIT-2022-ANNUAL-rendition.pdf",
+    "sha256": "de1c7d886853f611873f1c0b0bc75ddf9a25c9c6f2487cf1abdd932eedc04115",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R01-MIIT-2023-ANNUAL",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+    "capture_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+    "retrieval_url": "https://r.jina.ai/https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+    "acquired_at": "2026-11-27T17:39:34.275566+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-12月新能源汽车产销数据"
+    },
+    "text_file": "EV-R01-MIIT-2023-ANNUAL-rendition.txt",
+    "text_sha256": "a9b04f56d85491b43bff488ce225c70c062f983a77269212b79dfc9625b08904",
+    "selected_character_ranges": [],
+    "file": "EV-R01-MIIT-2023-ANNUAL-rendition.pdf",
+    "sha256": "69d67f6da64fed8e8e987fdd7bd3616390327382602de2b5c7f891daf0f29a89",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R01-POLICY-2021-2035",
+    "source_url": "https://www.gov.cn/zhengce/content/2020-11/02/content_5556716.htm",
+    "capture_url": "https://www.gov.cn/zhengce/content/2020-11/02/content_5556716.htm",
+    "retrieval_url": "https://r.jina.ai/https://www.gov.cn/zhengce/content/2020-11/02/content_5556716.htm",
+    "acquired_at": "2026-11-27T17:39:34.430887+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "第三章 提高技术创新能力"
+    },
+    "text_file": "EV-R01-POLICY-2021-2035-rendition.txt",
+    "text_sha256": "fc9ad214110658f35536f630ecce3591a3737d9d3fea2fe399d6e6dfe684c27a",
+    "selected_character_ranges": [],
+    "file": "EV-R01-POLICY-2021-2035-rendition.pdf",
+    "sha256": "63dbc56c307b63f0bf1c49849f8b7863e5075a9e2612d5706c835819c42970f6",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2023-Q1",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_9cdfd3d829b24222a8ecf947d6627a45.html",
+    "capture_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_9cdfd3d829b24222a8ecf947d6627a45.html",
+    "retrieval_url": "https://r.jina.ai/https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_9cdfd3d829b24222a8ecf947d6627a45.html",
+    "acquired_at": "2026-11-27T17:39:34.276566+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-3月新能源汽车销量"
+    },
+    "text_file": "EV-R03-MIIT-2023-Q1-rendition.txt",
+    "text_sha256": "39f8ddf173a1061f1e85ff8edccd3f4c2f4dbc89bbc8721f15fb737817675c42",
+    "selected_character_ranges": [],
+    "file": "EV-R03-MIIT-2023-Q1-rendition.pdf",
+    "sha256": "6a0719d73a0a21966a88ff231ba8ac1bfae4b3239df16777ebbebeafa68dde83",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2023-H1",
+    "source_url": "https://gxt.fujian.gov.cn/zwgk/gysj/xysj/zb/202307/t20230725_6213460.htm",
+    "capture_url": "https://gxt.fujian.gov.cn/zwgk/gysj/xysj/zb/202307/t20230725_6213460.htm",
+    "retrieval_url": "https://r.jina.ai/https://gxt.fujian.gov.cn/zwgk/gysj/xysj/zb/202307/t20230725_6213460.htm",
+    "acquired_at": "2026-11-27T17:39:34.407505+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-6月新能源汽车销量"
+    },
+    "text_file": "EV-R03-MIIT-2023-H1-rendition.txt",
+    "text_sha256": "81e68ff43fc581e5c85c45d33fef8c08a1d0984e32c7e5d19ca18ba2e3b42f6c",
+    "selected_character_ranges": [],
+    "file": "EV-R03-MIIT-2023-H1-rendition.pdf",
+    "sha256": "b83267afcf2e678ac54129b0ba084194e0b51c50d4299338da35ae3c075d4bb3",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2023-9M",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_fce3df5fdc544f8bbb2277fac5df58da.html",
+    "capture_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_fce3df5fdc544f8bbb2277fac5df58da.html",
+    "retrieval_url": "https://r.jina.ai/https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_fce3df5fdc544f8bbb2277fac5df58da.html",
+    "acquired_at": "2026-11-27T17:39:34.405504+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-9月新能源汽车销量"
+    },
+    "text_file": "EV-R03-MIIT-2023-9M-rendition.txt",
+    "text_sha256": "5521c1534ced4fcffcde94675510816a83e6dce82c281b4c6b47ae2742a8fae9",
+    "selected_character_ranges": [],
+    "file": "EV-R03-MIIT-2023-9M-rendition.pdf",
+    "sha256": "c9331d1529c9b1c6925578b5ecc7102e5c0bd1153ce89843dbb742342d3e186d",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2023-ANNUAL",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+    "capture_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+    "retrieval_url": "https://r.jina.ai/https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+    "acquired_at": "2026-11-27T17:39:34.400001+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-12月新能源汽车销量"
+    },
+    "text_file": "EV-R03-MIIT-2023-ANNUAL-rendition.txt",
+    "text_sha256": "a9b04f56d85491b43bff488ce225c70c062f983a77269212b79dfc9625b08904",
+    "selected_character_ranges": [],
+    "file": "EV-R03-MIIT-2023-ANNUAL-rendition.pdf",
+    "sha256": "69d67f6da64fed8e8e987fdd7bd3616390327382602de2b5c7f891daf0f29a89",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2024-Q1",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+    "capture_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+    "retrieval_url": "https://r.jina.ai/https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+    "acquired_at": "2026-11-27T17:39:34.508174+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-3月新能源汽车销量"
+    },
+    "text_file": "EV-R03-MIIT-2024-Q1-rendition.txt",
+    "text_sha256": "deab9733e67e976bfa4aace85e5dcffc7249274c00a2cf289b810e0b5cae64b9",
+    "selected_character_ranges": [],
+    "file": "EV-R03-MIIT-2024-Q1-rendition.pdf",
+    "sha256": "574e02c6c2c2bae9479ed87c4a121cf5165d9269c6018f2298a1b8219c829583",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2024-H1",
+    "source_url": "https://wap.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_3dff2eb026d14e36b9ec6065840d3fdc.html",
+    "capture_url": "https://wap.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_3dff2eb026d14e36b9ec6065840d3fdc.html",
+    "retrieval_url": "https://r.jina.ai/https://wap.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_3dff2eb026d14e36b9ec6065840d3fdc.html",
+    "acquired_at": "2026-11-27T17:39:34.508685+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-6月新能源汽车销量"
+    },
+    "text_file": "EV-R03-MIIT-2024-H1-rendition.txt",
+    "text_sha256": "372e273690739e11eb904938a78ecb82c369097a6b60c08777cf2ec956d72a8d",
+    "selected_character_ranges": [],
+    "file": "EV-R03-MIIT-2024-H1-rendition.pdf",
+    "sha256": "7ea6b33c82e4a3588a947571dbd78b486e9319053618799107061f38415b6862",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2024-9M",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_be025f4f66ef42d78af0d4622e07eebb.html",
+    "capture_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_be025f4f66ef42d78af0d4622e07eebb.html",
+    "retrieval_url": "https://r.jina.ai/https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_be025f4f66ef42d78af0d4622e07eebb.html",
+    "acquired_at": "2026-11-27T17:39:34.555346+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-9月新能源汽车销量"
+    },
+    "text_file": "EV-R03-MIIT-2024-9M-rendition.txt",
+    "text_sha256": "64178514e1633b509d5b9789ad28815df4aea54054bb35ca306a980c0b3d56df",
+    "selected_character_ranges": [],
+    "file": "EV-R03-MIIT-2024-9M-rendition.pdf",
+    "sha256": "db1aaf1cdc1689da9c805f5ff6a95635f8aca871356230c1de7110b52daaf5dd",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2024-ANNUAL",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+    "capture_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+    "retrieval_url": "https://r.jina.ai/https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+    "acquired_at": "2026-11-27T17:39:34.653486+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-12月新能源汽车销量"
+    },
+    "text_file": "EV-R03-MIIT-2024-ANNUAL-rendition.txt",
+    "text_sha256": "d932b0c3c14cc9c2d545432b41254ef3e935f4d6fb7ec185c1619b94ab7f7ffb",
+    "selected_character_ranges": [],
+    "file": "EV-R03-MIIT-2024-ANNUAL-rendition.pdf",
+    "sha256": "420e93eb44960078c761ff11dcfc03ab96445421cd8dbe52833cd16ac99a7020",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R04-GOTION-PRODUCTS",
+    "source_url": "https://www.gotion.com.cn/solution",
+    "capture_url": "https://www.gotion.com.cn/solution",
+    "retrieval_url": "https://r.jina.ai/https://www.gotion.com.cn/solution",
+    "acquired_at": "2026-11-27T17:39:34.774488+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "乘用车动力解决方案"
+    },
+    "text_file": "EV-R04-GOTION-PRODUCTS-rendition.txt",
+    "text_sha256": "9c7a1d07231ccae4e2c6d1f8510a1bdc4b9ab1c24964978d02121b2333222d8a",
+    "selected_character_ranges": [],
+    "file": "EV-R04-GOTION-PRODUCTS-rendition.pdf",
+    "sha256": "027f4de24fd47af719cc66f6343a1a288ecc351bb121da621ac62762d4816135",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R04-GOTION-LAYOUT",
+    "source_url": "https://www.gotion.com.cn/about",
+    "capture_url": "https://www.gotion.com.cn/about",
+    "retrieval_url": "https://r.jina.ai/https://www.gotion.com.cn/about",
+    "acquired_at": "2026-11-27T17:39:34.877413+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "公司介绍与全球布局"
+    },
+    "text_file": "EV-R04-GOTION-LAYOUT-rendition.txt",
+    "text_sha256": "1b962b94bb2c9fa9e8d7b1d65e8e5189ac2d636e7c17444d2e5b429355772fcb",
+    "selected_character_ranges": [],
+    "file": "EV-R04-GOTION-LAYOUT-rendition.pdf",
+    "sha256": "b012cc4bcaff8fc22da55b2d2fe17fe49bccaf49ae060cf6716c6ebc1d481f6b",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R05-EU-ANTISUBSIDY",
+    "source_url": "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=OJ%3AL_202402754",
+    "capture_url": "https://eur-lex.europa.eu/eli/2024/2754/oj",
+    "retrieval_url": "https://r.jina.ai/https://eur-lex.europa.eu/eli/2024/2754/oj",
+    "acquired_at": "2026-11-27T17:39:34.790254+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "Articles 1 and 3"
+    },
+    "text_file": "EV-R05-EU-ANTISUBSIDY-rendition.txt",
+    "text_sha256": "626cb57f32252ea62f813bd48169016904dcbb94978e0f2efe58ac362a638c31",
+    "selected_character_ranges": [
+      [
+        939925,
+        943080
+      ],
+      [
+        943232,
+        944443
+      ]
+    ],
+    "file": "EV-R05-EU-ANTISUBSIDY-rendition.pdf",
+    "sha256": "0b484964e559a27ee85ae8eb4442030ebcaf27d679302f91f1df0bbeff43a76d",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R05-EU-TYPE-APPROVAL",
+    "source_url": "https://eur-lex.europa.eu/eli/reg/2018/858/oj/eng",
+    "capture_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32018R0858",
+    "retrieval_url": "https://r.jina.ai/https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32018R0858",
+    "acquired_at": "2026-11-27T17:39:34.790254+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "Scope and vehicle type-approval requirements"
+    },
+    "text_file": "EV-R05-EU-TYPE-APPROVAL-rendition.txt",
+    "text_sha256": "dea138c7f17ae2cea92b88e08532255555eebef88dc75780f1c2dafd99dda47e",
+    "selected_character_ranges": [
+      [
+        44254,
+        47246
+      ],
+      [
+        259548,
+        262060
+      ]
+    ],
+    "file": "EV-R05-EU-TYPE-APPROVAL-rendition.pdf",
+    "sha256": "ce7355152a1aa82fd373a26862f3f0313338982dbd5aac2669afa66681d4fbd1",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R05-BAFA-BONUS-END",
+    "source_url": "https://www.bafa.de/SharedDocs/Kurzmeldungen/DE/Energie/Elektromobilitaet/20231216_foerderende.html",
+    "capture_url": "https://www.bafa.de/SharedDocs/Kurzmeldungen/DE/Energie/Elektromobilitaet/20231216_foerderende.html",
+    "retrieval_url": "https://r.jina.ai/https://www.bafa.de/SharedDocs/Kurzmeldungen/DE/Energie/Elektromobilitaet/20231216_foerderende.html",
+    "acquired_at": "2026-11-27T17:39:34.940609+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "Ende des Umweltbonus"
+    },
+    "text_file": "EV-R05-BAFA-BONUS-END-rendition.txt",
+    "text_sha256": "ac19e1eebbe1a20334f723cf88b16f5b158db914970b64549f0b60d2e58461ec",
+    "selected_character_ranges": [],
+    "file": "EV-R05-BAFA-BONUS-END-rendition.pdf",
+    "sha256": "f0d07f22abbf7a48a66f13e095790fca1f63ea464129420d12adc1d2d8f562b6",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R04-GOTION-LAB-2023",
+    "source_url": "https://www.gotion.com.cn/newsInfo/317",
+    "capture_url": "https://www.gotion.com.cn/newsInfo/317",
+    "retrieval_url": "https://r.jina.ai/https://www.gotion.com.cn/newsInfo/317",
+    "acquired_at": "2026-11-27T17:39:35.023831+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "国轩高科验证工程院及测试平台"
+    },
+    "text_file": "EV-R04-GOTION-LAB-2023-rendition.txt",
+    "text_sha256": "a9f72e04eaae5ccd149df75fbf2be43d9d76cfa856711457f79da191ba09f939",
+    "selected_character_ranges": [],
+    "file": "EV-R04-GOTION-LAB-2023-rendition.pdf",
+    "sha256": "4654d5259ae4d53587cbfa7e0654d4e4c4a55974f0e2a7f2b30feb4fc28decc3",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R01-MIIT-2024-ANNUAL",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+    "capture_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+    "retrieval_url": "https://r.jina.ai/https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+    "acquired_at": "2026-11-27T17:39:35.132522+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "1-12月新能源汽车销量"
+    },
+    "text_file": "EV-R01-MIIT-2024-ANNUAL-rendition.txt",
+    "text_sha256": "33563d695d9c7474155477830fc64aee9169f23daa9f18367b051dd0f8ad1572",
+    "selected_character_ranges": [],
+    "file": "EV-R01-MIIT-2024-ANNUAL-rendition.pdf",
+    "sha256": "50930051d96a06f1e52383774e676a5a8b092f232aa0b149ba3e1a2733e82160",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R05-EU-CN-2025",
+    "source_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32024R2522",
+    "capture_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32024R2522",
+    "retrieval_url": "https://r.jina.ai/https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32024R2522",
+    "acquired_at": "2026-11-27T17:39:35.203182+00:00",
+    "representation": "gateway-text-rendition",
+    "original_locator": {
+      "kind": "web",
+      "anchor": "Annex tariff table, printed label 651/1101, CN 8703 80 10; Article 2"
+    },
+    "text_file": "EV-R05-EU-CN-2025-rendition.txt",
+    "text_sha256": "3b5d9123c6e5a819f21b45eece699b8a64d6df77893c8ff9e7dc2058cfa6f7cc",
+    "selected_character_ranges": [
+      [
+        4027,
+        4639
+      ],
+      [
+        2583925,
+        2586335
+      ]
+    ],
+    "file": "EV-R05-EU-CN-2025-rendition.pdf",
+    "sha256": "106319dd7fed6a0d1bddec0f3b19105d483c42be909bd76941d7d4650d2c0845",
+    "status": "RENDITION_REQUIRES_REVIEW"
+  }
+]

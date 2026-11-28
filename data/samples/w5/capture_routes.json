@@ -1,0 +1,22 @@
+{
+  "EV-R05-EU-ANTISUBSIDY": {
+    "capture_url": "https://eur-lex.europa.eu/eli/2024/2754/oj",
+    "capture_patterns": [
+      "Article\\s+1\\s*\\n.*?Article\\s+2\\s*\\n",
+      "Article\\s+3\\s*\\n.{0,1200}"
+    ]
+  },
+  "EV-R05-EU-TYPE-APPROVAL": {
+    "capture_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32018R0858",
+    "capture_patterns": [
+      "Article\\s+1\\s*\\n.*?Article\\s+3\\s*\\n",
+      "Article\\s+91\\s*\\n.{0,2500}"
+    ]
+  },
+  "EV-R05-EU-CN-2025": {
+    "capture_patterns": [
+      "Article\\s+2\\s*\\n.{0,600}",
+      "8703 80\\s+\u2013.{0,2400}"
+    ]
+  }
+}

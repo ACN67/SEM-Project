@@ -34,7 +34,7 @@
       "evidence_keys": [
         "EV-R01-MIIT-2022-ANNUAL",
         "EV-R01-MIIT-2023-ANNUAL",
-        "EV-R01-MEE-2024-P8",
+        "EV-R01-MIIT-2024-ANNUAL",
         "EV-R01-POLICY-2021-2035"
       ],
       "expected_metrics": [
@@ -54,7 +54,7 @@
           "evidence_keys": [
             "EV-R01-MIIT-2022-ANNUAL",
             "EV-R01-MIIT-2023-ANNUAL",
-            "EV-R01-MEE-2024-P8"
+            "EV-R01-MIIT-2024-ANNUAL"
           ],
           "allowed_wording": [
             "销量增长",
@@ -131,7 +131,6 @@
         "r02-saic-r-and-d-2024"
       ],
       "evidence_keys": [
-        "EV-R02-BYD-2023-HK-P273",
         "EV-R02-BYD-CNINFO-P34",
         "EV-R02-SAIC-2023-P13",
         "EV-R02-SAIC-2024-P13"
@@ -440,7 +439,8 @@
         "EV-R05-KBA-PDF-P1",
         "EV-R05-EU-ANTISUBSIDY",
         "EV-R05-EU-TYPE-APPROVAL",
-        "EV-R05-BAFA-BONUS-END"
+        "EV-R05-BAFA-BONUS-END",
+        "EV-R05-EU-CN-2025"
       ],
       "expected_metrics": [
         {

@@ -1,0 +1,560 @@
+[
+  {
+    "evidence_key": "EV-R01-MIIT-2022-ANNUAL",
+    "case_id": "R01",
+    "source_id": "miit-2022-annual",
+    "title": "2022年12月汽车工业经济运行情况",
+    "publisher": "中华人民共和国工业和信息化部",
+    "published_at": "2023-01-12",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_610c626d34b8424c9c1077ac5e5a40fe.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-12月新能源汽车产销数据"
+    },
+    "checked_at": "2026-11-27T16:46:13.750516+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R01-MIIT-2023-ANNUAL",
+    "case_id": "R01",
+    "source_id": "miit-2023-annual",
+    "title": "2023年12月汽车工业经济运行情况",
+    "publisher": "中华人民共和国工业和信息化部",
+    "published_at": "2024-01-11",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-12月新能源汽车产销数据"
+    },
+    "checked_at": "2026-11-27T16:46:13.751027+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R01-MEE-2024-P8",
+    "case_id": "R01",
+    "source_id": "mee-2025-mobile-source-report",
+    "title": "中国移动源环境管理年报（2025年）第 I 部分",
+    "publisher": "中华人民共和国生态环境部",
+    "published_at": "2025-12-03",
+    "source_url": "https://www.mee.gov.cn/hjzl/sthjzk/ydyhjgl/202512/W020251203577003736659.pdf",
+    "locator": {
+      "kind": "pdf",
+      "page": 8,
+      "page_label": "1",
+      "section": "第Ⅰ部分 机动车排放情况，1 机动车产销量"
+    },
+    "checked_at": "2026-11-27T16:46:13.751027+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R01-POLICY-2021-2035",
+    "case_id": "R01",
+    "source_id": "state-council-nev-plan-2035",
+    "title": "新能源汽车产业发展规划（2021—2035年）",
+    "publisher": "国务院办公厅",
+    "published_at": "2020-11-02",
+    "source_url": "https://www.gov.cn/zhengce/content/2020-11/02/content_5556716.htm",
+    "locator": {
+      "kind": "web",
+      "anchor": "第三章 提高技术创新能力"
+    },
+    "checked_at": "2026-11-27T16:46:13.752033+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R02-BYD-2023-HK-P273",
+    "case_id": "R02",
+    "source_id": "byd-2023-annual",
+    "title": "比亚迪2023年年度报告",
+    "publisher": "比亚迪股份有限公司",
+    "published_at": "2024-03-26",
+    "source_url": "https://www.bydglobal.com/material/group-official-website/file/cn/investor-relations/financial-reports/2024032602586_c.pdf",
+    "locator": {
+      "kind": "pdf",
+      "page": 273,
+      "page_label": "274",
+      "section": "研发支出按性质列示"
+    },
+    "checked_at": "2026-11-27T16:46:13.882086+00:00",
+    "distribution": "external-original",
+    "file": "EV-R02-BYD-2023-HK-P273.pdf",
+    "sha256": "0e54c391a147c9221457c9b2277d296e5c10d3914a74da3c768c7811b862f2ec",
+    "size_bytes": 25862702,
+    "located_text": "Notes to Financial Statements\nৌਕజڝڌൗ\n274\nBYD Company Limited\nˢԭٰࠔ΅Ϟࠢʮ̡\nRMB’000\nɛ͏࿆ɷʩ\nʬe ޼೯˕̈\n׌ܲሯʱᗳνɨj\n2023 2022\nɚཧɚɧϋ ɚཧɚɚϋ    \nEmployee benefits ᔖʈᑚཇ 21,803,760 11,304,110\nMaterial consumption ࣘيऊঃ 11,276,698 5,624,882\nDepreciation and amortization ұᔚʿᛅቖ 2,588,333 841,220\nInspection expenses Ꮸ಻൬ 1,114,636 324,183\nShare-based payment ٰ΅˕˹ 400,381 244,005\nOthers Չ˼ 2,733,935 1,884,842    \nTotal Υࠇ 39,917,743 20,223,242    \n Including:  Expensed development  \n expenditures\n Չʕj൬͜ʷ޼೯˕̈\n39,574,945 18,654,453\n         Capitalised development  \n expenditures\n༟͉ʷ޼೯˕̈\n342,798 1,568,789    \nୌΥ༟͉ʷૢ΁޼ٙ೯ධͦක೯˕̈νɨj\nIncrease during the year\n͉ϋᄣ̋\nDecrease during the year\n͉ϋಯˇ\nOpening\nbalance\nϋږڋᕘ\nIn-house \ndevelopment\nʫ௅ක೯\nOthers\nՉ˼\nRecognition\nas intangible\nassets\nᆽႩೌҖ༟ପ\nCharged to\nprofit\nor loss\nࠇɝ຅ಂฦू\nClosing\nbalance\nϋ͋ቱᕘ       \nAutomobile projects\nӛԓධͦ 1,683,000 342,798 – 1,484,798 – 541,000       \nVI. DEVELOPMENT EXPENDITURES\nClassification by nature:\nDevelopment expenditures of R&D projects qualified for \ncapitalisation are as follows:",
+    "status": "LOCATED_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R02-BYD-CNINFO-P34",
+    "case_id": "R02",
+    "source_id": "byd-2024-cninfo-annual",
+    "title": "比亚迪股份有限公司2024年年度报告全文",
+    "publisher": "比亚迪股份有限公司",
+    "published_at": "2025-03-25",
+    "source_url": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881496.PDF",
+    "locator": {
+      "kind": "pdf",
+      "page": 34,
+      "page_label": "34",
+      "table": "公司研发投入情况"
+    },
+    "checked_at": "2026-11-27T16:46:13.892180+00:00",
+    "distribution": "external-original",
+    "file": "EV-R02-BYD-CNINFO-P34.pdf",
+    "sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "size_bytes": 10092140,
+    "located_text": "比亚迪股份有限公司 2024 年年度报告全文 \n34 \n研发人员数量占比 12.55% 14.62% -2.07% \n研发人员学历结构 \n本科（人） 53,222 46,823 13.67% \n硕士（人） 28,842 23,706 21.66% \n博士（人） 2,403 1,587 51.45% \n研发人员年龄构成 \n30 岁以下（人） 68,548 61,337 11.76% \n30~40 岁（人） 45,764 36,182 26.48% \n40 岁以上（人） 7,286 5,325 36.83% \n公司研发人员构成发生重大变化的原因及影响 \n□适用 不适用 \n公司研发投入情况 \n 2024 年 2023 年 变动比例 \n研发投入金额（元） 54,160,964,000.00 39,917,743,000.00 35.68% \n研发投入占营业收入比例 6.97% 6.63% 0.34% \n研发投入资本化的金额\n（元） 966,219,000.00 342,798,000.00 181.86% \n资本化研发投入占研发投入\n的比例 1.78% 0.86% 0.92% \n研发投入总额占营业收入的比重较上年发生显著变化的原因 \n□适用 不适用 \n研发投入资本化率大幅变动的原因及其合理性说明 \n□适用 不适用 \n5、现金流 \n单位：元 \n项目 2024 年 2023 年 同比增减 \n经营活动现金流入小计 814,817,630,000.00 611,818,103,000.00 33.18% \n经营活动现金流出小计 681,363,757,000.00 442,093,078,000.00 54.12% \n经营活动产生的现金流量净\n额 133,453,873,000.00 169,725,025,000.00 -21.37% \n投资活动现金流入小计 15,400,173,000.00 23,105,483,000.00 -33.35% \n投资活动现金流出小计 144,482,455,000.00 148,769,127,000.00 -2.88% \n投资活动产生的现金流量净\n额 -129,082,282,000.00 -125,663,644,000.00 2.72% \n筹资活动现金流入小计 55,721,666,000.00 45,430,316,000.00 22.65% \n筹资活动现金流出小计 65,989,213,000.00 32,613,189,000.00 102.34% \n筹资活动产生的现金流量净\n额 -10,267,547,000.00 12,817,127,000.00 -180.11% \n现金及现金等价物净增加额 -6,255,203,000.00 57,329,288,000.00 -110.91% \n相关数据同比发生重大变动的主要影响因素说明 \n适用 □不适用 \n经营活动产生的现金流量净额同比变动-21.37%，主要是购买商品、接受劳务支付的现金增加所致； ",
+    "status": "LOCATED_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R02-SAIC-2023-P13",
+    "case_id": "R02",
+    "source_id": "saic-2023-annual",
+    "title": "上海汽车集团股份有限公司2023年年度报告",
+    "publisher": "上海汽车集团股份有限公司",
+    "published_at": "2024-03-29",
+    "source_url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2023ndqgg/2024/3/29/C5303F0A7F774009828802E9562F73FB.pdf",
+    "locator": {
+      "kind": "pdf",
+      "page": 13,
+      "page_label": "13",
+      "table": "研发投入情况表"
+    },
+    "checked_at": "2026-11-27T16:46:14.148772+00:00",
+    "distribution": "external-original",
+    "file": "EV-R02-SAIC-2023-P13.pdf",
+    "sha256": "4a2339816a97dc00b9196ed9d82b91373f1c3fc1f200313996b0605d74219e45",
+    "size_bytes": 4796308,
+    "located_text": "2023 年年度报告 \n13 / 214 \n \n \n(6). 公司报告期内业务、产品或服务发生重大变化或调整有关情况 \n□适用 √不适用  \n \n(7). 主要销售客户及主要供应商情况 \nA.公司主要销售客户情况 \n√适用 □不适用  \n前五名客户销售额 9,020,465.57 万元，占年度销售总额 12.43%；其中前五名客户销售额中关联方\n销售额 701,411.61 万元，占年度销售总额 0.97 %。 \n \n报告期内向单个客户的销售比例超过总额的50%、前 5 名客户中存在新增客户的或严重依赖于少\n数客户的情形 \n□适用 √不适用  \n \nB.公司主要供应商情况 \n√适用 □不适用  \n前五名供应商采购额 29,883,868.17 万元，占年度采购总额 45.82%；其中前五名供应商采购额中\n关联方采购额 1,706,108.47 万元，占年度采购总额 2.62%。 \n \n报告期内向单个供应商的采购比例超过总额的50%、前5 名供应商中存在新增供应商的或严重依\n赖于少数供应商的情形 \n□适用 √不适用  \n \n3. 费用 \n√适用 □不适用  \n单位：元 \n项目 2023 年 2022 年 变动比例（%） \n销售费用 29,878,918,085.65 30,175,402,864.14 -0.98 \n管理费用 24,240,271,451.56 25,641,378,773.93 -5.46 \n研发费用 18,365,413,289.29 18,030,919,437.98 1.86 \n财务费用 -156,683,993.96 -764,406,025.70 不适用 \n所得税费用 5,912,843,489.27 5,228,427,640.03 13.09 \n注：财务费用较上年同期变动主要系公司之子公司借款利息支出同比增加。 \n \n4. 研发投入 \n(1).研发投入情况表 \n√适用  □不适用  \n单位：元 \n本期费用化研发投入 18,365,413,289.29 \n本期资本化研发投入 3,647,833,203.82 \n研发投入合计 22,013,246,493.11 \n研发投入总额占营业收入比例（%） 3.03 \n研发投入资本化的比重（%） 16.57 \n \n(2).研发人员情况表 \n√适用 □不适用  \n ",
+    "status": "LOCATED_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R02-SAIC-2024-P13",
+    "case_id": "R02",
+    "source_id": "saic-2024-annual",
+    "title": "上海汽车集团股份有限公司2024年年度报告",
+    "publisher": "上海汽车集团股份有限公司",
+    "published_at": "2025-04-29",
+    "source_url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2024ndqgg/2025/4/29/685D33923ABE4D109BBE39F92BFBF945.pdf",
+    "locator": {
+      "kind": "pdf",
+      "page": 13,
+      "page_label": "13",
+      "table": "研发投入情况表",
+      "section": "附注：含主要合资整车企业的汇总研发投入另列"
+    },
+    "checked_at": "2026-11-27T16:46:14.155803+00:00",
+    "distribution": "external-original",
+    "file": "EV-R02-SAIC-2024-P13.pdf",
+    "sha256": "c980b2d827f372b5b90742e299d609345c83342584901c96ea95891c43f4ab3f",
+    "size_bytes": 1577457,
+    "located_text": "上海汽车集团股份有限公司2024 年年度报告\n13 / 219\n前五名客户销售额8,188,276.69万元，占年度销售总额13.33%；其中前五名客户销售额中关联方销\n售额0万元，占年度销售总额0% 。\n报告期内向单个客户的销售比例超过总额的 50%、前 5 名客户中存在新增客户的或严重依赖于少\n数客户的情形\n√适用 □不适用\n单位：万元 币种：人民币\n序号 客户名称 销售额 占年度销售总额比例（%）\n1 客户五 991,384.24 1.61\nB.公司主要供应商情况\n√适用 □不适用\n前五名供应商采购额20,238,575.55万元，占年度采购总额36.37%；其中前五名供应商采购额中关\n联方采购额385,004.09万元，占年度采购总额0.69%。\n报告期内向单个供应商的采购比例超过总额的 50%、前 5 名供应商中存在新增供应商的或严重依\n赖于少数供应商的情形\n□适用 √不适用\n3、 费用\n√适用 □不适用\n单位：元\n项目 2024 年 2023 年 变动比例（%）\n销售费用 20,080,258,315.83 24,784,563,685.16 -18.98\n管理费用 21,108,125,732.22 24,240,271,451.56 -12.92\n研发费用 17,649,893,105.21 18,365,413,289.29 -3.90\n财务费用 3,054,077,070.48 -156,683,993.96 2049.20\n所得税费用 4,677,794,462.18 5,912,843,489.27 -20.89\n注：财务费用较上年同期变动主要原因为本期公司受市场汇率影响，汇兑损失增加所致。\n4、 研发投入\n(1).研发投入情况表\n√适用 □不适用\n单位：元\n本期费用化研发投入 17,649,893,105.21\n本期资本化研发投入 4,163,196,940.09\n研发投入合计 21,813,090,045.30\n研发投入总额占营业收入比例（%） 3.55\n研发投入资本化的比重（%） 19.09\n注：2024 年度本集团含所属主要合资整车企业的汇总研发投入为 3,516,108.19 万元，同比 2023\n年度 3,276,417.68 万元（同口径）增加 7.32%。\n(2).研发人员情况表\n√适用 □不适用\n公司研发人员的数量 30,600\n研发人员数量占公司总人数的比例（%） 17.5",
+    "status": "LOCATED_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2023-Q1",
+    "case_id": "R03",
+    "source_id": "miit-2023-q1",
+    "title": "2023年3月汽车工业经济运行情况",
+    "publisher": "中华人民共和国工业和信息化部",
+    "published_at": "2023-04-11",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_9cdfd3d829b24222a8ecf947d6627a45.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-3月新能源汽车销量"
+    },
+    "checked_at": "2026-11-27T16:46:14.157928+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2023-H1",
+    "case_id": "R03",
+    "source_id": "miit-2023-h1-mirror",
+    "title": "2023年6月汽车工业经济运行情况",
+    "publisher": "福建省工业和信息化厅",
+    "published_at": "2023-07-25",
+    "source_url": "https://gxt.fujian.gov.cn/zwgk/gysj/xysj/zb/202307/t20230725_6213460.htm",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-6月新能源汽车销量"
+    },
+    "checked_at": "2026-11-27T16:46:14.199553+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2023-9M",
+    "case_id": "R03",
+    "source_id": "miit-2023-9m",
+    "title": "2023年9月汽车工业经济运行情况",
+    "publisher": "中华人民共和国工业和信息化部",
+    "published_at": "2023-10-13",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_fce3df5fdc544f8bbb2277fac5df58da.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-9月新能源汽车销量"
+    },
+    "checked_at": "2026-11-27T16:46:14.552448+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2023-ANNUAL",
+    "case_id": "R03",
+    "source_id": "miit-2023-annual",
+    "title": "2023年12月汽车工业经济运行情况",
+    "publisher": "中华人民共和国工业和信息化部",
+    "published_at": "2024-01-11",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-12月新能源汽车销量"
+    },
+    "checked_at": "2026-11-27T16:46:14.553465+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2024-Q1",
+    "case_id": "R03",
+    "source_id": "miit-2024-q1",
+    "title": "2024年3月汽车工业经济运行情况",
+    "publisher": "中华人民共和国工业和信息化部",
+    "published_at": "2024-04-10",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-3月新能源汽车销量"
+    },
+    "checked_at": "2026-11-27T16:46:14.890287+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2024-H1",
+    "case_id": "R03",
+    "source_id": "miit-2024-h1",
+    "title": "2024年6月汽车工业经济运行情况",
+    "publisher": "中华人民共和国工业和信息化部",
+    "published_at": "2024-07-10",
+    "source_url": "https://wap.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_3dff2eb026d14e36b9ec6065840d3fdc.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-6月新能源汽车销量"
+    },
+    "checked_at": "2026-11-27T16:46:15.040246+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2024-9M",
+    "case_id": "R03",
+    "source_id": "miit-2024-9m",
+    "title": "2024年9月汽车工业经济运行情况",
+    "publisher": "中华人民共和国工业和信息化部",
+    "published_at": "2024-10-12",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_be025f4f66ef42d78af0d4622e07eebb.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-9月新能源汽车销量"
+    },
+    "checked_at": "2026-11-27T16:46:15.359937+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R03-MIIT-2024-ANNUAL",
+    "case_id": "R03",
+    "source_id": "miit-2024-annual",
+    "title": "2024年12月汽车工业经济运行情况",
+    "publisher": "中华人民共和国工业和信息化部",
+    "published_at": "2025-01-13",
+    "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "1-12月新能源汽车销量"
+    },
+    "checked_at": "2026-11-27T16:46:15.379041+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R04-HEFEI-IMPL-P3",
+    "case_id": "R04",
+    "source_id": "hefei-implementation-2022",
+    "title": "合肥市人民政府关于加快新能源汽车产业发展的实施意见",
+    "publisher": "合肥市人民政府办公室",
+    "published_at": "2022-05-07",
+    "source_url": "https://po-o-cn.oss-cn-shenzhen.aliyuncs.com/Upload/20220507/c8ec7210fb918158532662da47d39257.pdf",
+    "locator": {
+      "kind": "pdf",
+      "page": 3,
+      "page_label": "3/9",
+      "section": "二、主要举措（四）培育产业生态"
+    },
+    "checked_at": "2026-11-27T16:46:15.528828+00:00",
+    "distribution": "external-original",
+    "file": "EV-R04-HEFEI-IMPL-P3.pdf",
+    "sha256": "ce0428d4fdc7e5e29b6b95a9b07c2ee6055dc2678579f86128b0ef7c70854d6a",
+    "size_bytes": 854726,
+    "located_text": "2022/5/7 下午 5:34 合肥市人民政府关于加快新能源汽车产业发展的实施意见 - 合肥市人民政府（政府办公室）\nhttps://zwgk.hefei.gov.cn/public/1741/105609819.html 3/9\n平台，促进各类数据共建共享与互联互通。（责任单位：市科技局、\n市发改委、市市场监管局、市经信局、市数据资源局，各县市区人民\n政府、开发区管委会）\n（三）攻关核心技术。依据国家新能源汽车“三纵三横”研发布\n局，每年组织实施一批关键技术研发项目，重点突破整车集成、动力\n电池、电驱动、智能网联、轻量化以及前瞻性技术。开发具有先进底\n层操作系统、全新电子电气系统架构和智能化网联化特征的新能源汽\n车整车或平台；开发低成本、高比能、长寿命锂电池系统以及其他性\n能优化的动力电池产品，建立健全动力电池模块化标准体系；探索新\n一代车用电机驱动系统解决方案，支持电驱动总成的集成应用；加强\n智能网联汽车关键零部件及系统开发，突破计算和控制基础平台等技\n术瓶颈；支持燃料电池系统、氢能储运、车载储氢等燃料电池汽车相\n关技术研发。不断提升基础关键技术、先进基础工艺、基础核心零部\n件、关键基础材料等研发能力，在新能源汽车整车、动力电池、驱动\n电机、智能网联等方面形成技术领先优势。（责任单位：市科技局，\n各县市区人民政府、开发区管委会）\n（四）培育产业生态。加快推进新能源汽车产业强链、补链、延\n链。支持江淮汽车、蔚来汽车、江淮大众、安凯客车、合肥长安、奇\n瑞（巢湖）等整车企业加强新能源汽车供应链建设，创新“车电分离”\n等商业模式，提升品牌国际竞争力，培育行业领军企业。支持动力电\n池、驱动电机、BMS、激光雷达、高精地图、自动驾驶等新能源汽车\n零部件企业提升配套能力，培育10-20家细分领域隐形冠军企业，整体\n提升产业链供应链稳定性和竞争力。完善动力电池回收、梯次利用和\n再资源化的循环利用体系，建立健全动力电池运输仓储、维修保养、\n安全检验、退役退出、回收利用等环节管理制度，加强全生命周期监\n管。支持江淮汽车、安凯客车等整车企业与合肥综合性国家科学中心",
+    "status": "LOCATED_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R04-HEFEI-PLAN-P11",
+    "case_id": "R04",
+    "source_id": "hefei-nev-plan",
+    "title": "合肥市“十四五”新能源汽车产业发展规划",
+    "publisher": "合肥市新能源汽车产业发展规划全文副本",
+    "published_at": "2022-11-24",
+    "source_url": "https://api.xch3.com/Resource/BPPfile/2022-12-15/20221215143814411.pdf",
+    "locator": {
+      "kind": "pdf",
+      "page": 11,
+      "page_label": "7",
+      "section": "（三）发展目标"
+    },
+    "checked_at": "2026-11-27T16:46:15.559704+00:00",
+    "distribution": "external-original",
+    "file": "EV-R04-HEFEI-PLAN-P11.pdf",
+    "sha256": "e3f663f750b8659960b8747a1b944043e3580acf5b366039799c9ec1665ebd7c",
+    "size_bytes": 734299,
+    "located_text": " \n— 7 — \n \n引优培强，开放合作。坚持引培结合，做大做强一批本地龙\n头企业，加大招商引资力度，推进一批具有带动作用的优质项目\n落地，促进产业集聚发展。提升开放合作水平，积极利用全球资\n源和市场，加 强产业链全球布局和国际交流合作，扩大市场占有\n率，形成产业发展新优势。 \n（三）发展目标 \n到 2025 年，全市新能源汽车产业规模迈上新台阶，重点领\n域取得新突破，优势特色领域不断拓宽，创新创业主体更加活跃，\n服务体系日趋完善，集聚发展格局基本形成，产业综合竞争力显\n著提升，努力争创国家级战略性新兴产业集群。 \n产业规模迈上新台阶。力争 2025 年，全市新能源汽车产业\n规模突破 7000 亿元，整车产能突破 300 万辆，培育百亿级企业\n10 家，实现产值和产量跃居全国第一方阵。布局完整、结构合\n理的新能源汽车及零部件产业体系基本形成，动力电池年产能超\n过 300GWh，驱动电机系统年产能超过 300 万套。 \n创新能级实现新突破。力争 2025 年，建成国家级新能源汽\n车产业创新中心 1 个，公共创新中心 5 个，培育商业模式创新工\n程 1 个，新增省级以上创新平台 10 个。规模以上新能源汽车企\n业研发投入占销售收入比重超过长三角平均水平。 \n产业生态呈现新面貌。力争 2025 年，“人-车-路-云”高度协\n同的智能基础设施体系初步建成，高度自动驾驶智能网联汽车实",
+    "status": "LOCATED_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R04-HEFEI-PLAN-P12",
+    "case_id": "R04",
+    "source_id": "hefei-nev-plan",
+    "title": "合肥市“十四五”新能源汽车产业发展规划",
+    "publisher": "合肥市新能源汽车产业发展规划全文副本",
+    "published_at": "2022-11-24",
+    "source_url": "https://api.xch3.com/Resource/BPPfile/2022-12-15/20221215143814411.pdf",
+    "locator": {
+      "kind": "pdf",
+      "page": 12,
+      "page_label": "8",
+      "table": "表1 “十四五”时期合肥市新能源汽车主要发展指标"
+    },
+    "checked_at": "2026-11-27T16:46:15.870229+00:00",
+    "distribution": "external-original",
+    "file": "EV-R04-HEFEI-PLAN-P12.pdf",
+    "sha256": "e3f663f750b8659960b8747a1b944043e3580acf5b366039799c9ec1665ebd7c",
+    "size_bytes": 734299,
+    "located_text": " \n— 8 — \n \n现限定区域和特定场景商业化应用，建成封闭测试场所 2 个。基\n本建成适度超前、布局合理、车桩位相随、智能高效的充电基础\n设施体系，新增公用和共用充电桩 20000 个，新建换电站 100 座、\n加氢站 10 座。“汽车+”服务体系、绿色回收服务体系进一步完善。\n功能齐全、设施先进的汽车及零部件检测试验共享平台、第三方\n智能网联公共服务平台等基本建成。氢燃料供给体系有序布局，\n示范推广应用燃料电池汽车 500 辆。 \n表 1“十四五”时期合肥市新能源汽车主要发展指标 \n一级指标 二级指标 2025 年目标 \n产业规模 \n产值/亿元 7000 \n百亿级企业/家 10 \n整车生产能力/万辆 300 \n动力电池年产能/GWh 300 \n驱动电机系统年产能/万套 300 \n创新能级 \n国家级产业创新中心/个 1 \n国家级公共创新中心/个 5 \n商业模式创新工程/个 1 \n省级以上创新平台/个 10 \n产业生态 \n智能网联汽车封闭测试场所/个 2 \n新增公用和共用充电桩/个 20000 \n新建换电站/个 100 \n推广应用燃料电池汽车/辆 500 ",
+    "status": "LOCATED_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R04-GOTION-PRODUCTS",
+    "case_id": "R04",
+    "source_id": "gotion-products",
+    "title": "国轩高科动力解决方案",
+    "publisher": "国轩高科股份有限公司",
+    "published_at": null,
+    "source_url": "https://www.gotion.com.cn/solution",
+    "locator": {
+      "kind": "web",
+      "anchor": "乘用车动力解决方案"
+    },
+    "checked_at": "2026-11-27T16:46:15.897429+00:00",
+    "distribution": "external-original",
+    "file": "EV-R04-GOTION-PRODUCTS.html",
+    "sha256": "fd46661bff2957b7adb83682fba1eff2b19d4304d956318de33ed6d76ee811ba",
+    "size_bytes": 94784,
+    "status": "WEB_REQUIRES_FROZEN_PDF"
+  },
+  {
+    "evidence_key": "EV-R04-GOTION-LAYOUT",
+    "case_id": "R04",
+    "source_id": "gotion-layout",
+    "title": "国轩高科公司介绍与全球布局",
+    "publisher": "国轩高科股份有限公司",
+    "published_at": null,
+    "source_url": "https://www.gotion.com.cn/about",
+    "locator": {
+      "kind": "web",
+      "anchor": "公司介绍与全球布局"
+    },
+    "checked_at": "2026-11-27T16:46:15.945874+00:00",
+    "distribution": "external-original",
+    "file": "EV-R04-GOTION-LAYOUT.html",
+    "sha256": "b79ec1a7da7f43186edbba7366a6e7c40e03ba34943e23821908e634298d8221",
+    "size_bytes": 89539,
+    "status": "WEB_REQUIRES_FROZEN_PDF"
+  },
+  {
+    "evidence_key": "EV-R05-KBA-2023-XLSX-AL461",
+    "case_id": "R05",
+    "source_id": "kba-2023-xlsx",
+    "title": "FZ 10 2023年12月乘用车新注册统计",
+    "publisher": "Kraftfahrt-Bundesamt",
+    "published_at": "2024-01-04",
+    "source_url": "https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ10/fz10_2023_12.xlsx?__blob=publicationFile&v=2",
+    "locator": {
+      "kind": "xlsx",
+      "sheet": "FZ 10.1",
+      "cell": "AL461",
+      "header_cells": [
+        "AK8",
+        "AL9",
+        "B461"
+      ]
+    },
+    "checked_at": "2026-11-27T16:46:15.954399+00:00",
+    "distribution": "external-original",
+    "file": "EV-R05-KBA-2023-XLSX-AL461.xlsx",
+    "sha256": "3fd1b4604bb957de8faa3b96be385254fe9c4b3d0a18c2083d98ff5cdffeec4c",
+    "size_bytes": 170252,
+    "sheets": [
+      "Deckblatt",
+      "Impressum",
+      "Inhaltsverzeichnis",
+      "FZ 10.1"
+    ],
+    "status": "ORIGINAL_REQUIRES_CELL_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R05-KBA-XLSX-AL488",
+    "case_id": "R05",
+    "source_id": "kba-2024-xlsx",
+    "title": "FZ 10 2024年12月乘用车新注册统计",
+    "publisher": "Kraftfahrt-Bundesamt",
+    "published_at": "2025-01-06",
+    "source_url": "https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ10/fz10_2024_12.xlsx?__blob=publicationFile&v=5",
+    "locator": {
+      "kind": "xlsx",
+      "sheet": "FZ 10.1",
+      "cell": "AL488",
+      "header_cells": [
+        "AK8",
+        "AL9",
+        "B488"
+      ]
+    },
+    "checked_at": "2026-11-27T16:46:15.968776+00:00",
+    "distribution": "external-original",
+    "file": "EV-R05-KBA-XLSX-AL488.xlsx",
+    "sha256": "856b9afe515d51aa52bcb34d645dce2c5cdeaf47ef398b4e0a754c1bd5813dbf",
+    "size_bytes": 177108,
+    "sheets": [
+      "Deckblatt",
+      "Impressum",
+      "Inhaltsverzeichnis",
+      "FZ 10.1"
+    ],
+    "status": "ORIGINAL_REQUIRES_CELL_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R05-KBA-PDF-P1",
+    "case_id": "R05",
+    "source_id": "kba-2024",
+    "title": "Fahrzeugzulassungen im Dezember 2024 - Jahresbilanz",
+    "publisher": "Kraftfahrt-Bundesamt",
+    "published_at": "2025-01-06",
+    "source_url": "https://www.kba.de/SharedDocs/Downloads/DE/Pressemitteilungen/2025/pm_01_2025_fahrzeugzulassungen_12_2024.pdf?__blob=publicationFile&v=5",
+    "locator": {
+      "kind": "pdf",
+      "page": 1,
+      "page_label": "1",
+      "section": "Jahresbilanz alternative Antriebsarten"
+    },
+    "checked_at": "2026-11-27T16:46:15.976530+00:00",
+    "distribution": "external-original",
+    "file": "EV-R05-KBA-PDF-P1.pdf",
+    "sha256": "a6bb050f0c8288c79465dd018e4b74c7755d3c3051b4e51194d3e0dbd853f4f2",
+    "size_bytes": 198516,
+    "located_text": " Pressemitteilung Nr. 01/2025  \n \n© Kraftfahrt-Bundesamt • Pressestelle • Telefon: +49 461 316-1293 • Telefax: +49 461 316-272907 \nE-Mail: pressestelle@kba.de • Internet: www.kba.de \n   \nFahrzeugzulassungen im Dezember 2024 - Jahresbilanz \n \nFlensburg, 6. Januar 2025. 224.721 Personenkraftwagen (Pkw) wurden im De- Unter den alternativen Antriebsarten bewirkten 947.398 Pkw-Neuzulassungen \nzember 2024 neu zugelassen, 7,1 Prozent weniger als im Dezember 2023. In mit hybridem Antrieb eine Steigerung von 12,7 Prozent und einen Anteil von \nder Jahresbilanz blieb das Zulassungsniveau 2024 mit insgesamt 2,8 Millionen 33,6 Prozent, darunter waren 191.905 Plug-in Hybride (+9,2 %) mit einem An-\nNeuwagen und einem Minus von 1,0 Prozent knapp unterhalb des Vorjahres- teil von 6,8 Prozent. Mit 380.609 neu zugelassenen Elektro-Pkw (BEV) ver-\nergebnisses. Im Jahresverlauf entfielen 67,5 Prozent auf gewerbliche Neuzu- zeichnete diese Antriebsart einen Rückgang von 27,4 Prozent und einen Anteil \nlassungen, 0,4 Prozent weniger als im Vorjahr, bei den privaten Neuzulassun- von 13,5 Prozent. Der Anteil benzinbetriebener Pkw (991.948/+1,4 %) lag mit \ngen betrug der Rückgang 2,1 Prozent.  35,2 Prozent über dem Vorjahresniveau (34,4 %); gleichwohl die Neuzulassun-\ngen dieselbetriebener Pkw mit 483.261 Einheiten insgesamt einen Rückgang Bei den deutschen Marken zeigten sich in der Neuzulassungsbilanz des Jah- von 0,7 Prozent auswiesen, lag ihr Anteil in der Jahresbilanz mit 17,2 Prozent res 2024 positive Vorzeichen bei Porsche (+9,9 %/1,3 %), VW (+3,4 %/19,1 %) über dem Vorjahreswert von 17,1 Prozent. Flüssiggasbetriebene Pkw (13.711/ und Opel (+2,0 %/5,2 %). Die weiteren deutschen Marken warteten in der +4,3 %) erreichten einen Anteil von 0,5 Prozent, erdgasangetriebene Pkw-Neuzulassungsbilanz 2024 mit Rückgängen auf, welche bei Mini mit -29,1 Pro- Neuzulassungen (137/-89,7 %) gingen mit 0,0 Prozent in die Jahresbilanz ein. zent am deutlichsten ausfielen und einen Anteil von 1,2 Prozent bewirkten, ge-\nfolgt von Smart (-28,4 %/0,4 %), MAN (-27,1 %/0,0 %), Audi (-18,1 %/7,2 %), Die durchschnittliche CO2-Emission der neu zugelassenen Pkw stieg 2024 um \nFord (-14,6 %/3,5 %), Mercedes (-7,0 %/9,2 %) und BMW (-0,1 %/8,3 %). VW +4,2 Prozent auf 119,8 g/km (Vorjahr: 114,9 g/km). \nwar mit einem Anteil von 19,1 Prozent weiterhin die zulassungsstärkste Marke. Auf dem Nutzfahrzeugmarkt lagen ausschließlich die Lastkraftwagen (Lkw) mit \nBei den Importmarken mit einem Zulassungsanteil von 1,5 Prozent und mehr +9,0 Prozent über dem Vorjahresergebnis. Die Kraftomnibusse (-2,0 %), Zug-\nzeigten sich teils zweistellige Zuwächse, die bei Peugeot mit Plus 44,0 % am maschinen insgesamt (-8,8 %), darunter die Sattelzugmaschinen (-24,1 %) und \ndeutlichsten ausfielen und zu einem Anteil von 2,4 Prozent führten, gefolgt von die Sonstigen Kraftfahrzeuge (Kfz) (-4,3 %) schlossen die Jahresbilanz mit  \nVolvo (+39,3 %/2,2 %), Citroen (+32,9 %/1,9 %), Toyota (+27,0 %/3,4 %), einem Minus ab. Insgesamt wurden 426.912 Nutzfahrzeuge neu zugelassen, \nSkoda (+22,0 %/7,3 %), Seat (+14,9 %/5,4 %) und Dacia (+4,1 %/2,5 %). darunter 19.142 BEV und 485 Plug-in-Hybride. Der Anteil der BEV und Plug-\nNeuzulassungsrückgänge zeigten sich in der Jahresbilanz hingegen bei Fiat  in-Hybride bei den Nutzfahrzeugen betrug damit 4,6 Prozent.  \n(-24,8 %/2,0 %), Renault (-20,4 %/1,9 %), Hyundai (-9,4 %/3,4 %), Kia  Der Kraftradmarkt hatte im Jahr 2024 mit 251.169 Neuzulassungen ein Plus (-8,0 %/2,4 %) und Mazda (-2,5 %/1,6 %). Tesla (-41,0 %/1,3 %) und Polestar von 13,1 Prozent eingefahren. Insgesamt wurden 3.495.412 Kfz (+0,5 %) und (-49,4 %/0,1 %) wiesen ebenfalls zweistellige Rückgänge aus und blieben un- 265.985 Kfz-Anhänger (-2,4 %) neu zugelassen. terhalb eines Zulassungsanteils von 1,5 Prozent. Die anteilsstärkste Marke war \nerneut Skoda (7,3 %). Mehr als 6,4 Millionen Pkw wechselten im Laufe des Jahres die Halterin bezie-\nhungsweise den Halter. Die Jahresbilanz 2024 schloss mit rund 7,5 Millionen Knapp die Hälfte aller Neuzulassungen des Jahres 2024 war den Segmenten umgeschriebenen Kfz (+7,1 %) und 424.685 Kfz-Anhängern (+2,4 %) ab. SUVs (30,2 %) und Kompaktklasse (18,7 %) zuzuordnen, gefolgt von den Seg-\nmenten Kleinwagen (12,0 %), Geländewagen (11,3 %) und Mittelklasse Kontakt:  \n(9,0 %). Die Obere Mittelklasse verzeichnete mit +30,5 Prozent den deutlichs- Stephan Immen, Telefon: +49 461 316-1293 \nten Zuwachs in der Jahresbilanz und erreichte einen Anteil von 4,0 Prozent. \n \n \n375\n350\n325\n300\n275\n250\n225\n200\n175\n150\n125\n100\nDez Jan Feb Mrz Apr Mai Jun Jul Aug Sep Okt Nov Dez\nNeuzulassungen von Personenkraftwagen im Jahresverlauf 2022 bis 2024 \n0 \nFahrzeuge in Tsd. \n225 \n2023 \n2022 \n2024 \n \nNeuzulassungen Besitzumschreibungen \nDezember 2024 Januar-Dezember 2024 Dezember 2024 Januar-Dezember 2024 \nFahrzeugklasse Anzahl \nVeränderung  \ngegenüber \nAnzahl \nVeränderung \ngegenüber \nVorjahres-\nzeitraum \nin % \nAnzahl \nVeränderung \ngegenüber \nAnzahl \nVeränderung \ngegenüber \nVorjahres-\nzeitraum \nin % \nVormonat  \nin % \nVorjahres-\nmonat  \nin % \nVormonat \nin % \nVorjahres-\nmonat \nin % \n1 2 3 4 5 6 7 8 9 10 \nKrafträder 31.677 +73,4 +669,4 251.169 +13,1 12.372 -35,2 +16,8 468.626 +2,2 \nPersonenkraftwagen 224.721 -8,1 -7,1 2.817.331 -1,0 446.675 -16,1 +3,5 6.479.953 +7,4 \nKraftomnibusse  390 -8,0 -35,9 5.382 -2,0 496 +26,2 +24,3 5.621 +9,4 \nLastkraftwagen 25.699 -2,4 +12,6 316.928 +9,0 29.710 -14,4 +4,0 424.537 +9,3 \nZugmaschinen insgesamt 4.023 -19,2 -22,1 84.433 -8,8 9.824 -2,1 +7,9 130.482 +3,8 \n  dar. Sattelzugmaschinen 1.389 -38,9 -27,7 32.221 -24,1 925 -29,0 +7,2 16.032 +4,9 \nSonstige Kraftfahrzeuge 1.538 -8,9 +0,3 20.169 -4,3 1.159 -9,8 +8,3 16.617 +3,2 \nKraftfahrzeuge \nzusammen 288.048 -2,8 +4,3 3.495.412 +0,5 500.236 -16,4 +4,0 7.525.836 +7,1 \nKraftfahrzeuganhänger 12.879 -27,5 -1,1 265.985 -2,4 25.641 -19,8 +9,1 424.685 +2,4 \n  ",
+    "status": "LOCATED_REQUIRES_REVIEW"
+  },
+  {
+    "evidence_key": "EV-R05-EU-ANTISUBSIDY",
+    "case_id": "R05",
+    "source_id": "eu-2024-2754",
+    "title": "Commission Implementing Regulation (EU) 2024/2754",
+    "publisher": "European Commission",
+    "published_at": "2024-10-29",
+    "source_url": "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=OJ%3AL_202402754",
+    "locator": {
+      "kind": "web",
+      "anchor": "Articles 1 and 3"
+    },
+    "checked_at": "2026-11-27T16:46:15.976530+00:00",
+    "distribution": "external-original",
+    "file": "EV-R05-EU-ANTISUBSIDY.html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size_bytes": 0,
+    "status": "WEB_REQUIRES_FROZEN_PDF"
+  },
+  {
+    "evidence_key": "EV-R05-EU-TYPE-APPROVAL",
+    "case_id": "R05",
+    "source_id": "eu-2018-858",
+    "title": "Regulation (EU) 2018/858 on motor vehicle approval and market surveillance",
+    "publisher": "European Union",
+    "published_at": "2018-06-14",
+    "source_url": "https://eur-lex.europa.eu/eli/reg/2018/858/oj/eng",
+    "locator": {
+      "kind": "web",
+      "anchor": "Scope and vehicle type-approval requirements"
+    },
+    "checked_at": "2026-11-27T16:46:16.003894+00:00",
+    "distribution": "external-original",
+    "file": "EV-R05-EU-TYPE-APPROVAL.html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size_bytes": 0,
+    "status": "WEB_REQUIRES_FROZEN_PDF"
+  },
+  {
+    "evidence_key": "EV-R05-BAFA-BONUS-END",
+    "case_id": "R05",
+    "source_id": "bafa-umweltbonus-end",
+    "title": "Ende des Umweltbonus",
+    "publisher": "Bundesamt für Wirtschaft und Ausfuhrkontrolle",
+    "published_at": "2023-12-16",
+    "source_url": "https://www.bafa.de/SharedDocs/Kurzmeldungen/DE/Energie/Elektromobilitaet/20231216_foerderende.html",
+    "locator": {
+      "kind": "web",
+      "anchor": "Ende des Umweltbonus"
+    },
+    "checked_at": "2026-11-27T16:46:16.008431+00:00",
+    "distribution": "external-original",
+    "status": "BLOCKED",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>"
+  },
+  {
+    "evidence_key": "EV-R04-GOTION-LAB-2023",
+    "case_id": "R04",
+    "source_id": "gotion-lab-2023",
+    "title": "国轩高科获大众汽车集团电芯测试实验室资质认证",
+    "publisher": "国轩高科股份有限公司",
+    "published_at": "2023-02-21",
+    "source_url": "https://www.gotion.com.cn/newsInfo/317",
+    "locator": {
+      "kind": "pdf",
+      "page": 1
+    },
+    "checked_at": "2026-11-27T16:46:16.053852+00:00",
+    "distribution": "external-original",
+    "file": "EV-R04-GOTION-LAB-2023-snapshot.pdf",
+    "sha256": "8c753a5c1ee84db2647d1322a22bea7f5eca039d481b61401c90b9bddfe3f028",
+    "size_bytes": 449331,
+    "status": "LOCATED_REQUIRES_REVIEW",
+    "located_text": "国轩高科获大众汽车集团电芯测试实验室资质认证\n发布时间：2023-02-21\n2月21日，国轩高科正式获得大众汽车集团电芯测试实验室资质认证。此次认证标志着国轩高科测试验证能力获得大众汽车集团认可，并正式\n进入全球领先技术管理体系。\n \n国轩高科电芯测试实验室认证授予仪式现场\n作为全球最大的汽车集团之一，大众汽车集团在动力电池的可靠性验证、测试周期、测试环境和创新性的测试方法等方面都提出了高于全球行\n业标准的要求，目的是通过对产品性能极限条件测试、安全边界探索和测试表征结果代表性等方面的严格把控，确保产品的可靠性、安全性和\n高性能等。\n \n国轩高科验证工程院占地面积超6万平米，目前已建成合肥新站、包河、庐江，上海嘉定四大验证基地，拥有电池材料及零部件测试、电芯测\n试、系统测试、安全可靠测试等四大测试平台，可以实现从电池原材料到电池系统的全尺度、全生命周期的验证测试分析，实验室于2015年获\n得CNAS认可，近年来又获得TÜV、CSA、CCS等海内外专业机构多项资质认可，验证能力已达全球领先水平。近年来验证工程院一直致力于\n大众标准电芯的验证开发工作，并同时为大众汽车集团提供全球项目的验证测试合作支持，双方发挥各自优势，实现了技术互补、资源共享。\n \n德国大众电芯验证负责人Dr. Boettger表示，很高兴双方能共同庆祝国轩电池测试实验室的设备、流程、团队都通过审核并获得认证。这次认\n证的成功要感谢双方团队的高水准付出。\n \n德国大众负责国轩审核的Dr. Westerhoff表示，我们深知电池验证测试十分复杂，不同客户的电芯需求、样品阶段各有不同。将如此多的测试\n业务在一个验证中心实现，更是难上加难。这需要依赖强大的电芯管理系统、品质管理系统和管理层的支持。 而这一切国轩验证中心已经具\n备，期待未来能看到国轩在验证方面的新成果。\n \n国轩高科工程研究总院副院长周复博士表示：“自认证项目启动，双方紧扣失效分析、测试管理、实验室安全、样品管理及人员管理等多个维\n度，超过三百项节点的持续改进，高效精准地支撑了实验室从优秀到卓越的改善过程。此次认证成功，标志着国轩高科测试验证能力正式进入\n股票代\n码\n002074\n国轩商\n城 EN\n科研\n技术\n解决\n方案\n关于\n我们\n可持续\n发展\n新闻\n资讯\n投资者\n关系\n2026/11/28 00:45 国轩⾼科\nhttps://www.gotion.com.cn/newsInfo/317 1/3"
+  }
+]

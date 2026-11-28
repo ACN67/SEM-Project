@@ -731,6 +731,56 @@
       "effective_to": null,
       "review_status": "PASS",
       "review_note": "发布日期早于案例截止日。公开认证及平台信息可支持能力匹配。"
+    },
+    {
+      "evidence_key": "EV-R01-MIIT-2024-ANNUAL",
+      "case_id": "R01",
+      "source_id": "miit-2024-annual",
+      "document_id": "doc_miit_2024_annual",
+      "document_version_id": "dv_miit_2024_annual",
+      "title": "2024年12月汽车工业经济运行情况",
+      "publisher": "中华人民共和国工业和信息化部",
+      "published_at": "2025-01-13",
+      "accessed_at": "2026-11-25",
+      "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+      "source_hash": null,
+      "file_version": "工业和信息化部网页，中汽协数据",
+      "locator": {
+        "kind": "web",
+        "anchor": "1-12月新能源汽车销量"
+      },
+      "excerpt": "1—12月，新能源汽车销量完成1286.6万辆。",
+      "role": "market_observation",
+      "applies_to": "2024年全年中国新能源汽车销量",
+      "effective_from": null,
+      "effective_to": null,
+      "review_status": "PASS",
+      "review_note": "用于差分得到2024年第四季度销量，并与生态环境部年报交叉核对。"
+    },
+    {
+      "evidence_key": "EV-R05-EU-CN-2025",
+      "case_id": "R05",
+      "source_id": "eu-cn-2025",
+      "document_id": "doc_eu_cn_2025",
+      "document_version_id": "dv_eu_cn_2025",
+      "title": "Commission Implementing Regulation (EU) 2024/2522 - Common Customs Tariff 2025",
+      "publisher": "European Union",
+      "published_at": "2024-10-31",
+      "accessed_at": "2026-11-28",
+      "source_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32024R2522",
+      "source_hash": null,
+      "file_version": "2024/2522 original publication, applies from 2025-01-01",
+      "locator": {
+        "kind": "web",
+        "anchor": "Annex tariff table, printed label 651/1101, CN 8703 80 10; Article 2"
+      },
+      "excerpt": "CN 8703 80 10: new vehicles with only electric motor for propulsion; conventional rate of duty 10%.",
+      "role": "policy",
+      "applies_to": "CN 8703 80 10 new electric passenger vehicles; ordinary conventional duty, separate from countervailing duty",
+      "effective_from": "2025-01-01",
+      "effective_to": null,
+      "review_status": "PASS",
+      "review_note": "Developer checked the full official text rendition: CN 8703 80 10 conventional rate 10%; Article 2 applies from 1 January 2025. This is source compilation review; independent Astra acceptance remains pending. Original PDF bytes/hash not obtained; captured text and rendition PDF hashes are separate."
     }
   ]
 }

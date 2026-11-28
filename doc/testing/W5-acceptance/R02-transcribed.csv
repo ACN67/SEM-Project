@@ -1,0 +1,5 @@
+indicator,name,entity_id,period,granularity,region,scope,raw_value,raw_unit,multiplier,unit,currency
+rd_investment,rd_investment,byd,2024,year,中国,比亚迪合并口径；费用化与资本化研发投入合计,54160964000.00,元,1,元,CNY
+rd_investment,rd_investment,byd,2023,year,中国,比亚迪合并口径；费用化与资本化研发投入合计,39917743000.00,元,1,元,CNY
+rd_investment,rd_investment,saic,2023,year,中国,上汽集团合并口径；费用化与资本化研发投入合计,22013246493.11,元,1,元,CNY
+rd_investment,rd_investment,saic,2024,year,中国,上汽集团合并口径；费用化与资本化研发投入合计,21813090045.30,元,1,元,CNY

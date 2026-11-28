@@ -269,9 +269,9 @@
       "unit": "万辆",
       "reported_change_pct": "35.5",
       "source_id": "miit-2024-annual",
-      "locator": "“1—12月，新能源汽车产销分别完成1288.8万辆和1286.6万辆……”",
+      "locator": "工信部2024年12月运行情况，1—12月新能源汽车销量1286.6万辆；原中汽协统计口径。",
       "evidence_keys": [
-        "EV-R01-MEE-2024-P8"
+        "EV-R01-MIIT-2024-ANNUAL"
       ]
     },
     {
@@ -520,7 +520,7 @@
       "granularity": "year",
       "region": "中国",
       "scope": "比亚迪合并口径；费用化研发投入与资本化研发投入合计",
-      "value": "399.18",
+      "value": "399.17743",
       "unit": "亿元",
       "currency": "CNY",
       "source_ids": [
@@ -542,7 +542,7 @@
       "granularity": "year",
       "region": "中国",
       "scope": "比亚迪合并口径；费用化研发投入与资本化研发投入合计",
-      "value": "541.61",
+      "value": "541.60964",
       "unit": "亿元",
       "currency": "CNY",
       "reported_change_pct": "35.68",
@@ -691,5 +691,7 @@
         "EV-R05-KBA-XLSX-AL488"
       ]
     }
-  ]
+  ],
+  "compilation_revision": "1.1-2026-11-28",
+  "revision_note": "R01 official MIIT 2024 annual source substitution; BYD values retain original table precision; prior technical_review records the earlier compilation."
 }

@@ -445,6 +445,8 @@ class OrchestrationService:
         format_retries = 0
         attempt = 0
         while True:
+            if self.store.get_job(job_id).status != 'RUNNING':
+                return frozen
             attempt += 1
             try:
                 content = self._generate_and_check(job_id, frozen, task)
@@ -474,10 +476,13 @@ class OrchestrationService:
                                 retryable=False, details={}),
                 )
                 return frozen
-            self.store.update_chapter(
-                job_id, chapter_id, status="SUCCEEDED", content=content, error=None,
-            )
-            return self._absorb_facts(job_id, frozen, content)
+            facts=[f for f in content.fact_candidates if f.evidence_ids or f.metric_ids]
+            updated=frozen.model_copy(update={'facts':[*frozen.facts,*facts],'facts_version':f'f{len(frozen.facts)+len(facts)}'})
+            pack=self._packs.get(frozen.run_id,{'evidences':{},'metrics':{}})
+            context={kind:{key:item.model_dump(mode='json',by_alias=True) for key,item in values.items()} for kind,values in pack.items()}
+            if self.store.finish_attempt(job_id,chapter_id,attempt_id,content=content,frozen=updated,context=context):
+                return updated
+            return frozen
 
     def _chapter_failed(
         self,
@@ -487,8 +492,10 @@ class OrchestrationService:
         failed: dict[str, m.ErrorInfo],
         error: m.ErrorInfo,
     ) -> None:
+        record=next(c for c in self.store.get_job(job_id).chapters if c.chapter_id==chapter_id)
+        if not self.store.finish_attempt(job_id,chapter_id,record.attempt_id,error=error):
+            return
         failed[chapter_id] = error
-        self.store.update_chapter(job_id, chapter_id, status="FAILED", error=error)
         self._skip_dependents(job_id, tasks, chapter_id, error)
 
     def _skip_dependents(
@@ -595,6 +602,8 @@ class OrchestrationService:
     ) -> None:
         job = self.store.get_job(job_id)
         assert job is not None
+        if job.status != "RUNNING":
+            return
         now = self.clock()
         required_failed = [
             chapter_id for chapter_id, error in failed.items()
@@ -779,7 +788,6 @@ class OrchestrationService:
             context=source.context, chapters=chapters,
         )
         response = self.store.begin_retry(guard, retry, accepted, now)
-        self.store.set_report_job(source.report_id, new_job_id, "QUEUED", self.clock())
         return m.JobAccepted.model_validate(response)
 
     def cancel_job(self, job_id: str) -> m.JobDetail:

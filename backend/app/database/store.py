@@ -408,6 +408,8 @@ class MemoryStore:
                        attempt_id=None, retries=None, content=None, error=UNSET) -> None:
         with self._lock:
             job = self._jobs[job_id]
+            if job.status not in ("QUEUED","RUNNING"):
+                return
             for chapter in job.chapters:
                 if chapter.chapter_id == chapter_id:
                     if status is not None:
@@ -551,6 +553,10 @@ class MemoryStore:
             job.created_at = now
             job.updated_at = now
             self._jobs[job.job_id] = replace(job)
+            report=self._reports[job.report_id]
+            report.latest_job_id=job.job_id
+            report.job_status='QUEUED'
+            report.updated_at=now
             self._store_guard(guard, accepted)
             return accepted
 
@@ -604,8 +610,23 @@ class MemoryStore:
             self._sessions.pop(session_id, None)
 
     def reserve_budget(self, amount, limit):
+        if not amount.is_finite() or not limit.is_finite() or amount<=0 or limit<0:
+            raise ValueError("invalid budget reservation")
         with self._lock:
             if self._budget_reserved+amount>limit:
                 return False
             self._budget_reserved+=amount
+            return True
+
+    def finish_attempt(self, job_id, chapter_id, attempt_id, *, content=None, error=None, frozen=None, context=None):
+        with self._lock:
+            job=self._jobs[job_id]
+            chapter=next(c for c in job.chapters if c.chapter_id==chapter_id)
+            if job.status!='RUNNING' or chapter.status!='RUNNING' or chapter.attempt_id!=attempt_id:
+                return False
+            chapter.status='SUCCEEDED' if error is None else 'FAILED'
+            chapter.content=content
+            chapter.error=error
+            if frozen is not None:job.frozen=frozen
+            if context is not None:job.context=context
             return True

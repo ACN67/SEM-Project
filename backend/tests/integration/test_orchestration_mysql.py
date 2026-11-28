@@ -66,3 +66,24 @@ class StoreMySQLTests(unittest.TestCase):
         job=JobRecord(job_id='bad',report_id='missing',run_id='run')
         with self.assertRaises(Exception):self.store.begin_report(IdempotencyRequest(operation='create',target_id='',key='bad',hash='h'),report,job,{},self.now)
         self.assertIsNone(self.store.get_report('rollback'))
+
+    def test_cancelled_and_stale_attempts_cannot_commit(self):
+        from backend.app.database.store import ChapterRecord
+        for store in [self.store,MemoryStore()]:
+            store.create_report(ReportRecord(report_id='guard-r',title='test',report_type='industry_analysis',template_id='industry_analysis_v1',template_version=1),self.now)
+            store.create_job(JobRecord(job_id='guard-j',report_id='guard-r',run_id='run',status='RUNNING',chapters=[ChapterRecord(chapter_id='chapter',status='RUNNING',attempt_id='current')]),self.now)
+            self.assertFalse(store.finish_attempt('guard-j','chapter','old',context={'invalid':1}))
+            store.cancel_job('guard-j',self.now)
+            self.assertFalse(store.finish_attempt('guard-j','chapter','current',context={'invalid':1}))
+            actual=store.get_job('guard-j')
+            self.assertEqual(actual.status,'CANCELLED')
+            self.assertEqual(actual.chapters[0].status,'RUNNING')
+            self.assertIsNone(actual.context)
+
+    def test_budget_rejects_invalid_amounts(self):
+        from decimal import Decimal
+        for store in [self.store,MemoryStore()]:
+            for amount in ['-1','0','NaN','Infinity']:
+                with self.assertRaises(ValueError):store.reserve_budget(Decimal(amount),Decimal('100'))
+            self.assertTrue(store.reserve_budget(Decimal('100'),Decimal('100')))
+            self.assertFalse(store.reserve_budget(Decimal('0.01'),Decimal('100')))

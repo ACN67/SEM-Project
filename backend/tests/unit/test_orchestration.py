@@ -244,3 +244,28 @@ if __name__ == "__main__":
         first=self._create('one');second=self._create('two')
         self.orchestration._reserve_budget(first.job_id,'chapter')
         with self.assertRaises(ServiceError):self.orchestration._reserve_budget(second.job_id,'chapter')
+
+    def test_retry_replay_preserves_actual_report_pointer(self):
+        accepted=self._create()
+        self.store.update_job(accepted.job_id,status='FAILED')
+        first=self.orchestration.retry_job(accepted.job_id,'retry')
+        self.store.set_report_job(accepted.report_id,first.job_id,'COMPLETED',self.stack.clock.now())
+        second=self.orchestration.retry_job(accepted.job_id,'retry')
+        self.assertEqual(first,second)
+        report=self.store.get_report(accepted.report_id)
+        self.assertEqual(report.latest_job_id,first.job_id)
+        self.assertEqual(report.job_status,'COMPLETED')
+
+    def test_cancel_drops_late_success_and_pack(self):
+        accepted=self._create()
+        original=self.orchestration._generate_and_check
+        def cancelled(job_id,frozen,task):
+            result=original(job_id,frozen,task)
+            self.orchestration.cancel_job(job_id)
+            return result
+        self.orchestration._generate_and_check=cancelled
+        self.orchestration.run_cycle()
+        job=self.store.get_job(accepted.job_id)
+        self.assertEqual(job.status,'CANCELLED')
+        self.assertFalse(any(c.status=='SUCCEEDED' for c in job.chapters))
+        self.assertIsNone(job.context)

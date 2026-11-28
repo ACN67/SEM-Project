@@ -620,8 +620,8 @@ class MySqlStore:
     def ready_version_ids(self) -> list[str]:
         with self._document_connect() as connection, connection.cursor() as cursor:
             cursor.execute(
-                "SELECT document_version_id FROM document_versions"
-                " WHERE ingest_status='READY' ORDER BY document_version_id",
+                "SELECT v.document_version_id FROM document_versions v"
+                " WHERE v.ingest_status='READY' AND NOT EXISTS (SELECT 1 FROM document_versions newer WHERE newer.document_id=v.document_id AND newer.ingest_status='READY' AND newer.registration_order>v.registration_order) ORDER BY v.document_version_id",
             )
             return [row["document_version_id"] for row in cursor.fetchall()]
 

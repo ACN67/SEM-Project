@@ -9,9 +9,12 @@ from pathlib import Path
 
 def _decimal(value: str | None, default: Decimal) -> Decimal:
     try:
-        return Decimal(value) if value else default
-    except InvalidOperation:
-        return default
+        result=Decimal(value) if value is not None and value!='' else default
+    except InvalidOperation as exc:
+        raise ValueError("invalid budget configuration") from exc
+    if not result.is_finite():
+        raise ValueError("budget must be finite")
+    return result
 
 
 @dataclass
@@ -25,6 +28,12 @@ class Settings:
     budget_cny: Decimal
     per_call_reserve_cny: Decimal
     top_k: int
+
+    def __post_init__(self):
+        if not self.budget_cny.is_finite() or self.budget_cny<0:
+            raise ValueError("budget must be nonnegative and finite")
+        if not self.per_call_reserve_cny.is_finite() or self.per_call_reserve_cny<=0:
+            raise ValueError("per-call reservation must be positive and finite")
 
     @classmethod
     def from_env(cls, env: dict | None = None) -> Settings:

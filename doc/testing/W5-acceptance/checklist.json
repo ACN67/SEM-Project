@@ -1,0 +1,37 @@
+[
+  {
+    "case_id": "R01",
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "acceptance": "READY_FOR_REVIEW",
+    "evidence": "five-case-results.json"
+  },
+  {
+    "case_id": "R02",
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "acceptance": "READY_FOR_REVIEW",
+    "evidence": "five-case-results.json"
+  },
+  {
+    "case_id": "R03",
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "acceptance": "READY_FOR_REVIEW",
+    "evidence": "five-case-results.json"
+  },
+  {
+    "case_id": "R04",
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "acceptance": "READY_FOR_REVIEW",
+    "evidence": "five-case-results.json"
+  },
+  {
+    "case_id": "R05",
+    "machine_verification": "PASS",
+    "independent_review": "PENDING_ASTRA_REVIEW",
+    "acceptance": "READY_FOR_REVIEW",
+    "evidence": "five-case-results.json"
+  }
+]

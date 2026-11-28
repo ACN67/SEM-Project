@@ -160,6 +160,7 @@ class IdempotencyTests(unittest.TestCase):
         self.assertEqual(error.exception.error.code, "IDEMPOTENCY_CONFLICT")
 
     def test_begin_retry_and_exports_share_the_guard(self):
+        self.store.create_report(_report(), _NOW)
         retry_guard = IdempotencyRequest(
             operation="job_retry", target_id="job-old", key="r1",
             hash=request_hash({"job_id": "job-old"}),

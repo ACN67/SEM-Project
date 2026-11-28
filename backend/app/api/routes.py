@@ -127,15 +127,19 @@ def upload_document(
     _require_admin(request)
     services = _services(request)
     record = m.Metadata.model_validate_json(metadata)
-    with tempfile.NamedTemporaryFile(
-        suffix=file.filename or "", delete=False,
-    ) as staging:
-        staging.write(file.file.read())
-        staging_path = staging.name
-    try:
-        return services.knowledge.ingest_document(Path(staging_path), record)
-    finally:
-        Path(staging_path).unlink(missing_ok=True)
+    _check_origin(request)
+    from ..knowledge.storage import filename_key
+    filename_key(file.filename or '')
+    with tempfile.TemporaryDirectory() as temporary:
+        path=Path(temporary)/(file.filename or '')
+        size=0
+        with path.open('wb') as staging:
+            while chunk:=file.file.read(1024*1024):
+                size+=len(chunk)
+                if size>50*1024*1024:
+                    raise ServiceError(m.ErrorInfo(code='FILE_TOO_LARGE',message='文件超过 50 MiB。',retryable=False,details={}))
+                staging.write(chunk)
+        return services.knowledge.ingest_document(path,record)
 
 
 @documents_router.get("/documents", response_model=m.Page[m.DocumentRecord])

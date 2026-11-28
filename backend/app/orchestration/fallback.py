@@ -20,7 +20,7 @@ class FixedWriter:
         payload = json.loads(context)
         task = payload["task"]
         evidences = payload.get("evidences") or []
-        metrics = payload.get("metrics") or []
+        metrics = [item for item in (payload.get("metrics") or []) if item.get("value") is not None]
         metric_ids = [item["metric_id"] for item in metrics[:1]]
         if metrics:
             # Keep the citation aligned with the referenced metric's own sources.

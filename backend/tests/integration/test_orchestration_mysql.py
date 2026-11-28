@@ -66,3 +66,99 @@ class StoreMySQLTests(unittest.TestCase):
         job=JobRecord(job_id='bad',report_id='missing',run_id='run')
         with self.assertRaises(Exception):self.store.begin_report(IdempotencyRequest(operation='create',target_id='',key='bad',hash='h'),report,job,{},self.now)
         self.assertIsNone(self.store.get_report('rollback'))
+
+    def test_cancelled_and_stale_attempts_cannot_commit(self):
+        from backend.app.database.store import ChapterRecord
+        for store in [self.store,MemoryStore()]:
+            store.create_report(ReportRecord(report_id='guard-r',title='test',report_type='industry_analysis',template_id='industry_analysis_v1',template_version=1),self.now)
+            store.create_job(JobRecord(job_id='guard-j',report_id='guard-r',run_id='run',status='RUNNING',chapters=[ChapterRecord(chapter_id='chapter',status='RUNNING',attempt_id='current')]),self.now)
+            self.assertFalse(store.finish_attempt('guard-j','chapter','old',context={'invalid':1}))
+            store.cancel_job('guard-j',self.now)
+            self.assertFalse(store.finish_attempt('guard-j','chapter','current',context={'invalid':1}))
+            actual=store.get_job('guard-j')
+            self.assertEqual(actual.status,'CANCELLED')
+            self.assertEqual(actual.chapters[0].status,'RUNNING')
+            self.assertIsNone(actual.context)
+
+    def test_budget_rejects_invalid_amounts(self):
+        from decimal import Decimal
+        for store in [self.store,MemoryStore()]:
+            for amount in ['-1','0','NaN','Infinity']:
+                with self.assertRaises(ValueError):store.reserve_budget(Decimal(amount),Decimal('100'))
+            self.assertTrue(store.reserve_budget(Decimal('100'),Decimal('100')))
+            self.assertFalse(store.reserve_budget(Decimal('0.01'),Decimal('100')))
+
+    def test_retry_replay_is_atomic_with_report_pointer(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from backend.app.database.store import IdempotencyRequest
+        report=ReportRecord(report_id='retry-r',title='test',report_type='industry_analysis',template_id='industry_analysis_v1',template_version=1)
+        self.store.create_report(report,self.now)
+        guard=IdempotencyRequest(operation='retry',target_id='old',key='same',hash='same')
+        def retry(i):
+            job=JobRecord(job_id='retry'+str(i),report_id=report.report_id,run_id='run')
+            return self.store.begin_retry(guard,job,{'job_id':job.job_id},self.now)
+        with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(retry,range(2)))
+        self.assertEqual(results[0],results[1])
+        actual=results[0]['job_id']
+        self.store.set_report_job(report.report_id,actual,'COMPLETED',self.now)
+        retry(3)
+        self.assertEqual(self.store.get_report(report.report_id).latest_job_id,actual)
+        self.assertEqual(self.store.get_report(report.report_id).job_status,'COMPLETED')
+
+    def test_finalization_is_guarded_atomic_and_immutable(self):
+        for store in [self.store, MemoryStore()]:
+            report = ReportRecord(report_id='final-r', title='test', report_type='industry_analysis', template_id='industry_analysis_v1', template_version=1)
+            store.create_report(report, self.now)
+            doc = ReportDocument.model_validate_json(Path('shared/contracts/fixtures/report_document.json').read_text(encoding='utf8')).model_copy(update={'report_id':'final-r', 'version_id':'final-v', 'run_id':'run'})
+            store.create_job(JobRecord(job_id='final-j', report_id='final-r', run_id='run', status='RUNNING'), self.now)
+            store.set_report_job('final-r', 'final-j', 'RUNNING', self.now)
+            self.assertFalse(store.finalize_job('final-j', 'old-run', status='COMPLETED', document=doc, now=self.now))
+            store.cancel_job('final-j', self.now)
+            for status in ['FAILED', 'COMPLETED', 'COMPLETED_WITH_WARNINGS']:
+                self.assertFalse(store.finalize_job('final-j', 'run', status=status, document=doc, now=self.now))
+            self.assertIsNone(store.get_version('final-r', 'final-v'))
+            self.assertIsNone(store.get_report('final-r').current_version_id)
+            self.assertEqual(store.get_job('final-j').status, 'CANCELLED')
+            store.create_job(JobRecord(job_id='new-j', report_id='final-r', run_id='run', status='RUNNING'), self.now)
+            self.assertFalse(store.finalize_job('new-j', 'run', status='COMPLETED', document=doc, now=self.now))
+            store.set_report_job('final-r', 'new-j', 'RUNNING', self.now)
+            store.save_version(doc, make_current=False, now=self.now)
+            with self.assertRaises(ValueError):
+                store.finalize_job('new-j', 'run', status='COMPLETED', document=doc.model_copy(update={'exportable':not doc.exportable}), now=self.now)
+            self.assertEqual(store.get_job('new-j').status, 'RUNNING')
+            self.assertIsNone(store.get_report('final-r').current_version_id)
+            self.assertTrue(store.finalize_job('new-j', 'run', status='COMPLETED', document=doc, now=self.now))
+            self.assertEqual(store.get_job('new-j').result_version_id, 'final-v')
+            self.assertEqual(store.get_report('final-r').current_version_id, 'final-v')
+            self.assertEqual(store.get_report('final-r').job_status, 'COMPLETED')
+            self.assertIsNone(store.cancel_job('new-j', self.now))
+
+    def test_cancel_races_finalization_without_partial_publication(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Barrier
+        for store in [self.store, MemoryStore()]:
+            for i in range(4):
+                rid, jid = 'race-r'+str(i), 'race-j'+str(i)
+                store.create_report(ReportRecord(report_id=rid, title='test', report_type='industry_analysis', template_id='industry_analysis_v1', template_version=1), self.now)
+                store.create_job(JobRecord(job_id=jid, report_id=rid, run_id='run', status='RUNNING'), self.now)
+                store.set_report_job(rid, jid, 'RUNNING', self.now)
+                doc = ReportDocument.model_validate_json(Path('shared/contracts/fixtures/report_document.json').read_text(encoding='utf8')).model_copy(update={'report_id':rid, 'version_id':'race-v'+str(i), 'run_id':'run'})
+                barrier = Barrier(2)
+                def finish():
+                    barrier.wait()
+                    return store.finalize_job(jid, 'run', status='COMPLETED', document=doc, now=self.now)
+                def cancel():
+                    barrier.wait()
+                    return store.cancel_job(jid, self.now)
+                with ThreadPoolExecutor(max_workers=2) as pool:
+                    a, b = pool.submit(finish), pool.submit(cancel)
+                    published, cancelled = a.result(), b.result()
+                self.assertNotEqual(published, cancelled is not None)
+                job, report = store.get_job(jid), store.get_report(rid)
+                if published:
+                    self.assertEqual(job.status, 'COMPLETED')
+                    self.assertEqual(report.current_version_id, doc.version_id)
+                else:
+                    self.assertEqual(job.status, 'CANCELLED')
+                    self.assertIsNone(report.current_version_id)
+                    self.assertIsNone(store.get_version(rid, doc.version_id))

@@ -121,7 +121,9 @@ class OrchestrationService:
         )
         job = JobRecord(
             job_id=job_id, report_id=report.report_id, run_id=new_id(), spec=spec,
+            frozen=m.FrozenRun(run_id='pending',spec=spec,template_ref=m.TemplateRef(template_id=template.template_id,version=template.version),source_version_ids=self.store.ready_version_ids(),facts_version='f0',facts=[]),
         )
+        job.frozen=job.frozen.model_copy(update={'run_id':job.run_id})
         response = self.store.begin_report(guard, report, job, accepted, now)
         return m.JobAccepted.model_validate(response)
 
@@ -333,7 +335,7 @@ class OrchestrationService:
         job_id = claimed.job_id
         self.store.heartbeat_job(job_id, self.clock())
         self._load_pack(claimed)
-        if claimed.frozen is None:
+        if claimed.frozen is None or not claimed.chapters:
             planned = self._plan_job(claimed)
             if planned is None:
                 return
@@ -391,7 +393,7 @@ class OrchestrationService:
             run_id=claimed.run_id, spec=claimed.spec, template_ref=m.TemplateRef(
                 template_id=template.template_id, version=template.version,
             ),
-            source_version_ids=self.store.ready_version_ids(),
+            source_version_ids=claimed.frozen.source_version_ids if claimed.frozen else self.store.ready_version_ids(),
             facts_version="f0", facts=[],
         )
         chapters = [
@@ -443,22 +445,26 @@ class OrchestrationService:
         format_retries = 0
         attempt = 0
         while True:
+            current = self.store.get_job(job_id)
+            chapter = next(c for c in current.chapters if c.chapter_id == chapter_id)
+            if current.status != 'RUNNING' or chapter.status != 'RUNNING' or chapter.attempt_id != attempt_id:
+                return frozen
             attempt += 1
             try:
                 content = self._generate_and_check(job_id, frozen, task)
             except ServiceError as exc:
                 error = exc.error
                 if not error.retryable or attempt >= MAX_ATTEMPTS:
-                    self._chapter_failed(job_id, tasks, chapter_id, failed, error)
+                    self._chapter_failed(job_id, tasks, chapter_id, failed, error, attempt_id)
                     return frozen
                 if error.code in FORMAT_CODES:
                     if format_retries >= FORMAT_EXTRA:
-                        self._chapter_failed(job_id, tasks, chapter_id, failed, error)
+                        self._chapter_failed(job_id, tasks, chapter_id, failed, error, attempt_id)
                         return frozen
                     format_retries += 1
                 else:
                     if transient >= TRANSIENT_EXTRA:
-                        self._chapter_failed(job_id, tasks, chapter_id, failed, error)
+                        self._chapter_failed(job_id, tasks, chapter_id, failed, error, attempt_id)
                         return frozen
                     transient += 1
                 self.store.update_chapter(job_id, chapter_id, retries=attempt)
@@ -469,13 +475,16 @@ class OrchestrationService:
                 self._chapter_failed(
                     job_id, tasks, chapter_id, failed,
                     m.ErrorInfo(code="ORCHESTRATION_ERROR", message=str(exc),
-                                retryable=False, details={}),
+                                retryable=False, details={}), attempt_id,
                 )
                 return frozen
-            self.store.update_chapter(
-                job_id, chapter_id, status="SUCCEEDED", content=content, error=None,
-            )
-            return self._absorb_facts(job_id, frozen, content)
+            facts=[f for f in content.fact_candidates if f.evidence_ids or f.metric_ids]
+            updated=frozen.model_copy(update={'facts':[*frozen.facts,*facts],'facts_version':f'f{len(frozen.facts)+len(facts)}'})
+            pack=self._packs.get(frozen.run_id,{'evidences':{},'metrics':{}})
+            context={kind:{key:item.model_dump(mode='json',by_alias=True) for key,item in values.items()} for kind,values in pack.items()}
+            if self.store.finish_attempt(job_id,chapter_id,attempt_id,content=content,frozen=updated,context=context):
+                return updated
+            return frozen
 
     def _chapter_failed(
         self,
@@ -484,9 +493,11 @@ class OrchestrationService:
         chapter_id: str,
         failed: dict[str, m.ErrorInfo],
         error: m.ErrorInfo,
+        attempt_id: str,
     ) -> None:
+        if not self.store.finish_attempt(job_id,chapter_id,attempt_id,error=error):
+            return
         failed[chapter_id] = error
-        self.store.update_chapter(job_id, chapter_id, status="FAILED", error=error)
         self._skip_dependents(job_id, tasks, chapter_id, error)
 
     def _skip_dependents(
@@ -593,17 +604,16 @@ class OrchestrationService:
     ) -> None:
         job = self.store.get_job(job_id)
         assert job is not None
+        if job.status != "RUNNING":
+            return
         now = self.clock()
         required_failed = [
             chapter_id for chapter_id, error in failed.items()
             if tasks[chapter_id].required
         ]
         if required_failed:
-            self.store.update_job(
-                job_id, status="FAILED", stage=None,
-                error=failed[required_failed[0]], now=now,
-            )
-            self.store.set_report_job(job.report_id, job_id, "FAILED", now)
+            self.store.finalize_job(job_id, job.run_id, status="FAILED",
+                                    error=failed[required_failed[0]], now=now)
             return
         # Chapters that never became ready (e.g. their dependencies failed).
         for record in job.chapters:
@@ -675,41 +685,26 @@ class OrchestrationService:
             check_snapshot(document)
         except (ValueError, OSError) as exc:
             logger.exception("snapshot for job %s failed validation", job.job_id)
-            self.store.save_version(document, make_current=False, now=now)
-            self.store.update_job(
-                job.job_id, status="FAILED", stage=None,
-                error=m.ErrorInfo(
-                    code="INVALID_SNAPSHOT", message="报告快照未通过一致性检查。",
-                    retryable=False, details={"reason": str(exc)},
-                ),
-                now=now,
+            self.store.finalize_job(
+                job.job_id, job.run_id, status="FAILED", document=document,
+                error=m.ErrorInfo(code="INVALID_SNAPSHOT", message="报告快照未通过一致性检查。",
+                                  retryable=False, details={"reason": str(exc)}), now=now,
             )
-            self.store.set_report_job(job.report_id, job.job_id, "FAILED", now)
             return
-        self.store.save_version(document, make_current=True, now=now)
         status = "COMPLETED"
         if quality.issues or failed or any(
             record.status == "SKIPPED" for record in job.chapters
         ):
             status = "COMPLETED_WITH_WARNINGS"
-        self.store.set_report_version(job.report_id, document.version_id, now)
-        self.store.update_job(
-            job.job_id, status=status, stage=None,
-            result_version_id=document.version_id, now=self.clock(),
-        )
-        self.store.set_report_job(job.report_id, job.job_id, status, self.clock())
+        self.store.finalize_job(job.job_id, job.run_id, status=status,
+                                document=document, now=self.clock())
 
     def _fail_with_draft(self, job: JobRecord, document: m.ReportDocument, now: datetime) -> None:
-        self.store.save_version(document, make_current=False, now=now)
-        self.store.update_job(
-            job.job_id, status="FAILED", stage=None,
-            error=m.ErrorInfo(
-                code="QUALITY_BLOCK", message="全文质量检查存在 BLOCK 问题，已保留草稿。",
-                retryable=False, details={},
-            ),
-            now=now,
+        self.store.finalize_job(
+            job.job_id, job.run_id, status="FAILED", document=document,
+            error=m.ErrorInfo(code="QUALITY_BLOCK", message="全文质量检查存在 BLOCK 问题，已保留草稿。",
+                              retryable=False, details={}), now=now,
         )
-        self.store.set_report_job(job.report_id, job.job_id, "FAILED", now)
 
     def _write_assets(self, document: m.ReportDocument) -> None:
         """Persist chart PNGs under the frozen version so exports can resolve them."""
@@ -726,7 +721,7 @@ class OrchestrationService:
         job = self.store.get_job(job_id)
         assert job is not None
         projected = job.estimated_cost_cny + self.per_call_reserve_cny
-        if projected > self.budget_cny:
+        if not self.store.reserve_budget(self.per_call_reserve_cny, self.budget_cny):
             raise _error(
                 "BUDGET_LIMIT",
                 "预计调用费用超过剩余预算，已停止模型调用。",
@@ -777,7 +772,6 @@ class OrchestrationService:
             context=source.context, chapters=chapters,
         )
         response = self.store.begin_retry(guard, retry, accepted, now)
-        self.store.set_report_job(source.report_id, new_job_id, "QUEUED", self.clock())
         return m.JobAccepted.model_validate(response)
 
     def cancel_job(self, job_id: str) -> m.JobDetail:

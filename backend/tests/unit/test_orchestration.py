@@ -197,6 +197,93 @@ class OrchestrationFlowTests(unittest.TestCase):
                 self.assertTrue(set(block.evidence_ids) <= evidence_ids)
 
 
+    def test_sources_frozen_before_worker(self):
+        accepted=self._create()
+        frozen=self.store.get_job(accepted.job_id).frozen
+        self.assertIsNotNone(frozen)
+        before=list(frozen.source_version_ids)
+        self.store.ready_version_ids=lambda:['later-source']
+        self.orchestration.run_cycle()
+        self.assertEqual(self.store.get_job(accepted.job_id).frozen.source_version_ids,before)
+
+    def test_budget_shared_between_jobs(self):
+        from decimal import Decimal
+        self.orchestration.budget_cny=Decimal('0.10')
+        first=self._create('one');second=self._create('two')
+        self.orchestration._reserve_budget(first.job_id,'chapter')
+        with self.assertRaises(ServiceError):self.orchestration._reserve_budget(second.job_id,'chapter')
+
+    def test_retry_replay_preserves_actual_report_pointer(self):
+        accepted=self._create()
+        self.store.update_job(accepted.job_id,status='FAILED')
+        first=self.orchestration.retry_job(accepted.job_id,'retry')
+        self.store.set_report_job(accepted.report_id,first.job_id,'COMPLETED',self.stack.clock.now())
+        second=self.orchestration.retry_job(accepted.job_id,'retry')
+        self.assertEqual(first,second)
+        report=self.store.get_report(accepted.report_id)
+        self.assertEqual(report.latest_job_id,first.job_id)
+        self.assertEqual(report.job_status,'COMPLETED')
+
+    def test_cancel_drops_late_success_and_pack(self):
+        accepted=self._create()
+        original=self.orchestration._generate_and_check
+        def cancelled(job_id,frozen,task):
+            result=original(job_id,frozen,task)
+            self.orchestration.cancel_job(job_id)
+            return result
+        self.orchestration._generate_and_check=cancelled
+        self.orchestration.run_cycle()
+        job=self.store.get_job(accepted.job_id)
+        self.assertEqual(job.status,'CANCELLED')
+        self.assertFalse(any(c.status=='SUCCEEDED' for c in job.chapters))
+        self.assertIsNone(job.context)
+
+    def test_cancel_during_final_quality_never_publishes(self):
+        accepted = self._create()
+        original = self.orchestration.quality.validate_report
+        def cancel(document):
+            result = original(document)
+            self.orchestration.cancel_job(accepted.job_id)
+            return result
+        self.orchestration.quality.validate_report = cancel
+        self.orchestration.run_cycle()
+        self.assertEqual(self.store.get_job(accepted.job_id).status, 'CANCELLED')
+        self.assertIsNone(self.store.get_report(accepted.report_id).current_version_id)
+        self.assertEqual(self.store.list_versions(accepted.report_id, 1, 20)[0], 0)
+
+    def test_replaced_attempt_rejects_late_success_and_failure(self):
+        from backend.app.contracts.services import ServiceError
+        for fail in (False, True):
+            with self.subTest(fail=fail):
+                accepted = self._create('late-' + str(fail))
+                claimed = self.store.claim_next_queued(self.stack.clock.now())
+                frozen, outline = self.orchestration._plan_job(claimed)
+                tasks = {t.chapter_id: t for t in outline.chapters}
+                task = next(t for t in outline.chapters if not t.depends_on)
+                original = self.orchestration._generate_and_check
+                def replace(job_id, frozen, task):
+                    result = original(job_id, frozen, task)
+                    self.store.update_chapter(job_id, task.chapter_id, attempt_id='replacement')
+                    if fail:
+                        raise ServiceError(m.ErrorInfo(code='OLD_CALL', message='old', retryable=False, details={}))
+                    return result
+                self.orchestration._generate_and_check = replace
+                failed = {}
+                try:
+                    self.orchestration._run_chapter(accepted.job_id, frozen, tasks, task.chapter_id, failed)
+                finally:
+                    self.orchestration._generate_and_check = original
+                chapter = next(c for c in self.store.get_job(accepted.job_id).chapters if c.chapter_id == task.chapter_id)
+                self.assertEqual(chapter.status, 'RUNNING')
+                self.assertEqual(chapter.attempt_id, 'replacement')
+                self.assertIsNone(chapter.error)
+                self.assertIsNone(chapter.content)
+                self.assertEqual(failed, {})
+                self.assertFalse(any(c.status == 'SKIPPED' for c in self.store.get_job(accepted.job_id).chapters))
+                self.orchestration.cancel_job(accepted.job_id)
+
+
+
 class OrchestrationPreviewTests(unittest.TestCase):
     def setUp(self):
         import tempfile
@@ -224,6 +311,7 @@ class OrchestrationPreviewTests(unittest.TestCase):
         self.assertEqual(summary.status, "COMPLETED")
         self.assertEqual(summary.current_version_id, report.current_version_id)
         self.assertTrue(summary.title)
+
 
 
 if __name__ == "__main__":

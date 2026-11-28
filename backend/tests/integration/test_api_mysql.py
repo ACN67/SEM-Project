@@ -20,7 +20,8 @@ class ApiMySQLTests(StoreMySQLTests):
                     def upload(value):
                         import io
                         text=io.StringIO();writer=csv.writer(text);writer.writerow(COLUMNS)
-                        writer.writerow(['sales','sales','','2024','year','中国','test',value,'辆','1','辆',''])
+                        for year,amount in [('2022','8'),('2023','9'),('2024',value)]:
+                            writer.writerow(['sales','sales','',year,'year','中国','test',amount,'辆','1','辆',''])
                         result=client.post('/api/v1/documents',files={'file':('same.csv',text.getvalue().encode(),'text/csv')},data={'metadata':json.dumps({'title':'test','publisher':'test','published_at':'2025-01-01'})})
                         self.assertEqual(result.status_code,202,result.text)
                         return result.json()
@@ -35,9 +36,29 @@ class ApiMySQLTests(StoreMySQLTests):
                     metrics=services.knowledge.get_metrics(filters,ids)
                     self.assertEqual(len(metrics),1)
                     self.assertEqual(metrics[0].value,'20')
-                    self.assertTrue(services.knowledge.retrieve('sales',filters,5,ids))
+                    self.assertTrue(services.knowledge.retrieve('raw_value: 20 辆',filters,5,ids))
                     source_ids=metrics[0].source_evidence_ids
                     self.assertEqual(len(services.knowledge.get_evidences(source_ids,ids)),1)
                     self.assertEqual(services.knowledge.get_evidences(source_ids,[]),[])
                     self.assertEqual(client.get(second['status_url']).json()['ingest_status'],'READY')
+                    request=json.loads(Path('data/samples/w5/cases.json').read_text(encoding='utf8'))['cases'][0]['request']
+                    accepted=client.post('/api/v1/reports',json=request,headers={'Idempotency-Key':'real-db'}).json()
+                    original=services.orchestration.quality.validate_chapter
+                    def diagnostic(*args):
+                        result=original(*args)
+                        if any(x.severity=='BLOCK' for x in result.issues):print(result.model_dump_json(),flush=True)
+                        return result
+                    services.orchestration.quality.validate_chapter=diagnostic
+                    services.orchestration.run_cycle()
+                    job=client.get(accepted['status_url']).json()
+                    self.assertIn(job['status'],['COMPLETED','COMPLETED_WITH_WARNINGS'],job)
+                    version=job['result_version_id']
+                    base=f"/api/v1/reports/{accepted['report_id']}/versions/{version}"
+                    self.assertEqual(client.get(base).status_code,200)
+                    exported=client.post(base+'/exports',json={'format':'docx'},headers={'Idempotency-Key':'export'}).json()
+                    services.orchestration.run_cycle()
+                    result=client.get(exported['status_url']).json()
+                    self.assertEqual(result['status'],'READY',result)
+                    self.assertEqual(client.get(result['download_url']).status_code,200)
+
             finally:app.state.services.knowledge.pipeline.index.client._system.stop()

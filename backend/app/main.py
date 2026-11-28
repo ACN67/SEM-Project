@@ -64,8 +64,8 @@ def _build_services(settings: Settings) -> AppServices:
         )
 
         def ingest_runner(version: str):
-            # Empty labels mean no metadata filters; documents are still
-            # indexed and retrievable within their frozen version.
+            # Administrator-configured labels for this import batch. Change
+            # the configuration before importing a different industry/region.
             import json
             import os
             labels=json.loads(os.getenv('INGEST_LABELS_JSON','{}'))

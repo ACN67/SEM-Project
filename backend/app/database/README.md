@@ -31,3 +31,5 @@
 ## 迁移
 
 MySQL 8+：在业务库按 010 → 011 → 012 → 020 顺序执行（集成测试用与 `test_knowledge_mysql.py` 相同的按 `;` 拆分方式即可）。
+
+Review fixes: explicit None clears nullable stage/error fields; omitted arguments preserve values. Re-saving identical snapshots is allowed, conflicting content is rejected. MySQL idempotency uses connection-scoped advisory locks to serialize identical keys. Migration 020 now includes project_budget; reapply its idempotent statements to an existing deployment before using shared reservations. Real MySQL regression: python -m unittest discover -s backend/tests/integration -p test_orchestration_mysql.py -q (set W1_MYSQL_PORT).

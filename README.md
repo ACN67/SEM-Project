@@ -54,6 +54,29 @@ py -3.11 -m venv .venv
 
 第一项检查仓库中的接口文件是否与代码定义一致，成功时退出码为 0。第二项检查五类表单、异常输入、引用、任务响应和过期版本等样例，成功时显示 `OK`。实际接入模型或数据库时，参照 [.env.example](.env.example) 配置本机环境，密钥存放在受忽略的本地配置中。
 
+## 后端最小链路与全部测试
+
+任务编排、持久化与 HTTP 层位于 [backend/app/orchestration/README.md](backend/app/orchestration/README.md) 和 [backend/app/database/README.md](backend/app/database/README.md)。安装全部单元测试依赖后（含 FastAPI 与文档解析工具），可以本地运行整条验证链：
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r backend/tests/contract/requirements.txt -r backend/tests/unit/requirements.txt
+.\.venv\Scripts\python.exe scripts/export_contracts.py --check
+.\.venv\Scripts\python.exe -m unittest discover -s backend/tests/contract -v
+.\.venv\Scripts\python.exe -m unittest discover -s backend/tests/unit -v
+```
+
+静态检查：`python -m ruff check --select E9,F63,F7,F82 backend scripts`。CI 另通过 MySQL 8.0 服务执行 `python -m unittest backend.tests.integration.test_orchestration_mysql -v`；本地运行时设置 `W1_MYSQL_PORT` 指向无密码 root 的隔离测试实例，测试会创建并删除临时数据库，请勿指向业务数据库。
+
+单元测试覆盖编排模块（MemoryStore + W5 资料包 + 固定应答，无需数据库或模型密钥）与 HTTP 层。零配置启动演示服务并从网页触发一次生成到导出：
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn backend.app.main:create_app --factory --port 8000
+```
+
+使用配置文件时先复制 `.env.example` 为 `.env` 并填写，再用 `python -m uvicorn backend.app.main:create_app --factory --env-file .env --port 8000` 启动。测试依赖中已包含 `python-dotenv`；普通启动命令只读取进程环境变量，不自动加载 `.env`。
+
+正式模式先按 010→011→012→020 应用 MySQL 迁移，再配置 `DATABASE_URL` 与 `MODEL_*`。推送后 GitHub Actions 会自动运行静态检查、契约一致性、契约测试、单元测试及 MySQL 关键集成测试（[.github/workflows/ci.yml](.github/workflows/ci.yml)）。
+
 ## 分支与 Pull Request
 
 1. 在任务中写明负责人、需求编号、验收条件和交接对象。从最新 `main` 创建短期分支，例如依次执行 `git switch main`、`git pull --ff-only`、`git switch -c feature/knowledge-ingest`。

@@ -42,3 +42,27 @@ class StoreMySQLTests(unittest.TestCase):
         from decimal import Decimal
         self.assertTrue(self.store.reserve_budget(Decimal('60'),Decimal('100')))
         self.assertFalse(MySqlStore(self.connect).reserve_budget(Decimal('50'),Decimal('100')))
+
+    def test_atomic_idempotency_and_claims(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from backend.app.database.store import IdempotencyRequest
+        from backend.app.contracts.services import ServiceError
+        guard=IdempotencyRequest(operation='create',target_id='',key='same',hash='same')
+        def submit(i):
+            report=ReportRecord(report_id='r'+str(i),title='test',report_type='industry_analysis',template_id='industry_analysis_v1',template_version=1)
+            job=JobRecord(job_id='j'+str(i),report_id=report.report_id,run_id='run'+str(i))
+            return self.store.begin_report(guard,report,job,{'job_id':job.job_id},self.now)
+        with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(submit,range(2)))
+        self.assertEqual(results[0],results[1])
+        self.assertEqual(self.store.list_reports(1,20)[0],1)
+        with self.assertRaises(ServiceError):
+            self.store.begin_report(IdempotencyRequest(operation='create',target_id='',key='same',hash='other'),None,None,{},self.now)
+        with ThreadPoolExecutor(max_workers=2) as pool:claims=list(pool.map(lambda _:self.store.claim_next_queued(self.now),range(2)))
+        self.assertEqual(sum(x is not None for x in claims),1)
+
+    def test_report_insert_rolls_back_on_invalid_job(self):
+        from backend.app.database.store import IdempotencyRequest
+        report=ReportRecord(report_id='rollback',title='test',report_type='industry_analysis',template_id='industry_analysis_v1',template_version=1)
+        job=JobRecord(job_id='bad',report_id='missing',run_id='run')
+        with self.assertRaises(Exception):self.store.begin_report(IdempotencyRequest(operation='create',target_id='',key='bad',hash='h'),report,job,{},self.now)
+        self.assertIsNone(self.store.get_report('rollback'))

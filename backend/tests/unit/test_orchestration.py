@@ -228,3 +228,19 @@ class OrchestrationPreviewTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_sources_frozen_before_worker(self):
+        accepted=self._create()
+        frozen=self.store.get_job(accepted.job_id).frozen
+        self.assertIsNotNone(frozen)
+        before=list(frozen.source_version_ids)
+        self.store.ready_version_ids=lambda:['later-source']
+        self.orchestration.run_cycle()
+        self.assertEqual(self.store.get_job(accepted.job_id).frozen.source_version_ids,before)
+
+    def test_budget_shared_between_jobs(self):
+        from decimal import Decimal
+        self.orchestration.budget_cny=Decimal('0.10')
+        first=self._create('one');second=self._create('two')
+        self.orchestration._reserve_budget(first.job_id,'chapter')
+        with self.assertRaises(ServiceError):self.orchestration._reserve_budget(second.job_id,'chapter')

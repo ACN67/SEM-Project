@@ -25,6 +25,8 @@ def plan_outline(spec: m.Spec, template: m.Template) -> m.Outline:
                     sections[key].chapter_id for key in section.depends_on
                 )),
             })
+            if isinstance(spec, m.Prosperity) and task.required_metrics:
+                task.required_metrics = [spec.indicator]
             tasks.append(task)
         tuple(TopologicalSorter({task.chapter_id: task.depends_on for task in tasks}).static_order())
         return m.Outline(chapters=tasks)

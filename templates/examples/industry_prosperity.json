@@ -1,0 +1,13 @@
+{
+  "report_type": "industry_prosperity",
+  "industry": "新能源汽车",
+  "region": "中国",
+  "period": {
+    "from": "2023",
+    "to": "2024"
+  },
+  "template_id": "industry_prosperity_v1",
+  "indicator": "sales",
+  "granularity": "quarter",
+  "as_of": "2025-01-13"
+}

@@ -1,0 +1,117 @@
+{
+  "template_id": "investment_attraction_v1",
+  "version": 1,
+  "title": "招商报告",
+  "report_type": "investment_attraction",
+  "layout_version": "1",
+  "requires_as_of": true,
+  "sections": [
+    {
+      "chapter_id": "summary",
+      "section_key": "summary",
+      "title": "摘要",
+      "order": 0,
+      "required": true,
+      "depends_on": [
+        "demand",
+        "capability",
+        "matching",
+        "constraints",
+        "contact"
+      ],
+      "research_questions": [
+        "主要判断、适用范围和证据缺口是什么？"
+      ],
+      "evidence_requirements": [],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "demand",
+      "section_key": "demand",
+      "title": "区域需求",
+      "order": 1,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "依据本次报告的 region、target_segment 和 as_of，目标地区在指定产业链环节有哪些有来源的需求？"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "capability",
+      "section_key": "capability",
+      "title": "企业能力",
+      "order": 2,
+      "required": true,
+      "depends_on": [],
+      "research_questions": [
+        "候选企业的产品与布局有哪些公开依据？"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "matching",
+      "section_key": "matching",
+      "title": "候选匹配",
+      "order": 3,
+      "required": true,
+      "depends_on": [
+        "demand",
+        "capability"
+      ],
+      "research_questions": [
+        "逐项对应需求与能力的两侧来源，缺一侧标记待核实，不能推断签约或投资意向。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "constraints",
+      "section_key": "constraints",
+      "title": "约束条件",
+      "order": 4,
+      "required": true,
+      "depends_on": [
+        "matching"
+      ],
+      "research_questions": [
+        "有哪些产能、位置和政策适用约束？"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    },
+    {
+      "chapter_id": "contact",
+      "section_key": "contact",
+      "title": "接洽建议",
+      "order": 5,
+      "required": true,
+      "depends_on": [
+        "constraints"
+      ],
+      "research_questions": [
+        "公开渠道和具体合作需求是否有来源？给出可核实的接洽建议。"
+      ],
+      "evidence_requirements": [
+        "可定位的原始来源与适用日期"
+      ],
+      "required_metrics": [],
+      "desired_chart": null
+    }
+  ]
+}

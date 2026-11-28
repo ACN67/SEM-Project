@@ -1,0 +1,1179 @@
+[
+  {
+    "case_id": "R01",
+    "source_version_ids": [
+      "7b693278f2ab4e498e5f1271046d49af",
+      "c6b5466ce7cc4955abceb6d071cc5262",
+      "7e7db2a1afd54aa6b5f1091867250d7d",
+      "f6ee563c2cc347e0acf15ce77a0a4466",
+      "1ad50ab56ecd4d8181e5453dc0958f8b",
+      "8e336f7446804eb69d7903a47e781bb1"
+    ],
+    "metrics": [
+      {
+        "metric_id": "cc738f0eff41006c7900e577ec33b602bb69ac10b3db402cd189fdcc7ca3514c",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2022",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "688.7",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "6887000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "f0b3232148c8ac247a03371556fa219e07e46cc3b8554a2ce51f201b19d91fec",
+          "e0de1e9055efcab403d64ebbb669747553e5ebea8a2f4b641eacdd4ff9fbc62d"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "f83232993ac006412456e84b28a910ac2694c88473b9bee6708642589910994b",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "1286.6",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "12866000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "3b2508e68ec97289297afe8529820d900a22ddb175acd3cd3991f283276d148b"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "fb3b76f23f21f40ee42059938f899cb49980d519f1028355c604b307fb69d384",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "949.5",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "9495000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "6da0e80f1e4f420c69d5cfa0415a5e6bc524459045b6e55755c2ef461aca16cd"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      }
+    ],
+    "provenance": {
+      "case_id": "R01",
+      "file": "R01-transcribed.csv",
+      "sha256": "706d38f614f8b2c91b49617ac471db05f13d60d7842502dc2f95ae165f5a8777",
+      "representation": "manual-transcription",
+      "rows": [
+        {
+          "csv_row": 2,
+          "evidence_keys": [
+            "EV-R01-MIIT-2022-ANNUAL"
+          ],
+          "source_values": [
+            "688.7"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 3,
+          "evidence_keys": [
+            "EV-R01-MIIT-2023-ANNUAL"
+          ],
+          "source_values": [
+            "949.5"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 4,
+          "evidence_keys": [
+            "EV-R01-MIIT-2024-ANNUAL"
+          ],
+          "source_values": [
+            "1286.6"
+          ],
+          "operation": "direct"
+        }
+      ]
+    },
+    "trace_checks": [
+      {
+        "period": "2022",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "f0b3232148c8ac247a03371556fa219e07e46cc3b8554a2ce51f201b19d91fec",
+          "e0de1e9055efcab403d64ebbb669747553e5ebea8a2f4b641eacdd4ff9fbc62d"
+        ],
+        "original_locations": [
+          {
+            "title": "2022年12月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2023-01-12",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_610c626d34b8424c9c1077ac5e5a40fe.html",
+            "evidence_id": "f0b3232148c8ac247a03371556fa219e07e46cc3b8554a2ce51f201b19d91fec",
+            "document_id": "90c1ab61d4694693b83ab096fc3834ae",
+            "document_version_id": "f6ee563c2cc347e0acf15ce77a0a4466",
+            "chunk_id": "f0b3232148c8ac247a03371556fa219e07e46cc3b8554a2ce51f201b19d91fec",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "5万辆和330万辆，同比分别下降31.9%和31.2%。\n**二、12月新能源汽车销量同比增长51.8%**\n12月，新能源汽车产销分别完成79.5万辆和81.4万辆，同比分别均增长51.8%；新能源汽车新车销量达到汽车新车总销量的\n31.8%。\n1－12月，新能源汽车产销分别完成705.8万辆和688.7万辆，同比分别增长96.9%和93.4%；新能源汽车新车销量达到汽车新\n车总销量的25.6%。\n**三、1－11月汽车制造业营业收入同比增长8.1%**\n1－11月，汽车制造业增加值同比增长7.7%；完成营业收入83726.1亿元，同比增长8.1%；实现利润总额4763亿元，同比增长\n0.3%。\n**四、12月汽车出口同比增长45.4%**",
+            "score": 0.7639150023460388
+          },
+          {
+            "title": "2022年12月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2023-01-12",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_610c626d34b8424c9c1077ac5e5a40fe.html",
+            "evidence_id": "e0de1e9055efcab403d64ebbb669747553e5ebea8a2f4b641eacdd4ff9fbc62d",
+            "document_id": "90c1ab61d4694693b83ab096fc3834ae",
+            "document_version_id": "f6ee563c2cc347e0acf15ce77a0a4466",
+            "chunk_id": "e0de1e9055efcab403d64ebbb669747553e5ebea8a2f4b641eacdd4ff9fbc62d",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "l)>[工信数据](https://www.miit.gov.cn/gxsj/index.html)>[统计分析]\n(https://www.miit.gov.cn/gxsj/tjfx/index.html)>[装备工业](https://www.miit.gov.cn/gxsj/tjfx/zbgy/index.html)>[汽车]\n(https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/index.html)\n# 2022年12月汽车工业经济运行情况\n发布时间：2023-01-12 19:37 来源：装备工业一司\n2022年，我国汽车产销实现小幅增长，分别完成2702.1万辆和2686.4万辆，同比分别增长3.4%和2.1%。其中，新能源汽车产\n销分别完成705.8万辆和688.7万辆，同比分别增长96.9%和93.4%。\n**一、12月汽车销量同比下降8.4%**\n12月，汽车产销分别完成238.3万辆和255.6万辆，同比分别下降18.2%和8.4%。\n1－12月，汽车产销分别完成2702.1万辆和2686.4万辆，同比分别增长3.4%和2.1%。\n**（一）12月乘用车销量同比下降6.7%**\n12月，乘用车产销分别完成212.5万辆和226.5万辆，同比分别下降16.1%和6.7%。\n1－12月，乘用车产销分别完成2383.6万辆和2356.3万辆，同比分别增长11.2%和9.5%。\n**（二）12月商用车销量同比下降20.2%**\n12月，商用车产销分别完成25.8万辆和29.1万辆，同比分别下降32.1%和20.2%。\n1－12月，商用车产销分别完成318.5万辆和330万辆，同比分别下降31.9%和31.2%。\n**二、12月新能源汽车销量同比增长51.8%**\n12月，新能源汽车产销分别完成79.5万辆和81.",
+            "score": 0.7127878665924072
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2023",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "6da0e80f1e4f420c69d5cfa0415a5e6bc524459045b6e55755c2ef461aca16cd"
+        ],
+        "original_locations": [
+          {
+            "title": "2023年12月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-01-11",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+            "evidence_id": "6da0e80f1e4f420c69d5cfa0415a5e6bc524459045b6e55755c2ef461aca16cd",
+            "document_id": "b7424c05dd7448d69eea6f3794a768ae",
+            "document_version_id": "1ad50ab56ecd4d8181e5453dc0958f8b",
+            "chunk_id": "6da0e80f1e4f420c69d5cfa0415a5e6bc524459045b6e55755c2ef461aca16cd",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "**二、12月新能源汽车销量同比增长46.4%**\n****\n12月，新能源汽车产销分别完成117.2万辆和119.1万辆，同比分别增长47.5%和46.4%；新能源汽车新车销量达到汽车新车总\n销量的37.7%。\n1－12月，新能源汽车产销分别完成958.7万辆和949.5万辆，同比分别增长35.8%和37.9%；新能源汽车新车销量达到汽车新\n车总销量的31.6%。\n**三、1－11月汽车制造业营业收入同比增长11.2%**",
+            "score": 0.7694789171218872
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2024",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "3b2508e68ec97289297afe8529820d900a22ddb175acd3cd3991f283276d148b"
+        ],
+        "original_locations": [
+          {
+            "title": "2024年12月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2025-01-13",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+            "evidence_id": "3b2508e68ec97289297afe8529820d900a22ddb175acd3cd3991f283276d148b",
+            "document_id": "46f098d6e69a4c37abf2028ba9d8c1a0",
+            "document_version_id": "8e336f7446804eb69d7903a47e781bb1",
+            "chunk_id": "3b2508e68ec97289297afe8529820d900a22ddb175acd3cd3991f283276d148b",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "，同比分别下降5.8%和3.9%。\n**二、12月新能源汽车销量同比增长34%**\n12月，新能源汽车产销分别完成153万辆和159.6万辆，同比分别增长30.5%和34%；新能源汽车新车销量达到汽车新车总销量\n的45.8%。\n1－12月，新能源汽车产销分别完成1288.8万辆和1286.6万辆，同比分别增长34.4%和35.5%；新能源汽车新车销量达到汽车\n新车总销量的40.9%。\n**三、12月汽车出口同比增长1.1%**\n12月，汽车整车出口50.4万辆，同比增长1.1%。新能源汽车出口13.4万辆，同比增长19.8%。\n1－12月，汽车整车出口585.9万辆，同比增长19.3%。新能源汽车出口128.4万辆，同比增长6.7%。\n（注：上述数据来自中国汽车工业协会。）",
+            "score": 0.6991350650787354
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": false
+      }
+    ]
+  },
+  {
+    "case_id": "R03",
+    "source_version_ids": [
+      "5e4a76ce26f0449daafb729396db2609",
+      "06463f8f74024f76aba84179eefe4727",
+      "a10cb8de3d014940ae80835f7c7de62a",
+      "bc7fc32c32764749b6562dbb6f2764ca",
+      "2834883363e049f48fa937035456c6d5",
+      "92217baed12943e3ba41ed7effa16d78",
+      "8cdd136d23c548e8bb5b144b8ec9f988",
+      "3975037c54c04e0ab10ff917fad984dc",
+      "28e4c8812cb64f7eb95f5d218544150d",
+      "1ad50ab56ecd4d8181e5453dc0958f8b",
+      "e406360bac5c4b2b93d1c44b4679924b",
+      "51cf2152c4414df98a4b5bbe70f1f532",
+      "f1c13b23fa9942fdb90c7db794995843",
+      "4d4bb1ae145843a1b43632c05e5bfbfc",
+      "b88f79ca4f934998a9ad05ab0b918521",
+      "599be7d9c35f4d0ea7c1624cde712465"
+    ],
+    "metrics": [
+      {
+        "metric_id": "2ad310739bd59dddf1a13c470e9c3c9dc40fa4d03464eafcf2dd12da79bdc0c1",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024-Q4",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "454.6",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "4546000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "0722221c18e8b8a3f8689d2f73ad5bdc9c56259b5d4064261f25c8202257be25",
+          "81cb4e995a8467e68be788b5261ab466b4ddefa8e3059623c3490e4584ae1290"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "4a57d43e076c27881162139f488034492e1561ae7799b08bdfbe7d4cc4132fac",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024-Q2",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "285.4",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "2854000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "d6cfe119d9df16e2653104e14f8c57ff407a1f72bc132cf902048a634bca82d1",
+          "33a56ebb9d659ea183721986d168556ddf0533e29ed3ba19f11a33d39eb77d8f",
+          "987c97c5e6a66fe61ed9e641b40d27f954c47df1014387cd57f51dc603612fba"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "5bab78732256ebf5071a5165d9e034be8961a6936071a7241b52cf1db3a55645",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024-Q3",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "337.6",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "3376000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "81cb4e995a8467e68be788b5261ab466b4ddefa8e3059623c3490e4584ae1290",
+          "d6cfe119d9df16e2653104e14f8c57ff407a1f72bc132cf902048a634bca82d1"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "ade832e4263c7e95df515675df95770801f36e31f05b0db671a35f4c1f5f116c",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023-Q2",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "216.1",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "2161000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "a3f3abd7899bd792de0de1ef33ff693956714bd8b7343b907796eeb796808b76",
+          "4dff522d77e7c688f6b64896d5193d6e6c49a4827ff799bcea8cea2537bbd395"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "ae6590a73cb1437573aeb5425e9514e694345b4cf823962ced22a0d0d431bb21",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2024-Q1",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "209",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "2090000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "33a56ebb9d659ea183721986d168556ddf0533e29ed3ba19f11a33d39eb77d8f",
+          "987c97c5e6a66fe61ed9e641b40d27f954c47df1014387cd57f51dc603612fba"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "aff83bedc08623e6984b85366563ef0083671bac9a819cbf50a8e2fa48b55597",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023-Q1",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "158.6",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "1586000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "4dff522d77e7c688f6b64896d5193d6e6c49a4827ff799bcea8cea2537bbd395"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "c998bad6978e1f26fec712dcbaecf3b36120c1bcbfea798a989ef2fac2699837",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023-Q4",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "321.7",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "3217000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "6da0e80f1e4f420c69d5cfa0415a5e6bc524459045b6e55755c2ef461aca16cd",
+          "685b09f00a60a3c2b219993f7a6e2d3fed0e10d8f1a45be852ac172c0672b719"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "dbbc03af03f1506b804812572456ae8e6121f0d6cee9fabce15172ef16d3bc3c",
+        "indicator": "sales",
+        "name": "sales",
+        "entity_id": null,
+        "period": "2023-Q3",
+        "granularity": "quarter",
+        "region": "中国",
+        "scope": "中国汽车工业协会统计口径；全国新能源汽车销量",
+        "raw_value": "253.1",
+        "raw_unit": "万辆",
+        "multiplier": "10000",
+        "value": "2531000",
+        "unit": "辆",
+        "currency": null,
+        "source_evidence_ids": [
+          "685b09f00a60a3c2b219993f7a6e2d3fed0e10d8f1a45be852ac172c0672b719",
+          "a3f3abd7899bd792de0de1ef33ff693956714bd8b7343b907796eeb796808b76"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      }
+    ],
+    "provenance": {
+      "case_id": "R03",
+      "file": "R03-transcribed.csv",
+      "sha256": "f65ef19b68b6cc97348cd468d60d010461e3e96f35cc4f3a63250c91bde611ee",
+      "representation": "manual-transcription",
+      "rows": [
+        {
+          "csv_row": 2,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-Q1"
+          ],
+          "source_values": [
+            "158.6",
+            "0"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 3,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-H1",
+            "EV-R03-MIIT-2023-Q1"
+          ],
+          "source_values": [
+            "374.7",
+            "158.6"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 4,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-9M",
+            "EV-R03-MIIT-2023-H1"
+          ],
+          "source_values": [
+            "627.8",
+            "374.7"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 5,
+          "evidence_keys": [
+            "EV-R03-MIIT-2023-ANNUAL",
+            "EV-R03-MIIT-2023-9M"
+          ],
+          "source_values": [
+            "949.5",
+            "627.8"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 6,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-Q1"
+          ],
+          "source_values": [
+            "209",
+            "0"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 7,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-H1",
+            "EV-R03-MIIT-2024-Q1"
+          ],
+          "source_values": [
+            "494.4",
+            "209"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 8,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-9M",
+            "EV-R03-MIIT-2024-H1"
+          ],
+          "source_values": [
+            "832",
+            "494.4"
+          ],
+          "operation": "cumulative_difference"
+        },
+        {
+          "csv_row": 9,
+          "evidence_keys": [
+            "EV-R03-MIIT-2024-ANNUAL",
+            "EV-R03-MIIT-2024-9M"
+          ],
+          "source_values": [
+            "1286.6",
+            "832"
+          ],
+          "operation": "cumulative_difference"
+        }
+      ]
+    },
+    "trace_checks": [
+      {
+        "period": "2023-Q1",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "4dff522d77e7c688f6b64896d5193d6e6c49a4827ff799bcea8cea2537bbd395"
+        ],
+        "original_locations": [
+          {
+            "title": "2023年3月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2023-04-11",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_9cdfd3d829b24222a8ecf947d6627a45.html",
+            "evidence_id": "4dff522d77e7c688f6b64896d5193d6e6c49a4827ff799bcea8cea2537bbd395",
+            "document_id": "4fe820fd24a446aeb1e6309a5cf03b37",
+            "document_version_id": "599be7d9c35f4d0ea7c1624cde712465",
+            "chunk_id": "4dff522d77e7c688f6b64896d5193d6e6c49a4827ff799bcea8cea2537bbd395",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "4.8%**\n3月，新能源汽车产销分别完成67.4万辆和65.3万辆，同比分别增长44.8%和34.8%，新能源汽车新车销量达到汽车新车总销量\n的26.6%。\n1－3月，新能源汽车产销分别完成165万辆和158.6万辆，同比分别增长27.7%和26.2%，新能源汽车新车销量达到汽车新车总\n销量的26.1%。\n****",
+            "score": 0.8094004988670349
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2023-Q2",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "a3f3abd7899bd792de0de1ef33ff693956714bd8b7343b907796eeb796808b76",
+          "4dff522d77e7c688f6b64896d5193d6e6c49a4827ff799bcea8cea2537bbd395"
+        ],
+        "original_locations": [
+          {
+            "title": "2023年6月汽车工业经济运行情况",
+            "publisher": "福建省工业和信息化厅",
+            "published_at": "2023-07-25",
+            "source_url": "https://gxt.fujian.gov.cn/zwgk/gysj/xysj/zb/202307/t20230725_6213460.htm",
+            "evidence_id": "a3f3abd7899bd792de0de1ef33ff693956714bd8b7343b907796eeb796808b76",
+            "document_id": "527f16c11a5947b8b480953d2ffb54ea",
+            "document_version_id": "51cf2152c4414df98a4b5bbe70f1f532",
+            "chunk_id": "a3f3abd7899bd792de0de1ef33ff693956714bd8b7343b907796eeb796808b76",
+            "locator": {
+              "kind": "pdf",
+              "page": 2
+            },
+            "excerpt": "空间\")\n2023年6月，我国汽车产销分别完成256.1万辆和262.2万辆，同比分别增长2.5%和4.8%。其中，新能源汽车产销分别完成\n78.4万辆和80.6万辆，同比分别增长32.8%和35.2%。\n**一、6月汽车销量同比增长4.8%**\n6月，汽车产销分别完成256.1万辆和262.2万辆，同比分别增长2.5%和4.8%。\n1－6月，汽车产销分别完成1324.8万辆和1323.9万辆，同比分别增长9.3%和9.8%。\n**（一）6月乘用车销量同比增长2.1%**\n6月，乘用车产销分别完成221.9万辆和226.8万辆，产量同比下降0.9%，销量同比增长2.1%。\n1－6月，乘用车产销分别完成1128.1万辆和1126.8万辆，同比分别增长8.1%和8.8%。\n**（二）6月商用车销量同比增长26.3%**\n6月，商用车产销分别完成34.2万辆和35.5万辆，同比分别增长31.3%和26.3%。\n1－6月，商用车产销分别完成196.7万辆和197.1万辆，同比分别增长16.9%和15.8%。\n**二、6月新能源汽车销量同比增长35.2%**\n6月，新能源汽车产销分别完成78.4万辆和80.6万辆，同比分别增长32.8%和35.2%；新能源汽车新车销量达到汽车新车总销量\n的30.7%。\n1－6月，新能源汽车产销分别完成378.8万辆和374.7万辆，同比分别增长42.4%和44.1%；新能源汽车新车销量达到汽车新车\n总销量的28.3%。\n**三、1－5月汽车制造业营业收入同比增长14.2%**\n1－5月，汽车制造业增加值同比增长14.2%；完成营业收入36312.6亿元，同比增长14.3%；实现利润1746.2亿元，同比增长\n24.3%。\n**四、6月汽车出口同比增长53.2%**\n6月，汽车整车出口38.2万辆，同比增长53.2%。新能源汽车出口7.",
+            "score": 0.7290510535240173
+          },
+          {
+            "title": "2023年3月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2023-04-11",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_9cdfd3d829b24222a8ecf947d6627a45.html",
+            "evidence_id": "4dff522d77e7c688f6b64896d5193d6e6c49a4827ff799bcea8cea2537bbd395",
+            "document_id": "4fe820fd24a446aeb1e6309a5cf03b37",
+            "document_version_id": "599be7d9c35f4d0ea7c1624cde712465",
+            "chunk_id": "4dff522d77e7c688f6b64896d5193d6e6c49a4827ff799bcea8cea2537bbd395",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "4.8%**\n3月，新能源汽车产销分别完成67.4万辆和65.3万辆，同比分别增长44.8%和34.8%，新能源汽车新车销量达到汽车新车总销量\n的26.6%。\n1－3月，新能源汽车产销分别完成165万辆和158.6万辆，同比分别增长27.7%和26.2%，新能源汽车新车销量达到汽车新车总\n销量的26.1%。\n****",
+            "score": 0.8094004988670349
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2023-Q3",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "685b09f00a60a3c2b219993f7a6e2d3fed0e10d8f1a45be852ac172c0672b719",
+          "a3f3abd7899bd792de0de1ef33ff693956714bd8b7343b907796eeb796808b76"
+        ],
+        "original_locations": [
+          {
+            "title": "2023年9月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2023-10-13",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_fce3df5fdc544f8bbb2277fac5df58da.html",
+            "evidence_id": "685b09f00a60a3c2b219993f7a6e2d3fed0e10d8f1a45be852ac172c0672b719",
+            "document_id": "8dc7ed505ff642399d3d81805d10eba1",
+            "document_version_id": "4d4bb1ae145843a1b43632c05e5bfbfc",
+            "chunk_id": "685b09f00a60a3c2b219993f7a6e2d3fed0e10d8f1a45be852ac172c0672b719",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "3%。\n**二、9月新能源汽车销量同比增长27.7%**\n****\n9月，新能源汽车产销分别完成87.9万辆和90.4万辆，同比分别增长16.1%和27.7%；新能源汽车新车销量达到汽车新车总销量\n的31.6%。\n1－9月，新能源汽车产销分别完成631.3万辆和627.8万辆，同比分别增长33.7%和37.5%；新能源汽车新车销量达到汽车新车\n总销量的29.8%。\n**三、1－8月汽车制造业营业收入同比增长10.9%**",
+            "score": 0.7601831555366516
+          },
+          {
+            "title": "2023年6月汽车工业经济运行情况",
+            "publisher": "福建省工业和信息化厅",
+            "published_at": "2023-07-25",
+            "source_url": "https://gxt.fujian.gov.cn/zwgk/gysj/xysj/zb/202307/t20230725_6213460.htm",
+            "evidence_id": "a3f3abd7899bd792de0de1ef33ff693956714bd8b7343b907796eeb796808b76",
+            "document_id": "527f16c11a5947b8b480953d2ffb54ea",
+            "document_version_id": "51cf2152c4414df98a4b5bbe70f1f532",
+            "chunk_id": "a3f3abd7899bd792de0de1ef33ff693956714bd8b7343b907796eeb796808b76",
+            "locator": {
+              "kind": "pdf",
+              "page": 2
+            },
+            "excerpt": "空间\")\n2023年6月，我国汽车产销分别完成256.1万辆和262.2万辆，同比分别增长2.5%和4.8%。其中，新能源汽车产销分别完成\n78.4万辆和80.6万辆，同比分别增长32.8%和35.2%。\n**一、6月汽车销量同比增长4.8%**\n6月，汽车产销分别完成256.1万辆和262.2万辆，同比分别增长2.5%和4.8%。\n1－6月，汽车产销分别完成1324.8万辆和1323.9万辆，同比分别增长9.3%和9.8%。\n**（一）6月乘用车销量同比增长2.1%**\n6月，乘用车产销分别完成221.9万辆和226.8万辆，产量同比下降0.9%，销量同比增长2.1%。\n1－6月，乘用车产销分别完成1128.1万辆和1126.8万辆，同比分别增长8.1%和8.8%。\n**（二）6月商用车销量同比增长26.3%**\n6月，商用车产销分别完成34.2万辆和35.5万辆，同比分别增长31.3%和26.3%。\n1－6月，商用车产销分别完成196.7万辆和197.1万辆，同比分别增长16.9%和15.8%。\n**二、6月新能源汽车销量同比增长35.2%**\n6月，新能源汽车产销分别完成78.4万辆和80.6万辆，同比分别增长32.8%和35.2%；新能源汽车新车销量达到汽车新车总销量\n的30.7%。\n1－6月，新能源汽车产销分别完成378.8万辆和374.7万辆，同比分别增长42.4%和44.1%；新能源汽车新车销量达到汽车新车\n总销量的28.3%。\n**三、1－5月汽车制造业营业收入同比增长14.2%**\n1－5月，汽车制造业增加值同比增长14.2%；完成营业收入36312.6亿元，同比增长14.3%；实现利润1746.2亿元，同比增长\n24.3%。\n**四、6月汽车出口同比增长53.2%**\n6月，汽车整车出口38.2万辆，同比增长53.2%。新能源汽车出口7.",
+            "score": 0.7290510535240173
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2023-Q4",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "6da0e80f1e4f420c69d5cfa0415a5e6bc524459045b6e55755c2ef461aca16cd",
+          "685b09f00a60a3c2b219993f7a6e2d3fed0e10d8f1a45be852ac172c0672b719"
+        ],
+        "original_locations": [
+          {
+            "title": "2023年12月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-01-11",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_37d2fedbbeca43a4a98338f1c81cdb00.html",
+            "evidence_id": "6da0e80f1e4f420c69d5cfa0415a5e6bc524459045b6e55755c2ef461aca16cd",
+            "document_id": "b7424c05dd7448d69eea6f3794a768ae",
+            "document_version_id": "1ad50ab56ecd4d8181e5453dc0958f8b",
+            "chunk_id": "6da0e80f1e4f420c69d5cfa0415a5e6bc524459045b6e55755c2ef461aca16cd",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "**二、12月新能源汽车销量同比增长46.4%**\n****\n12月，新能源汽车产销分别完成117.2万辆和119.1万辆，同比分别增长47.5%和46.4%；新能源汽车新车销量达到汽车新车总\n销量的37.7%。\n1－12月，新能源汽车产销分别完成958.7万辆和949.5万辆，同比分别增长35.8%和37.9%；新能源汽车新车销量达到汽车新\n车总销量的31.6%。\n**三、1－11月汽车制造业营业收入同比增长11.2%**",
+            "score": 0.7418241500854492
+          },
+          {
+            "title": "2023年9月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2023-10-13",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2023/art_fce3df5fdc544f8bbb2277fac5df58da.html",
+            "evidence_id": "685b09f00a60a3c2b219993f7a6e2d3fed0e10d8f1a45be852ac172c0672b719",
+            "document_id": "8dc7ed505ff642399d3d81805d10eba1",
+            "document_version_id": "4d4bb1ae145843a1b43632c05e5bfbfc",
+            "chunk_id": "685b09f00a60a3c2b219993f7a6e2d3fed0e10d8f1a45be852ac172c0672b719",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "3%。\n**二、9月新能源汽车销量同比增长27.7%**\n****\n9月，新能源汽车产销分别完成87.9万辆和90.4万辆，同比分别增长16.1%和27.7%；新能源汽车新车销量达到汽车新车总销量\n的31.6%。\n1－9月，新能源汽车产销分别完成631.3万辆和627.8万辆，同比分别增长33.7%和37.5%；新能源汽车新车销量达到汽车新车\n总销量的29.8%。\n**三、1－8月汽车制造业营业收入同比增长10.9%**",
+            "score": 0.7601831555366516
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2024-Q1",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "33a56ebb9d659ea183721986d168556ddf0533e29ed3ba19f11a33d39eb77d8f",
+          "987c97c5e6a66fe61ed9e641b40d27f954c47df1014387cd57f51dc603612fba"
+        ],
+        "original_locations": [
+          {
+            "title": "2024年3月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-04-10",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+            "evidence_id": "33a56ebb9d659ea183721986d168556ddf0533e29ed3ba19f11a33d39eb77d8f",
+            "document_id": "00a74569a88341e0bfab62dfb6f304b0",
+            "document_version_id": "f1c13b23fa9942fdb90c7db794995843",
+            "chunk_id": "33a56ebb9d659ea183721986d168556ddf0533e29ed3ba19f11a33d39eb77d8f",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": ")>[统计分析]\n(https://www.miit.gov.cn/gxsj/tjfx/index.html)>[装备工业](https://www.miit.gov.cn/gxsj/tjfx/zbgy/index.html)>[汽车]\n(https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/index.html)\n# 2024年3月汽车工业经济运行情况\n发布时间：2024-04-10 18:49 来源：装备工业一司\n2024年3月，我国汽车产销分别完成268.7万辆和269.4万辆，同比分别增长4%和9.9%。其中，新能源汽车产销分别完成86.3\n万辆和88.3万辆，同比分别增长28.1%和35.3%。\n**一、3月汽车销量同比增长9.9%**\n3月，汽车产销分别完成268.7万辆和269.4万辆，同比分别增长4%和9.9%。\n1－3月，汽车产销分别完成660.6万辆和672万辆，同比分别增长6.4%和10.6%。\n**（一）3月乘用车销量同比增长10.9%**\n3月，乘用车产销分别完成225万辆和223.6万辆，同比分别增长4.7%和10.9%。\n1－3月，乘用车产销分别完成560.9万辆和568.7万辆，同比分别增长6.6%和10.7%。\n**（二）3月商用车销量同比增长5.6%**\n3月，商用车产销分别完成43.7万辆和45.8万辆，同比分别增长0.7%和5.6%。\n1－3月，商用车产销分别完成99.7万辆和103.3万辆，同比分别增长5.1%和10.1%。\n**二、3月新能源汽车销量同比增长35.3%**\n3月，新能源汽车产销分别完成86.3万辆和88.3万辆，同比分别增长28.1%和35.3%；新能源汽车新车销量达到汽车新车总销量\n的32.8%。\n1－3月，新能源汽车产销分别完成211.5万辆和209万辆，同比分别增长28.",
+            "score": 0.7366577386856079
+          },
+          {
+            "title": "2024年3月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-04-10",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+            "evidence_id": "987c97c5e6a66fe61ed9e641b40d27f954c47df1014387cd57f51dc603612fba",
+            "document_id": "00a74569a88341e0bfab62dfb6f304b0",
+            "document_version_id": "f1c13b23fa9942fdb90c7db794995843",
+            "chunk_id": "987c97c5e6a66fe61ed9e641b40d27f954c47df1014387cd57f51dc603612fba",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "增长28.1%和35.3%；新能源汽车新车销量达到汽车新车总销量\n的32.8%。\n1－3月，新能源汽车产销分别完成211.5万辆和209万辆，同比分别增长28.2%和31.8%；新能源汽车新车销量达到汽车新车总\n销量的31.1%。\n**三、3月汽车出口同比增长37.9%**\n3月，汽车整车出口50.2万辆，同比增长37.9%。新能源汽车出口12.4万辆，同比增长59.4%。\n1－3月，汽车整车出口132.4万辆，同比增长33.2%。新能源汽车出口30.7万辆，同比增长23.8%。\n（注：上述数据来自中国汽车工业协会。）\n扫一扫在手机打开当前页",
+            "score": 0.7332949042320251
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2024-Q2",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "d6cfe119d9df16e2653104e14f8c57ff407a1f72bc132cf902048a634bca82d1",
+          "33a56ebb9d659ea183721986d168556ddf0533e29ed3ba19f11a33d39eb77d8f",
+          "987c97c5e6a66fe61ed9e641b40d27f954c47df1014387cd57f51dc603612fba"
+        ],
+        "original_locations": [
+          {
+            "title": "2024年6月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-07-10",
+            "source_url": "https://wap.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_3dff2eb026d14e36b9ec6065840d3fdc.html",
+            "evidence_id": "d6cfe119d9df16e2653104e14f8c57ff407a1f72bc132cf902048a634bca82d1",
+            "document_id": "277e24c102a8436689f2a2488cadcb76",
+            "document_version_id": "28e4c8812cb64f7eb95f5d218544150d",
+            "chunk_id": "d6cfe119d9df16e2653104e14f8c57ff407a1f72bc132cf902048a634bca82d1",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "04.9万辆，同比分别增长28.1%和30.1%；新能源汽车新车销量达到汽车新车总\n销量的41.1%。\n1－6月，新能源汽车产销分别完成492.9万辆和494.4万辆，同比分别增长30.1%和32%；新能源汽车新车销量达到汽车新车总\n销量的35.2%。\n**三、1－5月汽车制造业营业收入同比增长6.8%**\n1－5月，汽车制造业增加值同比增长10.5%；完成营业收入38965.7亿元，同比增长6.8%；实现利润总额2046.7亿元，同比增\n长17.9%。\n**四、6月汽车出口同比增长26.9%**\n6月，汽车整车出口48.5万辆，同比增长26.9%。新能源汽车出口8.6万辆，同比增长10.3%。",
+            "score": 0.718447208404541
+          },
+          {
+            "title": "2024年3月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-04-10",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+            "evidence_id": "33a56ebb9d659ea183721986d168556ddf0533e29ed3ba19f11a33d39eb77d8f",
+            "document_id": "00a74569a88341e0bfab62dfb6f304b0",
+            "document_version_id": "f1c13b23fa9942fdb90c7db794995843",
+            "chunk_id": "33a56ebb9d659ea183721986d168556ddf0533e29ed3ba19f11a33d39eb77d8f",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": ")>[统计分析]\n(https://www.miit.gov.cn/gxsj/tjfx/index.html)>[装备工业](https://www.miit.gov.cn/gxsj/tjfx/zbgy/index.html)>[汽车]\n(https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/index.html)\n# 2024年3月汽车工业经济运行情况\n发布时间：2024-04-10 18:49 来源：装备工业一司\n2024年3月，我国汽车产销分别完成268.7万辆和269.4万辆，同比分别增长4%和9.9%。其中，新能源汽车产销分别完成86.3\n万辆和88.3万辆，同比分别增长28.1%和35.3%。\n**一、3月汽车销量同比增长9.9%**\n3月，汽车产销分别完成268.7万辆和269.4万辆，同比分别增长4%和9.9%。\n1－3月，汽车产销分别完成660.6万辆和672万辆，同比分别增长6.4%和10.6%。\n**（一）3月乘用车销量同比增长10.9%**\n3月，乘用车产销分别完成225万辆和223.6万辆，同比分别增长4.7%和10.9%。\n1－3月，乘用车产销分别完成560.9万辆和568.7万辆，同比分别增长6.6%和10.7%。\n**（二）3月商用车销量同比增长5.6%**\n3月，商用车产销分别完成43.7万辆和45.8万辆，同比分别增长0.7%和5.6%。\n1－3月，商用车产销分别完成99.7万辆和103.3万辆，同比分别增长5.1%和10.1%。\n**二、3月新能源汽车销量同比增长35.3%**\n3月，新能源汽车产销分别完成86.3万辆和88.3万辆，同比分别增长28.1%和35.3%；新能源汽车新车销量达到汽车新车总销量\n的32.8%。\n1－3月，新能源汽车产销分别完成211.5万辆和209万辆，同比分别增长28.",
+            "score": 0.7366577386856079
+          },
+          {
+            "title": "2024年3月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-04-10",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_44af73fb960c4b0087ba49c16b0dfcb3.html",
+            "evidence_id": "987c97c5e6a66fe61ed9e641b40d27f954c47df1014387cd57f51dc603612fba",
+            "document_id": "00a74569a88341e0bfab62dfb6f304b0",
+            "document_version_id": "f1c13b23fa9942fdb90c7db794995843",
+            "chunk_id": "987c97c5e6a66fe61ed9e641b40d27f954c47df1014387cd57f51dc603612fba",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "增长28.1%和35.3%；新能源汽车新车销量达到汽车新车总销量\n的32.8%。\n1－3月，新能源汽车产销分别完成211.5万辆和209万辆，同比分别增长28.2%和31.8%；新能源汽车新车销量达到汽车新车总\n销量的31.1%。\n**三、3月汽车出口同比增长37.9%**\n3月，汽车整车出口50.2万辆，同比增长37.9%。新能源汽车出口12.4万辆，同比增长59.4%。\n1－3月，汽车整车出口132.4万辆，同比增长33.2%。新能源汽车出口30.7万辆，同比增长23.8%。\n（注：上述数据来自中国汽车工业协会。）\n扫一扫在手机打开当前页",
+            "score": 0.7332949042320251
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2024-Q3",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "81cb4e995a8467e68be788b5261ab466b4ddefa8e3059623c3490e4584ae1290",
+          "d6cfe119d9df16e2653104e14f8c57ff407a1f72bc132cf902048a634bca82d1"
+        ],
+        "original_locations": [
+          {
+            "title": "2024年9月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-10-12",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_be025f4f66ef42d78af0d4622e07eebb.html",
+            "evidence_id": "81cb4e995a8467e68be788b5261ab466b4ddefa8e3059623c3490e4584ae1290",
+            "document_id": "0da2b0db6ad148e080c3c3bde10bcb11",
+            "document_version_id": "e406360bac5c4b2b93d1c44b4679924b",
+            "chunk_id": "81cb4e995a8467e68be788b5261ab466b4ddefa8e3059623c3490e4584ae1290",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "30.7万辆和128.7万辆，同比分别增长48.8%和42.3%；新能源汽车新车销量达到汽车新车总\n销量的45.8%。\n1－9月，新能源汽车产销分别完成831.6万辆和832万辆，同比分别增长31.7%和32.5%；新能源汽车新车销量达到汽车新车总\n销量的38.6%。\n**三、9月汽车出口同比增长21.4%**\n9月，汽车整车出口53.9万辆，同比增长21.4%。新能源汽车出口11.1万辆，同比增长15.6%。\n1－9月，汽车整车出口431.2万辆，同比增长27.3%。新能源汽车出口92.8万辆，同比增长12.5%。\n（注：上述数据来自中国汽车工业协会。）\n扫一扫在手机打开当前页",
+            "score": 0.7060961723327637
+          },
+          {
+            "title": "2024年6月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-07-10",
+            "source_url": "https://wap.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_3dff2eb026d14e36b9ec6065840d3fdc.html",
+            "evidence_id": "d6cfe119d9df16e2653104e14f8c57ff407a1f72bc132cf902048a634bca82d1",
+            "document_id": "277e24c102a8436689f2a2488cadcb76",
+            "document_version_id": "28e4c8812cb64f7eb95f5d218544150d",
+            "chunk_id": "d6cfe119d9df16e2653104e14f8c57ff407a1f72bc132cf902048a634bca82d1",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "04.9万辆，同比分别增长28.1%和30.1%；新能源汽车新车销量达到汽车新车总\n销量的41.1%。\n1－6月，新能源汽车产销分别完成492.9万辆和494.4万辆，同比分别增长30.1%和32%；新能源汽车新车销量达到汽车新车总\n销量的35.2%。\n**三、1－5月汽车制造业营业收入同比增长6.8%**\n1－5月，汽车制造业增加值同比增长10.5%；完成营业收入38965.7亿元，同比增长6.8%；实现利润总额2046.7亿元，同比增\n长17.9%。\n**四、6月汽车出口同比增长26.9%**\n6月，汽车整车出口48.5万辆，同比增长26.9%。新能源汽车出口8.6万辆，同比增长10.3%。",
+            "score": 0.718447208404541
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2024-Q4",
+        "entity_id": "",
+        "source_evidence_ids": [
+          "0722221c18e8b8a3f8689d2f73ad5bdc9c56259b5d4064261f25c8202257be25",
+          "81cb4e995a8467e68be788b5261ab466b4ddefa8e3059623c3490e4584ae1290"
+        ],
+        "original_locations": [
+          {
+            "title": "2024年12月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2025-01-13",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2025/art_a8895b6aa6d449e2861d027b0d85a2dd.html",
+            "evidence_id": "0722221c18e8b8a3f8689d2f73ad5bdc9c56259b5d4064261f25c8202257be25",
+            "document_id": "0745f1578f4f42d5abac5638fa1a92c3",
+            "document_version_id": "b88f79ca4f934998a9ad05ab0b918521",
+            "chunk_id": "0722221c18e8b8a3f8689d2f73ad5bdc9c56259b5d4064261f25c8202257be25",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "增长34%**\n12月，新能源汽车产销分别完成153万辆和159.6万辆，同比分别增长30.5%和34%；新能源汽车新车销量达到汽车新车总销量\n的45.8%。\n1－12月，新能源汽车产销分别完成1288.8万辆和1286.6万辆，同比分别增长34.4%和35.5%；新能源汽车新车销量达到汽车\n新车总销量的40.9%。\n**三、12月汽车出口同比增长1.1%**\n12月，汽车整车出口50.4万辆，同比增长1.1%。新能源汽车出口13.4万辆，同比增长19.8%。\n1－12月，汽车整车出口585.9万辆，同比增长19.3%。新能源汽车出口128.4万辆，同比增长6.7%。\n（注：上述数据来自中国汽车工业协会。）\n扫一扫在手机打开当前页",
+            "score": 0.7129662036895752
+          },
+          {
+            "title": "2024年9月汽车工业经济运行情况",
+            "publisher": "中华人民共和国工业和信息化部",
+            "published_at": "2024-10-12",
+            "source_url": "https://www.miit.gov.cn/gxsj/tjfx/zbgy/qc/art/2024/art_be025f4f66ef42d78af0d4622e07eebb.html",
+            "evidence_id": "81cb4e995a8467e68be788b5261ab466b4ddefa8e3059623c3490e4584ae1290",
+            "document_id": "0da2b0db6ad148e080c3c3bde10bcb11",
+            "document_version_id": "e406360bac5c4b2b93d1c44b4679924b",
+            "chunk_id": "81cb4e995a8467e68be788b5261ab466b4ddefa8e3059623c3490e4584ae1290",
+            "locator": {
+              "kind": "pdf",
+              "page": 1
+            },
+            "excerpt": "30.7万辆和128.7万辆，同比分别增长48.8%和42.3%；新能源汽车新车销量达到汽车新车总\n销量的45.8%。\n1－9月，新能源汽车产销分别完成831.6万辆和832万辆，同比分别增长31.7%和32.5%；新能源汽车新车销量达到汽车新车总\n销量的38.6%。\n**三、9月汽车出口同比增长21.4%**\n9月，汽车整车出口53.9万辆，同比增长21.4%。新能源汽车出口11.1万辆，同比增长15.6%。\n1－9月，汽车整车出口431.2万辆，同比增长27.3%。新能源汽车出口92.8万辆，同比增长12.5%。\n（注：上述数据来自中国汽车工业协会。）\n扫一扫在手机打开当前页",
+            "score": 0.7060961723327637
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": false
+      }
+    ]
+  },
+  {
+    "case_id": "R02",
+    "source_version_ids": [
+      "b40456c631054614818c198d26ead762",
+      "7d499c46b7c94bb98c96d576f524fdcf",
+      "ed7ee90855164f2aa23165e7d3328027",
+      "80fe03b4b86244bdbd616e746b78e44f",
+      "b5776919fa3847adb11976f8d8582c08",
+      "8fa83a10859f4033983ea8a29ccc954c",
+      "828ed7ea085b4b87b904effbb262070b"
+    ],
+    "metrics": [
+      {
+        "metric_id": "6366705dcdc824467f0be2bedbb92de41e80a7ff4ee4dd522d7ebe3ca7800b51",
+        "indicator": "rd_investment",
+        "name": "rd_investment",
+        "entity_id": "saic",
+        "period": "2024",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "上汽集团合并口径；费用化与资本化研发投入合计",
+        "raw_value": "21813090045.30",
+        "raw_unit": "元",
+        "multiplier": "1",
+        "value": "21813090045.3",
+        "unit": "元",
+        "currency": "CNY",
+        "source_evidence_ids": [
+          "942ba2dfe1833c6847497de9cb258e3242ce60e737091112912e1fd60c618120",
+          "f16dad868cf25d449f281d9b57225b3fdcf5a92baf18518ce352d2ff569f6720"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "9d2a15b8a80e0e3604f26cc69e0e1326e0b8ba59d982d588eddaaaaad50cd5e6",
+        "indicator": "rd_investment",
+        "name": "rd_investment",
+        "entity_id": "byd",
+        "period": "2024",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "比亚迪合并口径；费用化与资本化研发投入合计",
+        "raw_value": "54160964000.00",
+        "raw_unit": "元",
+        "multiplier": "1",
+        "value": "54160964000",
+        "unit": "元",
+        "currency": "CNY",
+        "source_evidence_ids": [
+          "30f0e01d74fb279b927ab25ad781092b945242e70757b7b6f0954fefc6fe8317"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "dc55c5efaa5b52780ed71ae7718309a7423e43cdaeed60dd85870abeee8f332a",
+        "indicator": "rd_investment",
+        "name": "rd_investment",
+        "entity_id": "saic",
+        "period": "2023",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "上汽集团合并口径；费用化与资本化研发投入合计",
+        "raw_value": "22013246493.11",
+        "raw_unit": "元",
+        "multiplier": "1",
+        "value": "22013246493.11",
+        "unit": "元",
+        "currency": "CNY",
+        "source_evidence_ids": [
+          "f8753b8b721e46c0652393e45eda0920e2e8ef764503a70a01715c3d4f31c200",
+          "2e3c89cb706b9d4eaffc1584ce8305bc7ba54159c435cf5a1ddf1d03d803212c"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      },
+      {
+        "metric_id": "f652aefc7ac7892671f84bbda2a7ac1d292b9abbef1404d773050260c53dc18e",
+        "indicator": "rd_investment",
+        "name": "rd_investment",
+        "entity_id": "byd",
+        "period": "2023",
+        "granularity": "year",
+        "region": "中国",
+        "scope": "比亚迪合并口径；费用化与资本化研发投入合计",
+        "raw_value": "39917743000.00",
+        "raw_unit": "元",
+        "multiplier": "1",
+        "value": "39917743000",
+        "unit": "元",
+        "currency": "CNY",
+        "source_evidence_ids": [
+          "30f0e01d74fb279b927ab25ad781092b945242e70757b7b6f0954fefc6fe8317"
+        ],
+        "formula_id": null,
+        "input_metric_ids": [],
+        "missing_reason": null
+      }
+    ],
+    "provenance": {
+      "case_id": "R02",
+      "file": "R02-transcribed.csv",
+      "sha256": "d3bfd7e09035d891490fa21e8bfc42c0a6fe862f15000933605cc01409270d3f",
+      "representation": "manual-transcription",
+      "rows": [
+        {
+          "csv_row": 2,
+          "evidence_keys": [
+            "EV-R02-BYD-CNINFO-P34"
+          ],
+          "source_values": [
+            "54,160,964,000.00"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 3,
+          "evidence_keys": [
+            "EV-R02-BYD-CNINFO-P34"
+          ],
+          "source_values": [
+            "39,917,743,000.00"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 4,
+          "evidence_keys": [
+            "EV-R02-SAIC-2023-P13"
+          ],
+          "source_values": [
+            "22,013,246,493.11"
+          ],
+          "operation": "direct"
+        },
+        {
+          "csv_row": 5,
+          "evidence_keys": [
+            "EV-R02-SAIC-2024-P13"
+          ],
+          "source_values": [
+            "21,813,090,045.30"
+          ],
+          "operation": "direct"
+        }
+      ]
+    },
+    "trace_checks": [
+      {
+        "period": "2024",
+        "entity_id": "byd",
+        "source_evidence_ids": [
+          "30f0e01d74fb279b927ab25ad781092b945242e70757b7b6f0954fefc6fe8317"
+        ],
+        "original_locations": [
+          {
+            "title": "比亚迪股份有限公司2024年年度报告全文",
+            "publisher": "比亚迪股份有限公司",
+            "published_at": "2025-03-25",
+            "source_url": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881496.PDF",
+            "evidence_id": "30f0e01d74fb279b927ab25ad781092b945242e70757b7b6f0954fefc6fe8317",
+            "document_id": "dcb3d3d8078148328d57ab7ccd82c17d",
+            "document_version_id": "b5776919fa3847adb11976f8d8582c08",
+            "chunk_id": "30f0e01d74fb279b927ab25ad781092b945242e70757b7b6f0954fefc6fe8317",
+            "locator": {
+              "kind": "pdf",
+              "page": 34
+            },
+            "excerpt": "研发人员数量占比\n12.55%\n14.62%\n-2.07%\n研发人员学历结构\n本科（人）\n53,222\n46,823\n13.67%\n硕士（人）\n28,842\n23,706\n21.66%\n博士（人）\n2,403\n1,587\n51.45%\n研发人员年龄构成\n30岁以下（人）\n68,548\n61,337\n11.76%\n30~40岁（人）\n45,764\n36,182\n26.48%\n40岁以上（人）\n7,286\n5,325\n36.83%\n公司研发人员构成发生重大变化的原因及影响\n□适用 不适用\n公司研发投入情况\n2024年\n2023年\n变动比例\n研发投入金额（元）\n54,160,964,000.00\n39,917,743,000.00\n35.68%\n研发投入占营业收入比例\n6.97%\n6.63%\n0.34%\n研发投入资本化的金额\n（元）\n966,219,000.00\n342,798,000.00\n181.86%",
+            "score": 0.7178138494491577
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": false
+      },
+      {
+        "period": "2023",
+        "entity_id": "byd",
+        "source_evidence_ids": [
+          "30f0e01d74fb279b927ab25ad781092b945242e70757b7b6f0954fefc6fe8317"
+        ],
+        "original_locations": [
+          {
+            "title": "比亚迪股份有限公司2024年年度报告全文",
+            "publisher": "比亚迪股份有限公司",
+            "published_at": "2025-03-25",
+            "source_url": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881496.PDF",
+            "evidence_id": "30f0e01d74fb279b927ab25ad781092b945242e70757b7b6f0954fefc6fe8317",
+            "document_id": "dcb3d3d8078148328d57ab7ccd82c17d",
+            "document_version_id": "b5776919fa3847adb11976f8d8582c08",
+            "chunk_id": "30f0e01d74fb279b927ab25ad781092b945242e70757b7b6f0954fefc6fe8317",
+            "locator": {
+              "kind": "pdf",
+              "page": 34
+            },
+            "excerpt": "研发人员数量占比\n12.55%\n14.62%\n-2.07%\n研发人员学历结构\n本科（人）\n53,222\n46,823\n13.67%\n硕士（人）\n28,842\n23,706\n21.66%\n博士（人）\n2,403\n1,587\n51.45%\n研发人员年龄构成\n30岁以下（人）\n68,548\n61,337\n11.76%\n30~40岁（人）\n45,764\n36,182\n26.48%\n40岁以上（人）\n7,286\n5,325\n36.83%\n公司研发人员构成发生重大变化的原因及影响\n□适用 不适用\n公司研发投入情况\n2024年\n2023年\n变动比例\n研发投入金额（元）\n54,160,964,000.00\n39,917,743,000.00\n35.68%\n研发投入占营业收入比例\n6.97%\n6.63%\n0.34%\n研发投入资本化的金额\n（元）\n966,219,000.00\n342,798,000.00\n181.86%",
+            "score": 0.7178138494491577
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": false
+      },
+      {
+        "period": "2023",
+        "entity_id": "saic",
+        "source_evidence_ids": [
+          "f8753b8b721e46c0652393e45eda0920e2e8ef764503a70a01715c3d4f31c200",
+          "2e3c89cb706b9d4eaffc1584ce8305bc7ba54159c435cf5a1ddf1d03d803212c"
+        ],
+        "original_locations": [
+          {
+            "title": "上海汽车集团股份有限公司2023年年度报告",
+            "publisher": "上海汽车集团股份有限公司",
+            "published_at": "2024-03-29",
+            "source_url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2023ndqgg/2024/3/29/C5303F0A7F774009828802E9562F73FB.pdf",
+            "evidence_id": "f8753b8b721e46c0652393e45eda0920e2e8ef764503a70a01715c3d4f31c200",
+            "document_id": "758fb939a3a04f2ba97ccc6be3404cf6",
+            "document_version_id": "8fa83a10859f4033983ea8a29ccc954c",
+            "chunk_id": "f8753b8b721e46c0652393e45eda0920e2e8ef764503a70a01715c3d4f31c200",
+            "locator": {
+              "kind": "pdf",
+              "page": 13
+            },
+            "excerpt": "4. 研发投入\n(1).研发投入情况表\n√适用 □不适用\n单位：元\n本期费用化研发投入\n18,365,413,289.29\n本期资本化研发投入\n3,647,833,203.82\n研发投入合计\n22,013,246,493.11\n研发投入总额占营业收入比例（%）\n3.03\n研发投入资本化的比重（%）\n16.57",
+            "score": 0.8478130102157593
+          },
+          {
+            "title": "上海汽车集团股份有限公司2023年年度报告",
+            "publisher": "上海汽车集团股份有限公司",
+            "published_at": "2024-03-29",
+            "source_url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2023ndqgg/2024/3/29/C5303F0A7F774009828802E9562F73FB.pdf",
+            "evidence_id": "2e3c89cb706b9d4eaffc1584ce8305bc7ba54159c435cf5a1ddf1d03d803212c",
+            "document_id": "758fb939a3a04f2ba97ccc6be3404cf6",
+            "document_version_id": "8fa83a10859f4033983ea8a29ccc954c",
+            "chunk_id": "2e3c89cb706b9d4eaffc1584ce8305bc7ba54159c435cf5a1ddf1d03d803212c",
+            "locator": {
+              "kind": "pdf",
+              "page": 176
+            },
+            "excerpt": "八、 研发支出\n(1). 按费用性质列示\n√适用 □不适用\n单位：元 币种：人民币\n项目\n本期发生额\n上期发生额\n职工薪酬\n9,212,937,332.74\n6,702,649,547.03\n技术服务\n4,997,797,831.05\n6,077,865,011.59\n耗用材料\n2,027,663,986.89\n3,099,193,078.96\n研发测试\n1,905,657,553.07\n2,177,519,209.81\n折旧和摊销\n1,220,591,355.38\n743,690,450.44\n其他\n2,648,598,433.98\n2,065,275,629.65\n合计\n22,013,246,493.11\n20,866,192,927.48",
+            "score": 0.6401265263557434
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": true
+      },
+      {
+        "period": "2024",
+        "entity_id": "saic",
+        "source_evidence_ids": [
+          "942ba2dfe1833c6847497de9cb258e3242ce60e737091112912e1fd60c618120",
+          "f16dad868cf25d449f281d9b57225b3fdcf5a92baf18518ce352d2ff569f6720"
+        ],
+        "original_locations": [
+          {
+            "title": "上海汽车集团股份有限公司2024年年度报告",
+            "publisher": "上海汽车集团股份有限公司",
+            "published_at": "2025-04-29",
+            "source_url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2024ndqgg/2025/4/29/685D33923ABE4D109BBE39F92BFBF945.pdf",
+            "evidence_id": "942ba2dfe1833c6847497de9cb258e3242ce60e737091112912e1fd60c618120",
+            "document_id": "8a61e2da9e994163a6182916e19e28d5",
+            "document_version_id": "828ed7ea085b4b87b904effbb262070b",
+            "chunk_id": "942ba2dfe1833c6847497de9cb258e3242ce60e737091112912e1fd60c618120",
+            "locator": {
+              "kind": "pdf",
+              "page": 13
+            },
+            "excerpt": "4、 研发投入\n(1).研发投入情况表\n√适用 □不适用\n单位：元\n本期费用化研发投入\n17,649,893,105.21\n本期资本化研发投入\n4,163,196,940.09\n研发投入合计\n21,813,090,045.30\n研发投入总额占营业收入比例（%）\n3.55\n研发投入资本化的比重（%）\n19.09\n注：2024 年度本集团含所属主要合资整车企业的汇总研发投入为 3,516,108.19 万元，同比 2023\n年度 3,276,417.68 万元（同口径）增加 7.32%。",
+            "score": 0.815056562423706
+          },
+          {
+            "title": "上海汽车集团股份有限公司2024年年度报告",
+            "publisher": "上海汽车集团股份有限公司",
+            "published_at": "2025-04-29",
+            "source_url": "https://www.saicmotor.com/chinese/images/tzzgx/ggb/dqgg/2024ndqgg/2025/4/29/685D33923ABE4D109BBE39F92BFBF945.pdf",
+            "evidence_id": "f16dad868cf25d449f281d9b57225b3fdcf5a92baf18518ce352d2ff569f6720",
+            "document_id": "8a61e2da9e994163a6182916e19e28d5",
+            "document_version_id": "828ed7ea085b4b87b904effbb262070b",
+            "chunk_id": "f16dad868cf25d449f281d9b57225b3fdcf5a92baf18518ce352d2ff569f6720",
+            "locator": {
+              "kind": "pdf",
+              "page": 177
+            },
+            "excerpt": "技术服务\n4,205,996,632.00\n4,997,797,831.05\n耗用材料\n1,495,377,261.81\n2,027,663,986.89\n研发测试\n1,820,481,197.44\n1,905,657,553.07\n折旧和摊销\n3,521,057,196.01\n1,220,591,355.38\n其他\n2,287,885,311.32\n2,648,598,433.98\n合计\n21,813,090,045.30\n22,013,246,493.11\n其中：费用化研发支出\n17,649,893,105.21\n18,365,413,289.29\n资本化研发支出\n4,163,196,940.09\n3,647,833,203.82",
+            "score": 0.7338201403617859
+          }
+        ],
+        "as_of": "2024-12-31",
+        "visible": false
+      }
+    ]
+  }
+]

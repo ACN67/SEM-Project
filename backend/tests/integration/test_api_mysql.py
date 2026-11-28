@@ -43,12 +43,6 @@ class ApiMySQLTests(StoreMySQLTests):
                     self.assertEqual(client.get(second['status_url']).json()['ingest_status'],'READY')
                     request=json.loads(Path('data/samples/w5/cases.json').read_text(encoding='utf8'))['cases'][0]['request']
                     accepted=client.post('/api/v1/reports',json=request,headers={'Idempotency-Key':'real-db'}).json()
-                    original=services.orchestration.quality.validate_chapter
-                    def diagnostic(*args):
-                        result=original(*args)
-                        if any(x.severity=='BLOCK' for x in result.issues):print(result.model_dump_json(),flush=True)
-                        return result
-                    services.orchestration.quality.validate_chapter=diagnostic
                     services.orchestration.run_cycle()
                     job=client.get(accepted['status_url']).json()
                     self.assertIn(job['status'],['COMPLETED','COMPLETED_WITH_WARNINGS'],job)

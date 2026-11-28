@@ -87,3 +87,20 @@ class StoreMySQLTests(unittest.TestCase):
                 with self.assertRaises(ValueError):store.reserve_budget(Decimal(amount),Decimal('100'))
             self.assertTrue(store.reserve_budget(Decimal('100'),Decimal('100')))
             self.assertFalse(store.reserve_budget(Decimal('0.01'),Decimal('100')))
+
+    def test_retry_replay_is_atomic_with_report_pointer(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from backend.app.database.store import IdempotencyRequest
+        report=ReportRecord(report_id='retry-r',title='test',report_type='industry_analysis',template_id='industry_analysis_v1',template_version=1)
+        self.store.create_report(report,self.now)
+        guard=IdempotencyRequest(operation='retry',target_id='old',key='same',hash='same')
+        def retry(i):
+            job=JobRecord(job_id='retry'+str(i),report_id=report.report_id,run_id='run')
+            return self.store.begin_retry(guard,job,{'job_id':job.job_id},self.now)
+        with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(retry,range(2)))
+        self.assertEqual(results[0],results[1])
+        actual=results[0]['job_id']
+        self.store.set_report_job(report.report_id,actual,'COMPLETED',self.now)
+        retry(3)
+        self.assertEqual(self.store.get_report(report.report_id).latest_job_id,actual)
+        self.assertEqual(self.store.get_report(report.report_id).job_status,'COMPLETED')

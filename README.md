@@ -65,13 +65,17 @@ py -3.11 -m venv .venv
 .\.venv\Scripts\python.exe -m unittest discover -s backend/tests/unit -v
 ```
 
+静态检查：`python -m ruff check --select E9,F63,F7,F82 backend scripts`。CI 另通过 MySQL 8.0 服务执行 `python -m unittest backend.tests.integration.test_orchestration_mysql -v`；本地运行时设置 `W1_MYSQL_PORT` 指向无密码 root 的隔离测试实例，测试会创建并删除临时数据库，请勿指向业务数据库。
+
 单元测试覆盖编排模块（MemoryStore + W5 资料包 + 固定应答，无需数据库或模型密钥）与 HTTP 层。零配置启动演示服务并从网页触发一次生成到导出：
 
 ```powershell
 .\.venv\Scripts\python.exe -m uvicorn backend.app.main:create_app --factory --port 8000
 ```
 
-正式模式先按 010→011→012→020 应用 MySQL 迁移，再配置 `DATABASE_URL` 与 `MODEL_*`。推送后 GitHub Actions 会自动运行同样的四项检查（[.github/workflows/ci.yml](.github/workflows/ci.yml)）。
+使用配置文件时先复制 `.env.example` 为 `.env` 并填写，再用 `python -m uvicorn backend.app.main:create_app --factory --env-file .env --port 8000` 启动。测试依赖中已包含 `python-dotenv`；普通启动命令只读取进程环境变量，不自动加载 `.env`。
+
+正式模式先按 010→011→012→020 应用 MySQL 迁移，再配置 `DATABASE_URL` 与 `MODEL_*`。推送后 GitHub Actions 会自动运行静态检查、契约一致性、契约测试、单元测试及 MySQL 关键集成测试（[.github/workflows/ci.yml](.github/workflows/ci.yml)）。
 
 ## 分支与 Pull Request
 

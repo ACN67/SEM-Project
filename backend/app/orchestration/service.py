@@ -121,7 +121,9 @@ class OrchestrationService:
         )
         job = JobRecord(
             job_id=job_id, report_id=report.report_id, run_id=new_id(), spec=spec,
+            frozen=m.FrozenRun(run_id='pending',spec=spec,template_ref=m.TemplateRef(template_id=template.template_id,version=template.version),source_version_ids=self.store.ready_version_ids(),facts_version='f0',facts=[]),
         )
+        job.frozen=job.frozen.model_copy(update={'run_id':job.run_id})
         response = self.store.begin_report(guard, report, job, accepted, now)
         return m.JobAccepted.model_validate(response)
 
@@ -333,7 +335,7 @@ class OrchestrationService:
         job_id = claimed.job_id
         self.store.heartbeat_job(job_id, self.clock())
         self._load_pack(claimed)
-        if claimed.frozen is None:
+        if claimed.frozen is None or not claimed.chapters:
             planned = self._plan_job(claimed)
             if planned is None:
                 return
@@ -391,7 +393,7 @@ class OrchestrationService:
             run_id=claimed.run_id, spec=claimed.spec, template_ref=m.TemplateRef(
                 template_id=template.template_id, version=template.version,
             ),
-            source_version_ids=self.store.ready_version_ids(),
+            source_version_ids=claimed.frozen.source_version_ids if claimed.frozen else self.store.ready_version_ids(),
             facts_version="f0", facts=[],
         )
         chapters = [
@@ -726,7 +728,7 @@ class OrchestrationService:
         job = self.store.get_job(job_id)
         assert job is not None
         projected = job.estimated_cost_cny + self.per_call_reserve_cny
-        if projected > self.budget_cny:
+        if not self.store.reserve_budget(self.per_call_reserve_cny, self.budget_cny):
             raise _error(
                 "BUDGET_LIMIT",
                 "预计调用费用超过剩余预算，已停止模型调用。",
